@@ -1,0 +1,5 @@
+# OS junk
+.DS_Store
+
+# Design resources (screenshots, original unoptimised images) - not part of the site
+/_resources/
