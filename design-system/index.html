@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Design system | GroMush</title>
-  <meta name="description" content="Interne stijlgids van gromush.be: kleuren, typografie, knoppen, schaduwen en motion.">
+  <meta name="description" content="Interne stijlgids van gromush.be: kleuren met contrastratio's, typografie, knoppen, schaduwen, kaarten, layout-primitieven, iconen en motion — met levende voorbeelden en kopieerbare HTML.">
   <link rel="canonical" href="https://michtio.github.io/gromush-site/design-system/">
   <meta name="robots" content="noindex">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="GroMush">
   <meta property="og:locale" content="nl_BE">
   <meta property="og:title" content="Design system | GroMush">
-  <meta property="og:description" content="Interne stijlgids van gromush.be: kleuren, typografie, knoppen, schaduwen en motion.">
+  <meta property="og:description" content="Interne stijlgids van gromush.be: kleuren, typografie, knoppen, schaduwen, kaarten, layout, iconen en motion.">
   <meta property="og:url" content="https://michtio.github.io/gromush-site/design-system/">
   <meta property="og:image" content="https://michtio.github.io/gromush-site/assets/img/chefbox-verse-oesterzwammen-gromush.webp">
   <meta name="twitter:card" content="summary_large_image">
@@ -22,6 +22,7 @@
   <link rel="preload" href="../assets/fonts/epilogue-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../assets/fonts/old-standard-tt-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="./ds.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Ga naar de inhoud</a>
@@ -49,68 +50,776 @@
     </div>
   </header>
   <main id="main">
-    <section class="section" aria-labelledby="ds-h1">
+
+    <!-- Intro + inhoudsopgave -->
+    <section class="section ds-intro" aria-labelledby="ds-h1">
       <div class="container">
-        <span class="kicker">Intern</span>
-        <h1 id="ds-h1">GroMush design system</h1>
-        <p class="lead" style="max-width: 44rem">Kleuren, typografie, componenten en motion van gromush.be. Bedoeld als referentie bij verdere ontwikkeling (en als checklist bij een latere CMS-migratie).</p>
-
-        <h2>Logo</h2>
-        <div class="split" style="align-items: start">
-          <div>
-            <div style="background: #fff; border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow-card)">
-              <img src="../assets/img/logo.svg" alt="GroMush logo, horizontale versie" width="360" height="120">
-            </div>
-            <p style="margin-top: 1rem"><code>assets/img/logo.svg</code> &mdash; horizontale lockup</p>
-          </div>
-          <div>
-            <div style="background: var(--green); border-radius: var(--radius); padding: 2rem; display: flex; gap: 2rem; align-items: center; box-shadow: var(--shadow-card)">
-              <img src="../assets/img/logo-badge.svg" alt="GroMush logo in witte cirkel (badge)" width="120" height="120">
-              <img src="../assets/img/logo-mark.svg" alt="GroMush beeldmerk zonder tekst" width="110" height="110">
-            </div>
-            <p style="margin-top: 1rem"><code>logo-badge.svg</code> (header/footer) &middot; <code>logo-mark.svg</code> (beeldmerk) &middot; <code>favicon.svg</code></p>
-          </div>
-        </div>
-
-        <h2 style="margin-top: 3rem">Kleuren</h2>
-        <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr))">
-          <div class="info-card"><div style="background: var(--cream); border: 1px solid #ddd; height: 4.5rem; border-radius: 0.6rem"></div><p><strong>Cream</strong><br><code>#fdf8ee</code><br>hoofdachtergrond</p></div>
-          <div class="info-card"><div style="background: var(--green); height: 4.5rem; border-radius: 0.6rem"></div><p><strong>Green</strong><br><code>#334727</code><br>tweede achtergrond, subtitels</p></div>
-          <div class="info-card"><div style="background: var(--gold); height: 4.5rem; border-radius: 0.6rem"></div><p><strong>Gold</strong><br><code>#9b8843</code><br>hoofdtitels (groot)</p></div>
-          <div class="info-card"><div style="background: var(--gold-deep); height: 4.5rem; border-radius: 0.6rem"></div><p><strong>Gold deep</strong><br><code>#75652c</code><br>goud voor kleine tekst (AA)</p></div>
-          <div class="info-card"><div style="background: var(--sand); height: 4.5rem; border-radius: 0.6rem"></div><p><strong>Sand</strong><br><code>#d0bf7c</code><br>knoppen, accenten</p></div>
-          <div class="info-card"><div style="background: #353535; height: 4.5rem; border-radius: 0.6rem"></div><p><strong>Shadow</strong><br><code>#353535</code><br>schaduw, buiten, rechtsonder</p></div>
-        </div>
-
-        <h2 style="margin-top: 3rem">Typografie</h2>
-        <p><span class="kicker" style="margin: 0">Kicker &mdash; Epilogue 600 caps</span></p>
-        <p style="font-size: var(--text-h1); font-weight: 700; color: var(--gold); margin: 0.5rem 0">Hoofdtitel &mdash; Epilogue Bold</p>
-        <p class="title-serif" style="font-size: var(--text-h2); color: var(--green); margin: 0.5rem 0">Subtitel &mdash; Old Standard TT</p>
-        <p style="max-width: 40rem">Lopende tekst &mdash; Epilogue Light (300). De combinatie van een geometrische sans voor titels en een klassieke serif voor accenten geeft GroMush zijn ambachtelijke maar frisse karakter.</p>
-
-        <h2 style="margin-top: 3rem">Knoppen</h2>
-        <p>Drie contexten, telkens met schaduw rechtsonder en een subtiele zoom-out bij hover. <strong>Afwijking van de briefing:</strong> hovertekstkleuren zijn overal donkergroen gehouden waar goud/zand op cream onvoldoende contrast zou geven (WCAG&nbsp;AA).</p>
-        <div class="card-grid">
-          <div class="info-card" style="text-align: center"><p><strong>Op foto's</strong></p><div style="background: #6b6152; padding: 2rem 1rem; border-radius: 0.6rem"><a class="btn btn--photo" href="#voorbeeld">Bestel ChefBox</a></div></div>
-          <div class="info-card" style="text-align: center"><p><strong>Op cream</strong></p><div style="padding: 2rem 1rem"><a class="btn btn--cream" href="#voorbeeld">Onze oesterzwammen</a></div></div>
-          <div class="info-card" style="text-align: center"><p><strong>Op groen</strong></p><div style="background: var(--green); padding: 2rem 1rem; border-radius: 0.6rem"><a class="btn btn--green" href="#voorbeeld">Gratis Chefbox</a></div></div>
-        </div>
-
-        <h2 style="margin-top: 3rem" id="voorbeeld">Schaduwen</h2>
-        <p>Kleur <code>#353535</code>, buiten de vorm, offset naar rechtsonder. Tokens: <code>--shadow-photo</code>, <code>--shadow-card</code>, <code>--shadow-btn</code>. Toegepast op losse foto's, knoppen en kaarten.</p>
-
-        <h2 style="margin-top: 3rem">Motion</h2>
-        <ul>
-          <li>Hero-tekst vervaagt <em>in</em> bij het laden en vervaagt <em>uit</em> bij het scrollen.</li>
-          <li>Foto's schuiven zijdelings in via <code>data-reveal="left|right"</code>; blokken faden omhoog via <code>data-reveal</code>.</li>
-          <li>Knoppen en iconen zoomen uit (scale &darr;) bij hover.</li>
-          <li>Alles respecteert <code>prefers-reduced-motion</code>.</li>
-        </ul>
-
-        <h2 style="margin-top: 3rem">Componenten</h2>
-        <p>Profielkaarten, soortencirkels, USP-iconen, genummerde stappen, accordeons, chefbox-band en regiokaarten &mdash; zie de klassen in <code>assets/css/main.css</code> en de voorbeelden doorheen de site.</p>
+        <span class="kicker">Intern &middot; niet ge&iuml;ndexeerd</span>
+        <h1 id="ds-h1" class="title-duo">
+          <span class="line-1">Gro<strong>Mush</strong> design system</span>
+          <span class="line-2">stijlgids &amp; componenten</span>
+        </h1>
+        <p class="lead" style="max-width: 46rem">Alle bouwstenen van gromush.be op &eacute;&eacute;n plek: tokens, componenten en motion, telkens met een levend voorbeeld en kopieerbare HTML. De enige bron van waarheid voor stijlen is <code>assets/css/main.css</code> &mdash; deze pagina documenteert, ze definieert niets nieuws.</p>
+        <p style="max-width: 46rem">Uitgangspunten: dependency-vrij (geen frameworks, geen build-stap), GDPR-vriendelijk (fonts self-hosted, geen CDN&rsquo;s of trackers) en WCAG&nbsp;AA als ondergrens voor contrast. Bedoeld als referentie bij verdere ontwikkeling en als checklist bij een latere CMS-migratie.</p>
+        <nav aria-label="Op deze pagina">
+          <ul class="ds-toc">
+            <li><a href="#logo">Logo</a></li>
+            <li><a href="#kleuren">Kleuren</a></li>
+            <li><a href="#typografie">Typografie</a></li>
+            <li><a href="#knoppen">Knoppen</a></li>
+            <li><a href="#schaduwen">Schaduwen</a></li>
+            <li><a href="#layout">Layout &amp; spacing</a></li>
+            <li><a href="#kaarten">Kaarten</a></li>
+            <li><a href="#stappen">Stappen</a></li>
+            <li><a href="#accordeons">Accordeons</a></li>
+            <li><a href="#chefbox-band">Chefbox-band</a></li>
+            <li><a href="#header-footer">Header &amp; footer</a></li>
+            <li><a href="#iconografie">Iconografie</a></li>
+            <li><a href="#motion">Motion</a></li>
+          </ul>
+        </nav>
       </div>
     </section>
+
+    <!-- Logo -->
+    <section class="section ds-section" id="logo" aria-labelledby="logo-h">
+      <div class="container">
+        <span class="kicker">Merk</span>
+        <h2 id="logo-h">Logo</h2>
+        <p style="max-width: 46rem">Vier SVG-varianten, allemaal in <code>assets/img/</code>. De kleuren in de bestanden zijn vast (groen <code>#334727</code> met accenten) en worden nooit hertint.</p>
+
+        <div class="split" style="align-items: start; margin-top: 2rem">
+          <div>
+            <div class="ds-demo ds-demo--white ds-demo--center">
+              <img src="../assets/img/logo.svg" alt="GroMush logo, horizontale versie" width="360" height="120">
+            </div>
+            <p style="margin-top: 1rem"><code>logo.svg</code> &mdash; horizontale lockup, voor lichte achtergronden (drukwerk, documenten, partners).</p>
+          </div>
+          <div>
+            <div class="ds-demo ds-demo--green ds-demo--center">
+              <img src="../assets/img/logo-badge.svg" alt="GroMush logo in witte cirkel (badge)" width="120" height="120">
+              <img src="../assets/img/logo-mark.svg" alt="GroMush beeldmerk zonder tekst" width="110" height="110" style="background: #fff; border-radius: 1rem; padding: 0.5rem">
+              <img src="../assets/img/favicon.svg" alt="GroMush favicon" width="64" height="64">
+            </div>
+            <p style="margin-top: 1rem"><code>logo-badge.svg</code> (witte cirkel, voor groen/foto&rsquo;s) &middot; <code>logo-mark.svg</code> (beeldmerk) &middot; <code>favicon.svg</code> (afgeronde cream-tegel).</p>
+          </div>
+        </div>
+
+        <div class="ds-table-wrap">
+          <table class="ds-table">
+            <caption class="visually-hidden">Logobestanden en hun gebruik</caption>
+            <thead>
+              <tr><th scope="col">Bestand</th><th scope="col">Vorm</th><th scope="col">Gebruik</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>logo.svg</code></td><td>Horizontale lockup (360&times;120)</td><td>Lichte achtergronden; minimaal 180px breed zodat de woordmerktekst leesbaar blijft.</td></tr>
+              <tr><td><code>logo-badge.svg</code></td><td>Beeldmerk in witte cirkel</td><td>Op groen of op foto&rsquo;s. In header en footer staat de raster-variant <code>gromush-logo-240.webp</code> in een witte cirkel met schaduw.</td></tr>
+              <tr><td><code>logo-mark.svg</code></td><td>Beeldmerk zonder tekst</td><td>Kleine formaten en decoratief gebruik, altijd op wit of cream.</td></tr>
+              <tr><td><code>favicon.svg</code></td><td>Beeldmerk op cream-tegel</td><td>Browser-tab; PNG-fallbacks: <code>favicon-48.png</code>, <code>apple-touch-icon.png</code>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ds-rules">
+          <div class="ds-do">
+            <h3>Wel doen</h3>
+            <ul>
+              <li>Op donkere ondergrond altijd de badge (witte cirkel) gebruiken.</li>
+              <li>Vrije ruimte rondom: minstens de hoogte van het beeldmerk-hoedje.</li>
+              <li>Proporties behouden; schalen via <code>width</code>/<code>height</code> in dezelfde verhouding.</li>
+            </ul>
+          </div>
+          <div class="ds-dont">
+            <h3>Niet doen</h3>
+            <ul>
+              <li>Het logo hertinten, van een schaduw of outline voorzien.</li>
+              <li>De lockup rechtstreeks op groen of op een foto zetten (te weinig contrast).</li>
+              <li>Het woordmerk zelf zetten in Epilogue &mdash; het logo is een vaste vorm, geen tekst.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kleuren -->
+    <section class="section ds-section" id="kleuren" aria-labelledby="kleuren-h">
+      <div class="container">
+        <span class="kicker">Tokens</span>
+        <h2 id="kleuren-h">Kleuren</h2>
+        <p style="max-width: 46rem">Het volledige palet als CSS-variabelen op <code>:root</code>. Cream is de hoofdachtergrond, groen de tweede achtergrond. Goud is voorbehouden voor grote titels; voor kleine goudkleurige tekst bestaat de donkerdere AA-variant <code>--gold-deep</code>.</p>
+
+        <div class="ds-swatch-grid">
+          <div class="ds-swatch">
+            <div class="ds-swatch__chip ds-swatch__chip--outlined" style="background: var(--cream)"></div>
+            <p class="ds-swatch__meta"><strong>Cream</strong><code>#fdf8ee</code> &middot; <code>--cream</code><br>Hoofdachtergrond.</p>
+          </div>
+          <div class="ds-swatch">
+            <div class="ds-swatch__chip" style="background: var(--green)"></div>
+            <p class="ds-swatch__meta"><strong>Green</strong><code>#334727</code> &middot; <code>--green</code><br>Tweede achtergrond, subtitels, knoppen op cream.</p>
+          </div>
+          <div class="ds-swatch">
+            <div class="ds-swatch__chip" style="background: var(--gold)"></div>
+            <p class="ds-swatch__meta"><strong>Gold</strong><code>#9b8843</code> &middot; <code>--gold</code><br>Hoofdtitels &mdash; enkel grote tekst.</p>
+          </div>
+          <div class="ds-swatch">
+            <div class="ds-swatch__chip" style="background: var(--gold-deep)"></div>
+            <p class="ds-swatch__meta"><strong>Gold deep</strong><code>#75652c</code> &middot; <code>--gold-deep</code><br>Goud voor kleine tekst en links (AA op cream).</p>
+          </div>
+          <div class="ds-swatch">
+            <div class="ds-swatch__chip" style="background: var(--sand)"></div>
+            <p class="ds-swatch__meta"><strong>Sand</strong><code>#d0bf7c</code> &middot; <code>--sand</code><br>Knoppen, accenten en navigatie op groen.</p>
+          </div>
+          <div class="ds-swatch">
+            <div class="ds-swatch__chip" style="background: var(--sand-soft)"></div>
+            <p class="ds-swatch__meta"><strong>Sand soft</strong><code>#e5dcb4</code> &middot; <code>--sand-soft</code><br>Hero-titels op fotoachtergrond.</p>
+          </div>
+          <div class="ds-swatch">
+            <div class="ds-swatch__chip" style="background: var(--ink)"></div>
+            <p class="ds-swatch__meta"><strong>Ink</strong><code>#26331c</code> &middot; <code>--ink</code><br>Lopende tekst op cream.</p>
+          </div>
+          <div class="ds-swatch">
+            <div class="ds-swatch__chip" style="background: var(--cream-muted)"></div>
+            <p class="ds-swatch__meta"><strong>Cream muted</strong><code>#e9e3d2</code> &middot; <code>--cream-muted</code><br>Lopende tekst op groen.</p>
+          </div>
+          <div class="ds-swatch">
+            <div class="ds-swatch__chip" style="background: #353535"></div>
+            <p class="ds-swatch__meta"><strong>Shadow</strong><code>#353535</code> &middot; <code>--shadow-rgb</code><br>Alle schaduwen: buiten de vorm, rechtsonder.</p>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 3rem">Contrastratio&rsquo;s (WCAG&nbsp;2.1)</h3>
+        <p style="max-width: 46rem">AA vraagt 4,5:1 voor normale tekst en 3:1 voor grote tekst (&ge;&nbsp;24px, of &ge;&nbsp;18,5px vet). De twee combinaties die falen zijn bewust geen tekstcombinaties in dit systeem.</p>
+        <div class="ds-table-wrap">
+          <table class="ds-table">
+            <caption class="visually-hidden">Contrastratio's van de gebruikte kleurcombinaties</caption>
+            <thead>
+              <tr><th scope="col">Combinatie</th><th scope="col">Gebruik</th><th scope="col">Ratio</th><th scope="col">Oordeel</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Ink op cream</td><td>Lopende tekst</td><td>12,6:1</td><td><span class="ds-pass">AA + AAA</span></td></tr>
+              <tr><td>Green op cream</td><td>Koppen, knoptekst bij hover</td><td>9,6:1</td><td><span class="ds-pass">AA + AAA</span></td></tr>
+              <tr><td>Gold op cream</td><td>Hoofdtitels</td><td>3,3:1</td><td><span class="ds-large">Enkel grote tekst</span></td></tr>
+              <tr><td>Gold-deep op cream</td><td>Kickers, links, kleine goudtekst</td><td>5,4:1</td><td><span class="ds-pass">AA</span></td></tr>
+              <tr><td>Cream op green</td><td>Koppen op groen</td><td>9,6:1</td><td><span class="ds-pass">AA + AAA</span></td></tr>
+              <tr><td>Cream-muted op green</td><td>Lopende tekst op groen</td><td>7,9:1</td><td><span class="ds-pass">AA + AAA</span></td></tr>
+              <tr><td>Sand op green</td><td>Kickers, links en navigatie op groen</td><td>5,5:1</td><td><span class="ds-pass">AA</span></td></tr>
+              <tr><td>Green op sand</td><td>Knoptekst</td><td>5,5:1</td><td><span class="ds-pass">AA</span></td></tr>
+              <tr><td>Sand-soft op green</td><td>Hero-titels (met donkere overlay)</td><td>7,4:1</td><td><span class="ds-pass">AA + AAA</span></td></tr>
+              <tr><td>Gold op green</td><td>&mdash;</td><td>2,9:1</td><td><span class="ds-fail">Niet voor tekst &mdash; gebruik sand</span></td></tr>
+              <tr><td>Sand op cream</td><td>&mdash;</td><td>1,7:1</td><td><span class="ds-fail">Enkel vlakken, nooit tekst</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ds-note">
+          <p>Op groene vlakken zet de utility-klasse <code>.on-green</code> alles automatisch goed: koppen worden cream, lopende tekst cream-muted, kickers/links/accenten sand en de focus-ring sand. Goud wordt op groen dus nooit als tekstkleur gebruikt.</p>
+        </div>
+
+        <div class="ds-code"><pre><code>&lt;div class="band on-green"&gt;
+  &lt;span class="kicker"&gt;Kicker in sand&lt;/span&gt;
+  &lt;h2&gt;Kop in cream&lt;/h2&gt;
+  &lt;p&gt;Lopende tekst in cream-muted met een &lt;a href="#"&gt;link in sand&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</code></pre></div>
+      </div>
+    </section>
+
+    <!-- Typografie -->
+    <section class="section ds-section" id="typografie" aria-labelledby="typografie-h">
+      <div class="container">
+        <span class="kicker">Tokens</span>
+        <h2 id="typografie-h">Typografie</h2>
+        <p style="max-width: 46rem"><strong>Epilogue</strong> (variabel font, 100&ndash;900) voor titels en lopende tekst; <strong>Old Standard TT</strong> (400, 700, 400 italic) voor serif-accenten. Beide self-hosted als woff2 in <code>assets/fonts/</code> &mdash; geen Google Fonts CDN (GDPR). Lopende tekst staat in Epilogue Light (300), regelafstand 1.65.</p>
+
+        <div class="ds-demo ds-demo--white" style="margin-top: 2rem">
+          <div class="ds-type-row">
+            <p class="ds-type-meta">h1 &middot; --text-h1 &middot; clamp(2rem &rarr; 3.75rem) &middot; Epilogue 700</p>
+            <p style="font-size: var(--text-h1); font-weight: 700; color: var(--gold); line-height: 1.12">Hoofdtitel in goud</p>
+          </div>
+          <div class="ds-type-row">
+            <p class="ds-type-meta">h2 &middot; --text-h2 &middot; clamp(1.65rem &rarr; 2.75rem) &middot; Epilogue 700</p>
+            <p style="font-size: var(--text-h2); font-weight: 700; color: var(--green); line-height: 1.12">Sectiekop in groen</p>
+          </div>
+          <div class="ds-type-row">
+            <p class="ds-type-meta">h2 + .title-serif &middot; Old Standard TT 400</p>
+            <p class="title-serif" style="font-size: var(--text-h2); color: var(--green); line-height: 1.12">Serif-subtitel in groen</p>
+          </div>
+          <div class="ds-type-row">
+            <p class="ds-type-meta">h3 &middot; --text-h3 &middot; clamp(1.375rem &rarr; 1.75rem) &middot; Epilogue 700</p>
+            <p style="font-size: var(--text-h3); font-weight: 700; color: var(--green); line-height: 1.12">Tussenkop</p>
+          </div>
+          <div class="ds-type-row">
+            <p class="ds-type-meta">.lead &middot; --text-lg &middot; clamp(1.125rem &rarr; 1.3125rem) &middot; Epilogue 300</p>
+            <p class="lead">Inleidende paragraaf, net iets groter dan de lopende tekst.</p>
+          </div>
+          <div class="ds-type-row">
+            <p class="ds-type-meta">body &middot; --text-md &middot; 1.0625rem (17px) &middot; Epilogue 300</p>
+            <p>Lopende tekst. De combinatie van een geometrische sans voor titels en een klassieke serif voor accenten geeft GroMush zijn ambachtelijke maar frisse karakter.</p>
+          </div>
+          <div class="ds-type-row">
+            <p class="ds-type-meta">.site-footer__meta &middot; --text-sm &middot; 0.9375rem (15px)</p>
+            <p style="font-size: var(--text-sm)">Meta-tekst: bijschriften, footer, kleine lettertjes.</p>
+          </div>
+          <div class="ds-type-row">
+            <p class="ds-type-meta">.kicker &middot; --text-xs &middot; 0.8125rem (13px) &middot; Epilogue 600, caps, letterspacing 0.16em</p>
+            <p class="kicker" style="margin: 0">Kicker boven een kop</p>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 3rem">Tweekleurige titel (.title-duo)</h3>
+        <p style="max-width: 46rem">Het vaste titelpatroon van de site: eerste regel Epilogue-bold in goud, tweede regel Old Standard TT in groen. In &ldquo;GroMush&rdquo; krijgt &ldquo;Mush&rdquo; altijd een <code>&lt;strong&gt;</code>.</p>
+        <div class="ds-demo">
+          <h3 class="title-duo" style="font-size: var(--text-h2)">
+            <span class="line-1">Welkom bij Gro<strong>Mush</strong></span>
+            <span class="line-2">oesterzwam&#8209;kwekerij</span>
+          </h3>
+        </div>
+        <div class="ds-code"><pre><code>&lt;h1 class="title-duo"&gt;
+  &lt;span class="line-1"&gt;Welkom bij Gro&lt;strong&gt;Mush&lt;/strong&gt;&lt;/span&gt;
+  &lt;span class="line-2"&gt;oesterzwam&amp;#8209;kwekerij&lt;/span&gt;
+&lt;/h1&gt;</code></pre></div>
+
+        <h3 style="margin-top: 3rem">Tekst op groen (.on-green)</h3>
+        <div class="ds-demo ds-demo--green on-green">
+          <span class="kicker">Kicker in sand</span>
+          <h3 style="margin-bottom: 0.4em">Kop in cream</h3>
+          <p style="margin: 0">Lopende tekst in cream-muted, met een <a href="#typografie">link in sand</a>.</p>
+        </div>
+        <p style="margin-top: 1rem">Hulpklassen: <code>.title-gold</code>, <code>.title-green</code>, <code>.title-serif</code>, <code>.title-light</code>, <code>.lead</code>, <code>.kicker</code>, <code>.text-center</code>, <code>.accent</code> (sand op groen) en <code>.visually-hidden</code> voor screenreader-tekst.</p>
+      </div>
+    </section>
+
+    <!-- Knoppen -->
+    <section class="section ds-section" id="knoppen" aria-labelledby="knoppen-h">
+      <div class="container">
+        <span class="kicker">Componenten</span>
+        <h2 id="knoppen-h">Knoppen</h2>
+        <p style="max-width: 46rem">E&eacute;n basisklasse <code>.btn</code> (pill-vorm, Epilogue 600, schaduw rechtsonder) met drie contextvarianten. Bij hover en focus zoomt de knop subtiel <em>uit</em> (<code>scale(0.96)</code>) en wordt de schaduw korter; bij <code>:active</code> gaat hij naar <code>scale(0.93)</code>. Probeer ze hieronder.</p>
+
+        <div class="ds-demo ds-demo--photo">
+          <img src="../assets/img/oesterzwammen-kwekerij-restaurant-chef-knokke-heist-800.webp" alt="" width="800" height="644" loading="lazy" decoding="async">
+          <a class="btn btn--photo" href="#knoppen">Bestel ChefBox</a>
+        </div>
+        <p style="margin-top: 1rem"><strong>Op foto&rsquo;s</strong> &mdash; <code>.btn--photo</code>: sand met groene tekst; bij hover cream met een sand-rand.</p>
+
+        <div class="ds-demo ds-demo--center">
+          <a class="btn btn--cream" href="#knoppen">Onze oesterzwammen</a>
+        </div>
+        <p style="margin-top: 1rem"><strong>Op cream</strong> &mdash; <code>.btn--cream</code>: groen met sand-tekst; bij hover omgekeerd (sand met groene tekst).</p>
+
+        <div class="ds-demo ds-demo--green ds-demo--center">
+          <a class="btn btn--green" href="#knoppen">Gratis Chefbox</a>
+        </div>
+        <p style="margin-top: 1rem"><strong>Op groen</strong> &mdash; <code>.btn--green</code>: sand met groene tekst; bij hover cream met een sand-rand.</p>
+
+        <div class="ds-code"><pre><code>&lt;a class="btn btn--photo" href="#"&gt;Bestel ChefBox&lt;/a&gt;      &lt;!-- op foto's --&gt;
+&lt;a class="btn btn--cream" href="#"&gt;Onze oesterzwammen&lt;/a&gt;  &lt;!-- op cream --&gt;
+&lt;a class="btn btn--green" href="#"&gt;Gratis Chefbox&lt;/a&gt;      &lt;!-- op groen --&gt;</code></pre></div>
+
+        <div class="ds-note">
+          <p><strong>Bewuste afwijking van de briefing:</strong> de hover-tekstkleur is overal donkergroen gehouden. Goud- of zandkleurige tekst op cream haalt geen 4,5:1 (sand op cream is 1,7:1) en zou WCAG&nbsp;AA breken. De focus-stijl volgt de hover-stijl, plus de globale gouden focus-ring (<code>:focus-visible</code>).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Schaduwen -->
+    <section class="section ds-section" id="schaduwen" aria-labelledby="schaduwen-h">
+      <div class="container">
+        <span class="kicker">Tokens</span>
+        <h2 id="schaduwen-h">Schaduwen</h2>
+        <p style="max-width: 46rem">Alle schaduwen gebruiken <code>#353535</code> (via <code>--shadow-rgb</code>), vallen <em>buiten</em> de vorm en wijzen naar <strong>rechtsonder</strong>. Nooit zwart, nooit gecentreerd, nooit inzet.</p>
+
+        <div class="ds-shadow-grid">
+          <div class="ds-shadow-tile" style="box-shadow: var(--shadow-photo)"><span><strong>Foto</strong><br><code>--shadow-photo</code><br>14px 16px 32px &minus;8px / 38%</span></div>
+          <div class="ds-shadow-tile" style="box-shadow: var(--shadow-card)"><span><strong>Kaart</strong><br><code>--shadow-card</code><br>10px 12px 26px &minus;8px / 32%</span></div>
+          <div class="ds-shadow-tile" style="box-shadow: var(--shadow-btn)"><span><strong>Knop</strong><br><code>--shadow-btn</code><br>5px 6px 14px &minus;2px / 35%</span></div>
+          <div class="ds-shadow-tile" style="box-shadow: var(--shadow-btn-hover)"><span><strong>Knop, hover</strong><br><code>--shadow-btn-hover</code><br>3px 4px 8px &minus;2px / 30%</span></div>
+        </div>
+
+        <div class="ds-code"><pre><code>--shadow-rgb: 53, 53, 53;
+--shadow-photo: 14px 16px 32px -8px rgba(var(--shadow-rgb), 0.38);
+--shadow-card: 10px 12px 26px -8px rgba(var(--shadow-rgb), 0.32);
+--shadow-btn: 5px 6px 14px -2px rgba(var(--shadow-rgb), 0.35);
+--shadow-btn-hover: 3px 4px 8px -2px rgba(var(--shadow-rgb), 0.3);</code></pre></div>
+      </div>
+    </section>
+
+    <!-- Layout & spacing -->
+    <section class="section ds-section" id="layout" aria-labelledby="layout-h">
+      <div class="container">
+        <span class="kicker">Primitieven</span>
+        <h2 id="layout-h">Layout &amp; spacing</h2>
+        <p style="max-width: 46rem">Vier bouwstenen dragen elke pagina: <code>.container</code> (max-breedte + zijmarge), <code>.section</code> (verticale ritmiek), <code>.split</code> (50/50 foto + tekst) en <code>.band</code> (donkergroen afgerond vlak). Verticale ruimte komt vrijwel altijd uit <code>clamp()</code>-waarden, niet uit vaste margins.</p>
+
+        <div class="ds-table-wrap">
+          <table class="ds-table">
+            <caption class="visually-hidden">Layout-tokens en primitieven</caption>
+            <thead>
+              <tr><th scope="col">Token / klasse</th><th scope="col">Waarde</th><th scope="col">Gebruik</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>--container</code></td><td>72rem</td><td>Maximale contentbreedte; <code>.container</code> = <code>min(100% &minus; 2.5rem, 72rem)</code>, gecentreerd.</td></tr>
+              <tr><td><code>.section</code></td><td>padding-block <code>clamp(3.5rem, 8vw, 6.5rem)</code></td><td>Standaard sectie-ademruimte.</td></tr>
+              <tr><td><code>.section--tight</code></td><td>padding-block <code>clamp(2.5rem, 5vw, 4rem)</code></td><td>Compactere sectie, bv. USP-rij of CTA.</td></tr>
+              <tr><td><code>--radius</code></td><td>1.25rem</td><td>Kaarten, foto&rsquo;s, demo-vlakken.</td></tr>
+              <tr><td><code>--radius-lg</code></td><td>2rem</td><td>Grote vlakken zoals <code>.band</code>.</td></tr>
+              <tr><td><code>--header-h</code></td><td>7.75rem</td><td>Minimale hoogte van de site-header.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top: 3rem">Split (.split)</h3>
+        <p style="max-width: 46rem">Vanaf 48rem twee gelijke kolommen; daaronder gestapeld. Met <code>.split--text-first</code> komt de tekst links en de foto rechts (de foto blijft in de HTML v&oacute;&oacute;r of na de tekst staan, de volgorde wisselt visueel via <code>order</code>). Foto&rsquo;s in <code>.split__media</code> krijgen automatisch ronde hoeken en de foto-schaduw.</p>
+        <div class="ds-demo">
+          <div class="split split--text-first">
+            <div class="split__copy">
+              <span class="kicker">Onze kwekerij</span>
+              <h3>Rechtstreeks van kwekerij tot keuken</h3>
+              <p>Elke kweekcyclus volgen we van dichtbij op, van substraat tot oogst.</p>
+              <a class="btn btn--cream" href="#layout">Ontdek onze oesterzwammen</a>
+            </div>
+            <div class="split__media">
+              <img src="../assets/img/anthony-watteeuw-oesterzwammen-kwekerij-knokke-heist-800.webp" alt="Kweker Anthony Watteeuw controleert oesterzwammen in de kwekerij" width="800" height="1000" loading="lazy" decoding="async">
+            </div>
+          </div>
+        </div>
+        <div class="ds-code"><pre><code>&lt;div class="container split split--text-first"&gt;
+  &lt;div class="split__copy"&gt;
+    &lt;span class="kicker"&gt;Onze kwekerij&lt;/span&gt;
+    &lt;h2&gt;Rechtstreeks van kwekerij tot keuken&lt;/h2&gt;
+    &lt;p&gt;&hellip;&lt;/p&gt;
+    &lt;a class="btn btn--cream" href="&hellip;"&gt;Ontdek onze oesterzwammen&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class="split__media" data-reveal="right"&gt;
+    &lt;img src="../assets/img/&hellip;.webp" alt="&hellip;" width="1122" height="1402" loading="lazy" decoding="async"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+
+        <h3 style="margin-top: 3rem">Band (.band)</h3>
+        <p style="max-width: 46rem">Donkergroen vlak met grote ronde hoeken, altijd samen met <code>.on-green</code>. Voor randloze varianten bestaat <code>.band--full</code>. Zie de <a href="#chefbox-band">chefbox-band</a> voor de volledige invulling.</p>
+        <div class="ds-demo" style="padding: 0; border: 0">
+          <div class="band on-green text-center">
+            <h3>Wij leveren in regio <span class="accent">Knokke&#8209;Heist, Damme &amp; Brugge</span></h3>
+            <p style="max-width: 40rem; margin-inline: auto">Restaurants, grootkeukens, hotels en particulieren kunnen rekenen op persoonlijke levering door de kweker zelf.</p>
+            <a class="btn btn--green" href="#layout">Bestel</a>
+          </div>
+        </div>
+        <div class="ds-code"><pre><code>&lt;div class="band on-green text-center"&gt;
+  &lt;h2&gt;Wij leveren in regio &lt;span class="accent"&gt;Knokke&amp;#8209;Heist, Damme &amp;amp; Brugge&lt;/span&gt;&lt;/h2&gt;
+  &lt;p&gt;&hellip;&lt;/p&gt;
+  &lt;a class="btn btn--green" href="&hellip;"&gt;Bestel&lt;/a&gt;
+&lt;/div&gt;</code></pre></div>
+
+        <h3 style="margin-top: 3rem">Hero (.hero)</h3>
+        <p style="max-width: 46rem">Full-bleed foto met donkere overlay (55% <code>#1a2112</code>), gecentreerde serif-titel in sand-soft en een <code>.btn--photo</code>. De hero krijgt zijn fade-gedrag van <code>main.js</code>; daarom staat hier geen levend voorbeeld &mdash; zie <a href="../restaurant/">/restaurant/</a>. Gebruik maximaal &eacute;&eacute;n hero per pagina, altijd bovenaan.</p>
+        <div class="ds-code"><pre><code>&lt;section class="hero"&gt;
+  &lt;img class="hero__bg" src="../assets/img/&hellip;.webp" alt="" width="1398" height="1125"&gt;
+  &lt;div class="hero__inner"&gt;
+    &lt;h1&gt;Verse oesterzwammen voor uw restaurant&lt;/h1&gt;
+    &lt;p&gt;&hellip;&lt;/p&gt;
+    &lt;a class="btn btn--photo" href="&hellip;"&gt;Gratis Chefbox&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre></div>
+      </div>
+    </section>
+
+    <!-- Kaarten -->
+    <section class="section ds-section" id="kaarten" aria-labelledby="kaarten-h">
+      <div class="container">
+        <span class="kicker">Componenten</span>
+        <h2 id="kaarten-h">Kaarten</h2>
+
+        <h3>Profielkaarten (.profile-card)</h3>
+        <p style="max-width: 46rem">De klant-keuze op de homepage. Staande foto (3:4) met een gradi&euml;nt-label onderaan; bij hover of focus vervaagt de foto en verschijnt het label groot en goud in het midden. Altijd in een <code>.profile-grid</code> van drie.</p>
+        <div class="ds-demo" style="padding-block: 2.5rem">
+          <div class="profile-grid" style="margin-top: 0">
+            <a class="profile-card" href="../restaurant/">
+              <img src="../assets/img/gromush-levering-chef-keuken-800.webp" alt="Kweker Anthony overhandigt een kist verse oesterzwammen aan een chef-kok" width="800" height="640" loading="lazy" decoding="async">
+              <span class="profile-card__label">Restaurant</span>
+            </a>
+            <a class="profile-card" href="../grootkeuken/">
+              <img src="../assets/img/grootkeuken-verse-oesterzwammen-levering-800.webp" alt="Professionele grootkeuken waar koks verse oesterzwammen verwerken" width="800" height="533" loading="lazy" decoding="async">
+              <span class="profile-card__label">Groot keuken</span>
+            </a>
+            <a class="profile-card" href="../particulier/">
+              <img src="../assets/img/oesterzwammen-markt-verkoop-gromush-800.webp" alt="GroMush-marktkraam waar een klant een zakje verse oesterzwammen ontvangt" width="800" height="640" loading="lazy" decoding="async">
+              <span class="profile-card__label">Particulier</span>
+            </a>
+          </div>
+        </div>
+        <div class="ds-code"><pre><code>&lt;div class="profile-grid"&gt;
+  &lt;a class="profile-card" href="../restaurant/" data-reveal&gt;
+    &lt;img src="../assets/img/&hellip;.webp" alt="&hellip;" width="1402" height="1122"&gt;
+    &lt;span class="profile-card__label"&gt;Restaurant&lt;/span&gt;
+  &lt;/a&gt;
+  &lt;!-- &times;3 --&gt;
+&lt;/div&gt;</code></pre></div>
+
+        <h3 style="margin-top: 3rem">Infokaarten (.info-card)</h3>
+        <p style="max-width: 46rem">Witte kaart met kaartschaduw, gecentreerde inhoud en optioneel een icoon-cirkel. De kop is serif in gold-deep. Altijd in een <code>.card-grid</code> (3 kolommen vanaf 48rem).</p>
+        <div class="ds-demo" style="padding-block: 2.5rem">
+          <div class="card-grid" style="margin-top: 0">
+            <div class="info-card">
+              <span class="usp__icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h24v22H4zM28 20h9l7 7v7h-16"/><circle cx="12" cy="37" r="4"/><circle cx="36" cy="37" r="4"/></svg></span>
+              <h4 style="font-family: var(--font-serif); font-weight: 400; color: var(--gold-deep); font-size: var(--text-h3); margin: 1.25rem 0 0.5rem">Dagvers geleverd</h4>
+              <p>Geoogst op bestelling en rechtstreeks tot in uw keuken.</p>
+            </div>
+            <div class="info-card">
+              <span class="usp__icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 25c0-10.5 8-18 18-18s18 7.5 18 18c-6 2.2-12 3.2-18 3.2S12 27.2 6 25Z"/><path d="M19 28.5 17.4 39a4.2 4.2 0 0 0 4.2 4.8h4.8a4.2 4.2 0 0 0 4.2-4.8L29 28.5"/></svg></span>
+              <h4 style="font-family: var(--font-serif); font-weight: 400; color: var(--gold-deep); font-size: var(--text-h3); margin: 1.25rem 0 0.5rem">Lokaal gekweekt</h4>
+              <p>Geteeld en geoogst in onze kwekerij in Knokke&#8209;Heist.</p>
+            </div>
+            <div class="info-card">
+              <span class="usp__icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 41S6 30 6 17.5A9.5 9.5 0 0 1 24 13a9.5 9.5 0 0 1 18 4.5C42 30 24 41 24 41Z"/><path d="M17 24h5l2-5 3 9 2-4h4"/></svg></span>
+              <h4 style="font-family: var(--font-serif); font-weight: 400; color: var(--gold-deep); font-size: var(--text-h3); margin: 1.25rem 0 0.5rem">Ambachtelijke teelt</h4>
+              <p>Kleinschalig en met respect voor natuur en kwaliteit.</p>
+            </div>
+          </div>
+        </div>
+        <div class="ds-code"><pre><code>&lt;div class="card-grid"&gt;
+  &lt;div class="info-card"&gt;
+    &lt;span class="usp__icon"&gt;&lt;svg &hellip;&gt;&lt;/svg&gt;&lt;/span&gt;
+    &lt;h3&gt;Dagvers geleverd&lt;/h3&gt;
+    &lt;p&gt;Geoogst op bestelling en rechtstreeks tot in uw keuken.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;!-- &times;3 --&gt;
+&lt;/div&gt;</code></pre></div>
+
+        <h3 style="margin-top: 3rem">Soortencirkels (.species)</h3>
+        <p style="max-width: 46rem">Ronde foto-tegels met kaartschaduw. Bij hover zoomt de foto licht in en verschijnt de naam op een donkere overlay; op touch-toestellen is het label altijd zichtbaar (onderaan met gradi&euml;nt). Op de soortenpagina staat elke cirkel in een <code>figure.species-item</code> met zichtbaar bijschrift. Zolang een foto ontbreekt, toont de placeholder-tegel het paddenstoel-icoon op groen.</p>
+        <div class="ds-demo" style="padding-block: 2.5rem">
+          <div class="species-grid" style="margin-top: 0">
+            <figure class="species-item">
+              <div class="species">
+                <img src="../assets/img/witte-oesterzwam-600.webp" alt="Witte oesterzwam" width="600" height="600" loading="lazy" decoding="async">
+                <span class="species__name" aria-hidden="true">Witte oesterzwam</span>
+              </div>
+              <figcaption><span class="species-caption__name">Witte oesterzwam</span> Mild en zacht, veelzijdig in de keuken.</figcaption>
+            </figure>
+            <figure class="species-item">
+              <div class="species">
+                <img src="../assets/img/blauwe-oesterzwam-600.webp" alt="Blauwe oesterzwam" width="600" height="600" loading="lazy" decoding="async">
+                <span class="species__name" aria-hidden="true">Blauwe oesterzwam</span>
+              </div>
+              <figcaption><span class="species-caption__name">Blauwe oesterzwam</span> Vol van smaak en mooi stevig.</figcaption>
+            </figure>
+            <figure class="species-item">
+              <div class="species">
+                <img src="../assets/img/roze-oesterzwam-600.webp" alt="Roze oesterzwam" width="600" height="600" loading="lazy" decoding="async">
+                <span class="species__name" aria-hidden="true">Roze oesterzwam</span>
+              </div>
+              <figcaption><span class="species-caption__name">Roze oesterzwam</span> Fruitig en licht ziltig, kort bakken.</figcaption>
+            </figure>
+            <figure class="species-item">
+              <div class="species species--placeholder" role="img" aria-label="Koning oesterzwam (foto volgt binnenkort)">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 25c0-10.5 8-18 18-18s18 7.5 18 18c-6 2.2-12 3.2-18 3.2S12 27.2 6 25Z"/><path d="M19 28.5 17.4 39a4.2 4.2 0 0 0 4.2 4.8h4.8a4.2 4.2 0 0 0 4.2-4.8L29 28.5"/></svg>
+              </div>
+              <figcaption><span class="species-caption__name">Koning oesterzwam</span> Placeholder tot de foto er is.</figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="ds-code"><pre><code>&lt;div class="species-grid"&gt;
+  &lt;figure class="species-item" data-reveal&gt;
+    &lt;div class="species"&gt;
+      &lt;img src="../assets/img/witte-oesterzwam.webp" alt="Witte oesterzwam" width="1254" height="1254"&gt;
+      &lt;span class="species__name" aria-hidden="true"&gt;Witte oesterzwam&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;figcaption&gt;&lt;span class="species-caption__name"&gt;Witte oesterzwam&lt;/span&gt; Mild en zacht.&lt;/figcaption&gt;
+  &lt;/figure&gt;
+
+  &lt;!-- placeholder zolang de foto ontbreekt --&gt;
+  &lt;figure class="species-item" data-reveal&gt;
+    &lt;div class="species species--placeholder" role="img" aria-label="Koning oesterzwam (foto volgt binnenkort)"&gt;
+      &lt;svg &hellip; aria-hidden="true"&gt;&lt;/svg&gt;  &lt;!-- paddenstoel-icoon --&gt;
+    &lt;/div&gt;
+    &lt;figcaption&gt;&lt;span class="species-caption__name"&gt;Koning oesterzwam&lt;/span&gt; Vlezig en stevig.&lt;/figcaption&gt;
+  &lt;/figure&gt;
+&lt;/div&gt;</code></pre></div>
+
+        <h3 style="margin-top: 3rem">Regiokaarten (.region)</h3>
+        <p style="max-width: 46rem">Liggende foto (4:3) met serif-bijschrift in gold-deep, in een <code>.region-grid</code> van drie. Gebruikt voor de leverregio Knokke-Heist, Damme en Brugge.</p>
+        <div class="ds-code"><pre><code>&lt;div class="region-grid"&gt;
+  &lt;figure class="region" data-reveal&gt;
+    &lt;img src="../assets/img/knokke-heist-strand-panorama.webp" alt="&hellip;" width="1536" height="1024"&gt;
+    &lt;figcaption&gt;Knokke&amp;#8209;Heist&lt;/figcaption&gt;
+  &lt;/figure&gt;
+  &lt;!-- &times;3 --&gt;
+&lt;/div&gt;</code></pre></div>
+      </div>
+    </section>
+
+    <!-- Stappen -->
+    <section class="section ds-section" id="stappen" aria-labelledby="stappen-h">
+      <div class="container">
+        <span class="kicker">Componenten</span>
+        <h2 id="stappen-h">Genummerde stappen</h2>
+        <p style="max-width: 46rem">Een <code>ol.steps</code> nummert zichzelf via CSS-counters (&ldquo;01&rdquo;, &ldquo;02&rdquo;, &hellip;) in cream-tegels met kaartschaduw; de stappentekst is serif. Werkt op cream &eacute;n in een groene band. Voor compacte opsommingen op groen bestaat daarnaast <code>ol.numbered-list</code> (nummer in cream, inline).</p>
+
+        <div class="ds-demo">
+          <ol class="steps" style="max-width: 38rem">
+            <li class="step"><p>Plaats je bestelling via WhatsApp, telefoon of e&#8209;mail.</p></li>
+            <li class="step"><p>Kies een van de beschikbare afhaal- of leverdagen.</p></li>
+            <li class="step"><p>Wij oogsten jouw bestelling vers op de dag zelf.</p></li>
+          </ol>
+        </div>
+        <div class="ds-code"><pre><code>&lt;ol class="steps"&gt;
+  &lt;li class="step" data-reveal&gt;&lt;p&gt;Plaats je bestelling via WhatsApp, telefoon of e&amp;#8209;mail.&lt;/p&gt;&lt;/li&gt;
+  &lt;li class="step" data-reveal&gt;&lt;p&gt;Kies een van de beschikbare afhaal- of leverdagen.&lt;/p&gt;&lt;/li&gt;
+  &lt;li class="step" data-reveal&gt;&lt;p&gt;Wij oogsten jouw bestelling vers op de dag zelf.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;</code></pre></div>
+
+        <div class="ds-demo ds-demo--green on-green">
+          <h3 style="margin-bottom: 1rem">Wat mag u verwachten?</h3>
+          <ol class="numbered-list">
+            <li>Dagverse oogst, geplukt op bestelling.</li>
+            <li>Persoonlijke levering door de kweker zelf.</li>
+            <li>Een vast leverritme op maat van uw keuken.</li>
+          </ol>
+        </div>
+        <div class="ds-code"><pre><code>&lt;div class="band on-green"&gt;
+  &lt;ol class="numbered-list"&gt;
+    &lt;li&gt;Dagverse oogst, geplukt op bestelling.&lt;/li&gt;
+    &lt;li&gt;Persoonlijke levering door de kweker zelf.&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</code></pre></div>
+      </div>
+    </section>
+
+    <!-- Accordeons -->
+    <section class="section ds-section" id="accordeons" aria-labelledby="accordeons-h">
+      <div class="container">
+        <span class="kicker">Componenten</span>
+        <h2 id="accordeons-h">Accordeons</h2>
+        <p style="max-width: 46rem">Native <code>&lt;details&gt;</code>/<code>&lt;summary&gt;</code> &mdash; geen JavaScript nodig, toetsenbord- en screenreader-vriendelijk out of the box. Het plusje draait 45&deg; naar een kruisje wanneer het paneel opent.</p>
+
+        <div class="ds-demo" style="padding-bottom: 1rem">
+          <details class="accordion">
+            <summary>Maak een afspraak</summary>
+            <div class="accordion__body">
+              <p>Kies een afhaaldag en tijdstip; wij oogsten je bestelling vers en zetten ze voor je klaar.</p>
+            </div>
+          </details>
+          <details class="accordion">
+            <summary>Prijzen en pakketten</summary>
+            <div class="accordion__body">
+              <p>Van een proefpakket over de chefbox tot een vast week- of maandritme. Prijzen op aanvraag.</p>
+              <div class="pack-grid">
+                <div class="pack">
+                  <h4>Proefpakket</h4>
+                  <p>&plusmn; 300 gr gemengde soorten</p>
+                  <p class="pack__meta">Prijs op aanvraag</p>
+                </div>
+                <div class="pack">
+                  <h4>Chefbox</h4>
+                  <p>500 gr, vijf soorten</p>
+                  <p class="pack__meta">Gratis voor professionele keukens</p>
+                </div>
+                <div class="pack">
+                  <h4>Vast ritme</h4>
+                  <p>Week- of maandlevering op maat</p>
+                  <p class="pack__meta">Prijs op aanvraag</p>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+        <div class="ds-code"><pre><code>&lt;details class="accordion"&gt;
+  &lt;summary&gt;Maak een afspraak&lt;/summary&gt;
+  &lt;div class="accordion__body"&gt;
+    &lt;p&gt;Kies een afhaaldag en tijdstip; wij oogsten je bestelling vers.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/details&gt;
+
+&lt;!-- prijstegels in een accordeon --&gt;
+&lt;div class="pack-grid"&gt;
+  &lt;div class="pack"&gt;
+    &lt;h4&gt;Chefbox&lt;/h4&gt;
+    &lt;p&gt;500 gr, vijf soorten&lt;/p&gt;
+    &lt;p class="pack__meta"&gt;Gratis voor professionele keukens&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+      </div>
+    </section>
+
+    <!-- Chefbox-band -->
+    <section class="section ds-section" id="chefbox-band" aria-labelledby="chefbox-h">
+      <div class="container">
+        <span class="kicker">Componenten</span>
+        <h2 id="chefbox-h">Chefbox-band</h2>
+        <p style="max-width: 46rem">Het signatuurblok van de site: een <code>.band.on-green</code> met links een <code>.rule-list</code> (inhoudslijst met sand-scheidingslijnen en paddenstoel-iconen) plus een <code>.btn--green</code>, en rechts een <code>.figure-label</code> &mdash; een foto met hoeklabel en witte icoon-stip.</p>
+
+        <div class="ds-demo" style="padding: 0; border: 0">
+          <div class="band on-green">
+            <h3 style="font-size: var(--text-h2)">Proef een gratis <span class="accent">chefbox</span></h3>
+            <div class="split" style="margin-top: 1.5rem">
+              <div>
+                <ul class="rule-list">
+                  <li>100 gr Grijze oesterzwam <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 25c0-10.5 8-18 18-18s18 7.5 18 18c-6 2.2-12 3.2-18 3.2S12 27.2 6 25Z"/><path d="M19 28.5 17.4 39a4.2 4.2 0 0 0 4.2 4.8h4.8a4.2 4.2 0 0 0 4.2-4.8L29 28.5"/></svg></li>
+                  <li>100 gr Gele oesterzwam <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 25c0-10.5 8-18 18-18s18 7.5 18 18c-6 2.2-12 3.2-18 3.2S12 27.2 6 25Z"/><path d="M19 28.5 17.4 39a4.2 4.2 0 0 0 4.2 4.8h4.8a4.2 4.2 0 0 0 4.2-4.8L29 28.5"/></svg></li>
+                  <li>100 gr Roze oesterzwam <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 25c0-10.5 8-18 18-18s18 7.5 18 18c-6 2.2-12 3.2-18 3.2S12 27.2 6 25Z"/><path d="M19 28.5 17.4 39a4.2 4.2 0 0 0 4.2 4.8h4.8a4.2 4.2 0 0 0 4.2-4.8L29 28.5"/></svg></li>
+                </ul>
+                <a class="btn btn--green" href="#chefbox-band">Gratis Chefbox aanvragen</a>
+              </div>
+              <figure class="figure-label">
+                <img src="../assets/img/chefbox-verse-oesterzwammen-gromush-800.webp" alt="Houten GroMush-kist met gele, grijze, roze, blauwe en witte oesterzwammen" width="800" height="653" loading="lazy" decoding="async">
+                <figcaption><span>Chefbox</span> <span class="dot"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 25c0-10.5 8-18 18-18s18 7.5 18 18c-6 2.2-12 3.2-18 3.2S12 27.2 6 25Z"/><path d="M19 28.5 17.4 39a4.2 4.2 0 0 0 4.2 4.8h4.8a4.2 4.2 0 0 0 4.2-4.8L29 28.5"/></svg></span></figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div class="ds-code"><pre><code>&lt;div class="band on-green"&gt;
+  &lt;h1&gt;Proef een gratis &lt;span class="accent"&gt;chefbox&lt;/span&gt;&lt;/h1&gt;
+  &lt;div class="split"&gt;
+    &lt;div&gt;
+      &lt;ul class="rule-list"&gt;
+        &lt;li&gt;100 gr Grijze oesterzwam &lt;svg &hellip;&gt;&lt;/svg&gt;&lt;/li&gt;
+        &lt;!-- &hellip; --&gt;
+      &lt;/ul&gt;
+      &lt;a class="btn btn--green" href="&hellip;"&gt;Gratis Chefbox aanvragen&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;figure class="figure-label" data-reveal="right"&gt;
+      &lt;img src="../assets/img/chefbox-&hellip;.webp" alt="&hellip;" width="1388" height="1133"&gt;
+      &lt;figcaption&gt;&lt;span&gt;Chefbox&lt;/span&gt; &lt;span class="dot"&gt;&lt;svg &hellip;&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/figcaption&gt;
+    &lt;/figure&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+      </div>
+    </section>
+
+    <!-- Header & footer -->
+    <section class="section ds-section" id="header-footer" aria-labelledby="hf-h">
+      <div class="container">
+        <span class="kicker">Componenten</span>
+        <h2 id="hf-h">Header &amp; footer</h2>
+        <p style="max-width: 46rem">Beide staan levend boven- en onderaan deze pagina; elke pagina gebruikt exact dezelfde structuur. De header is groen met het logo in een witte cirkel, gecentreerde navigatie in sand en een ronde WhatsApp-knop rechts. Onder 47.9rem klapt de navigatie in achter een <code>.nav-toggle</code> (het openen zet <code>.is-open</code> op de nav en <code>aria-expanded</code> op de knop &mdash; zie <code>main.js</code>).</p>
+        <ul style="max-width: 46rem">
+          <li>De actieve pagina krijgt <code>aria-current="page"</code> op de navigatielink en daarmee een sand-onderlijn. Deze design-systempagina staat bewust niet in de navigatie.</li>
+          <li>Elke pagina begint met een skip-link naar <code>#main</code>.</li>
+          <li>De footer bevat contactgegevens, de paginanavigatie plus privacy-link en drie sociale iconen (WhatsApp, e-mail, telefoon). Facebook/Instagram/YouTube volgen zodra de URL&rsquo;s gekend zijn.</li>
+        </ul>
+        <div class="ds-code"><pre><code>&lt;header class="site-header"&gt;
+  &lt;div class="container site-header__inner"&gt;
+    &lt;a class="site-header__logo" href="../" aria-label="GroMush — naar de startpagina"&gt;
+      &lt;img src="../assets/img/gromush-logo-240.webp" alt="Logo van GroMush, &hellip;" width="96" height="96"&gt;
+    &lt;/a&gt;
+    &lt;button class="nav-toggle" aria-expanded="false" aria-controls="site-nav"&gt;
+      &lt;span class="visually-hidden"&gt;Menu&lt;/span&gt;
+      &lt;svg &hellip;&gt;&lt;/svg&gt;  &lt;!-- hamburger --&gt;
+    &lt;/button&gt;
+    &lt;nav id="site-nav" class="site-nav" aria-label="Hoofdnavigatie"&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="../" aria-current="page"&gt;Klant&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="../oesterzwammen/"&gt;Oesterzwammen&lt;/a&gt;&lt;/li&gt;
+        &lt;!-- &hellip; --&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+    &lt;a class="btn-whatsapp" href="https://wa.me/32499242359" aria-label="Stuur GroMush een WhatsApp-bericht"&gt;
+      &lt;svg &hellip;&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+&lt;/header&gt;</code></pre></div>
+
+        <h3 style="margin-top: 3rem">Contactlijst (.contact-list)</h3>
+        <p style="max-width: 46rem">Icoon + tekst per regel, gebruikt op de contactpagina en (met <code>style="--gold-deep: var(--sand)"</code>) in de groene bestel-band.</p>
+        <div class="ds-demo">
+          <ul class="contact-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Kwekerij in Knokke&#8209;Heist, op afspraak</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <a href="tel:+32499242359">0499 24 23 59</a></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg> <a href="mailto:info@gromush.be">info@gromush.be</a></li>
+          </ul>
+        </div>
+        <div class="ds-code"><pre><code>&lt;ul class="contact-list"&gt;
+  &lt;li&gt;&lt;svg &hellip;&gt;&lt;/svg&gt; Kwekerij in Knokke&amp;#8209;Heist, op afspraak&lt;/li&gt;
+  &lt;li&gt;&lt;svg &hellip;&gt;&lt;/svg&gt; &lt;a href="tel:+32499242359"&gt;0499 24 23 59&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre></div>
+      </div>
+    </section>
+
+    <!-- Iconografie -->
+    <section class="section ds-section" id="iconografie" aria-labelledby="icono-h">
+      <div class="container">
+        <span class="kicker">Componenten</span>
+        <h2 id="icono-h">Iconografie</h2>
+        <p style="max-width: 46rem">Alle iconen zijn inline SVG&rsquo;s op <code>currentColor</code> &mdash; geen icon-font, geen externe sprites. Lijniconen op 2&ndash;2.6 stroke-width, ronde uiteinden. Decoratieve iconen krijgen altijd <code>aria-hidden="true"</code>; iconen die betekenis dragen (bv. de WhatsApp-knop) krijgen een <code>aria-label</code> op de link. De set hieronder is de volledige inventaris (namen zoals in <code>_resources/build.py</code>).</p>
+
+        <div class="ds-icon-grid">
+          <div class="ds-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 25c0-10.5 8-18 18-18s18 7.5 18 18c-6 2.2-12 3.2-18 3.2S12 27.2 6 25Z"/><path d="M19 28.5 17.4 39a4.2 4.2 0 0 0 4.2 4.8h4.8a4.2 4.2 0 0 0 4.2-4.8L29 28.5"/></svg><span><code>mushroom</code><br>USP, rule-list, placeholder</span></div>
+          <div class="ds-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="10"/><circle cx="24" cy="24" r="16.5"/><path d="M5 6v10M2.5 6v6.5a2.5 2.5 0 0 0 5 0V6M45 6v36M45 6c-3.5 1.5-5 5-5 9v6h5"/></svg><span><code>plate</code><br>Restaurant-USP&rsquo;s</span></div>
+          <div class="ds-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h24v22H4zM28 20h9l7 7v7h-16"/><circle cx="12" cy="37" r="4"/><circle cx="36" cy="37" r="4"/></svg><span><code>truck</code><br>Levering</span></div>
+          <div class="ds-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18h36l-3 22H9L6 18Z"/><path d="M14 18v22M24 18v22M34 18v22M10 18l4-8h20l4 8"/></svg><span><code>crate</code><br>Chefbox, pakketten</span></div>
+          <div class="ds-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 41S6 30 6 17.5A9.5 9.5 0 0 1 24 13a9.5 9.5 0 0 1 18 4.5C42 30 24 41 24 41Z"/><path d="M17 24h5l2-5 3 9 2-4h4"/></svg><span><code>heart</code><br>Ambacht, kwaliteit</span></div>
+          <div class="ds-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 42V10l16-6v38M40 42V18l-16-6M14 16h4M14 24h4M14 32h4M30 22h4M30 30h4"/><path d="M4 42h40"/></svg><span><code>building</code><br>Grootkeuken</span></div>
+          <div class="ds-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span><code>phone</code><br>Contact, footer</span></div>
+          <div class="ds-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><span><code>mail</code><br>Contact, footer</span></div>
+          <div class="ds-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span><code>pin</code><br>Locatie</span></div>
+          <div class="ds-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span><code>clock</code><br>Openingsuren, afspraken</span></div>
+          <div class="ds-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span><code>hamburger</code><br>Mobiele navigatie</span></div>
+          <div class="ds-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg><span><code>whatsapp</code><br>Header, footer, CTA&rsquo;s</span></div>
+          <div class="ds-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg><span><code>facebook</code><br>Gereserveerd (URL volgt)</span></div>
+          <div class="ds-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg><span><code>instagram</code><br>Gereserveerd (URL volgt)</span></div>
+        </div>
+
+        <h3 style="margin-top: 3rem">USP-rij (.usp-row)</h3>
+        <p style="max-width: 46rem">Iconen in groene cirkels (7rem) met sand-lijnwerk, kop in gold-deep en een korte tekst. Bij hover zoomt de cirkel uit. Vanaf 40rem drie kolommen.</p>
+        <div class="ds-demo">
+          <div class="usp-row">
+            <div class="usp">
+              <span class="usp__icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 25c0-10.5 8-18 18-18s18 7.5 18 18c-6 2.2-12 3.2-18 3.2S12 27.2 6 25Z"/><path d="M19 28.5 17.4 39a4.2 4.2 0 0 0 4.2 4.8h4.8a4.2 4.2 0 0 0 4.2-4.8L29 28.5"/></svg></span>
+              <h3>Lokaal gekweekt</h3>
+              <p>Geteeld en geoogst in onze kwekerij in Knokke&#8209;Heist.</p>
+            </div>
+            <div class="usp">
+              <span class="usp__icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h24v22H4zM28 20h9l7 7v7h-16"/><circle cx="12" cy="37" r="4"/><circle cx="36" cy="37" r="4"/></svg></span>
+              <h3>Dagvers geleverd</h3>
+              <p>Geoogst op bestelling en rechtstreeks tot in uw keuken.</p>
+            </div>
+            <div class="usp">
+              <span class="usp__icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 41S6 30 6 17.5A9.5 9.5 0 0 1 24 13a9.5 9.5 0 0 1 18 4.5C42 30 24 41 24 41Z"/><path d="M17 24h5l2-5 3 9 2-4h4"/></svg></span>
+              <h3>Ambachtelijke teelt</h3>
+              <p>Kleinschalig en met respect voor natuur en kwaliteit.</p>
+            </div>
+          </div>
+        </div>
+        <div class="ds-code"><pre><code>&lt;div class="usp-row"&gt;
+  &lt;div class="usp" data-reveal&gt;
+    &lt;span class="usp__icon"&gt;&lt;svg &hellip; aria-hidden="true"&gt;&lt;/svg&gt;&lt;/span&gt;
+    &lt;h3&gt;Lokaal gekweekt&lt;/h3&gt;
+    &lt;p&gt;Geteeld en geoogst in onze kwekerij in Knokke&amp;#8209;Heist.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;!-- &times;3 --&gt;
+&lt;/div&gt;</code></pre></div>
+      </div>
+    </section>
+
+    <!-- Motion -->
+    <section class="section ds-section" id="motion" aria-labelledby="motion-h">
+      <div class="container">
+        <span class="kicker">Gedrag</span>
+        <h2 id="motion-h">Motion</h2>
+        <p style="max-width: 46rem">Alle beweging zit achter <code>prefers-reduced-motion: no-preference</code>; wie minder beweging vraagt, krijgt alles direct zichtbaar en zonder animatie. Er zijn vier patronen:</p>
+        <ul style="max-width: 46rem">
+          <li><strong>Hero-fade</strong> &mdash; hero-tekst vervaagt <em>in</em> bij het laden (getrapte delays van 0.18s) en vervaagt <em>uit</em> bij het scrollen (opacity + lichte parallax via <code>main.js</code>).</li>
+          <li><strong>Scroll-reveals</strong> &mdash; elementen met <code>data-reveal</code> faden omhoog zodra ze in beeld komen; <code>data-reveal="left"</code> en <code>data-reveal="right"</code> schuiven zijdelings in. E&eacute;nmalig per element (IntersectionObserver, drempel 18%).</li>
+          <li><strong>Zoom-out hovers</strong> &mdash; knoppen, iconen en kaarten schalen bij hover licht n&aacute;&aacute;r de gebruiker toe kleiner (<code>scale(0.9&ndash;0.98)</code>), nooit groter.</li>
+          <li><strong>Accordeon-plus</strong> &mdash; het plusje draait 45&deg; bij openen.</li>
+        </ul>
+
+        <div class="ds-demo" id="reveal-demo">
+          <div class="card-grid" style="margin-top: 0">
+            <div class="info-card" data-reveal="left"><p style="font-weight: 600; color: var(--green)">data-reveal="left"</p><p>Schuift van links in.</p></div>
+            <div class="info-card" data-reveal><p style="font-weight: 600; color: var(--green)">data-reveal</p><p>Fadet omhoog.</p></div>
+            <div class="info-card" data-reveal="right"><p style="font-weight: 600; color: var(--green)">data-reveal="right"</p><p>Schuift van rechts in.</p></div>
+          </div>
+          <p style="margin: 1.5rem 0 0"><button type="button" class="btn btn--cream ds-replay">Speel opnieuw af</button></p>
+        </div>
+        <div class="ds-code"><pre><code>&lt;div class="split__media" data-reveal="right"&gt;&hellip;&lt;/div&gt;  &lt;!-- foto schuift van rechts in --&gt;
+&lt;div class="usp" data-reveal&gt;&hellip;&lt;/div&gt;                  &lt;!-- blok fadet omhoog --&gt;</code></pre></div>
+
+        <div class="ds-note">
+          <p>Timing: reveals 0.7s ease, hovers 0.2&ndash;0.35s ease, hero-in 0.9s ease. Voeg geen nieuwe animatiepatronen toe zonder ze hier te documenteren, en zet ze altijd achter dezelfde media query.</p>
+        </div>
+      </div>
+    </section>
+
   </main>
   <footer class="site-footer">
     <div class="site-footer__logo">
@@ -133,5 +842,6 @@
     </ul>
   </footer>
   <script src="../assets/js/main.js" defer></script>
+  <script src="./ds.js" defer></script>
 </body>
 </html>
