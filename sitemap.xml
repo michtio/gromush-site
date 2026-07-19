@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://michtio.github.io/gromush-site/</loc></url>
-  <url><loc>https://michtio.github.io/gromush-site/restaurant/</loc></url>
-  <url><loc>https://michtio.github.io/gromush-site/grootkeuken/</loc></url>
-  <url><loc>https://michtio.github.io/gromush-site/particulier/</loc></url>
-  <url><loc>https://michtio.github.io/gromush-site/oesterzwammen/</loc></url>
-  <url><loc>https://michtio.github.io/gromush-site/chefbox/</loc></url>
-  <url><loc>https://michtio.github.io/gromush-site/bestel/</loc></url>
-  <url><loc>https://michtio.github.io/gromush-site/contact/</loc></url>
-  <url><loc>https://michtio.github.io/gromush-site/privacy/</loc></url>
+  <url><loc>https://michtio.github.io/gromush-site/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://michtio.github.io/gromush-site/over-ons/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://michtio.github.io/gromush-site/restaurant/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://michtio.github.io/gromush-site/grootkeuken/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://michtio.github.io/gromush-site/particulier/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://michtio.github.io/gromush-site/oesterzwammen/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://michtio.github.io/gromush-site/oesterzwammen-knokke-heist/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://michtio.github.io/gromush-site/oesterzwammen-damme/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://michtio.github.io/gromush-site/oesterzwammen-brugge/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://michtio.github.io/gromush-site/chefbox/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://michtio.github.io/gromush-site/bestel/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://michtio.github.io/gromush-site/contact/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://michtio.github.io/gromush-site/privacy/</loc><lastmod>2026-07-19</lastmod></url>
 </urlset>

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Design system | GroMush</title>
-  <meta name="description" content="Interne stijlgids van gromush.be: kleuren met contrastratio's, typografie, knoppen, schaduwen, kaarten, layout-primitieven, iconen en motion — met levende voorbeelden en kopieerbare HTML.">
+  <meta name="description" content="Interne stijlgids van gromush.be: kleuren met contrastratio's, typografie, knoppen, schaduwen, kaarten, formules, layout-primitieven, iconen, playful details en motion — met levende voorbeelden en kopieerbare HTML.">
   <link rel="canonical" href="https://michtio.github.io/gromush-site/design-system/">
   <meta name="robots" content="noindex">
   <meta property="og:type" content="website">
@@ -41,6 +41,7 @@
         <li><a href="../oesterzwammen/">Oesterzwammen</a></li>
         <li><a href="../chefbox/">Chefbox</a></li>
         <li><a href="../bestel/">Bestel</a></li>
+        <li><a href="../over-ons/">Over ons</a></li>
         <li><a href="../contact/">Contact</a></li>
         </ul>
       </nav>
@@ -69,12 +70,19 @@
             <li><a href="#knoppen">Knoppen</a></li>
             <li><a href="#schaduwen">Schaduwen</a></li>
             <li><a href="#layout">Layout &amp; spacing</a></li>
+            <li><a href="#hero-split">Hero-split</a></li>
             <li><a href="#kaarten">Kaarten</a></li>
+            <li><a href="#formules">Formules</a></li>
+            <li><a href="#couverts">Couverts-kiezer</a></li>
+            <li><a href="#lijsten">Lijsten</a></li>
             <li><a href="#stappen">Stappen</a></li>
             <li><a href="#accordeons">Accordeons</a></li>
             <li><a href="#chefbox-band">Chefbox-band</a></li>
+            <li><a href="#founder">Founder-blok</a></li>
             <li><a href="#header-footer">Header &amp; footer</a></li>
+            <li><a href="#doormat">Doormat &amp; breadcrumbs</a></li>
             <li><a href="#iconografie">Iconografie</a></li>
+            <li><a href="#playful">Playful</a></li>
             <li><a href="#motion">Motion</a></li>
           </ul>
         </nav>
@@ -311,9 +319,16 @@
         </div>
         <p style="margin-top: 1rem"><strong>Op groen</strong> &mdash; <code>.btn--green</code>: sand met groene tekst; bij hover cream met een sand-rand.</p>
 
+        <div class="ds-demo ds-demo--green ds-demo--center">
+          <a class="btn btn--green" href="#knoppen">Lees ons verhaal</a>
+          <a class="btn btn--outline" href="#knoppen">Zeg hallo</a>
+        </div>
+        <p style="margin-top: 1rem"><strong>Outline (secundair op groen)</strong> &mdash; <code>.btn--outline</code>: transparant met sand-rand en sand-tekst, zonder schaduw; bij hover gevuld sand met groene tekst. Gebruik als tweede knop naast een gevulde primaire.</p>
+
         <div class="ds-code"><pre><code>&lt;a class="btn btn--photo" href="#"&gt;Bestel ChefBox&lt;/a&gt;      &lt;!-- op foto's --&gt;
 &lt;a class="btn btn--cream" href="#"&gt;Onze oesterzwammen&lt;/a&gt;  &lt;!-- op cream --&gt;
-&lt;a class="btn btn--green" href="#"&gt;Gratis Chefbox&lt;/a&gt;      &lt;!-- op groen --&gt;</code></pre></div>
+&lt;a class="btn btn--green" href="#"&gt;Gratis Chefbox&lt;/a&gt;      &lt;!-- op groen --&gt;
+&lt;a class="btn btn--outline" href="#"&gt;Zeg hallo&lt;/a&gt;         &lt;!-- secundair op groen --&gt;</code></pre></div>
 
         <div class="ds-note">
           <p><strong>Bewuste afwijking van de briefing:</strong> de hover-tekstkleur is overal donkergroen gehouden. Goud- of zandkleurige tekst op cream haalt geen 4,5:1 (sand op cream is 1,7:1) en zou WCAG&nbsp;AA breken. De focus-stijl volgt de hover-stijl, plus de globale gouden focus-ring (<code>:focus-visible</code>).</p>
@@ -419,6 +434,62 @@
     &lt;a class="btn btn--photo" href="&hellip;"&gt;Gratis Chefbox&lt;/a&gt;
   &lt;/div&gt;
 &lt;/section&gt;</code></pre></div>
+      </div>
+    </section>
+
+    <!-- Hero-split -->
+    <section class="section ds-section" id="hero-split" aria-labelledby="herosplit-h">
+      <div class="container">
+        <span class="kicker">Componenten</span>
+        <h2 id="herosplit-h">Hero-split</h2>
+        <p style="max-width: 46rem">De standaard pagina-opener voor marketingpagina&rsquo;s (regiopagina&rsquo;s, ChefBox, Over ons): links copy op groen met een serif-titel, rechts een foto-moza&iuml;ek. In de moza&iuml;ek spant het eerste kind twee rijen (staand, 4:5); de andere twee zijn liggend (4:3) en <strong>het derde verdwijnt onder 48rem</strong> zodat mobiel twee foto&rsquo;s toont. Accentwoorden in de titel krijgen <code>.accent</code> (sand).</p>
+
+        <div class="ds-demo" style="padding: 0; border: 0">
+          <section class="hero-split" style="border-radius: var(--radius); overflow: hidden">
+            <div class="container hero-split__inner">
+              <div class="on-green">
+                <span class="kicker">Gro<strong>Mush</strong> &middot; demo</span>
+                <h3 style="font-family: var(--font-serif); font-weight: 400; color: var(--cream); font-size: var(--text-h1); line-height: 1.12">Wij leveren verse <span class="accent">oesterzwammen</span> in Knokke-Heist.</h3>
+                <p class="lead">Elke bestelling wordt hier geoogst en vertrekt binnen het uur naar uw keuken.</p>
+                <a class="btn btn--green" href="#hero-split">Bestel</a>
+                <a class="btn btn--outline" href="#hero-split">Oesterzwammen</a>
+              </div>
+              <div class="hero-mosaic">
+                <picture>
+                  <source type="image/avif" srcset="../assets/img/anthony-watteeuw-witte-oesterzwam-800.avif">
+                  <img src="../assets/img/anthony-watteeuw-witte-oesterzwam-800.webp" alt="Kweker Anthony Watteeuw met witte oesterzwammen" width="800" height="1069" loading="lazy" decoding="async">
+                </picture>
+                <picture>
+                  <source type="image/avif" srcset="../assets/img/knokke-heist-strand-panorama-800.avif">
+                  <img src="../assets/img/knokke-heist-strand-panorama-800.webp" alt="Strand van Knokke-Heist" width="800" height="393" loading="lazy" decoding="async">
+                </picture>
+                <picture>
+                  <source type="image/avif" srcset="../assets/img/zalmoesterzwam-gerecht-800.avif">
+                  <img src="../assets/img/zalmoesterzwam-gerecht-800.webp" alt="Gerecht met zalmoesterzwammen" width="800" height="533" loading="lazy" decoding="async">
+                </picture>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="ds-code"><pre><code>&lt;section class="hero-split" aria-labelledby="regio-h1"&gt;
+  &lt;div class="container hero-split__inner"&gt;
+    &lt;div class="on-green"&gt;
+      &lt;span class="kicker"&gt;Gro&lt;strong&gt;Mush&lt;/strong&gt; &middot; thuisbasis Knokke-Heist&lt;/span&gt;
+      &lt;h1 id="regio-h1"&gt;Wij leveren verse &lt;span class="accent"&gt;oesterzwammen&lt;/span&gt; in Knokke-Heist.&lt;/h1&gt;
+      &lt;p class="lead"&gt;&hellip;&lt;/p&gt;
+      &lt;a class="btn btn--green" href="../bestel/"&gt;Bestel&lt;/a&gt;
+      &lt;a class="btn btn--photo" href="../oesterzwammen/"&gt;Oesterzwammen&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="hero-mosaic"&gt;
+      &lt;picture&gt;&hellip;&lt;/picture&gt;  &lt;!-- staand 4:5, spant 2 rijen --&gt;
+      &lt;picture&gt;&hellip;&lt;/picture&gt;  &lt;!-- liggend 4:3 --&gt;
+      &lt;picture&gt;&hellip;&lt;/picture&gt;  &lt;!-- liggend 4:3, verborgen onder 48rem --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre></div>
+        <div class="ds-note">
+          <p>Op regiopagina&rsquo;s staat boven de <code>.hero-split__inner</code> nog een <a href="#doormat">breadcrumb</a> (<code>.breadcrumbs.on-green</code>). Stickers kunnen op de moza&iuml;ek geplakt worden &mdash; zie <a href="#playful">Playful</a>.</p>
+        </div>
       </div>
     </section>
 
@@ -547,6 +618,187 @@
       </div>
     </section>
 
+    <!-- Formules -->
+    <section class="section ds-section" id="formules" aria-labelledby="formules-h">
+      <div class="container">
+        <span class="kicker">Componenten</span>
+        <h2 id="formules-h">Formules (tier-kaarten)</h2>
+        <p style="max-width: 46rem">De ChefBox-abonnementen als prijskaarten: <code>.tier-grid</code> met drie <code>.tier</code>-kaarten. De aanbevolen formule krijgt <code>.tier--featured</code> (sand in plaats van groen, licht opgetild vanaf 48rem) plus een <code>.tier__flag</code>-badge. Het kg-getal is het grote serif-element; voordelen staan in een <a href="#lijsten"><code>.check-list</code></a>; <code>.tier__meta</code> herhaalt het volume onderaan. Kaarten zoomen licht uit bij hover.</p>
+
+        <div class="ds-demo" style="padding-block: 2.5rem">
+          <div class="tier-grid" style="margin-top: 1rem">
+            <article class="tier">
+              <h3 class="tier__name">ChefBox <span class="tier__variant">Basis</span></h3>
+              <p class="tier__amount">vanaf <strong>5&nbsp;kg</strong></p>
+              <p class="tier__period">per week</p>
+              <ul class="check-list">
+                <li>E&eacute;n of meerdere soorten</li>
+                <li>Wekelijks vers geleverd</li>
+                <li>Vast leverritme op maat</li>
+              </ul>
+              <p class="tier__meta">5&nbsp;kg/week</p>
+              <a class="btn btn--green" href="#formules">Bestel Basis</a>
+            </article>
+            <article class="tier tier--featured">
+              <span class="tier__flag">Meest gekozen</span>
+              <h3 class="tier__name">ChefBox <span class="tier__variant">Select</span></h3>
+              <p class="tier__amount">vanaf <strong>15&nbsp;kg</strong></p>
+              <p class="tier__period">per week</p>
+              <ul class="check-list">
+                <li>Mix van 4 soorten</li>
+                <li>Wekelijks vers geleverd</li>
+                <li>Voorrang op speciale zwammen</li>
+              </ul>
+              <p class="tier__meta">15&nbsp;kg/week</p>
+              <a class="btn btn--cream" href="#formules">Bestel Select</a>
+            </article>
+            <article class="tier">
+              <h3 class="tier__name">ChefBox <span class="tier__variant">Exclusief</span></h3>
+              <p class="tier__amount">vanaf <strong>25&nbsp;kg</strong></p>
+              <p class="tier__period">per week</p>
+              <ul class="check-list">
+                <li>Mix van 6 soorten</li>
+                <li>Voorrang op speciale zwammen</li>
+                <li>Prioriteit bij schaarste</li>
+              </ul>
+              <p class="tier__meta">25&nbsp;kg/week</p>
+              <a class="btn btn--green" href="#formules">Bestel Exclusief</a>
+            </article>
+          </div>
+        </div>
+        <div class="ds-code"><pre><code>&lt;div class="tier-grid"&gt;
+  &lt;article class="tier" id="tier-basis"&gt;
+    &lt;h3 class="tier__name"&gt;ChefBox &lt;span class="tier__variant"&gt;Basis&lt;/span&gt;&lt;/h3&gt;
+    &lt;p class="tier__amount"&gt;vanaf &lt;strong&gt;5&amp;nbsp;kg&lt;/strong&gt;&lt;/p&gt;
+    &lt;p class="tier__period"&gt;per week&lt;/p&gt;
+    &lt;ul class="check-list"&gt;
+      &lt;li&gt;E&eacute;n of meerdere soorten&lt;/li&gt;
+      &lt;!-- &hellip; --&gt;
+    &lt;/ul&gt;
+    &lt;p class="tier__meta"&gt;5&amp;nbsp;kg/week&lt;/p&gt;
+    &lt;a class="btn btn--green" href="../contact/"&gt;Bestel Basis&lt;/a&gt;
+  &lt;/article&gt;
+
+  &lt;article class="tier tier--featured" id="tier-select"&gt;
+    &lt;span class="tier__flag"&gt;Meest gekozen&lt;/span&gt;
+    &lt;!-- &hellip; featured krijgt .btn--cream --&gt;
+  &lt;/article&gt;
+&lt;/div&gt;</code></pre></div>
+        <div class="ds-note">
+          <p>De volledige levende versie staat op <a href="../chefbox/#formules">/chefbox/#formules</a>. Proefperiodes horen niet op de kaarten &mdash; de gratis proefbox (3 maanden) is de gedeelde instap v&oacute;&oacute;r elke formule.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Couverts-kiezer -->
+    <section class="section ds-section" id="couverts" aria-labelledby="couverts-h">
+      <div class="container">
+        <span class="kicker">Componenten &middot; interactief</span>
+        <h2 id="couverts-h">Couverts-kiezer</h2>
+        <p style="max-width: 46rem">Helpt een chef de juiste formule kiezen op basis van het aantal couverts. Drie knoppen (<code>.covers__range</code>); de actieve optie krijgt <code>.is-active</code> op zijn <code>.covers__option</code>. Het gedrag zit in <code>assets/js/main.js</code>: een klik verplaatst <code>.is-active</code> en <code>aria-pressed</code>, en werkt de tekst en <code>href</code> van de <code>.covers__link</code>-knop bij via de data-attributen <code>data-formule</code> en <code>data-doel</code>. Zonder JavaScript blijven alle drie de adviezen gewoon leesbaar (progressive enhancement). Hoort thuis op een groene band; maximaal &eacute;&eacute;n kiezer per pagina.</p>
+
+        <div class="ds-demo ds-demo--green on-green">
+          <div class="covers">
+            <div>
+              <ul class="covers__options">
+                <li class="covers__option is-active" data-formule="ChefBox Basis" data-doel="#formules">
+                  <button type="button" class="covers__range" aria-pressed="true">20&ndash;40<small>couverts</small></button>
+                  <p class="covers__advice">Aanbevolen formule <strong>ChefBox Basis &middot; 5 kg/week</strong></p>
+                </li>
+                <li class="covers__option" data-formule="ChefBox Select" data-doel="#formules">
+                  <button type="button" class="covers__range" aria-pressed="false">40&ndash;80<small>couverts</small></button>
+                  <p class="covers__advice">Aanbevolen formule <strong>ChefBox Select &middot; 15 kg/week</strong></p>
+                </li>
+                <li class="covers__option" data-formule="ChefBox Exclusief" data-doel="#formules">
+                  <button type="button" class="covers__range" aria-pressed="false">80&ndash;150<small>couverts</small></button>
+                  <p class="covers__advice">Aanbevolen formule <strong>ChefBox Exclusief &middot; 25 kg/week</strong></p>
+                </li>
+              </ul>
+              <p style="margin: 1.75rem 0 0"><a class="btn btn--green covers__link" href="#formules">Bekijk ChefBox Basis</a></p>
+            </div>
+            <div class="covers__media">
+              <picture>
+                <source type="image/avif" srcset="../assets/img/gele-oesterzwam-gerecht-knokke-heist-800.avif">
+                <img src="../assets/img/gele-oesterzwam-gerecht-knokke-heist-800.webp" alt="Gerecht met gele oesterzwammen op een bord" width="800" height="640" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </div>
+        </div>
+        <div class="ds-code"><pre><code>&lt;div class="covers"&gt;
+  &lt;div&gt;
+    &lt;ul class="covers__options"&gt;
+      &lt;li class="covers__option is-active" data-formule="ChefBox Basis" data-doel="#tier-basis"&gt;
+        &lt;button type="button" class="covers__range" aria-pressed="true"&gt;20&amp;ndash;40&lt;small&gt;couverts&lt;/small&gt;&lt;/button&gt;
+        &lt;p class="covers__advice"&gt;Aanbevolen formule &lt;strong&gt;ChefBox Basis &middot; 5 kg/week&lt;/strong&gt;&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;!-- &times;3 --&gt;
+    &lt;/ul&gt;
+    &lt;p&gt;&lt;a class="btn btn--green covers__link" href="#tier-basis"&gt;Bekijk ChefBox Basis&lt;/a&gt;&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="covers__media"&gt;&lt;picture&gt;&hellip;&lt;/picture&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+        <div class="ds-note">
+          <p>Statische variant (zonder knoppen, met <code>&lt;span class="covers__range"&gt;</code>) staat op de regiopagina&rsquo;s &mdash; daar linkt &eacute;&eacute;n knop naar <a href="../chefbox/#formules">/chefbox/#formules</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lijsten -->
+    <section class="section ds-section" id="lijsten" aria-labelledby="lijsten-h">
+      <div class="container">
+        <span class="kicker">Componenten</span>
+        <h2 id="lijsten-h">Lijsten</h2>
+
+        <h3>Checklijst (.check-list)</h3>
+        <p style="max-width: 46rem">Opsomming met een ronde vink-badge. Op cream: groene badge met cream-vinkje; binnen <code>.on-green</code> (en op tier-kaarten): sand-badge met groen vinkje. De badge is een inline-SVG in CSS &mdash; geen extra markup nodig.</p>
+        <div class="ds-demo">
+          <ul class="check-list" style="columns: 2; column-gap: 2rem; max-width: 30rem">
+            <li>Wekelijkse leveringen</li>
+            <li>Constante kwaliteit</li>
+            <li>Lokale productie</li>
+            <li>Flexibele volumes</li>
+          </ul>
+        </div>
+        <div class="ds-demo ds-demo--green on-green">
+          <ul class="check-list" style="columns: 2; column-gap: 2rem; max-width: 30rem; margin: 0">
+            <li>Restaurants</li>
+            <li>Hotels</li>
+            <li>Grootkeukens</li>
+            <li>Traiteurs</li>
+          </ul>
+        </div>
+        <div class="ds-code"><pre><code>&lt;ul class="check-list"&gt;
+  &lt;li&gt;Wekelijkse leveringen&lt;/li&gt;
+  &lt;li&gt;Constante kwaliteit&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- twee kolommen: style="columns: 2; column-gap: 2rem" --&gt;</code></pre></div>
+
+        <h3 style="margin-top: 3rem">Pijllijst (.arrow-list)</h3>
+        <p style="max-width: 46rem">USP-rijen met haarlijn-scheiding: titel links, pijl-icoon in het midden, uitleg rechts. Onder 40rem stapelt de rij en verdwijnt de pijl. Werkt op cream, sand (<code>.on-sand</code>) en groen (<code>.on-green</code>).</p>
+        <div class="ds-demo" style="background: var(--sand); border-style: solid; border-color: var(--sand)">
+          <ul class="arrow-list">
+            <li>
+              <h3 style="font-size: var(--text-h3)">Binnen de 24u geoogst</h3>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              <p>Zo ontvangt u oesterzwammen die vaak minder dan 24 uur eerder werden geoogst.</p>
+            </li>
+            <li>
+              <h3 style="font-size: var(--text-h3)">Levering op maat</h3>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              <p>Chef-koks moeten kunnen plannen. Daarom werken wij met duidelijke afspraken.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="ds-code"><pre><code>&lt;ul class="arrow-list"&gt;
+  &lt;li&gt;
+    &lt;h3&gt;Binnen de 24u geoogst&lt;/h3&gt;
+    &lt;svg viewBox="0 0 24 24" &hellip; aria-hidden="true"&gt;&lt;path d="M5 12h14M13 6l6 6-6 6"/&gt;&lt;/svg&gt;
+    &lt;p&gt;Zo ontvangt u oesterzwammen die vaak minder dan 24 uur eerder werden geoogst.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre></div>
+      </div>
+    </section>
+
     <!-- Stappen -->
     <section class="section ds-section" id="stappen" aria-labelledby="stappen-h">
       <div class="container">
@@ -581,6 +833,32 @@
     &lt;li&gt;Persoonlijke levering door de kweker zelf.&lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;</code></pre></div>
+
+        <h3 style="margin-top: 3rem">Horizontale stappen (.steps-row)</h3>
+        <p style="max-width: 46rem">Drie witte kaarten naast elkaar (gestapeld onder 48rem), elk met een genummerde cirkel (CSS-counter, groen met sand-cijfer), een korte kop en uitleg. Gebruikt voor &ldquo;Hoe bestel je?&rdquo; op <a href="../bestel/">/bestel/</a>.</p>
+        <div class="ds-demo">
+          <ol class="steps-row" style="margin-top: 0">
+            <li>
+              <h3>We maken kennis met jouw keuken</h3>
+              <p>Vertel ons welke gerechten je serveert en hoeveel couverts je draait.</p>
+            </li>
+            <li>
+              <h3>Stel jouw ideale levering samen</h3>
+              <p>Kies de formule die past bij jouw keuken en aantal couverts.</p>
+            </li>
+            <li>
+              <h3>Vers geoogst, rechtstreeks geleverd</h3>
+              <p>Op de afgesproken leverdag oogsten we jouw bestelling vers.</p>
+            </li>
+          </ol>
+        </div>
+        <div class="ds-code"><pre><code>&lt;ol class="steps-row"&gt;
+  &lt;li data-reveal&gt;
+    &lt;h3&gt;We maken kennis met jouw keuken&lt;/h3&gt;
+    &lt;p&gt;Vertel ons welke gerechten je serveert en hoeveel couverts je draait.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;!-- &times;3 --&gt;
+&lt;/ol&gt;</code></pre></div>
       </div>
     </section>
 
@@ -685,6 +963,53 @@
       </div>
     </section>
 
+    <!-- Founder-blok -->
+    <section class="section ds-section" id="founder" aria-labelledby="founder-h">
+      <div class="container">
+        <span class="kicker">Componenten</span>
+        <h2 id="founder-h">Founder-blok &amp; pull-quote</h2>
+        <p style="max-width: 46rem">Vertrouwensblok met Anthony: foto links, sand-paneel rechts met serif-kop en een CTA naar <a href="../over-ons/">/over-ons/</a>. Terugkerend op de ChefBox- en regiopagina&rsquo;s (E-E-A-T: de kweker is het gezicht van het merk). Op sand krijgen koppen <code>color:&nbsp;var(--green)</code>.</p>
+
+        <div class="ds-demo" style="padding: 0; border: 0">
+          <div class="founder">
+            <div class="founder__media">
+              <picture>
+                <source type="image/avif" srcset="../assets/img/anthony-watteeuw-portret-kwekerij-800.avif">
+                <img src="../assets/img/anthony-watteeuw-portret-kwekerij-800.webp" alt="Kweker Anthony Watteeuw met verse oesterzwammen in de GroMush-kwekerij" width="800" height="1066" loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <div class="founder__panel">
+              <span class="kicker">Over GroMush</span>
+              <h3 style="font-size: var(--text-h2)">Rechtstreeks van de kweker naar uw bord</h3>
+              <p>GroMush is een ambachtelijke paddenstoelenkwekerij, opgericht door <strong>Anthony Watteeuw</strong>. Bij iedere bestelling of levering staat u rechtstreeks in contact met de kweker zelf.</p>
+              <a class="btn btn--cream" href="../over-ons/">Ontmoet Anthony</a>
+            </div>
+          </div>
+        </div>
+        <div class="ds-code"><pre><code>&lt;div class="founder" data-reveal&gt;
+  &lt;div class="founder__media"&gt;
+    &lt;picture&gt;&hellip;&lt;/picture&gt;
+  &lt;/div&gt;
+  &lt;div class="founder__panel"&gt;
+    &lt;span class="kicker"&gt;Over GroMush&lt;/span&gt;
+    &lt;h2&gt;Rechtstreeks van de kweker naar uw bord&lt;/h2&gt;
+    &lt;p&gt;&hellip;&lt;/p&gt;
+    &lt;a class="btn btn--cream" href="../over-ons/"&gt;Ontmoet Anthony&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+
+        <h3 style="margin-top: 3rem">Pull-quote (.pull-quote)</h3>
+        <p style="max-width: 46rem">Serif-citaat voor het founder-verhaal. Groen op cream; binnen <code>.on-green</code> wordt het sand-soft met een sand-bronvermelding.</p>
+        <div class="ds-demo">
+          <blockquote class="pull-quote">Mycelium verbindt, groeit, breekt af, bouwt opnieuw op &mdash; en vormt zo de basis van gezonde ecosystemen.<footer>&mdash; Anthony Watteeuw, kweker</footer></blockquote>
+        </div>
+        <div class="ds-code"><pre><code>&lt;blockquote class="pull-quote"&gt;
+  Mycelium verbindt, groeit, breekt af, bouwt opnieuw op.
+  &lt;footer&gt;&mdash; Anthony Watteeuw, kweker&lt;/footer&gt;
+&lt;/blockquote&gt;</code></pre></div>
+      </div>
+    </section>
+
     <!-- Header & footer -->
     <section class="section ds-section" id="header-footer" aria-labelledby="hf-h">
       <div class="container">
@@ -694,7 +1019,8 @@
         <ul style="max-width: 46rem">
           <li>De actieve pagina krijgt <code>aria-current="page"</code> op de navigatielink en daarmee een sand-onderlijn. Deze design-systempagina staat bewust niet in de navigatie.</li>
           <li>Elke pagina begint met een skip-link naar <code>#main</code>.</li>
-          <li>De footer bevat contactgegevens, de paginanavigatie plus privacy-link en drie sociale iconen (WhatsApp, e-mail, telefoon). Facebook/Instagram/YouTube volgen zodra de URL&rsquo;s gekend zijn.</li>
+          <li>De footer opent sinds de uitbreiding met een <a href="#doormat">doormat</a> (sitemap-kolommen), gevolgd door contactgegevens, de paginanavigatie plus privacy-link en drie sociale iconen (WhatsApp, e-mail, telefoon). Facebook/Instagram/YouTube volgen zodra de URL&rsquo;s gekend zijn.</li>
+          <li>De navigatie telt zes items; de regiopagina&rsquo;s staan bewust n&iacute;et in de header maar in de doormat en de regiokaarten.</li>
         </ul>
         <div class="ds-code"><pre><code>&lt;header class="site-header"&gt;
   &lt;div class="container site-header__inner"&gt;
@@ -734,12 +1060,58 @@
       </div>
     </section>
 
+    <!-- Doormat & breadcrumbs -->
+    <section class="section ds-section" id="doormat" aria-labelledby="doormat-h">
+      <div class="container">
+        <span class="kicker">Componenten</span>
+        <h2 id="doormat-h">Doormat &amp; breadcrumbs</h2>
+
+        <h3>Footer-doormat (.site-footer__doormat)</h3>
+        <p style="max-width: 46rem">Sitemap-blok bovenaan de footer, op elke pagina identiek: een tagline-kolom (logo + serif-zin) en vier linkkolommen &mdash; <strong>Aanbod</strong>, <strong>Voor wie</strong>, <strong>Regio&rsquo;s</strong> en <strong>Praktisch</strong>. Vanaf 64rem vijf kolommen, vanaf 40rem twee, daaronder gestapeld. Dit is de primaire vindplaats van de regiopagina&rsquo;s. Levend voorbeeld: de footer onderaan deze pagina.</p>
+        <div class="ds-code"><pre><code>&lt;footer class="site-footer"&gt;
+  &lt;div class="site-footer__doormat"&gt;
+    &lt;div class="site-footer__tagline"&gt;
+      &lt;img src="../assets/img/gromush-logo-240.webp" alt="" width="72" height="72" loading="lazy"&gt;
+      &lt;p&gt;Ambachtelijk gekweekte oesterzwammen uit Knokke-Heist. Dagvers, lokaal en met liefde geteeld.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;h2&gt;Aanbod&lt;/h2&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="../oesterzwammen/"&gt;Oesterzwammen&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="../chefbox/"&gt;ChefBox-formules&lt;/a&gt;&lt;/li&gt;
+        &lt;!-- &hellip; --&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;!-- Voor wie &middot; Regio's &middot; Praktisch --&gt;
+  &lt;/div&gt;
+  &lt;!-- daarna: logo, contact, nav, socials zoals voorheen --&gt;
+&lt;/footer&gt;</code></pre></div>
+
+        <h3 style="margin-top: 3rem">Breadcrumbs (.breadcrumbs)</h3>
+        <p style="max-width: 46rem">Kruimelpad voor landingspagina&rsquo;s buiten de hoofdnavigatie (de regiopagina&rsquo;s). Op groen komt er <code>.on-green</code> bij. Hoort samen te gaan met <code>BreadcrumbList</code> JSON-LD.</p>
+        <div class="ds-demo">
+          <nav class="breadcrumbs" aria-label="Kruimelpad demo" style="padding-top: 0">
+            <ol>
+              <li><a href="../">Home</a></li>
+              <li aria-current="page">Oesterzwammen in Knokke-Heist</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="ds-code"><pre><code>&lt;nav class="breadcrumbs on-green" aria-label="Kruimelpad"&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href="../"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li aria-current="page"&gt;Oesterzwammen in Knokke-Heist&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre></div>
+      </div>
+    </section>
+
     <!-- Iconografie -->
     <section class="section ds-section" id="iconografie" aria-labelledby="icono-h">
       <div class="container">
         <span class="kicker">Componenten</span>
         <h2 id="icono-h">Iconografie</h2>
-        <p style="max-width: 46rem">Alle iconen zijn inline SVG&rsquo;s op <code>currentColor</code> &mdash; geen icon-font, geen externe sprites. Lijniconen op 2&ndash;2.6 stroke-width, ronde uiteinden. Decoratieve iconen krijgen altijd <code>aria-hidden="true"</code>; iconen die betekenis dragen (bv. de WhatsApp-knop) krijgen een <code>aria-label</code> op de link. De set hieronder is de volledige inventaris (namen zoals in <code>_resources/build.py</code>).</p>
+        <p style="max-width: 46rem">Alle iconen zijn inline SVG&rsquo;s op <code>currentColor</code> &mdash; geen icon-font, geen externe sprites. Lijniconen op 2&ndash;2.6 stroke-width, ronde uiteinden. Decoratieve iconen krijgen altijd <code>aria-hidden="true"</code>; iconen die betekenis dragen (bv. de WhatsApp-knop) krijgen een <code>aria-label</code> op de link. De set hieronder is de volledige inventaris (namen zoals in <code>_resources/build.py</code>; de pijl kwam er later bij voor de <a href="#lijsten">pijllijst</a>).</p>
 
         <div class="ds-icon-grid">
           <div class="ds-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 25c0-10.5 8-18 18-18s18 7.5 18 18c-6 2.2-12 3.2-18 3.2S12 27.2 6 25Z"/><path d="M19 28.5 17.4 39a4.2 4.2 0 0 0 4.2 4.8h4.8a4.2 4.2 0 0 0 4.2-4.8L29 28.5"/></svg><span><code>mushroom</code><br>USP, rule-list, placeholder</span></div>
@@ -756,6 +1128,7 @@
           <div class="ds-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg><span><code>whatsapp</code><br>Header, footer, CTA&rsquo;s</span></div>
           <div class="ds-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg><span><code>facebook</code><br>Gereserveerd (URL volgt)</span></div>
           <div class="ds-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg><span><code>instagram</code><br>Gereserveerd (URL volgt)</span></div>
+          <div class="ds-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span><code>arrow</code><br>Pijllijst (USP-rijen)</span></div>
         </div>
 
         <h3 style="margin-top: 3rem">USP-rij (.usp-row)</h3>
@@ -790,6 +1163,84 @@
       </div>
     </section>
 
+    <!-- Playful -->
+    <section class="section ds-section" id="playful" aria-labelledby="playful-h">
+      <div class="container">
+        <span class="kicker">Componenten &middot; speels</span>
+        <h2 id="playful-h">Playful</h2>
+        <p style="max-width: 46rem">Kleine knipogen die het merk menselijk houden. Spaarzaam gebruiken: maximaal &eacute;&eacute;n speels element per sectie, en nooit ten koste van leesbaarheid.</p>
+
+        <h3>Stickers (.sticker)</h3>
+        <p style="max-width: 46rem">Geroteerde pill-badges, geplakt op foto&rsquo;s of moza&iuml;eken (absoluut gepositioneerd op een <code>position:&nbsp;relative</code>-ouder). Basis is goud met &minus;4&deg;; <code>.sticker--sand</code> is sand/groen; <code>.sticker--tilt-right</code> kantelt +3&deg;.</p>
+        <div class="ds-demo ds-demo--center" style="gap: 2.5rem">
+          <span class="sticker">100% lokaal</span>
+          <span class="sticker sticker--sand sticker--tilt-right">Dagvers geplukt!</span>
+        </div>
+        <div class="ds-code"><pre><code>&lt;div class="hero-mosaic" style="position: relative"&gt;
+  &lt;picture&gt;&hellip;&lt;/picture&gt;
+  &lt;span class="sticker" style="position: absolute; top: -1rem; left: -1.25rem"&gt;100% lokaal&lt;/span&gt;
+  &lt;span class="sticker sticker--sand sticker--tilt-right" style="position: absolute; bottom: -1rem; right: -0.5rem"&gt;Dagvers geplukt!&lt;/span&gt;
+&lt;/div&gt;</code></pre></div>
+
+        <h3 style="margin-top: 3rem">Golf-scheiding (.wave)</h3>
+        <p style="max-width: 46rem">Organische overgang tussen cream en een full-bleed groene sectie. E&eacute;n SVG-pad, gevuld met het groen van de volgende sectie; onderaan spiegelen met <code>transform:&nbsp;scaleY(-1)</code>. Altijd <code>aria-hidden="true"</code>.</p>
+        <div class="ds-demo" style="padding: 0; border: 0; overflow: hidden; border-radius: var(--radius)">
+          <div style="background: var(--cream); height: 2rem"></div>
+          <div class="wave" aria-hidden="true"><svg preserveAspectRatio="none" viewBox="0 0 1200 60"><path d="M0 45 C 150 10 300 62 450 40 C 600 18 750 55 900 38 C 1050 21 1150 42 1200 32 L 1200 60 L 0 60 Z" fill="#334727"/></svg></div>
+          <div style="background: var(--green); height: 3.5rem"></div>
+        </div>
+        <div class="ds-code"><pre><code>&lt;div class="wave" aria-hidden="true"&gt;&lt;svg preserveAspectRatio="none" viewBox="0 0 1200 60"&gt;&lt;path d="M0 45 C 150 10 300 62 450 40 C 600 18 750 55 900 38 C 1050 21 1150 42 1200 32 L 1200 60 L 0 60 Z" fill="#334727"/&gt;&lt;/svg&gt;&lt;/div&gt;
+&lt;section class="on-green" style="background: var(--green)"&gt;&hellip;&lt;/section&gt;
+&lt;div class="wave" style="transform: scaleY(-1)" aria-hidden="true"&gt;&hellip;&lt;/div&gt;</code></pre></div>
+
+        <h3 style="margin-top: 3rem">Bestelwagentje (.van-scene)</h3>
+        <p style="max-width: 46rem">Het GroMush-busje rijdt langs een stippellijn met drie haltes (links naar de regiopagina&rsquo;s of de kwekerij). De rit duurt 16&nbsp;seconden, met een korte stop halverwege &mdash; iemand krijgt verse zwammen &mdash; en de wielen (<code>.van-wheel</code>) draaien mee. Alles zit achter <code>prefers-reduced-motion</code>: wie minder beweging vraagt, ziet een stilstaand busje. Het busje is inline SVG met merkkleuren; de haltes zijn gewone links, dus het component is ook navigatie.</p>
+        <div class="ds-demo ds-demo--green on-green" style="padding-top: 4.5rem">
+          <div class="van-scene" style="margin-top: 1rem">
+            <div class="van-scene__van" aria-hidden="true">
+              <svg viewBox="0 0 110 60" role="presentation">
+                <path d="M4 12 h58 a5 5 0 0 1 5 5 v27 H4 a2 2 0 0 1 -2 -2 V 14 a2 2 0 0 1 2 -2 Z" fill="#fdf8ee"/>
+                <path d="M67 20 h15 a4 4 0 0 1 3.2 1.6 l7.4 9.9 a4 4 0 0 1 .8 2.4 V 42 a2 2 0 0 1 -2 2 h-24.4 Z" fill="#334727"/>
+                <path d="M70.5 23.5 h10.6 a2 2 0 0 1 1.6 .8 l5.6 7.4 h-17.8 Z" fill="#e5dcb4"/>
+                <circle cx="34" cy="27" r="11.5" fill="#ffffff"/>
+                <path d="M27 27.5 c0-4.6 3.2-7.5 7-7.5 s7 2.9 7 7.5 c-2.4 0.9-4.7 1.3-7 1.3 s-4.6-0.4-7-1.3 Z" fill="#334727"/>
+                <path d="M32 29.5 l-0.5 4.2 a1.6 1.6 0 0 0 1.6 1.8 h1.8 a1.6 1.6 0 0 0 1.6-1.8 l-0.5-4.2" fill="none" stroke="#334727" stroke-width="1.6" stroke-linecap="round"/>
+                <rect x="2" y="42" width="91" height="3" rx="1.5" fill="#26331c"/>
+                <circle cx="92.5" cy="36.5" r="1.8" fill="#9b8843"/>
+                <g class="van-wheel">
+                  <circle cx="20" cy="46" r="7.5" fill="#353535"/>
+                  <circle cx="20" cy="46" r="3" fill="#fdf8ee"/>
+                  <path d="M20 40.5 v3 M20 48.5 v3 M14.5 46 h3 M22.5 46 h3" stroke="#fdf8ee" stroke-width="1.4" stroke-linecap="round"/>
+                </g>
+                <g class="van-wheel">
+                  <circle cx="76" cy="46" r="7.5" fill="#353535"/>
+                  <circle cx="76" cy="46" r="3" fill="#fdf8ee"/>
+                  <path d="M76 40.5 v3 M76 48.5 v3 M70.5 46 h3 M78.5 46 h3" stroke="#fdf8ee" stroke-width="1.4" stroke-linecap="round"/>
+                </g>
+              </svg>
+            </div>
+            <div class="van-scene__road"></div>
+            <ul class="van-scene__stops">
+              <li><a href="../oesterzwammen-knokke-heist/">Kwekerij Knokke&#8209;Heist</a></li>
+              <li><a href="../oesterzwammen-damme/">Damme</a></li>
+              <li><a href="../oesterzwammen-brugge/">Brugge</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="ds-code"><pre><code>&lt;div class="van-scene"&gt;
+  &lt;div class="van-scene__van" aria-hidden="true"&gt;
+    &lt;svg viewBox="0 0 110 60" role="presentation"&gt;&hellip;&lt;/svg&gt;  &lt;!-- busje: zie over-ons/index.html --&gt;
+  &lt;/div&gt;
+  &lt;div class="van-scene__road"&gt;&lt;/div&gt;
+  &lt;ul class="van-scene__stops"&gt;
+    &lt;li&gt;&lt;a href="../oesterzwammen-knokke-heist/"&gt;Kwekerij Knokke&amp;#8209;Heist&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="../oesterzwammen-damme/"&gt;Damme&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="../oesterzwammen-brugge/"&gt;Brugge&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre></div>
+      </div>
+    </section>
+
     <!-- Motion -->
     <section class="section ds-section" id="motion" aria-labelledby="motion-h">
       <div class="container">
@@ -801,6 +1252,7 @@
           <li><strong>Scroll-reveals</strong> &mdash; elementen met <code>data-reveal</code> faden omhoog zodra ze in beeld komen; <code>data-reveal="left"</code> en <code>data-reveal="right"</code> schuiven zijdelings in. E&eacute;nmalig per element (IntersectionObserver, drempel 18%).</li>
           <li><strong>Zoom-out hovers</strong> &mdash; knoppen, iconen en kaarten schalen bij hover licht n&aacute;&aacute;r de gebruiker toe kleiner (<code>scale(0.9&ndash;0.98)</code>), nooit groter.</li>
           <li><strong>Accordeon-plus</strong> &mdash; het plusje draait 45&deg; bij openen.</li>
+          <li><strong>Bestelwagentje</strong> &mdash; 16s-lus met pauze halverwege, draaiende wielen (zie <a href="#playful">Playful</a>).</li>
         </ul>
 
         <div class="ds-demo" id="reveal-demo">
@@ -822,6 +1274,45 @@
 
   </main>
   <footer class="site-footer">
+    <div class="site-footer__doormat">
+      <div class="site-footer__tagline">
+        <img src="../assets/img/gromush-logo-240.webp" alt="" width="72" height="72" loading="lazy">
+        <p>Ambachtelijk gekweekte oesterzwammen uit Knokke-Heist. Dagvers, lokaal en met liefde geteeld.</p>
+      </div>
+      <div>
+        <h2>Aanbod</h2>
+        <ul>
+          <li><a href="../oesterzwammen/">Oesterzwammen</a></li>
+          <li><a href="../chefbox/">ChefBox-formules</a></li>
+          <li><a href="../chefbox/#proefbox">Gratis proefbox</a></li>
+          <li><a href="../bestel/">Hoe bestellen</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Voor wie</h2>
+        <ul>
+          <li><a href="../restaurant/">Restaurant</a></li>
+          <li><a href="../grootkeuken/">Grootkeuken</a></li>
+          <li><a href="../particulier/">Particulier</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Regio's</h2>
+        <ul>
+          <li><a href="../oesterzwammen-knokke-heist/">Oesterzwammen Knokke-Heist</a></li>
+          <li><a href="../oesterzwammen-damme/">Oesterzwammen Damme</a></li>
+          <li><a href="../oesterzwammen-brugge/">Oesterzwammen Brugge</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Praktisch</h2>
+        <ul>
+          <li><a href="../over-ons/">Over ons</a></li>
+          <li><a href="../contact/">Contact</a></li>
+          <li><a href="../privacy/">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
     <div class="site-footer__logo">
       <img src="../assets/img/gromush-logo-240.webp" alt="" width="88" height="88" loading="lazy">
     </div>
@@ -832,6 +1323,7 @@
       <li><a href="../oesterzwammen/">Oesterzwammen</a></li>
       <li><a href="../chefbox/">Chefbox</a></li>
       <li><a href="../bestel/">Bestel</a></li>
+      <li><a href="../over-ons/">Over ons</a></li>
       <li><a href="../contact/">Contact</a></li>
       <li><a href="../privacy/">Privacy</a></li>
     </ul>

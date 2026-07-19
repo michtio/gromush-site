@@ -16,6 +16,39 @@
     });
   }
 
+  /* Couverts-kiezer: klik een bereik en zie de aanbevolen formule */
+  var coversOptions = document.querySelectorAll(".covers__option");
+  if (coversOptions.length) {
+    var coversLink = document.querySelector(".covers__link");
+    coversOptions.forEach(function (option) {
+      var range = option.querySelector(".covers__range");
+      if (!range) {
+        return;
+      }
+      range.addEventListener("click", function () {
+        coversOptions.forEach(function (other) {
+          other.classList.remove("is-active");
+          var otherRange = other.querySelector(".covers__range");
+          if (otherRange) {
+            otherRange.setAttribute("aria-pressed", "false");
+          }
+        });
+        option.classList.add("is-active");
+        range.setAttribute("aria-pressed", "true");
+        if (coversLink) {
+          var formule = option.getAttribute("data-formule");
+          var doel = option.getAttribute("data-doel");
+          if (formule) {
+            coversLink.textContent = "Bekijk " + formule;
+          }
+          if (doel) {
+            coversLink.setAttribute("href", doel);
+          }
+        }
+      });
+    });
+  }
+
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion) {
     return;
