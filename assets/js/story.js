@@ -47,24 +47,11 @@
       delay: 1,
       clearProps: "opacity,visibility"
     });
-    /* Mushroom clusters grow from the soil (inner .shroom groups carry no
-       placement transform, so GSAP owns their transform entirely) */
-    gsap.from(heroScene.querySelectorAll(".hero-shrooms .shroom"), {
-      scale: 0,
-      transformOrigin: "50% 100%",
-      duration: 0.9,
-      ease: "back.out(1.7)",
-      stagger: 0.14,
-      delay: 0.35
-    });
-    gsap.from(heroScene.querySelectorAll(".hero-mini"), {
-      autoAlpha: 0,
-      scale: 0.4,
-      duration: 0.7,
-      ease: "back.out(2)",
-      stagger: 0.15,
-      delay: 1.1,
-      clearProps: "opacity,visibility"
+    /* The hero photo settles from a slight zoom */
+    gsap.from(heroScene.querySelector(".hero-photo img"), {
+      scale: 1.07,
+      duration: 5,
+      ease: "power1.out"
     });
   }
 
@@ -107,7 +94,6 @@
     var mains = scene.querySelectorAll(".myc--main");
     var branches = scene.querySelectorAll(".myc--branch");
     var nodes = scene.querySelectorAll(".myc-node, .myc-dot");
-    var sprouts = scene.querySelectorAll(".myc-sprout");
     var steps = scene.querySelectorAll(".scene__step");
     var hook = scene.querySelector(".scene__hook");
 
@@ -117,7 +103,6 @@
       gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
     });
     gsap.set(nodes, { scale: 0, transformOrigin: "center center" });
-    gsap.set(sprouts, { scale: 0, transformOrigin: "50% 100%" });
     gsap.set(steps, { autoAlpha: 0, y: 24 });
     gsap.set(hook, { autoAlpha: 0, y: 16 });
 
@@ -140,9 +125,7 @@
       .to(steps[1], { autoAlpha: 1, y: 0, duration: 0.8 }, 3.8)
       .to(steps[1], { autoAlpha: 0, duration: 0.6 }, 6.2)
       .to(steps[2], { autoAlpha: 1, y: 0, duration: 0.8 }, 6.8)
-      /* Finale: mushrooms break through the soil line */
-      .to(sprouts, { scale: 1, duration: 0.7, stagger: 0.2, ease: "back.out(2.2)" }, 7)
-      .to(hook, { autoAlpha: 1, y: 0, duration: 0.6 }, 7.6)
+      .to(hook, { autoAlpha: 1, y: 0, duration: 0.6 }, 7.4)
       .to({}, { duration: 1.2 });
   }
 
@@ -224,7 +207,6 @@
     var pin = scene.querySelector(".scene__pin");
     var maskPath = scene.querySelector(".route-mask-path");
     var van = scene.querySelector(".route-van");
-    var wheels = scene.querySelectorAll(".route-van .van-wheel");
     var stops = scene.querySelectorAll(".route-stop");
     var sticker = scene.querySelector(".scene__sticker");
     var stats = scene.querySelectorAll(".stat-row .stat");
@@ -233,19 +215,9 @@
     var length = maskPath.getTotalLength();
     gsap.set(maskPath, { strokeDasharray: length, strokeDashoffset: length });
     gsap.set(van, { offsetDistance: "0%" });
-    gsap.set(stops, { scale: 0, transformOrigin: "50% 100%" });
+    gsap.set(stops, { scale: 0, transformOrigin: "center center" });
     gsap.set(stats, { autoAlpha: 0, y: 28 });
     gsap.set(hook, { autoAlpha: 0, y: 16 });
-
-    /* Wheels spin via the SVG transform attribute; the CSS
-       transform-origin: center + transform-box: fill-box on .van-wheel
-       (also used by the no-JS keyframe loop) centres the rotation */
-    var spin = { deg: 0 };
-    var applySpin = function () {
-      wheels.forEach(function (wheel) {
-        wheel.setAttribute("transform", "rotate(" + spin.deg + ")");
-      });
-    };
 
     var tl = gsap.timeline({
       scrollTrigger: {
@@ -260,10 +232,8 @@
     tl.to(maskPath, { strokeDashoffset: 0, duration: 7.2, ease: "none" }, 0)
       /* leg 1: kwekerij -> Damme */
       .to(van, { offsetDistance: "50%", duration: 4, ease: "none" }, 0)
-      .to(spin, { deg: 540, duration: 4, ease: "none", onUpdate: applySpin }, 0)
       /* pause at Damme (0.6), then leg 2: Damme -> Brugge */
       .to(van, { offsetDistance: "100%", duration: 3.4, ease: "none" }, 4.6)
-      .to(spin, { deg: 1080, duration: 3.4, ease: "none", onUpdate: applySpin }, 4.6)
       .to(stops[0], { scale: 1, duration: 0.5, ease: "back.out(2)" }, 0.1)
       .to(stops[1], { scale: 1, duration: 0.5, ease: "back.out(2)" }, 3.7)
       .to(stops[2], { scale: 1, duration: 0.5, ease: "back.out(2)" }, 7.7)

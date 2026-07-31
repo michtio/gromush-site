@@ -94,84 +94,79 @@
   font-weight: 500;
 }
 
-/* 2. Scene: hero
+/* 2. Scene: hero (full-bleed photo, dark and product-first)
    ========================================================================== */
 .scene--hero {
+  position: relative;
   display: grid;
-  place-items: center;
+  align-items: center;
   min-height: calc(100svh - var(--header-h));
-  padding: clamp(2.5rem, 6vw, 4rem) 1.25rem 5.5rem;
+  padding: clamp(3rem, 7vw, 5rem) 0 6rem;
   overflow: hidden;
+  isolation: isolate;
+  background: #1c2413;
+}
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 55%;
+}
+/* Scrim: dark on the copy side, lighter over the mushrooms */
+.scene--hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to top, rgba(20, 26, 14, 0.65), transparent 30%),
+    linear-gradient(100deg, rgba(20, 26, 14, 0.88) 8%, rgba(20, 26, 14, 0.55) 45%, rgba(20, 26, 14, 0.12) 78%);
 }
 .scene--hero .scene__inner {
   position: relative;
   z-index: 2;
-  max-width: 56rem;
-  text-align: center;
+  max-width: 46rem;
+}
+.scene--hero .kicker {
+  color: var(--sand);
 }
 .scene--hero .title-duo {
   text-wrap: balance;
-  font-size: clamp(2.4rem, 1.3rem + 4.6vw, 5rem);
-  line-height: 1.04;
+  font-size: clamp(2.2rem, 1.3rem + 3.4vw, 3.9rem);
+  line-height: 1.06;
+  margin-bottom: 0.4em;
 }
 .scene--hero .title-duo .line-1 {
+  color: var(--cream);
   font-weight: 800;
   letter-spacing: -0.015em;
 }
 .scene--hero .title-duo .line-2 {
-  font-size: 0.72em;
+  color: var(--sand);
+  font-size: 0.82em;
   font-style: italic;
-  margin-top: 0.15em;
+  margin-top: 0.1em;
 }
 .scene--hero .lead {
-  max-width: 40rem;
-  margin-inline: auto;
+  max-width: 36rem;
+  color: var(--cream-muted);
 }
-.scene--hero .scene__stickers {
+.scene--hero .scene__cta-row {
   margin-top: 1.75rem;
   display: flex;
-  justify-content: center;
-  gap: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.scene--hero .scroll-cue {
+  color: var(--sand);
 }
 
-/* Illustrated mushroom clusters growing from the hero's bottom corners.
-   Built from the brand mushroom glyph; ship fully grown (final state). */
-.hero-shrooms {
-  position: absolute;
-  bottom: -0.5rem;
-  z-index: 1;
-  width: clamp(8rem, 17vw, 16rem);
-  pointer-events: none;
-}
-.hero-shrooms--left { left: clamp(0.5rem, 4vw, 5rem); }
-.hero-shrooms--right {
-  right: clamp(0.5rem, 4vw, 5rem);
-  transform: scaleX(-1);
-}
-.hero-shrooms svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  overflow: visible;
-}
-@media (max-width: 40rem) {
-  .hero-shrooms { width: 7rem; }
-  .hero-shrooms--right { display: none; }
-}
-
-/* Tiny mushroom accents floating near the title */
-.hero-mini {
-  position: absolute;
-  z-index: 1;
-  width: clamp(2.2rem, 3.5vw, 3.25rem);
-  pointer-events: none;
-  opacity: 0.9;
-}
-.hero-mini svg { display: block; width: 100%; height: auto; }
-.hero-mini--one { top: 16%; left: clamp(0.75rem, 12vw, 14rem); transform: rotate(-14deg); }
-.hero-mini--two { top: 12%; right: clamp(0.75rem, 13vw, 15rem); transform: rotate(11deg); }
-
-/* Spores drifting through the hero (decorative dots; static without motion) */
+/* Spores: pale dust drifting over the dark photo */
 .spores {
   position: absolute;
   inset: 0;
@@ -180,14 +175,14 @@
 }
 .spores i {
   position: absolute;
-  width: 0.45rem;
-  height: 0.45rem;
+  width: 0.4rem;
+  height: 0.4rem;
   border-radius: 50%;
-  background: var(--gold);
-  opacity: 0.28;
+  background: var(--cream);
+  opacity: 0.22;
 }
-.spores i:nth-child(2n) { background: var(--sand); width: 0.3rem; height: 0.3rem; }
-.spores i:nth-child(3n) { opacity: 0.18; }
+.spores i:nth-child(2n) { background: var(--sand); width: 0.28rem; height: 0.28rem; }
+.spores i:nth-child(3n) { opacity: 0.13; }
 .spores i:nth-child(1) { left: 8%; top: 30%; }
 .spores i:nth-child(2) { left: 16%; top: 62%; }
 .spores i:nth-child(3) { left: 26%; top: 18%; }
@@ -311,14 +306,6 @@
   color: var(--sand);
 }
 
-/* Mushrooms sprouting on the soil line (finale of the underground draw) */
-.myc-svg .myc-sprout {
-  transform-box: fill-box;
-  transform-origin: 50% 100%;
-}
-.myc-svg .myc-sprout .sprout-cap { fill: var(--sand); }
-.myc-svg .myc-sprout .sprout-stem { fill: var(--cream-muted); }
-
 /* Chapter-bridging hook line at the end of a scene */
 .scene__hook {
   margin: 2rem 0 0;
@@ -402,6 +389,138 @@
   font-size: var(--text-sm);
   font-weight: 600;
   color: var(--gold-deep);
+}
+
+/* 4b. Van stro tot bord: compact process strip under the farm scene
+   ========================================================================== */
+.process {
+  padding-bottom: clamp(3rem, 7vw, 5rem);
+}
+.process__steps {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem 1.25rem;
+  margin: clamp(1.5rem, 4vw, 2.5rem) 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: proc;
+  text-align: center;
+}
+@media (min-width: 48rem) {
+  .process__steps {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+.process__steps li {
+  position: relative;
+  font-size: var(--text-sm);
+}
+.process__steps li::before {
+  counter-increment: proc;
+  content: counter(proc);
+  position: absolute;
+  top: -0.5rem;
+  left: calc(50% + 1.1rem);
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: var(--sand);
+  color: var(--green);
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+.process__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 4.25rem;
+  height: 4.25rem;
+  margin-bottom: 0.75rem;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: var(--shadow-card);
+}
+.process__icon svg {
+  width: 1.9rem;
+  height: 1.9rem;
+  fill: var(--sand);
+}
+.process__steps h3 {
+  margin: 0 0 0.15rem;
+  font-size: 1.05rem;
+  color: var(--green);
+}
+.process__steps p {
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--ink);
+}
+
+/* 4c. Scene: twee werelden (binnen- vs. buitenkweek)
+   ========================================================================== */
+.scene--werelden {
+  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+}
+.worlds {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+@media (min-width: 48rem) {
+  .worlds {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.worlds__panel {
+  position: relative;
+  margin: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-photo);
+  isolation: isolate;
+  aspect-ratio: 4 / 5;
+}
+@media (max-width: 47.9rem) {
+  .worlds__panel { aspect-ratio: 4 / 3.4; }
+}
+.worlds__panel img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  transition: transform 0.6s ease;
+}
+.worlds__panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to top, rgba(20, 26, 14, 0.85), rgba(20, 26, 14, 0.25) 55%, transparent);
+}
+.worlds__panel:hover img {
+  transform: scale(1.04);
+}
+.worlds__panel figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+.worlds__panel h3 {
+  margin: 0 0 0.35rem;
+  color: var(--cream);
+  font-size: var(--text-h3);
+}
+.worlds__panel h3 .accent {
+  color: var(--sand);
+}
+.worlds__panel p {
+  margin: 0;
+  color: var(--cream-muted);
+  font-size: var(--text-sm);
+  max-width: 26rem;
 }
 
 /* 5. Scene: varieties (parade)
@@ -519,8 +638,15 @@
   stroke: var(--green);
   stroke-width: 3;
 }
-.route-scene .route-stop .sprout-cap { fill: var(--sand); }
-.route-scene .route-stop .sprout-stem { fill: var(--cream-muted); }
+.route-scene .route-stop .route-stop__ring {
+  fill: none;
+  stroke: var(--sand);
+  stroke-width: 2;
+  opacity: 0.8;
+}
+.route-van path {
+  fill: var(--cream);
+}
 
 /* Big claim numbers inside the route scene */
 .stat-row {
@@ -569,11 +695,6 @@
     offset-distance: 100%;
   }
 }
-.route-van .van-wheel {
-  transform-origin: center;
-  transform-box: fill-box;
-}
-
 .route-scene__stops {
   display: flex;
   justify-content: space-between;
@@ -637,20 +758,65 @@
   margin-top: 1.75rem;
 }
 
-/* Mushroom-trio divider between sections */
-.shroom-divider {
+/* 7b. Scene: word eigenaar / beleven (sand band with photo cards)
+   ========================================================================== */
+.scene--eigenaar {
+  padding-block: 0 clamp(2.5rem, 6vw, 4rem);
+}
+.eigenaar-band {
+  border-radius: var(--radius-lg);
+  padding: clamp(2rem, 5vw, 4rem);
+}
+.eigenaar-cards {
+  display: grid;
+  gap: 1.75rem;
+  margin-top: clamp(1.75rem, 4vw, 2.75rem);
+}
+@media (min-width: 48rem) {
+  .eigenaar-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.eigenaar-card {
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 1rem;
+  flex-direction: column;
+  background: var(--cream);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
 }
-.shroom-divider svg {
-  width: 2.2rem;
-  height: auto;
-  overflow: visible;
+.eigenaar-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
-.shroom-divider svg:nth-child(1) { width: 1.7rem; transform: rotate(-10deg); }
-.shroom-divider svg:nth-child(3) { width: 1.5rem; transform: rotate(12deg); }
+.eigenaar-card__body {
+  flex: 1;
+  padding: 1.5rem 1.75rem 1.75rem;
+}
+.eigenaar-card h3 {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: var(--gold-deep);
+}
+.eigenaar-card p {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+.eigenaar-band .scene__beleven {
+  margin: clamp(1.75rem, 4vw, 2.5rem) 0 0;
+  font-size: var(--text-lg);
+}
+.eigenaar-band .scene__beleven .btn {
+  margin-left: 1rem;
+}
+@media (max-width: 40rem) {
+  .eigenaar-band .scene__beleven .btn {
+    display: table;
+    margin: 1rem 0 0;
+  }
+}
 
 /* 8. Scene: router (conversion)
    ========================================================================== */
@@ -711,9 +877,6 @@
     .route-van {
       animation: route-drive 18s linear infinite;
     }
-    .route-van .van-wheel {
-      animation: route-wheel 0.8s linear infinite;
-    }
   }
   @keyframes route-drive {
     0% { offset-distance: 0%; }
@@ -721,15 +884,21 @@
     50% { offset-distance: 50%; }
     100% { offset-distance: 100%; }
   }
-  @keyframes route-wheel {
-    to { transform: rotate(360deg); }
-  }
 
   /* When GSAP scrubs the route on desktop, the CSS loop steps aside */
   @media (min-width: 48rem) {
-    .story-js .route-van,
-    .story-js .route-van .van-wheel {
+    .story-js .route-van {
       animation: none;
     }
+  }
+
+  /* Hero photo settles from a slight zoom (CSS fallback when the story
+     is not armed; story.js takes over otherwise) */
+  body:not(.story-js) .hero-photo img {
+    animation: hero-zoom 5s ease-out both;
+  }
+  @keyframes hero-zoom {
+    from { transform: scale(1.07); }
+    to { transform: scale(1); }
   }
 }

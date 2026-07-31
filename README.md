@@ -8,9 +8,11 @@ Knokke-Heist (levering in regio Knokke-Heist, Damme en Brugge).
 ## Stack
 
 Puur HTML, CSS en vanilla JS; geen build-stap, geen frameworks — GitHub Pages
-serveert de repo as-is. Enige uitzondering: de homepage-scrollytelling draait
-op een zelf gehost GSAP + ScrollTrigger (`assets/vendor/gsap/`, enkel geladen
-op `/` en `/index-b/`; geen CDN, dus GDPR-proof).
+serveert de repo as-is. Enige uitzonderingen: de homepage-scrollytelling
+draait op een zelf gehost GSAP + ScrollTrigger (`assets/vendor/gsap/`, enkel
+geladen op `/` en `/index-b/`) en een handvol Font Awesome Free-iconen
+(`assets/vendor/fontawesome/`, CC BY 4.0, inline gebruikt). Geen CDN's,
+dus GDPR-proof.
 De site is zo opgezet dat hij later 1-op-1 naar een CMS (Craft) kan verhuizen:
 componenten en tokens zijn gedocumenteerd op [`/design-system/`](design-system/index.html).
 
@@ -57,7 +59,8 @@ python3 -m http.server 8765
   `logo-mark.svg` (beeldmerk), `favicon.svg`.
 - **Motion:** hero fade-in/-out, side reveals, zoom-out hovers; alles achter
   `prefers-reduced-motion`.
-- **Homepage-scrollytelling:** zeven scenes (spore → bord) met GSAP-pins en
+- **Homepage-scrollytelling:** negen scenes (spore → bord, incl. twee
+  werelden en word-eigenaar) met foto-hero, GSAP-pins en
   -scrubs. Contract: de CSS-standaardtoestand is de áfgewerkte pagina; JS
   spoelt enkel terug en scrubt vooruit. Geen JS, reduced motion en mobiel
   krijgen automatisch een complete statische versie. Twee kopijdecks:
