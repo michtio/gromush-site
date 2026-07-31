@@ -47,6 +47,25 @@
       delay: 1,
       clearProps: "opacity,visibility"
     });
+    /* Mushroom clusters grow from the soil (inner .shroom groups carry no
+       placement transform, so GSAP owns their transform entirely) */
+    gsap.from(heroScene.querySelectorAll(".hero-shrooms .shroom"), {
+      scale: 0,
+      transformOrigin: "50% 100%",
+      duration: 0.9,
+      ease: "back.out(1.7)",
+      stagger: 0.14,
+      delay: 0.35
+    });
+    gsap.from(heroScene.querySelectorAll(".hero-mini"), {
+      autoAlpha: 0,
+      scale: 0.4,
+      duration: 0.7,
+      ease: "back.out(2)",
+      stagger: 0.15,
+      delay: 1.1,
+      clearProps: "opacity,visibility"
+    });
   }
 
   /* --- Pinned scenes: desktop only -------------------------------------- */
@@ -88,7 +107,9 @@
     var mains = scene.querySelectorAll(".myc--main");
     var branches = scene.querySelectorAll(".myc--branch");
     var nodes = scene.querySelectorAll(".myc-node, .myc-dot");
+    var sprouts = scene.querySelectorAll(".myc-sprout");
     var steps = scene.querySelectorAll(".scene__step");
+    var hook = scene.querySelector(".scene__hook");
 
     /* Rewind: measure each path and hide it behind its own dash */
     scene.querySelectorAll(".myc").forEach(function (path) {
@@ -96,7 +117,9 @@
       gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
     });
     gsap.set(nodes, { scale: 0, transformOrigin: "center center" });
+    gsap.set(sprouts, { scale: 0, transformOrigin: "50% 100%" });
     gsap.set(steps, { autoAlpha: 0, y: 24 });
+    gsap.set(hook, { autoAlpha: 0, y: 16 });
 
     var tl = gsap.timeline({
       scrollTrigger: {
@@ -117,6 +140,9 @@
       .to(steps[1], { autoAlpha: 1, y: 0, duration: 0.8 }, 3.8)
       .to(steps[1], { autoAlpha: 0, duration: 0.6 }, 6.2)
       .to(steps[2], { autoAlpha: 1, y: 0, duration: 0.8 }, 6.8)
+      /* Finale: mushrooms break through the soil line */
+      .to(sprouts, { scale: 1, duration: 0.7, stagger: 0.2, ease: "back.out(2.2)" }, 7)
+      .to(hook, { autoAlpha: 1, y: 0, duration: 0.6 }, 7.6)
       .to({}, { duration: 1.2 });
   }
 
@@ -201,11 +227,15 @@
     var wheels = scene.querySelectorAll(".route-van .van-wheel");
     var stops = scene.querySelectorAll(".route-stop");
     var sticker = scene.querySelector(".scene__sticker");
+    var stats = scene.querySelectorAll(".stat-row .stat");
+    var hook = scene.querySelector(".scene__hook");
 
     var length = maskPath.getTotalLength();
     gsap.set(maskPath, { strokeDasharray: length, strokeDashoffset: length });
     gsap.set(van, { offsetDistance: "0%" });
-    gsap.set(stops, { scale: 0, transformOrigin: "center center" });
+    gsap.set(stops, { scale: 0, transformOrigin: "50% 100%" });
+    gsap.set(stats, { autoAlpha: 0, y: 28 });
+    gsap.set(hook, { autoAlpha: 0, y: 16 });
 
     /* Wheels spin via the SVG transform attribute; the CSS
        transform-origin: center + transform-box: fill-box on .van-wheel
@@ -240,6 +270,8 @@
       .fromTo(sticker,
         { scale: 0, rotation: 20 },
         { scale: 1, rotation: 3, duration: 0.6, ease: "back.out(2)" }, 4)
+      .to(stats, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.25 }, 0.3)
+      .to(hook, { autoAlpha: 1, y: 0, duration: 0.6 }, 7.9)
       .to({}, { duration: 0.8 });
   }
 

@@ -1261,11 +1261,11 @@
         <h3 style="margin-top: 3rem">Scene-overzicht (&eacute;&eacute;n <code>data-scene</code> = &eacute;&eacute;n later Craft-blok)</h3>
         <p style="max-width: 46rem"><code>story.js</code> initialiseert per scene op aanwezigheid (<code>querySelector('[data-scene=&hellip;]')</code>): blokken zijn weglaatbaar en herschikbaar zonder JS-aanpassing.</p>
         <ul style="max-width: 46rem">
-          <li><strong>hero</strong> &mdash; full-viewport <code>.title-duo</code>-claim + scroll-cue; intro-timeline, scrub-out bij scrollen. Niet gepind.</li>
-          <li><strong>underground</strong> &mdash; groene band met mycelium-SVG (<code>.myc-svg</code>): draden tekenen zichzelf via <code>stroke-dashoffset</code>, tekstfragmenten (<code>.scene__step</code>) crossfaden. Pin, 180%.</li>
+          <li><strong>hero</strong> &mdash; full-viewport <code>.title-duo</code>-claim (mega-formaat) met paddenstoelclusters (<code>.hero-shrooms</code>, opgebouwd uit het merkicoon), zwevende sporen (<code>.spores</code>) en scroll-cue; intro-timeline, scrub-out bij scrollen. Niet gepind. Direct eronder: de <code>.ticker</code>-marquee (sand-strook, CSS-lus, statisch bij reduced motion).</li>
+          <li><strong>underground</strong> &mdash; groene band met mycelium-SVG (<code>.myc-svg</code>): draden tekenen zichzelf via <code>stroke-dashoffset</code>, tekstfragmenten (<code>.scene__step</code>) crossfaden; finale: <code>.myc-sprout</code>-zwammetjes breken door de grondlijn en een <code>.scene__hook</code>-brugzin kondigt het volgende hoofdstuk aan. Pin, 180%.</li>
           <li><strong>farm</strong> &mdash; fotostapel (<code>.scene__stack</code>) crossfadet naast het oorsprongsverhaal. Statisch: collage met gedraaide foto&rsquo;s. Pin, 250%.</li>
           <li><strong>varieties</strong> &mdash; soortenparade (<code>.parade</code>): horizontale track, gescrubd. Mobiel: native scroll-snap-carrousel; zonder JS op desktop: raster. Pin, 200%.</li>
-          <li><strong>route</strong> &mdash; leverronde: route tekent zich (masker-truc), busje volgt via CSS <code>offset-path</code> (GSAP scrubt enkel <code>offset-distance</code>), haltes poppen, pauze in Damme. Zonder JS rijdt de CSS-lus van 18s. Pin, 250%.</li>
+          <li><strong>route</strong> &mdash; leverronde: grote claimcijfers (<code>.stat-row</code>: 0 voedselkilometers &middot; 30 minuten &middot; 6 kleuren), route tekent zich (masker-truc), busje volgt via CSS <code>offset-path</code> (GSAP scrubt enkel <code>offset-distance</code>), haltes zijn paddenstoel-markers en poppen, pauze in Damme. Zonder JS rijdt de CSS-lus van 18s. Pin, 250%.</li>
           <li><strong>plate</strong> &mdash; gerechten + pull-quote, bewust ongepind (ademruimte); enkel milde parallax.</li>
           <li><strong>router</strong> &mdash; conversiemoment: <code>.profile-grid</code> + CTA&rsquo;s, GSAP-vrij en saai-betrouwbaar.</li>
         </ul>

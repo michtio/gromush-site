@@ -17,6 +17,8 @@ componenten en tokens zijn gedocumenteerd op [`/design-system/`](design-system/i
 ```
 ├── index.html              # Homepage: scrollytelling "van spore tot bord" (kopijdeck A)
 ├── index-b/                # Zelfde verhaal, uitgesproken speelse kopij (deck B, noindex)
+│                           #   → regenereren via _resources/build-variant-b.py
+├── index-v1/               # Archief: eerste iteratie van de story-homepage (noindex)
 ├── restaurant/             # Subpagina per klantprofiel
 ├── grootkeuken/
 ├── particulier/

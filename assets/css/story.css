@@ -101,13 +101,27 @@
   place-items: center;
   min-height: calc(100svh - var(--header-h));
   padding: clamp(2.5rem, 6vw, 4rem) 1.25rem 5.5rem;
+  overflow: hidden;
 }
 .scene--hero .scene__inner {
-  max-width: 52rem;
+  position: relative;
+  z-index: 2;
+  max-width: 56rem;
   text-align: center;
 }
 .scene--hero .title-duo {
   text-wrap: balance;
+  font-size: clamp(2.4rem, 1.3rem + 4.6vw, 5rem);
+  line-height: 1.04;
+}
+.scene--hero .title-duo .line-1 {
+  font-weight: 800;
+  letter-spacing: -0.015em;
+}
+.scene--hero .title-duo .line-2 {
+  font-size: 0.72em;
+  font-style: italic;
+  margin-top: 0.15em;
 }
 .scene--hero .lead {
   max-width: 40rem;
@@ -118,6 +132,98 @@
   display: flex;
   justify-content: center;
   gap: 1.5rem;
+}
+
+/* Illustrated mushroom clusters growing from the hero's bottom corners.
+   Built from the brand mushroom glyph; ship fully grown (final state). */
+.hero-shrooms {
+  position: absolute;
+  bottom: -0.5rem;
+  z-index: 1;
+  width: clamp(8rem, 17vw, 16rem);
+  pointer-events: none;
+}
+.hero-shrooms--left { left: clamp(0.5rem, 4vw, 5rem); }
+.hero-shrooms--right {
+  right: clamp(0.5rem, 4vw, 5rem);
+  transform: scaleX(-1);
+}
+.hero-shrooms svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+@media (max-width: 40rem) {
+  .hero-shrooms { width: 7rem; }
+  .hero-shrooms--right { display: none; }
+}
+
+/* Tiny mushroom accents floating near the title */
+.hero-mini {
+  position: absolute;
+  z-index: 1;
+  width: clamp(2.2rem, 3.5vw, 3.25rem);
+  pointer-events: none;
+  opacity: 0.9;
+}
+.hero-mini svg { display: block; width: 100%; height: auto; }
+.hero-mini--one { top: 16%; left: clamp(0.75rem, 12vw, 14rem); transform: rotate(-14deg); }
+.hero-mini--two { top: 12%; right: clamp(0.75rem, 13vw, 15rem); transform: rotate(11deg); }
+
+/* Spores drifting through the hero (decorative dots; static without motion) */
+.spores {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.spores i {
+  position: absolute;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.28;
+}
+.spores i:nth-child(2n) { background: var(--sand); width: 0.3rem; height: 0.3rem; }
+.spores i:nth-child(3n) { opacity: 0.18; }
+.spores i:nth-child(1) { left: 8%; top: 30%; }
+.spores i:nth-child(2) { left: 16%; top: 62%; }
+.spores i:nth-child(3) { left: 26%; top: 18%; }
+.spores i:nth-child(4) { left: 38%; top: 74%; }
+.spores i:nth-child(5) { left: 55%; top: 12%; }
+.spores i:nth-child(6) { left: 64%; top: 68%; }
+.spores i:nth-child(7) { left: 74%; top: 26%; }
+.spores i:nth-child(8) { left: 84%; top: 58%; }
+.spores i:nth-child(9) { left: 92%; top: 34%; }
+.spores i:nth-child(10) { left: 47%; top: 44%; }
+
+/* Marquee ribbon under the hero (sand strip, loops sideways) */
+.ticker {
+  background: var(--sand);
+  color: var(--green);
+  overflow: hidden;
+  padding-block: 0.8rem;
+}
+.ticker__track {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+  width: max-content;
+}
+.ticker__track > span {
+  font-weight: 700;
+  font-size: var(--text-sm);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.ticker__track > svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 auto;
+  color: var(--green);
 }
 
 /* Scroll cue at the bottom of the hero */
@@ -202,6 +308,26 @@
 .scene__aside {
   font-family: var(--font-serif);
   font-style: italic;
+  color: var(--sand);
+}
+
+/* Mushrooms sprouting on the soil line (finale of the underground draw) */
+.myc-svg .myc-sprout {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+.myc-svg .myc-sprout .sprout-cap { fill: var(--sand); }
+.myc-svg .myc-sprout .sprout-stem { fill: var(--cream-muted); }
+
+/* Chapter-bridging hook line at the end of a scene */
+.scene__hook {
+  margin: 2rem 0 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-lg);
+  color: var(--gold-deep);
+}
+.on-green .scene__hook {
   color: var(--sand);
 }
 
@@ -388,15 +514,45 @@
   stroke-width: 10;
   stroke-linecap: round;
 }
-.route-scene .route-stop circle {
+.route-scene .route-stop .route-stop__dot {
   fill: var(--sand);
   stroke: var(--green);
-  stroke-width: 4;
+  stroke-width: 3;
 }
-.route-scene .route-stop .route-stop__ring {
-  fill: none;
-  stroke: var(--sand);
-  stroke-width: 2;
+.route-scene .route-stop .sprout-cap { fill: var(--sand); }
+.route-scene .route-stop .sprout-stem { fill: var(--cream-muted); }
+
+/* Big claim numbers inside the route scene */
+.stat-row {
+  display: grid;
+  gap: 1.5rem;
+  margin: clamp(1.5rem, 4vw, 2.5rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 40rem) {
+  .stat-row {
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    gap: clamp(2rem, 6vw, 5rem);
+  }
+}
+.stat__num {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(2.75rem, 2rem + 3.5vw, 4.75rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--sand);
+}
+.stat__label {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cream-muted);
 }
 
 /* The van. Its own origin is the middle of the wheel line, so offset-path
@@ -481,6 +637,21 @@
   margin-top: 1.75rem;
 }
 
+/* Mushroom-trio divider between sections */
+.shroom-divider {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1rem;
+}
+.shroom-divider svg {
+  width: 2.2rem;
+  height: auto;
+  overflow: visible;
+}
+.shroom-divider svg:nth-child(1) { width: 1.7rem; transform: rotate(-10deg); }
+.shroom-divider svg:nth-child(3) { width: 1.5rem; transform: rotate(12deg); }
+
 /* 8. Scene: router (conversion)
    ========================================================================== */
 .scene--router {
@@ -510,6 +681,27 @@
   @keyframes cue-bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(0.45rem); }
+  }
+
+  /* Spores drift slowly upward */
+  .spores i {
+    animation: spore-drift 9s ease-in-out infinite;
+  }
+  .spores i:nth-child(2n) { animation-duration: 12s; animation-delay: -4s; }
+  .spores i:nth-child(3n) { animation-duration: 15s; animation-delay: -8s; }
+  .spores i:nth-child(5n) { animation-delay: -2s; }
+  @keyframes spore-drift {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(0.6rem, -1.4rem); }
+    66% { transform: translate(-0.5rem, -2.6rem); }
+  }
+
+  /* Marquee ribbon: the track is duplicated once, so -50% loops seamlessly */
+  .ticker__track {
+    animation: ticker-scroll 32s linear infinite;
+  }
+  @keyframes ticker-scroll {
+    to { transform: translateX(-50%); }
   }
 
   /* The van drives its round on a loop (no JS / mobile). Pauses briefly
