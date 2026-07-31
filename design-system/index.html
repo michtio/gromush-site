@@ -22,6 +22,7 @@
   <link rel="preload" href="../assets/fonts/epilogue-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../assets/fonts/old-standard-tt-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/story.css">
   <link rel="stylesheet" href="./ds.css">
 </head>
 <body>
@@ -83,6 +84,7 @@
             <li><a href="#doormat">Doormat &amp; breadcrumbs</a></li>
             <li><a href="#iconografie">Iconografie</a></li>
             <li><a href="#playful">Playful</a></li>
+            <li><a href="#story">Story-scenes</a></li>
             <li><a href="#motion">Motion</a></li>
           </ul>
         </nav>
@@ -1241,6 +1243,86 @@
       </div>
     </section>
 
+    <!-- Story-scenes -->
+    <section class="section ds-section" id="story" aria-labelledby="story-h">
+      <div class="container">
+        <span class="kicker">Componenten &middot; homepage</span>
+        <h2 id="story-h">Story-scenes (scrollytelling)</h2>
+        <p style="max-width: 46rem">De homepage vertelt het verhaal van spore tot bord in zeven scenes, aangedreven door <strong>GSAP + ScrollTrigger</strong> (zelf gehost in <code>assets/vendor/gsap/</code>, enkel geladen op <code>/</code> en <code>/index-b/</code>). Stijlen staan in <code>assets/css/story.css</code>, gedrag in <code>assets/js/story.js</code>. Deze pagina toont de componenten in hun <strong>statische eindtoestand</strong> &mdash; er wordt hier bewust geen GSAP geladen; het levende gedrag zie je op de <a href="../">homepage</a>.</p>
+
+        <h3>Het contract: standaard = eindtoestand</h3>
+        <p style="max-width: 46rem">De CSS-standaardtoestand van elke scene is de <em>afgewerkte</em> pagina: mycelium volledig getekend, foto&rsquo;s in collage, busje geparkeerd, alle tekst zichtbaar. <code>story.js</code> spoelt &mdash; enkel n&aacute; de reduced-motion-poort &mdash; elementen terug met <code>gsap.set()</code> en scrubt ze vooruit op scroll, en zet dan <code>story-js</code> op <code>&lt;body&gt;</code> (waar de animatielayouts aan hangen). Geen JS, <code>prefers-reduced-motion</code> en reader mode krijgen daardoor automatisch een complete pagina. Pins bestaan enkel vanaf 48rem, via <code>gsap.matchMedia()</code> (auto-revert bij resize); mobiel valt overal terug op de statische layout.</p>
+        <div class="ds-code"><pre><code>&lt;section class="scene scene--{naam}" data-scene="{naam}" aria-labelledby="{id}"&gt;
+  &lt;div class="scene__pin"&gt;   &lt;!-- wat ScrollTrigger pint (&ge;48rem); zonder JS een gewoon blok --&gt;
+    &lt;div class="container"&gt;&hellip;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre></div>
+
+        <h3 style="margin-top: 3rem">Scene-overzicht (&eacute;&eacute;n <code>data-scene</code> = &eacute;&eacute;n later Craft-blok)</h3>
+        <p style="max-width: 46rem"><code>story.js</code> initialiseert per scene op aanwezigheid (<code>querySelector('[data-scene=&hellip;]')</code>): blokken zijn weglaatbaar en herschikbaar zonder JS-aanpassing.</p>
+        <ul style="max-width: 46rem">
+          <li><strong>hero</strong> &mdash; full-viewport <code>.title-duo</code>-claim + scroll-cue; intro-timeline, scrub-out bij scrollen. Niet gepind.</li>
+          <li><strong>underground</strong> &mdash; groene band met mycelium-SVG (<code>.myc-svg</code>): draden tekenen zichzelf via <code>stroke-dashoffset</code>, tekstfragmenten (<code>.scene__step</code>) crossfaden. Pin, 180%.</li>
+          <li><strong>farm</strong> &mdash; fotostapel (<code>.scene__stack</code>) crossfadet naast het oorsprongsverhaal. Statisch: collage met gedraaide foto&rsquo;s. Pin, 250%.</li>
+          <li><strong>varieties</strong> &mdash; soortenparade (<code>.parade</code>): horizontale track, gescrubd. Mobiel: native scroll-snap-carrousel; zonder JS op desktop: raster. Pin, 200%.</li>
+          <li><strong>route</strong> &mdash; leverronde: route tekent zich (masker-truc), busje volgt via CSS <code>offset-path</code> (GSAP scrubt enkel <code>offset-distance</code>), haltes poppen, pauze in Damme. Zonder JS rijdt de CSS-lus van 18s. Pin, 250%.</li>
+          <li><strong>plate</strong> &mdash; gerechten + pull-quote, bewust ongepind (ademruimte); enkel milde parallax.</li>
+          <li><strong>router</strong> &mdash; conversiemoment: <code>.profile-grid</code> + CTA&rsquo;s, GSAP-vrij en saai-betrouwbaar.</li>
+        </ul>
+
+        <h3 style="margin-top: 3rem">Hoofdstuk-kicker (.kicker__chapter)</h3>
+        <p style="max-width: 46rem">Het terugkerende verhaalanker: een genummerd muntje in de kicker van elke scene.</p>
+        <div class="ds-demo">
+          <span class="kicker"><span class="kicker__chapter">1</span>Onder de grond</span>
+        </div>
+        <div class="ds-code"><pre><code>&lt;span class="kicker"&gt;&lt;span class="kicker__chapter"&gt;1&lt;/span&gt;Onder de grond&lt;/span&gt;</code></pre></div>
+
+        <h3 style="margin-top: 3rem">Soortenparade (.parade)</h3>
+        <p style="max-width: 46rem">Zes <code>.species</code>-cirkels met naam en smaaknoot, elk een link naar <code>/oesterzwammen/</code>. De tegels blijven in elke modus zichtbaar en focusbaar &mdash; GSAP verschuift ze enkel. Hieronder de statische fallback (raster vanaf 48rem, snap-carrousel daaronder).</p>
+        <div class="ds-code"><pre><code>&lt;div class="container parade"&gt;
+  &lt;div class="parade__track"&gt;
+    &lt;a class="parade__item" href="../oesterzwammen/"&gt;
+      &lt;span class="species"&gt;&lt;img src="&hellip;" alt="Witte oesterzwam" width="600" height="600"&gt;&lt;/span&gt;
+      &lt;span class="parade__name"&gt;Witte oesterzwam&lt;/span&gt;
+      &lt;span class="parade__note"&gt;Mild en zacht, veelzijdig in de keuken.&lt;/span&gt;
+    &lt;/a&gt;
+    &lt;!-- &times;6 --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+
+        <h3 style="margin-top: 3rem">Leverronde (.route-scene)</h3>
+        <p style="max-width: 46rem">De opvolger van het <a href="#playful">.van-scene-busje</a> voor de homepage: &eacute;&eacute;n SVG met gebogen stippellijnroute, drie haltes en het bestaande busje als <code>.route-van</code>. Het busje rijdt via CSS <code>offset-path</code> (met <code>@supports</code>-fallback: geparkeerd in Brugge). De haltelabels blijven echte links. <code>.van-scene</code> blijft bestaan voor de andere pagina&rsquo;s.</p>
+        <div class="ds-demo ds-demo--green on-green">
+          <div class="route-scene" style="margin-top: 0">
+            <svg viewBox="0 40 1200 180" role="presentation" aria-hidden="true">
+              <path class="route-path" d="M60 150 C220 100 380 195 600 150 C820 105 980 195 1140 150"/>
+              <g class="route-stop"><circle cx="60" cy="150" r="9"/><circle class="route-stop__ring" cx="60" cy="150" r="15"/></g>
+              <g class="route-stop"><circle cx="600" cy="150" r="9"/><circle class="route-stop__ring" cx="600" cy="150" r="15"/></g>
+              <g class="route-stop"><circle cx="1140" cy="150" r="9"/><circle class="route-stop__ring" cx="1140" cy="150" r="15"/></g>
+            </svg>
+            <ul class="route-scene__stops">
+              <li><a href="../oesterzwammen-knokke-heist/">Kwekerij Knokke&#8209;Heist</a></li>
+              <li><a href="../oesterzwammen-damme/">Damme</a></li>
+              <li><a href="../oesterzwammen-brugge/">Brugge</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="ds-code"><pre><code>&lt;div class="route-scene"&gt;
+  &lt;svg viewBox="0 40 1200 180" role="presentation" aria-hidden="true"&gt;
+    &lt;defs&gt;&lt;mask id="route-mask"&gt;&lt;path class="route-mask-path" d="M60 150 C&hellip;"/&gt;&lt;/mask&gt;&lt;/defs&gt;
+    &lt;path class="route-path" d="M60 150 C&hellip;" mask="url(#route-mask)"/&gt;
+    &lt;g class="route-stop"&gt;&lt;circle&hellip;/&gt;&lt;circle class="route-stop__ring"&hellip;/&gt;&lt;/g&gt;  &lt;!-- &times;3 --&gt;
+    &lt;g class="route-van"&gt;&lt;g transform="translate(-71.5,-69.5) scale(1.3)"&gt;&hellip;busje&hellip;&lt;/g&gt;&lt;/g&gt;
+  &lt;/svg&gt;
+  &lt;ul class="route-scene__stops"&gt;&hellip;drie links&hellip;&lt;/ul&gt;
+&lt;/div&gt;</code></pre></div>
+
+        <div class="ds-note">
+          <p>A/B-kopij: <code>/index.html</code> (deck A, warm vakmanschap) en <code>/index-b/</code> (deck B, uitgesproken speels; <code>noindex</code>, canonical naar A). Beide bestanden delen exact hetzelfde scene-skelet; elk kopijslot is gemarkeerd met een <code>&lt;!-- copy: scene.slot --&gt;</code>-commentaar zodat de decks slot-per-slot diffbaar blijven. Structurele wijzigingen eerst in A, dan overnemen in B.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Motion -->
     <section class="section ds-section" id="motion" aria-labelledby="motion-h">
       <div class="container">
@@ -1253,6 +1335,7 @@
           <li><strong>Zoom-out hovers</strong> &mdash; knoppen, iconen en kaarten schalen bij hover licht n&aacute;&aacute;r de gebruiker toe kleiner (<code>scale(0.9&ndash;0.98)</code>), nooit groter.</li>
           <li><strong>Accordeon-plus</strong> &mdash; het plusje draait 45&deg; bij openen.</li>
           <li><strong>Bestelwagentje</strong> &mdash; 16s-lus met pauze halverwege, draaiende wielen (zie <a href="#playful">Playful</a>).</li>
+          <li><strong>Story-scenes (enkel homepage)</strong> &mdash; GSAP + ScrollTrigger pint en scrubt de zeven scenes (zie <a href="#story">Story-scenes</a>). Drie poorten, in volgorde: <code>prefers-reduced-motion</code> &rarr; <code>story.js</code> doet niets; GSAP ontbreekt &rarr; idem; pins enkel &ge;48rem via <code>gsap.matchMedia()</code>. De blanket-override in <code>main.css</code> blijft altijd het laatste woord. Vocabulaire: <em>pin</em> (sectie blijft staan terwijl scrollafstand verstrijkt), <em>scrub</em> (timeline-voortgang volgt scrollpositie, 0.6&ndash;0.8s smoothing), enkel <code>transform</code>/<code>opacity</code>, en <code>autoAlpha</code> in plaats van <code>display:&nbsp;none</code>.</li>
         </ul>
 
         <div class="ds-demo" id="reveal-demo">

@@ -7,13 +7,16 @@ Knokke-Heist (levering in regio Knokke-Heist, Damme en Brugge).
 
 ## Stack
 
-Bewust dependency-vrij: puur HTML, één CSS-bestand en een handvol vanilla JS.
-Geen build-stap, geen frameworks — GitHub Pages serveert de repo as-is.
+Puur HTML, CSS en vanilla JS; geen build-stap, geen frameworks — GitHub Pages
+serveert de repo as-is. Enige uitzondering: de homepage-scrollytelling draait
+op een zelf gehost GSAP + ScrollTrigger (`assets/vendor/gsap/`, enkel geladen
+op `/` en `/index-b/`; geen CDN, dus GDPR-proof).
 De site is zo opgezet dat hij later 1-op-1 naar een CMS (Craft) kan verhuizen:
 componenten en tokens zijn gedocumenteerd op [`/design-system/`](design-system/index.html).
 
 ```
-├── index.html              # Klant-keuze (homepage)
+├── index.html              # Homepage: scrollytelling "van spore tot bord" (kopijdeck A)
+├── index-b/                # Zelfde verhaal, uitgesproken speelse kopij (deck B, noindex)
 ├── restaurant/             # Subpagina per klantprofiel
 ├── grootkeuken/
 ├── particulier/
@@ -27,7 +30,10 @@ componenten en tokens zijn gedocumenteerd op [`/design-system/`](design-system/i
 ├── sitemap.xml / robots.txt
 └── assets/
     ├── css/main.css        # Design tokens + componenten
+    ├── css/story.css       # Homepage-scenes (scrollytelling), fallback-first
     ├── js/main.js          # Nav-toggle, scroll reveals, hero-fade
+    ├── js/story.js         # GSAP-scenes homepage (reduced-motion gate, pins ≥48rem)
+    ├── vendor/gsap/        # GSAP + ScrollTrigger, zelf gehost (zie README aldaar)
     ├── fonts/              # Self-hosted Epilogue (variabel) + Old Standard TT
     └── img/                # Geoptimaliseerde webp's + responsive varianten + SVG-logo's
 ```
@@ -49,6 +55,11 @@ python3 -m http.server 8765
   `logo-mark.svg` (beeldmerk), `favicon.svg`.
 - **Motion:** hero fade-in/-out, side reveals, zoom-out hovers; alles achter
   `prefers-reduced-motion`.
+- **Homepage-scrollytelling:** zeven scenes (spore → bord) met GSAP-pins en
+  -scrubs. Contract: de CSS-standaardtoestand is de áfgewerkte pagina; JS
+  spoelt enkel terug en scrubt vooruit. Geen JS, reduced motion en mobiel
+  krijgen automatisch een complete statische versie. Twee kopijdecks:
+  `/` (warm vakmanschap) en `/index-b/` (uitgesproken speels, noindex).
 
 Volledige referentie: [`/design-system/`](design-system/index.html).
 
