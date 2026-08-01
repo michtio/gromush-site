@@ -1,16 +1,28 @@
 /**
  * GroMush — story (homepage scrollytelling)
  *
- * Drives the seven homepage scenes with GSAP + ScrollTrigger (vendored,
+ * Drives the homepage scenes with GSAP + ScrollTrigger (vendored,
  * self-hosted). The page is complete without this file: the CSS default
  * state of every scene is the finished state. This script only *rewinds*
  * elements and scrubs them forward on scroll.
  *
+ * Scene order on the homepage: hero, kweek, varieties, proces, route,
+ * plate, beleef, eigenaar, router. Scenes without a JS hook (kweek,
+ * eigenaar, router) are reveal-driven through main.js only.
+ *
+ * Scenes are initialised on presence, so every init is a no-op when its
+ * scene is absent — /index-v1/ (archive) shares this file and still has
+ * the underground and farm scenes, which index.html no longer has.
+ *
  * Gates, in order:
  *  1. prefers-reduced-motion: reduce  -> do nothing (page stays static)
  *  2. GSAP missing                    -> do nothing
- *  3. Pinned scenes only >= 48rem via gsap.matchMedia (auto-reverts on
- *     resize, so mobile always falls back to the CSS-only behaviour)
+ *  3. Pinned scenes and the experience map only >= 48rem via
+ *     gsap.matchMedia (auto-reverts on resize, so mobile always falls back
+ *     to the CSS-only behaviour)
+ *
+ * GSAP ignores CSS transform-origin/transform-box on SVG, so every tween
+ * that scales an SVG node passes transformOrigin explicitly.
  */
 (function () {
   "use strict";
@@ -41,12 +53,16 @@
       stagger: 0.16,
       clearProps: "all"
     });
-    gsap.from(heroScene.querySelector(".scroll-cue"), {
-      autoAlpha: 0,
-      duration: 0.8,
-      delay: 1,
-      clearProps: "opacity,visibility"
-    });
+    /* The archive deck still carries a scroll cue; the current hero does not */
+    var heroCue = heroScene.querySelector(".scroll-cue");
+    if (heroCue) {
+      gsap.from(heroCue, {
+        autoAlpha: 0,
+        duration: 0.8,
+        delay: 1,
+        clearProps: "opacity,visibility"
+      });
+    }
     /* The hero photo settles from a slight zoom */
     gsap.from(heroScene.querySelector(".hero-photo img"), {
       scale: 1.07,
@@ -58,14 +74,18 @@
   /* --- Pinned scenes: desktop only -------------------------------------- */
   mm.add("(min-width: 48rem)", function () {
     initHeroScrub();
-    initUnderground();
-    initFarm();
     initVarieties();
     initRoute();
     initPlate();
+    /* Archive deck only (/index-v1/): no-ops on the current homepage */
+    initUnderground();
+    initFarm();
+    /* initBeleef hands back a cleanup function (see gsap.matchMedia docs) */
+    return initBeleef();
   });
 
-  /* Hero copy drifts away while the underground scene approaches */
+  /* Hero copy drifts away while the next scene approaches. autoAlpha ends at
+     visibility:hidden, so the CTA links leave the tab order with the copy. */
   function initHeroScrub() {
     if (!heroScene) {
       return;
@@ -83,7 +103,9 @@
     });
   }
 
-  /* Mycelium threads draw themselves while the copy steps crossfade */
+  /* Archive (/index-v1/): mycelium threads draw themselves while the copy
+     steps crossfade. Absent from index.html — the mycelium network moved to
+     the beleef scene, where it doubles as the experience map. */
   function initUnderground() {
     var scene = document.querySelector('[data-scene="underground"]');
     if (!scene) {
@@ -129,7 +151,9 @@
       .to({}, { duration: 1.2 });
   }
 
-  /* Photo layers crossfade beside the origin-story steps */
+  /* Archive (/index-v1/): photo layers crossfade beside the origin-story
+     steps. Absent from index.html — the origin story is now the compact
+     founder note inside the proces scene. */
   function initFarm() {
     var scene = document.querySelector('[data-scene="farm"]');
     if (!scene) {
@@ -166,7 +190,7 @@
       .to({}, { duration: 1 });
   }
 
-  /* The six varieties parade sideways past the pinned heading */
+  /* The seven oesterzwammen parade sideways past the pinned heading */
   function initVarieties() {
     var scene = document.querySelector('[data-scene="varieties"]');
     if (!scene) {
@@ -208,6 +232,9 @@
     var maskPath = scene.querySelector(".route-mask-path");
     var van = scene.querySelector(".route-van");
     var stops = scene.querySelectorAll(".route-stop");
+    /* One polaroid per stop: what happens when the van arrives. They hold no
+       links, so hiding them costs no focusable element. */
+    var pops = gsap.utils.toArray(scene.querySelectorAll(".route-pop"));
     var sticker = scene.querySelector(".scene__sticker");
     var stats = scene.querySelectorAll(".stat-row .stat");
     var hook = scene.querySelector(".scene__hook");
@@ -216,6 +243,7 @@
     gsap.set(maskPath, { strokeDasharray: length, strokeDashoffset: length });
     gsap.set(van, { offsetDistance: "0%" });
     gsap.set(stops, { scale: 0, transformOrigin: "center center" });
+    gsap.set(pops, { scale: 0, autoAlpha: 0, transformOrigin: "center center" });
     gsap.set(stats, { autoAlpha: 0, y: 28 });
     gsap.set(hook, { autoAlpha: 0, y: 16 });
 
@@ -237,6 +265,10 @@
       .to(stops[0], { scale: 1, duration: 0.5, ease: "back.out(2)" }, 0.1)
       .to(stops[1], { scale: 1, duration: 0.5, ease: "back.out(2)" }, 3.7)
       .to(stops[2], { scale: 1, duration: 0.5, ease: "back.out(2)" }, 7.7)
+      /* Photos pop in step with their stop dot */
+      .to(pops[0], { scale: 1, autoAlpha: 1, duration: 0.55, ease: "back.out(1.7)" }, 0.35)
+      .to(pops[1], { scale: 1, autoAlpha: 1, duration: 0.55, ease: "back.out(1.7)" }, 3.95)
+      .to(pops[2], { scale: 1, autoAlpha: 1, duration: 0.55, ease: "back.out(1.7)" }, 7.95)
       .fromTo(sticker,
         { scale: 0, rotation: 20 },
         { scale: 1, rotation: 3, duration: 0.6, ease: "back.out(2)" }, 4)
@@ -264,6 +296,81 @@
         }
       });
     });
+  }
+
+  /* The mycelium network doubles as an experience map: threads draw
+     themselves, then the six crosspoint nodes toggle one card panel.
+     Returns a cleanup function so gsap.matchMedia can restore the static
+     card grid when the viewport drops below 48rem. */
+  function initBeleef() {
+    var scene = document.querySelector('[data-scene="beleef"]');
+    if (!scene) {
+      return;
+    }
+    var web = scene.querySelector(".beleef__web");
+    var threads = scene.querySelectorAll(".beleef__web .myc");
+    var specks = scene.querySelectorAll(".beleef__halo, .beleef__web .myc-dot");
+    var nodes = gsap.utils.toArray(scene.querySelectorAll(".beleef__node"));
+    var cards = nodes.map(function (node) {
+      return document.getElementById(node.getAttribute("aria-controls"));
+    });
+
+    /* Rewind the drawing only — the nodes are buttons and stay visible */
+    threads.forEach(function (path) {
+      var length = path.getTotalLength();
+      gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+    });
+    gsap.set(specks, { scale: 0, transformOrigin: "center center" });
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: web,
+        start: "top 95%",
+        end: "top 25%",
+        scrub: 0.8
+      }
+    })
+      .to(threads, { strokeDashoffset: 0, duration: 3, stagger: 0.06, ease: "none" }, 0)
+      .to(specks, { scale: 1, duration: 0.7, stagger: 0.05, ease: "back.out(1.7)" }, 1.4);
+
+    gsap.from(nodes, {
+      scale: 0.5,
+      duration: 0.6,
+      stagger: 0.09,
+      ease: "back.out(1.6)",
+      clearProps: "transform",
+      scrollTrigger: { trigger: web, start: "top 75%", once: true }
+    });
+
+    function reveal(index) {
+      nodes.forEach(function (node, i) {
+        var open = i === index;
+        node.setAttribute("aria-expanded", open ? "true" : "false");
+        if (cards[i]) {
+          cards[i].hidden = !open;
+        }
+      });
+    }
+
+    var handlers = nodes.map(function (node, i) {
+      var handler = function () {
+        reveal(i);
+      };
+      node.addEventListener("click", handler);
+      return handler;
+    });
+
+    reveal(0);
+
+    return function () {
+      nodes.forEach(function (node, i) {
+        node.removeEventListener("click", handlers[i]);
+        node.setAttribute("aria-expanded", "false");
+        if (cards[i]) {
+          cards[i].hidden = false;
+        }
+      });
+    };
   }
 
   /* --- Image pre-warmer --------------------------------------------------

@@ -59,12 +59,23 @@ python3 -m http.server 8765
   `logo-mark.svg` (beeldmerk), `favicon.svg`.
 - **Motion:** hero fade-in/-out, side reveals, zoom-out hovers; alles achter
   `prefers-reduced-motion`.
-- **Homepage-scrollytelling:** negen scenes (spore → bord, incl. twee
-  werelden en word-eigenaar) met foto-hero, GSAP-pins en
-  -scrubs. Contract: de CSS-standaardtoestand is de áfgewerkte pagina; JS
-  spoelt enkel terug en scrubt vooruit. Geen JS, reduced motion en mobiel
-  krijgen automatisch een complete statische versie. Twee kopijdecks:
-  `/` (warm vakmanschap) en `/index-b/` (uitgesproken speels, noindex).
+- **Homepage-scrollytelling:** negen scenes van spore tot bord, in deze volgorde:
+  `hero` (foto-hero met gedokte ticker + golf boven de fold) → `kweek`
+  (binnen- én buitenkweek) → `varieties` (parade van zeven oesterzwammen) →
+  `proces` (van stro tot bord in gewone taal, plus de compacte founder-noot) →
+  `route` (leverronde met polaroid per halte) → `plate` → `beleef`
+  (interactieve belevingskaart op het mycelium-netwerk: zes knooppunt-knoppen
+  openen elk hun kaart) → `eigenaar` → `router`. Hoofdstuknummers 1 tot 6 lopen
+  van `kweek` tot `beleef`; de twee afsluiters blijven ongenummerd.
+  Contract: de CSS-standaardtoestand is de áfgewerkte pagina; JS spoelt enkel
+  terug en scrubt vooruit, en pint alleen vanaf 48rem via `gsap.matchMedia`.
+  Geen JS, reduced motion en mobiel krijgen automatisch een complete statische
+  versie: de belevingskaart wordt dan een gewoon kaartenraster met alle zes
+  belevingen. Twee kopijdecks: `/` (warm vakmanschap) en `/index-b/`
+  (uitgesproken speels, noindex, gegenereerd met
+  `python3 _resources/build-variant-b.py`). `/index-v1/` is het archief van de
+  eerste iteratie en gebruikt nog de scenes `underground` en `farm`; die CSS en
+  JS blijven daarom bestaan.
 
 Volledige referentie: [`/design-system/`](design-system/index.html).
 

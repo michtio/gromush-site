@@ -1749,6 +1749,18 @@ strong {
     opacity: 1;
     transform: none;
   }
+  /* Without scripting nothing ever adds .is-visible, so the rewound state
+     must not hide content (some of it is links). The reduced-motion gate
+     already skips this whole block; this covers the JS-off path. */
+  @media (scripting: none) {
+    [data-reveal],
+    [data-reveal="left"],
+    [data-reveal="right"] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
 
   /* Delivery van drives from the kwekerij past the three stops,
      with a short stop halfway (someone gets fresh mushrooms) */

@@ -11,15 +11,21 @@
    them forward. No JS, reduced motion and reader mode therefore always
    see a complete page.
 
-   1. Scene primitives
-   2. Scene: hero
-   3. Scene: underground (mycelium)
-   4. Scene: farm
-   5. Scene: varieties (parade)
-   6. Scene: route (delivery round)
-   7. Scene: plate
-   8. Scene: router (conversion)
-   9. Motion (prefers-reduced-motion: no-preference only)
+   Sections follow the scene order of index.html:
+
+    1. Scene primitives (pin, chapter kicker, hook, mycelium drawing)
+    2. Scene: hero (+ docked ticker and wave)
+    3. Scene: kweek (binnen- vs. buitenkweek)
+    4. Scene: varieties (oesterzwam-parade)
+    5. Scene: proces (van stro tot bord) + founder note
+    6. Scene: route (delivery round, incl. stop polaroids)
+    7. Scene: plate
+    8. Scene: beleef (experience map on the mycelium network)
+    9. Scene: eigenaar
+   10. Scene: router (conversion)
+   11. Archive-only scenes: underground + farm — see /index-v1/. NOT used by
+       index.html; do not delete, the archive deck loads this same stylesheet.
+   12. Motion (prefers-reduced-motion: no-preference only)
    ========================================================================== */
 
 /* 1. Scene primitives
@@ -30,44 +36,25 @@
 
 /* The element ScrollTrigger pins on desktop. Without JS it is a plain
    block. min-heights are declared here so pin-spacers cause no layout
-   shift when GSAP arms. */
+   shift when GSAP arms. (underground/farm are archive-only, see 11.) */
 .scene__pin {
   position: relative;
 }
 
 @media (min-width: 48rem) {
-  .story-js .scene--underground .scene__pin,
-  .story-js .scene--farm .scene__pin,
   .story-js .scene--varieties .scene__pin,
-  .story-js .scene--route .scene__pin {
+  .story-js .scene--route .scene__pin,
+  .story-js .scene--underground .scene__pin,
+  .story-js .scene--farm .scene__pin {
     min-height: 100svh;
     display: grid;
     align-content: center;
   }
 }
 
-/* Copy steps: flowing paragraphs by default; when the story is armed on
-   desktop they overlap in one grid cell so GSAP can crossfade them. */
-.scene__steps {
-  position: relative;
-}
-.scene__step {
-  margin: 0 0 1.1em;
-}
-@media (min-width: 48rem) {
-  .story-js .scene--underground .scene__steps,
-  .story-js .scene--farm .scene__steps {
-    display: grid;
-  }
-  .story-js .scene--underground .scene__step,
-  .story-js .scene--farm .scene__step {
-    grid-area: 1 / 1;
-    align-self: start;
-    margin: 0;
-  }
-}
-
-/* Chapter kicker: the repeating narrative anchor */
+/* Chapter kicker: the repeating narrative anchor. Chapters 1-6 run
+   kweek, varieties, proces, route, plate, beleef; the closing scenes
+   (eigenaar, router) step out of the numbering on purpose. */
 .scene .kicker .kicker__chapter {
   display: inline-grid;
   place-items: center;
@@ -86,6 +73,25 @@
   color: var(--green);
 }
 
+/* Chapter-bridging hook line at the end of a scene */
+.scene__hook {
+  margin: 2rem 0 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-lg);
+  color: var(--gold-deep);
+}
+.on-green .scene__hook {
+  color: var(--sand);
+}
+
+/* Attribution line under a quote or a founder note */
+.scene__signoff {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--gold-deep);
+}
+
 /* Inline CTA next to a button */
 .cta-link {
   display: inline-block;
@@ -94,14 +100,63 @@
   font-weight: 500;
 }
 
+/* The mycelium drawing. Shared by the archive underground scene and the
+   beleef experience map. Ships fully drawn: no dash attributes in the
+   markup — story.js measures and rewinds them. */
+.myc-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.myc-svg svg {
+  width: 100%;
+  height: 100%;
+}
+.myc-svg .myc {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.myc-svg .myc--main {
+  stroke: var(--sand);
+  stroke-width: 2.2;
+  opacity: 0.5;
+}
+.myc-svg .myc--branch {
+  stroke: var(--gold);
+  stroke-width: 1.6;
+  opacity: 0.45;
+}
+.myc-svg .myc--soil {
+  stroke: var(--sand-soft);
+  stroke-width: 3;
+  opacity: 0.7;
+}
+.myc-svg .myc-node {
+  fill: var(--gold);
+  opacity: 0.65;
+}
+.myc-svg .myc-dot {
+  fill: var(--sand);
+  opacity: 0.55;
+}
+
 /* 2. Scene: hero (full-bleed photo, dark and product-first)
    ========================================================================== */
 .scene--hero {
   position: relative;
+  /* Two rows: the copy centres in the first, the docked foot (ticker + wave)
+     closes the hero off in the second — so both stay above the fold */
   display: grid;
+  /* minmax(0,1fr): the ticker track is max-content wide and would otherwise
+     blow the column open */
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 1fr auto;
   align-items: center;
   min-height: calc(100svh - var(--header-h));
-  padding: clamp(3rem, 7vw, 5rem) 0 6rem;
+  padding: clamp(1.25rem, 3vw, 2rem) 0 0;
   overflow: hidden;
   isolation: isolate;
   background: #1c2413;
@@ -162,9 +217,6 @@
   flex-wrap: wrap;
   gap: 1rem;
 }
-.scene--hero .scroll-cue {
-  color: var(--sand);
-}
 
 /* Spores: pale dust drifting over the dark photo */
 .spores {
@@ -194,6 +246,25 @@
 .spores i:nth-child(9) { left: 92%; top: 34%; }
 .spores i:nth-child(10) { left: 47%; top: 44%; }
 
+/* Docked hero footer: the sand ticker sits directly on top of the wave, and
+   the wave is the hero photo's bottom edge — no cream sliver in between.
+   Both live inside the hero, so the marquee stays above the fold. */
+.hero-foot {
+  position: relative;
+  z-index: 3;
+  align-self: end;
+  margin-top: clamp(0.75rem, 2.5vw, 1.5rem);
+}
+.hero-foot .ticker {
+  padding-block: 0.7rem;
+}
+.hero-foot .wave {
+  /* Shorter than a section divider, and pulled up by a hair so no seam
+     shows between the ticker and the wave */
+  height: clamp(2.25rem, 4.5vw, 3.5rem);
+  margin-top: -1px;
+}
+
 /* Marquee ribbon under the hero (sand strip, loops sideways) */
 .ticker {
   background: var(--sand);
@@ -221,246 +292,19 @@
   color: var(--green);
 }
 
-/* Scroll cue at the bottom of the hero */
-.scroll-cue {
-  position: absolute;
-  left: 50%;
-  bottom: 1.75rem;
-  transform: translateX(-50%);
-  display: grid;
-  justify-items: center;
-  gap: 0.35rem;
-  color: var(--gold-deep);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  white-space: nowrap;
-}
-.scroll-cue svg {
-  width: 1.4rem;
-  height: 1.4rem;
-}
-
-/* 3. Scene: underground (mycelium)
+/* 3. Scene: kweek (binnen- vs. buitenkweek)
    ========================================================================== */
-.scene--underground {
-  background: var(--green);
+.scene--kweek {
+  padding-block: clamp(3.5rem, 8vw, 6.5rem) clamp(2.5rem, 6vw, 4rem);
 }
-.scene--underground .scene__pin {
-  overflow: hidden;
-  padding-block: clamp(3rem, 7vw, 5rem);
-}
-
-/* The mycelium drawing sits behind the copy. Ships fully drawn: no
-   dash attributes in the markup — story.js measures and rewinds them. */
-.myc-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-.myc-svg svg {
-  width: 100%;
-  height: 100%;
-}
-.myc-svg .myc {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.myc-svg .myc--main {
-  stroke: var(--sand);
-  stroke-width: 2.2;
-  opacity: 0.5;
-}
-.myc-svg .myc--branch {
-  stroke: var(--gold);
-  stroke-width: 1.6;
-  opacity: 0.45;
-}
-.myc-svg .myc--soil {
-  stroke: var(--sand-soft);
-  stroke-width: 3;
-  opacity: 0.7;
-}
-.myc-svg .myc-node {
-  fill: var(--gold);
-  opacity: 0.65;
-}
-.myc-svg .myc-dot {
-  fill: var(--sand);
-  opacity: 0.55;
-}
-
-.scene--underground .scene__copy {
-  position: relative;
-  max-width: 38rem;
-}
-.scene--underground .scene__step {
-  font-size: var(--text-lg);
-}
-.scene__aside {
-  font-family: var(--font-serif);
-  font-style: italic;
-  color: var(--sand);
-}
-
-/* Chapter-bridging hook line at the end of a scene */
-.scene__hook {
-  margin: 2rem 0 0;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: var(--text-lg);
-  color: var(--gold-deep);
-}
-.on-green .scene__hook {
-  color: var(--sand);
-}
-
-/* 4. Scene: farm
-   ========================================================================== */
-.scene--farm .scene__pin {
-  padding-block: clamp(3.5rem, 8vw, 6.5rem);
-}
-.scene--farm .scene__grid {
-  display: grid;
-  gap: clamp(2rem, 5vw, 5rem);
-  align-items: center;
-}
-@media (min-width: 48rem) {
-  .scene--farm .scene__grid {
-    grid-template-columns: 0.95fr 1.05fr;
-  }
-}
-
-/* Photo stack. Default: a small collage (the finished state). Armed on
-   desktop: layers overlap in one cell so GSAP can crossfade. */
-.scene__stack {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 1rem;
-}
-.scene__stack-item {
-  margin: 0;
-}
-.scene__stack-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-photo);
-}
-.scene__stack-item:nth-child(1) {
-  grid-column: 1;
-  transform: rotate(-1.2deg);
-}
-.scene__stack-item:nth-child(2) {
-  grid-column: 2;
-  grid-row: 1 / 3;
-  transform: rotate(1.2deg);
-}
-.scene__stack-item:nth-child(3) {
-  grid-column: 1;
-  transform: rotate(0.8deg);
-}
-@media (min-width: 48rem) {
-  .story-js .scene__stack {
-    grid-template-columns: 1fr;
-  }
-  .story-js .scene__stack-item {
-    grid-area: 1 / 1;
-    transform: none;
-  }
-  .story-js .scene__stack-item img {
-    aspect-ratio: 4 / 5;
-    max-height: 76svh;
-  }
-}
-.scene__stack .sticker {
-  position: absolute;
-  top: -1rem;
-  right: -0.75rem;
-  z-index: 2;
-}
-
-.scene--farm .scene__signoff {
+.kweek__note {
+  max-width: 40rem;
+  margin-inline: auto;
   font-size: var(--text-sm);
-  font-weight: 600;
-  color: var(--gold-deep);
-}
-
-/* 4b. Van stro tot bord: compact process strip under the farm scene
-   ========================================================================== */
-.process {
-  padding-bottom: clamp(3rem, 7vw, 5rem);
-}
-.process__steps {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.75rem 1.25rem;
-  margin: clamp(1.5rem, 4vw, 2.5rem) 0 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: proc;
-  text-align: center;
-}
-@media (min-width: 48rem) {
-  .process__steps {
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
-.process__steps li {
-  position: relative;
-  font-size: var(--text-sm);
-}
-.process__steps li::before {
-  counter-increment: proc;
-  content: counter(proc);
-  position: absolute;
-  top: -0.5rem;
-  left: calc(50% + 1.1rem);
-  display: grid;
-  place-items: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  background: var(--sand);
-  color: var(--green);
-  border-radius: 50%;
-  font-size: 0.7rem;
-  font-weight: 700;
-}
-.process__icon {
-  display: inline-grid;
-  place-items: center;
-  width: 4.25rem;
-  height: 4.25rem;
-  margin-bottom: 0.75rem;
-  background: var(--green);
-  border-radius: 50%;
-  box-shadow: var(--shadow-card);
-}
-.process__icon svg {
-  width: 1.9rem;
-  height: 1.9rem;
-  fill: var(--sand);
-}
-.process__steps h3 {
-  margin: 0 0 0.15rem;
-  font-size: 1.05rem;
-  color: var(--green);
-}
-.process__steps p {
-  margin: 0;
-  font-size: var(--text-xs);
   color: var(--ink);
 }
-
-/* 4c. Scene: twee werelden (binnen- vs. buitenkweek)
-   ========================================================================== */
-.scene--werelden {
-  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+.scene--kweek .scene__hook {
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
 }
 .worlds {
   display: grid;
@@ -523,7 +367,7 @@
   max-width: 26rem;
 }
 
-/* 5. Scene: varieties (parade)
+/* 4. Scene: varieties (oesterzwam-parade)
    --------------------------------------------------------------------------
    Default (mobile-first): a native scroll-snap carousel.
    No-JS desktop: wraps into a grid, like .species-grid.
@@ -572,7 +416,7 @@
   /* No-JS desktop: calm grid, nothing to scroll sideways */
   .parade__track {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     overflow: visible;
     scroll-snap-type: none;
   }
@@ -594,6 +438,130 @@
   }
 }
 
+/* 5. Scene: proces — "van stro tot bord" strip + compact founder note
+   ========================================================================== */
+.scene--proces {
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+}
+.process__steps {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem 1.25rem;
+  margin: clamp(1.5rem, 4vw, 2.5rem) 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: proc;
+  text-align: center;
+}
+@media (min-width: 48rem) {
+  .process__steps {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+.process__steps li {
+  position: relative;
+  font-size: var(--text-sm);
+}
+.process__steps li::before {
+  counter-increment: proc;
+  content: counter(proc);
+  position: absolute;
+  top: -0.5rem;
+  left: calc(50% + 1.1rem);
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: var(--sand);
+  color: var(--green);
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+.process__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 4.25rem;
+  height: 4.25rem;
+  margin-bottom: 0.75rem;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: var(--shadow-card);
+}
+.process__icon svg {
+  width: 1.9rem;
+  height: 1.9rem;
+  fill: var(--sand);
+}
+.process__steps h3 {
+  margin: 0 0 0.15rem;
+  font-size: 1.05rem;
+  color: var(--green);
+  text-wrap: balance;
+}
+/* The vakterm stays available but steps back: plain language leads */
+.process__term {
+  display: block;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--gold-deep);
+}
+.process__steps p {
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--ink);
+}
+
+/* Thin arrows between the steps (desktop only — the mobile grid wraps) */
+@media (min-width: 48rem) {
+  .process__steps li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 1.8rem;
+    right: -0.9rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-top: 1.5px solid var(--gold);
+    border-right: 1.5px solid var(--gold);
+    transform: rotate(45deg);
+    opacity: 0.75;
+  }
+}
+
+/* Compact founder note: the .founder component from main.css, with the
+   sticker hung outside it (that component clips its own overflow) */
+.founder-note {
+  position: relative;
+  padding-top: clamp(1.5rem, 4vw, 2.5rem);
+}
+.founder-note .sticker {
+  position: absolute;
+  top: 0.25rem;
+  right: -0.5rem;
+  z-index: 2;
+}
+.founder__panel .scene__signoff {
+  color: var(--green);
+}
+@media (min-width: 48rem) {
+  /* In main.css the portrait photo sets the row height, which leaves a large
+     empty sand area next to this short note. Here the panel sets the height
+     and the photo covers its own column instead. */
+  .founder-note .founder__media {
+    position: relative;
+    min-height: 20rem;
+  }
+  .founder-note .founder__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
 /* 6. Scene: route (delivery round)
    ========================================================================== */
 .scene--route {
@@ -604,9 +572,6 @@
 }
 .scene--route .scene__copy {
   max-width: 44rem;
-}
-.scene--route .scene__after {
-  padding-bottom: clamp(3rem, 7vw, 5rem);
 }
 
 .route-scene {
@@ -696,8 +661,9 @@
   }
 }
 .route-scene__stops {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: end;
   margin: 0.75rem 0 0;
   padding: 0 2%;
   list-style: none;
@@ -714,11 +680,50 @@
   text-align: right;
 }
 
+/* Polaroid per stop: what happens when the van arrives. Ships visible (the
+   finished state); story.js rewinds it and pops it in with the stop dot.
+   Holds no link, so hiding it costs no focusable element. */
+.route-pop {
+  display: block;
+  width: clamp(5.25rem, 23vw, 9rem);
+  margin: 0 0 0.9rem;
+  padding: 0.35rem 0.35rem 0.6rem;
+  background: var(--cream);
+  border-radius: 0.4rem;
+  box-shadow: var(--shadow-card);
+  transform: rotate(-3deg);
+}
+.route-scene__stops li:nth-child(2) .route-pop {
+  margin-inline: auto;
+  transform: rotate(2.5deg);
+}
+.route-scene__stops li:last-child .route-pop {
+  margin-left: auto;
+  transform: rotate(-2deg);
+}
+.route-pop img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0.15rem;
+}
+
+/* Mobile: the route SVG is only a few dozen pixels tall, so an absolutely
+   positioned sticker would sit on top of the van. It rides along above the
+   route instead (it is the first child of .route-scene). */
 .scene--route .scene__sticker {
-  position: absolute;
-  top: -0.5rem;
-  right: 1rem;
-  z-index: 2;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+@media (min-width: 48rem) {
+  .scene--route .scene__sticker {
+    position: absolute;
+    top: -0.5rem;
+    right: 1rem;
+    margin-bottom: 0;
+    z-index: 2;
+  }
 }
 
 /* 7. Scene: plate
@@ -758,7 +763,205 @@
   margin-top: 1.75rem;
 }
 
-/* 7b. Scene: word eigenaar / beleven (sand band with photo cards)
+/* 8. Scene: beleef — the experience layer, mapped on the mycelium network
+   --------------------------------------------------------------------------
+   Default (no JS / reduced motion / mobile): the six experiences are a plain
+   card grid, with the network drawn faintly behind it. Armed on desktop the
+   same network becomes an interactive map: six photo nodes on the crosspoints
+   toggle one card panel. The nodes are display:none until the map exists, so
+   no focusable element is ever hidden-but-reachable.
+   ========================================================================== */
+.scene--beleef {
+  background: var(--green);
+  padding-block: clamp(3rem, 7vw, 5rem);
+}
+.beleef {
+  position: relative;
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+.beleef__web {
+  opacity: 0.5;
+}
+.beleef__web svg {
+  pointer-events: none;
+}
+.beleef__halo {
+  fill: var(--gold);
+  opacity: 0.14;
+}
+.beleef__nodes {
+  display: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.beleef__cards {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 40rem) {
+  .beleef__cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 62rem) {
+  .beleef__cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.beleef__card {
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+/* The card sets display:flex, so the UA [hidden] rule needs restating */
+.beleef__card[hidden] {
+  display: none;
+}
+.beleef__card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.beleef__card-body {
+  flex: 1;
+  padding: 1.35rem 1.5rem 1.6rem;
+}
+.beleef__card h3 {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: var(--gold-deep);
+}
+.beleef__card p {
+  margin: 0 0 0.9rem;
+  color: var(--ink);
+  font-size: var(--text-sm);
+}
+.beleef__cards a.beleef__card-cta {
+  display: inline-block;
+  color: var(--gold-deep);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+}
+.beleef__cards a.beleef__card-cta::after {
+  content: " \2192";
+}
+.beleef__cards a.beleef__card-cta:hover,
+.beleef__cards a.beleef__card-cta:focus-visible {
+  text-decoration: underline;
+}
+
+@media (min-width: 48rem) {
+  /* Armed: the network becomes the map, the cards become one panel */
+  .story-js .beleef {
+    display: grid;
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+  }
+  .story-js .beleef__web {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1000 / 520;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .story-js .beleef__halo {
+    opacity: 0.28;
+  }
+  .story-js .beleef__nodes {
+    display: block;
+  }
+  .story-js .beleef__cards {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .story-js .beleef__card {
+    grid-area: 1 / 1;
+    flex-direction: row;
+    min-height: 13rem;
+  }
+  .story-js .beleef__card > picture {
+    display: block;
+    flex: 0 0 38%;
+  }
+  .story-js .beleef__card > picture img {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+  .story-js .beleef__card-body {
+    display: grid;
+    align-content: center;
+    padding: 1.75rem 2rem;
+  }
+}
+
+.beleef__nodes li {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  transform: translate(-50%, -50%);
+}
+.beleef__node {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: var(--sand);
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+/* The label sits over the network drawing, so it needs its own contrast */
+.beleef__node-label {
+  text-shadow: 0 1px 3px rgba(20, 26, 14, 0.9);
+}
+.beleef__node-photo {
+  display: block;
+  width: clamp(3.5rem, 5.5vw, 5rem);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 2px solid var(--sand);
+  border-radius: 50%;
+  box-shadow: var(--shadow-card);
+}
+.beleef__node-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.beleef__node:hover,
+.beleef__node:focus-visible {
+  transform: scale(0.94);
+  color: var(--cream);
+}
+.beleef__node[aria-expanded="true"] {
+  color: var(--cream);
+}
+.beleef__node[aria-expanded="true"] .beleef__node-photo {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 0.35rem rgba(155, 136, 67, 0.4), var(--shadow-card);
+}
+
+/* 9. Scene: word eigenaar (sand band with photo cards)
    ========================================================================== */
 .scene--eigenaar {
   padding-block: 0 clamp(2.5rem, 6vw, 4rem);
@@ -818,7 +1021,7 @@
   }
 }
 
-/* 8. Scene: router (conversion)
+/* 10. Scene: router (conversion)
    ========================================================================== */
 .scene--router {
   padding-block: clamp(3.5rem, 8vw, 6.5rem) clamp(2rem, 5vw, 3.5rem);
@@ -828,7 +1031,151 @@
   text-align: center;
 }
 
-/* 9. Motion (decorative only — everything above is complete without it)
+/* 11. Archive-only scenes — /index-v1/
+   --------------------------------------------------------------------------
+   The first iteration of the story homepage still ships at /index-v1/ and
+   loads this same stylesheet, so these rules must stay. index.html does NOT
+   use them: the underground scene became the beleef experience map and the
+   farm scene became the compact founder note in the proces scene.
+   ========================================================================== */
+
+/* Copy steps: flowing paragraphs by default; when the story is armed on
+   desktop they overlap in one grid cell so GSAP can crossfade them. */
+.scene__steps {
+  position: relative;
+}
+.scene__step {
+  margin: 0 0 1.1em;
+}
+@media (min-width: 48rem) {
+  .story-js .scene--underground .scene__steps,
+  .story-js .scene--farm .scene__steps {
+    display: grid;
+  }
+  .story-js .scene--underground .scene__step,
+  .story-js .scene--farm .scene__step {
+    grid-area: 1 / 1;
+    align-self: start;
+    margin: 0;
+  }
+}
+
+/* Scroll cue at the bottom of the archive hero */
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 1.75rem;
+  transform: translateX(-50%);
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  color: var(--gold-deep);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.scroll-cue svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+.scene--hero .scroll-cue {
+  color: var(--sand);
+}
+
+/* Scene: underground (mycelium) */
+.scene--underground {
+  background: var(--green);
+}
+.scene--underground .scene__pin {
+  overflow: hidden;
+  padding-block: clamp(3rem, 7vw, 5rem);
+}
+.scene--underground .scene__copy {
+  position: relative;
+  max-width: 38rem;
+}
+.scene--underground .scene__step {
+  font-size: var(--text-lg);
+}
+.scene__aside {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--sand);
+}
+
+/* Scene: farm (photo stack + origin story) */
+.scene--farm .scene__pin {
+  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+}
+.scene--farm .scene__grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+@media (min-width: 48rem) {
+  .scene--farm .scene__grid {
+    grid-template-columns: 0.95fr 1.05fr;
+  }
+}
+
+/* Photo stack. Default: a small collage (the finished state). Armed on
+   desktop: layers overlap in one cell so GSAP can crossfade. */
+.scene__stack {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1rem;
+}
+.scene__stack-item {
+  margin: 0;
+}
+.scene__stack-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-photo);
+}
+.scene__stack-item:nth-child(1) {
+  grid-column: 1;
+  transform: rotate(-1.2deg);
+}
+.scene__stack-item:nth-child(2) {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  transform: rotate(1.2deg);
+}
+.scene__stack-item:nth-child(3) {
+  grid-column: 1;
+  transform: rotate(0.8deg);
+}
+@media (min-width: 48rem) {
+  .story-js .scene__stack {
+    grid-template-columns: 1fr;
+  }
+  .story-js .scene__stack-item {
+    grid-area: 1 / 1;
+    transform: none;
+  }
+  .story-js .scene__stack-item img {
+    aspect-ratio: 4 / 5;
+    max-height: 76svh;
+  }
+}
+.scene__stack .sticker {
+  position: absolute;
+  top: -1rem;
+  right: -0.75rem;
+  z-index: 2;
+}
+
+/* Trailing block under the archive route pin */
+.scene--route .scene__after {
+  padding-bottom: clamp(3rem, 7vw, 5rem);
+}
+
+/* 12. Motion (decorative only — everything above is complete without it)
    ========================================================================== */
 @media (prefers-reduced-motion: no-preference) {
   /* Hero copy fades in on load — CSS handles it when the story is NOT
@@ -840,7 +1187,7 @@
   body:not(.story-js) .scene--hero .scene__inner > *:nth-child(3) { animation-delay: 0.36s; }
   body:not(.story-js) .scene--hero .scene__inner > *:nth-child(4) { animation-delay: 0.5s; }
 
-  /* Gentle bounce on the scroll cue */
+  /* Gentle bounce on the scroll cue (archive hero) */
   .scroll-cue svg {
     animation: cue-bounce 2.2s ease-in-out infinite;
   }

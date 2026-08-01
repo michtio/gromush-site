@@ -4,9 +4,12 @@
 Structuurwijzigingen gebeuren altijd eerst in index.html (deck A); daarna
 dit script draaien vanaf de repo-root:  python3 _resources/build-variant-b.py
 
-Elke (A, B)-tekstpaar hieronder moet exact één keer voorkomen — het script
-faalt luid als een slot niet meer matcht, zodat de decks nooit stil
-uiteenlopen.
+Elke (A, B)-tekstpaar hieronder moet exact het verwachte aantal keer
+voorkomen — het script faalt luid als een slot niet meer matcht, zodat de
+decks nooit stil uiteenlopen.
+
+Scene-volgorde (index.html): hero, kweek, varieties, proces (incl. de
+compacte founder-noot), route, plate, beleef, eigenaar, router.
 """
 import os
 import re
@@ -30,7 +33,9 @@ out = out.replace('<li><a href="../" aria-current="page">Klant</a></li>',
 
 # --- 4. kopijdeck B ----------------------------------------------------------
 PAIRS = [
-    # hero
+    # ---- hero ----------------------------------------------------------
+    ("""<span class="kicker">GroMush &mdash; Knokke&#8209;Heist &middot; Ontdek de magie</span>""",
+     """<span class="kicker">GroMush &mdash; Knokke&#8209;Heist &middot; Schimmels met een reputatie</span>"""),
     ("""            <span class="line-1">Paddenstoelen zoals je ze nog nooit hebt beleefd.</span>
             <span class="line-2">Van spore tot jouw bord.</span>""",
      """            <span class="line-1">Paddenstoelen waar zelfs chefs stil van worden.</span>
@@ -41,57 +46,41 @@ PAIRS = [
      """<!-- copy: hero.cta-1 --><a class="btn btn--photo" href="../oesterzwammen/">Toon me de soorten</a>"""),
     ("""<!-- copy: hero.cta-2 --><a class="btn btn--outline" href="../chefbox/#proefbox">Vraag een proefbox aan</a>""",
      """<!-- copy: hero.cta-2 --><a class="btn btn--outline" href="../chefbox/#proefbox">Proefbox scoren (gratis)</a>"""),
-    ("""<!-- copy: hero.cue --><span>Scroll &mdash; het verhaal groeit vanzelf</span>""",
-     """<!-- copy: hero.cue --><span>Scroll. De zwammen groeien niet vanzelf&hellip; ok&eacute;, eigenlijk wel.</span>"""),
-    # ticker (items komen 2x voor in de gedupliceerde track)
+    # ---- ticker (items komen 2x voor in de gedupliceerde track) ---------
+    ("<span>Dagvers geplukt</span>", "<span>Vanmorgen nog geplukt</span>"),
+    ("<span>100% lokaal</span>", "<span>100% lokaal (echt)</span>"),
     ("<span>Vijftien-plus soorten</span>", "<span>Vijftien-plus soorten, nul photoshop</span>"),
     ("<span>Ambachtelijk gekweekt</span>", "<span>Gekweekt met obsessie</span>"),
-    ("<span>100% lokaal</span>", "<span>100% lokaal (echt)</span>"),
-    # underground
-    ("""<h2 id="underground-h">Het echte werk zie je niet</h2>""",
-     """<h2 id="underground-h">Het beste deel zie je niet. Typisch.</h2>"""),
-    ("""              <p class="scene__step">Onder elk zwammetje zit een netwerk van kilometers fijne draden: <strong>mycelium</strong>. Het verbindt, groeit, breekt af en bouwt opnieuw op &mdash; de stille motor van elk gezond ecosysteem.</p>""",
-     """              <p class="scene__step">Onder elk zwammetje zit een netwerk van kilometers fijne draden: <strong>mycelium</strong>. Het verbindt alles met alles, breekt af en bouwt weer op. Zeg maar het internet, maar dan nuttig.</p>"""),
-    ("""              <p class="scene__step">In onze kwekerij in Knokke&#8209;Heist geven we dat netwerk precies wat het nodig heeft: vers substraat, de juiste vochtigheid en veel geduld. De rest doet de natuur.</p>""",
-     """              <p class="scene__step">Wij geven dat netwerk vers substraat, de juiste vochtigheid en af en toe een opbeurend woord. Daarna vooral: niet in de weg lopen.</p>"""),
-    ("""              <p class="scene__step scene__aside">Ja, we praten &eacute;cht iets te graag over mycelium. Vraag er gerust eens naar &mdash; dan ben je wel een uurtje zoet.</p>""",
-     """              <p class="scene__step scene__aside">Waarschuwing: vraag Anthony nooit &lsquo;wat is mycelium eigenlijk?&rsquo; Tenzij je een vrije namiddag hebt.</p>"""),
-    ("""<p class="scene__hook">Tijd om naar boven te komen.</p>""",
-     """<p class="scene__hook">Genoeg gegraven. Naar boven.</p>"""),
-    # farm
-    ("""<h2 id="farm-h">Het begon met een fascinatie</h2>""",
-     """<h2 id="farm-h">Begonnen uit pure obsessie</h2>"""),
-    ("""              <p class="scene__step">Sommige ondernemers starten een bedrijf omdat ze een gat in de markt zien. Bij mij begon het anders &mdash; met een jarenlange fascinatie voor de verborgen wereld van schimmels en mycelium.</p>""",
-     """              <p class="scene__step">Sommige ondernemers zien een gat in de markt. Ik zag een schimmel en was verkocht. Ieder zijn ding.</p>"""),
-    ("""              <p class="scene__step">Uit die passie is GroMush ontstaan: een kleinschalige kwekerij in Knokke&#8209;Heist waar ik elke kweekcyclus met de hand opvolg, van substraat tot oogst.</p>""",
-     """              <p class="scene__step">Dus staat er nu een kwekerij in Knokke&#8209;Heist waar ik elke kweekcyclus persoonlijk opvolg, van substraat tot oogst. De zwammen en ik &mdash; wij hebben iets.</p>"""),
-    ("""              <p class="scene__step">Vakmanschap boven massaproductie. Kwaliteit boven kwantiteit. Samenwerking boven verkoop. Zo simpel is het eigenlijk.</p>""",
-     """              <p class="scene__step">Vakmanschap boven massaproductie. Kwaliteit boven kwantiteit. Zwammen boven zowat alles, eerlijk gezegd.</p>"""),
-    ("""            <p class="scene__signoff">&mdash; Anthony Watteeuw, kweker</p>""",
-     """            <p class="scene__signoff">&mdash; Anthony Watteeuw, kweker (en voltijds mycelium-fan)</p>"""),
-    ("""<!-- copy: farm.sticker --><span class="sticker" aria-hidden="true">Ambachtelijke teelt</span>""",
-     """<!-- copy: farm.sticker --><span class="sticker" aria-hidden="true">Handwerk, hoor</span>"""),
-    # process
-    ("""<h2 id="process-h">Van stro tot bord</h2>""",
-     """<h2 id="process-h">Van stro tot bord &mdash; met een vleugje magie</h2>"""),
-    # werelden
+    ("<span>Van kwekerij tot keuken in 30 minuten</span>",
+     "<span>Van kwekerij tot keuken in 30 minuten, zonder file</span>"),
+    # ---- kweek ---------------------------------------------------------
+    ("""<span class="kicker"><span class="kicker__chapter">1</span>De kweek</span>""",
+     """<span class="kicker"><span class="kicker__chapter">1</span>Waar het gebeurt</span>"""),
     ("""          <span class="line-1">Binnen &eacute;n buiten.</span>
           <span class="line-2">&Eacute;&eacute;n passie.</span>""",
      """          <span class="line-1">Twee werelden.</span>
           <span class="line-2">Nul compromissen.</span>"""),
     ("""<p class="lead" style="max-width: 42rem; margin-inline: auto">Onze zwammen groeien op twee plekken die niet harder konden verschillen &mdash; en dat proef je.</p>""",
-     """<p class="lead" style="max-width: 42rem; margin-inline: auto">Een zeecontainer met discolicht en een voedselbos vol vogels. Onze zwammen kiezen zelf hun vibe.</p>"""),
+     """<p class="lead" style="max-width: 42rem; margin-inline: auto">Een zeecontainer met paars licht en een voedselbos vol vogels. Onze zwammen kiezen zelf hun vibe.</p>"""),
+    ("""<p class="kweek__note">Op beide plekken doet hetzelfde onzichtbare draadnetwerk het werk: <strong>mycelium</strong>. Wij geven het vers substraat, vocht en tijd; de natuur regelt de oogst.</p>""",
+     """<p class="kweek__note">Op beide plekken doet hetzelfde onzichtbare draadnetwerk het werk: <strong>mycelium</strong>. Wij leveren substraat, vocht en veel geduld. Mycelium doet de rest en stuurt geen factuur.</p>"""),
+    ("""            <h3>Binnenkweek <span class="accent">&middot; de zeecontainer</span></h3>""",
+     """            <h3>Binnenkweek <span class="accent">&middot; de discocontainer</span></h3>"""),
     ("""            <p>Gecontroleerde vochtigheid, mist en licht: hier oogsten we het hele jaar door oesterzwammen van constante topkwaliteit.</p>""",
      """            <p>Mist, paars licht en een strak klimaat: het ziet eruit als sciencefiction, maar er groeit gewoon topkwaliteit. Het hele jaar door.</p>"""),
+    ("""            <h3>Buitenkweek <span class="accent">&middot; het voedselbos</span></h3>""",
+     """            <h3>Buitenkweek <span class="accent">&middot; het bos doet mee</span></h3>"""),
     ("""            <p>Op boomstammen, op het ritme van de seizoenen: shiitake en bosgenoten groeien hier 100% natuurlijk.</p>""",
      """            <p>Boomstammen, seizoenen en verder niets: hier doet de natuur het werk. Wij komen vooral oogsten.</p>"""),
-    # varieties
-    ("""            <span class="line-1">Twaalf karakters.</span>
-            <span class="line-2">&Eacute;&eacute;n kwekerij.</span>""",
-     """            <span class="line-1">Twaalf karakters.</span>
-            <span class="line-2">Nul photoshop.</span>"""),
-    ("""<p class="lead" style="max-width: 42rem; margin-inline: auto">Van de klassieke grijze oesterzwam tot shiitake, morieltje en de diepzwarte Black Pearl: elk met een eigen karakter, kleur en smaak. Kies je favoriet &mdash; of laat de chef in jou beslissen.</p>""",
-     """<p class="lead" style="max-width: 42rem; margin-inline: auto">Van de brave grijze tot de Black Pearl die n&eacute;t iets te mysterieus doet: allemaal karakter, allemaal familie. Kies je favoriet. Of neem ze allemaal &mdash; wij oordelen niet.</p>"""),
+    ("""<p class="scene__hook">Maar wat groeit daar dan allemaal?</p>""",
+     """<p class="scene__hook">Ja maar, wat komt daar dan uit?</p>"""),
+    # ---- varieties -----------------------------------------------------
+    ("""            <span class="line-1">Zeven oesterzwammen.</span>
+            <span class="line-2">&Eacute;&eacute;n familie.</span>""",
+     """            <span class="line-1">Zeven oesterzwammen.</span>
+            <span class="line-2">Zeven persoonlijkheden.</span>"""),
+    ("""<p class="lead" style="max-width: 42rem; margin-inline: auto">Van de klassieke grijze tot de diepzwarte Black Pearl: elke oesterzwam heeft een eigen kleur, beet en smaak. En daarnaast kweken we shiitake, nameko, pioppino, morieltje en meer &mdash; ruim vijftien soorten in totaal.</p>""",
+     """<p class="lead" style="max-width: 42rem; margin-inline: auto">Van de brave grijze tot de Black Pearl die n&eacute;t iets te mysterieus doet: allemaal oesterzwam, allemaal karakter. Daarnaast staan shiitake, nameko, pioppino en morieltje te wachten op hun moment &mdash; ruim vijftien soorten in totaal.</p>"""),
     ("""<span class="parade__note">Mild en zacht, veelzijdig in de keuken.</span>""",
      """<span class="parade__note">Mild, zacht en overal goed in. De schoonzoon onder de zwammen.</span>"""),
     ("""<span class="parade__note">Stevig en mals, de klassieker.</span>""",
@@ -106,44 +95,108 @@ PAIRS = [
      """<span class="parade__note">Piekt in de zomer. Zoals wij allemaal.</span>"""),
     ("""<span class="parade__note">Diepdonkere kop, stevige beet, volle smaak.</span>""",
      """<span class="parade__note">Draagt altijd zwart. Smaakt navenant cool.</span>"""),
-    ("""<span class="parade__note">Intens, aards en boordevol umami.</span>""",
-     """<span class="parade__note">Umami-bom. Vraag maar aan Japan.</span>"""),
-    ("""<span class="parade__note">Goudglanzend, zijdezacht en licht zoet.</span>""",
-     """<span class="parade__note">Glimt alsof hij gepoetst is. Is gewoon zo.</span>"""),
-    ("""<span class="parade__note">Knapperige steeltjes, diep bosaroma.</span>""",
-     """<span class="parade__note">Knapperig steeltje, bosaroma van formaat.</span>"""),
-    ("""<span class="parade__note">De delicatesse waar chefs voor omrijden.</span>""",
-     """<span class="parade__note">Chefs rijden ervoor om. Letterlijk.</span>"""),
-    ("""<span class="parade__note">De legendarische vitaliteitszwam.</span>""",
-     """<span class="parade__note">Drinkt men als thee. Legende doet de rest.</span>"""),
     ("""          <a class="btn btn--cream" href="../oesterzwammen/">Bekijk alle soorten</a>""",
-     """          <a class="btn btn--cream" href="../oesterzwammen/">Ontdek alle soorten (2 zijn camerashy)</a>"""),
-    # route
+     """          <a class="btn btn--cream" href="../oesterzwammen/">Ontdek alle soorten (sommige zijn camerashy)</a>"""),
+    # ---- proces --------------------------------------------------------
+    ("""<span class="kicker"><span class="kicker__chapter">3</span>Ons werkproces</span>""",
+     """<span class="kicker"><span class="kicker__chapter">3</span>Hoe het werkt</span>"""),
+    ("""<h2 id="proces-h">Van stro tot bord</h2>""",
+     """<h2 id="proces-h">Van stro tot bord &mdash; met een vleugje magie</h2>"""),
+    ("""<p class="lead" style="max-width: 44rem">Zwammen kweken is koken in slow motion: eerst alles kiemvrij, dan zaaien, dan vooral geduld.</p>""",
+     """<p class="lead" style="max-width: 44rem">Zwammen kweken is koken in slow motion: eerst alles kiemvrij, dan zaaien, dan heel lang niets doen. Dat laatste is het moeilijkste.</p>"""),
+    ("""            <h3>Schoon beginnen <span class="process__term">(pasteuriseren)</span></h3>
+            <p>We stomen stro en substraat kiemvrij &mdash; zo krijgen alleen &oacute;nze zwammen een kans.</p>""",
+     """            <h3>Grote schoonmaak <span class="process__term">(pasteuriseren)</span></h3>
+            <p>We stomen stro en substraat kiemvrij. Sorry ongenode schimmels: geen toegang.</p>"""),
+    ("""            <h3>Zaaien <span class="process__term">(inoculeren)</span></h3>
+            <p>We mengen mycelium &mdash; het &lsquo;zaad&rsquo; van de zwam &mdash; door het substraat.</p>""",
+     """            <h3>Zaaien <span class="process__term">(inoculeren)</span></h3>
+            <p>We mengen mycelium door het substraat. Zeg maar het zaadje van de zwam, alleen met duizend armen.</p>"""),
+    ("""            <h3>Laten doorgroeien</h3>
+            <p>Weken van rust en warmte: het mycelium doorweeft het substraat als wortels.</p>""",
+     """            <h3>Laten doorgroeien</h3>
+            <p>Weken rust en warmte. Wij kijken toe en doen alsof we niet ongeduldig zijn.</p>"""),
+    ("""            <h3>Zwammen laten komen</h3>
+            <p>Frisse lucht en vocht geven het startsein: tijd om paddenstoelen te maken.</p>""",
+     """            <h3>Zwammen laten komen</h3>
+            <p>Frisse lucht en vocht als startsein. En dan gaat het pl&oacute;ts razendsnel.</p>"""),
+    ("""            <h3>Plukken</h3>
+            <p>Met de hand, precies op het juiste moment.</p>""",
+     """            <h3>Plukken</h3>
+            <p>Met de hand, op het juiste moment. Te vroeg is jammer, te laat is zonde.</p>"""),
+    ("""            <h3>Op jouw bord</h3>
+            <p>Dagvers geleverd voor optimale smaak.</p>""",
+     """            <h3>Op jouw bord</h3>
+            <p>Dagvers geleverd. Vanaf hier is het jouw verdienste.</p>"""),
+    ("""            <span class="kicker">De kweker</span>""",
+     """            <span class="kicker">De schuldige</span>"""),
+    ("""            <h3>Het begon met een fascinatie</h3>""",
+     """            <h3>Begonnen uit pure obsessie</h3>"""),
+    ("""            <p>Geen gat in de markt, maar een jarenlange fascinatie voor mycelium: zo ontstond GroMush. Een kleinschalige kwekerij in Knokke&#8209;Heist waar ik elke kweekcyclus met de hand opvolg, van substraat tot oogst.</p>""",
+     """            <p>Geen gat in de markt, wel een jarenlange obsessie voor mycelium. Zo ontstond GroMush: een kleinschalige kwekerij in Knokke&#8209;Heist waar ik elke kweekcyclus persoonlijk opvolg. De zwammen en ik, wij hebben iets.</p>"""),
+    ("""            <p class="scene__signoff">&mdash; Anthony Watteeuw, kweker</p>""",
+     """            <p class="scene__signoff">&mdash; Anthony Watteeuw, kweker (en voltijds mycelium-fan)</p>"""),
+    ("""            <a class="btn btn--cream" href="../over-ons/">Lees het hele verhaal</a>""",
+     """            <a class="btn btn--cream" href="../over-ons/">Lees het hele verhaal (het is lang)</a>"""),
+    ("""<!-- copy: proces.sticker --><span class="sticker" aria-hidden="true">Ambachtelijke teelt</span>""",
+     """<!-- copy: proces.sticker --><span class="sticker" aria-hidden="true">Handwerk, hoor</span>"""),
+    # ---- route ---------------------------------------------------------
     ("""<h2 id="route-h">Geen voedselkilometers, <span class="accent">wel smaak</span></h2>""",
      """<h2 id="route-h">Voedselkilometers? Wij doen <span class="accent">voedselmeters</span></h2>"""),
     ("""            <p>Veel bijzondere paddenstoelen leggen duizenden kilometers af voor ze op een bord belanden. De onze hooguit dertig minuten: &rsquo;s ochtends geoogst, dagvers geleverd in Knokke&#8209;Heist, Damme en Brugge. Zonder omweg, zonder koelcel-marathon.</p>""",
      """            <p>Sommige paddenstoelen vliegen business class de halve wereld rond. De onze zitten hooguit een half uurtje in een bestelwagentje richting Knokke&#8209;Heist, Damme of Brugge. Jetlagvrij, dus.</p>"""),
+    ("""<span class="stat__label">voedselkilometers</span>""",
+     """<span class="stat__label">voedselkilometers, geteld</span>"""),
+    ("""<span class="stat__label">soorten paddenstoelen</span>""",
+     """<span class="stat__label">soorten, en er komen er bij</span>"""),
     ("""<!-- copy: route.sticker --><span class="sticker sticker--sand scene__sticker" aria-hidden="true">Dagvers geleverd</span>""",
      """<!-- copy: route.sticker --><span class="sticker sticker--sand scene__sticker" aria-hidden="true">Geen jetlag</span>"""),
     ("""<p class="scene__hook">En dan: het bord.</p>""",
      """<p class="scene__hook">Volgende halte: jouw bord.</p>"""),
-    # plate
+    # ---- plate ---------------------------------------------------------
     ("""<h2 id="plate-h">Waar chefs ze laten schitteren</h2>""",
      """<h2 id="plate-h">Chefs staan er (beleefd) voor in de rij</h2>"""),
     ("""          <p>In restaurants, bistro&rsquo;s en thuiskeukens van Knokke&#8209;Heist tot Brugge krijgen onze zwammen de hoofdrol: gegrild, gewokt of gewoon kort gebakken in goeie boter. Meer hebben ze niet nodig.</p>""",
      """          <p>Van sterrenzaak tot keukentafel: onze zwammen spelen overal de hoofdrol. Gegrild, gewokt of gewoon in goeie boter. Applaus is niet verplicht, maar het gebeurt.</p>"""),
-    # eigenaar
+    # ---- beleef --------------------------------------------------------
+    ("""<span class="kicker"><span class="kicker__chapter">6</span>Beleef het zelf</span>""",
+     """<span class="kicker"><span class="kicker__chapter">6</span>Kom eens langs</span>"""),
+    ("""<h2 id="beleef-h">Zes manieren om de kwekerij binnen te stappen</h2>""",
+     """<h2 id="beleef-h">Zes manieren om bij ons binnen te vallen</h2>"""),
+    ("""<p class="lead" style="max-width: 44rem">Het netwerk onder de grond verbindt alles met alles. Bovengronds doen wij hetzelfde: van rondleiding tot oogstdag, kies wat bij je past en kom langs.</p>""",
+     """<p class="lead" style="max-width: 44rem">Onder de grond verbindt het mycelium alles met alles. Bovengronds doen wij hetzelfde: van rondleiding tot oogstdag, kies wat bij je past en val gerust binnen.</p>"""),
+    ("""              <p>Wandel mee door de zeecontainer en het voedselbos. Je ziet, ruikt en voelt hoe een zwam ontstaat.</p>""",
+     """              <p>Wandel mee door de zeecontainer en het voedselbos. Je ziet, ruikt en voelt hoe een zwam ontstaat. Meestal wil daarna niemand nog naar buiten.</p>"""),
+    ("""              <p>Maak je eigen kweekemmer en neem hem mee naar huis. Enkele weken later oogst je op je aanrecht.</p>""",
+     """              <p>Maak je eigen kweekemmer en neem hem mee naar huis. Enkele weken later staat er oogst op je aanrecht. Opscheppen mag.</p>"""),
+    ("""              <p>Zeven soorten naast elkaar op tafel. Je smaakt meteen waarom chefs zo kieskeurig zijn.</p>""",
+     """              <p>Zeven soorten naast elkaar op tafel. Je smaakt meteen waarom chefs zo kieskeurig d&oacute;en.</p>"""),
+    ("""              <p>Een chef kookt ter plaatse met wat die ochtend geoogst is. Kleine tafel, groot bord.</p>""",
+     """              <p>Een chef kookt ter plaatse met wat die ochtend geoogst is. Kleine tafel, groot bord, geen menukaart.</p>"""),
+    ("""              <p>Op verkenning tussen de boomstammen: hoe een bos eten geeft en er vooral niets voor terugvraagt.</p>""",
+     """              <p>Op verkenning tussen de boomstammen: hoe een bos eten geeft en er niets voor terugvraagt. Behalve wat regen.</p>"""),
+    ("""              <p>Twee keer per jaar oogsten we samen. Jij plukt, wij zorgen voor koffie en verhalen.</p>""",
+     """              <p>Twee keer per jaar oogsten we samen. Jij plukt, wij zorgen voor koffie en veel te lange verhalen.</p>"""),
+    ("""<a class="beleef__card-cta" href="../contact/">Plan je bezoek</a>""",
+     """<a class="beleef__card-cta" href="../contact/">Zet je naam op de lijst</a>"""),
+    # ---- eigenaar ------------------------------------------------------
+    ("""          <span class="kicker">Zelf aan de slag</span>""",
+     """          <span class="kicker">Zelf proberen</span>"""),
     ("""<h2 id="eigenaar-h">Word eigenaar van je eigen oogst</h2>""",
      """<h2 id="eigenaar-h">Word eigenaar van je eigen oogst (ja, echt)</h2>"""),
     ("""          <p style="max-width: 44rem">De magie hoeft niet bij kijken te blijven: kweek zelf mee, thuis of in ons voedselbos.</p>""",
      """          <p style="max-width: 44rem">Kijken is leuk, oogsten is beter. Kweek zelf mee &mdash; thuis op het aanrecht of in ons voedselbos.</p>"""),
+    ("""                <h3>Eigen kweekemmer</h3>""",
+     """                <h3>Je eigen kweekemmer</h3>"""),
     ("""                <p>Kweek je eigen oesterzwammen vanuit je keuken. Eenvoudig, leerrijk en verrassend lekker.</p>""",
      """                <p>Oesterzwammen kweken naast je koffiezet. Eenvoudiger dan een kamerplant in leven houden.</p>"""),
+    ("""                <h3>Eigen boomstam</h3>""",
+     """                <h3>Je eigen boomstam</h3>"""),
     ("""                <p>Word mede-eigenaar van een stuk voedselbos en ontvang jaarlijks jouw oogst verse paddenstoelen.</p>""",
      """                <p>Jouw eigen boomstam in het voedselbos, jouw jaarlijkse oogst. Landeigenaar worden was nooit z&oacute; lekker.</p>"""),
-    ("""          <p class="scene__beleven">Of kom het gewoon beleven: rondleidingen, proeverijen en workshops in de kwekerij.<a class="btn btn--cream" href="../contact/">Plan je bezoek</a></p>""",
-     """          <p class="scene__beleven">Of kom gewoon eens kijken: rondleidingen, proeverijen en workshops. Wij praten, jij proeft.<a class="btn btn--cream" href="../contact/">Plan je bezoek</a></p>"""),
-    # router
+    ("""          <p class="scene__beleven">Vertel ons wat je van plan bent: thuis op het aanrecht of een stam in het bos. We zetten je op weg.<a class="btn btn--cream" href="../contact/">Vraag info aan</a></p>""",
+     """          <p class="scene__beleven">Zeg maar wat je van plan bent: aanrecht of boomstam. Wij zetten je op weg, met net iets te veel enthousiasme.<a class="btn btn--cream" href="../contact/">Vraag info aan</a></p>"""),
+    # ---- router --------------------------------------------------------
     ("""          <span class="line-1">Honger gekregen?</span>
           <span class="line-2">Vertel ons wie je bent.</span>""",
      """          <span class="line-1">Honger?</span>
@@ -156,10 +209,16 @@ PAIRS = [
      """          <a class="cta-link" href="../bestel/">of spiek hoe bestellen werkt</a>"""),
 ]
 
-# ticker-items komen 2x voor (gedupliceerde track); alle andere slots 1x
-EXPECTED = {"<span>Vijftien-plus soorten</span>": 2,
-            "<span>Ambachtelijk gekweekt</span>": 2,
-            "<span>100% lokaal</span>": 2}
+# Slots die meer dan 1x in de markup staan. De ticker-track is gedupliceerd
+# voor de naadloze marquee-lus; de beleef-kaarten delen dezelfde CTA.
+EXPECTED = {
+    "<span>Dagvers geplukt</span>": 2,
+    "<span>100% lokaal</span>": 2,
+    "<span>Vijftien-plus soorten</span>": 2,
+    "<span>Ambachtelijk gekweekt</span>": 2,
+    "<span>Van kwekerij tot keuken in 30 minuten</span>": 2,
+    """<a class="beleef__card-cta" href="../contact/">Plan je bezoek</a>""": 6,
+}
 
 for old, new in PAIRS:
     want = EXPECTED.get(old, 1)
@@ -167,6 +226,15 @@ for old, new in PAIRS:
     assert have == want, f"slot verwacht {want}x, gevonden {have}x: {old[:70]}..."
     out = out.replace(old, new)
 
+# Deck B mag speels zijn, maar niet strijdlustig.
+assert "vecht" not in out.lower(), "deck B: 'vechten' hoort hier niet"
+
+# Elk kopijslot van deck A moet ook in deck B staan (zelfde skelet).
+slots_a = set(re.findall(r'<!-- copy: ([\w.\-]+) -->', src))
+slots_b = set(re.findall(r'<!-- copy: ([\w.\-]+) -->', out))
+assert slots_a == slots_b, f"kopijslots lopen uiteen: {slots_a ^ slots_b}"
+
 os.makedirs("index-b", exist_ok=True)
 open("index-b/index.html", "w").write(out)
-print(f"index-b/index.html geschreven ({len(out.splitlines())} regels)")
+print(f"index-b/index.html geschreven ({len(out.splitlines())} regels, "
+      f"{len(PAIRS)} kopijslots vervangen, {len(slots_a)} slots in het skelet)")

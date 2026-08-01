@@ -1248,7 +1248,7 @@
       <div class="container">
         <span class="kicker">Componenten &middot; homepage</span>
         <h2 id="story-h">Story-scenes (scrollytelling)</h2>
-        <p style="max-width: 46rem">De homepage vertelt het verhaal van spore tot bord in zeven scenes, aangedreven door <strong>GSAP + ScrollTrigger</strong> (zelf gehost in <code>assets/vendor/gsap/</code>, enkel geladen op <code>/</code> en <code>/index-b/</code>). Stijlen staan in <code>assets/css/story.css</code>, gedrag in <code>assets/js/story.js</code>. Deze pagina toont de componenten in hun <strong>statische eindtoestand</strong> &mdash; er wordt hier bewust geen GSAP geladen; het levende gedrag zie je op de <a href="../">homepage</a>.</p>
+        <p style="max-width: 46rem">De homepage vertelt het verhaal van spore tot bord in negen scenes, aangedreven door <strong>GSAP + ScrollTrigger</strong> (zelf gehost in <code>assets/vendor/gsap/</code>, enkel geladen op <code>/</code> en <code>/index-b/</code>). Stijlen staan in <code>assets/css/story.css</code>, gedrag in <code>assets/js/story.js</code>. Deze pagina toont de componenten in hun <strong>statische eindtoestand</strong> &mdash; er wordt hier bewust geen GSAP geladen; het levende gedrag zie je op de <a href="../">homepage</a>.</p>
 
         <h3>Het contract: standaard = eindtoestand</h3>
         <p style="max-width: 46rem">De CSS-standaardtoestand van elke scene is de <em>afgewerkte</em> pagina: mycelium volledig getekend, foto&rsquo;s in collage, busje geparkeerd, alle tekst zichtbaar. <code>story.js</code> spoelt &mdash; enkel n&aacute; de reduced-motion-poort &mdash; elementen terug met <code>gsap.set()</code> en scrubt ze vooruit op scroll, en zet dan <code>story-js</code> op <code>&lt;body&gt;</code> (waar de animatielayouts aan hangen). Geen JS, <code>prefers-reduced-motion</code> en reader mode krijgen daardoor automatisch een complete pagina. Pins bestaan enkel vanaf 48rem, via <code>gsap.matchMedia()</code> (auto-revert bij resize); mobiel valt overal terug op de statische layout.</p>
@@ -1261,26 +1261,29 @@
         <h3 style="margin-top: 3rem">Scene-overzicht (&eacute;&eacute;n <code>data-scene</code> = &eacute;&eacute;n later Craft-blok)</h3>
         <p style="max-width: 46rem"><code>story.js</code> initialiseert per scene op aanwezigheid (<code>querySelector('[data-scene=&hellip;]')</code>): blokken zijn weglaatbaar en herschikbaar zonder JS-aanpassing.</p>
         <ul style="max-width: 46rem">
-          <li><strong>hero</strong> &mdash; full-bleed donkere productfoto (<code>.hero-photo</code>, assortiment) met scrim, mega-<code>.title-duo</code> in cream/sand, zwevende sporen (<code>.spores</code>), CTA-rij en scroll-cue; intro-timeline + trage foto-zoom, scrub-out bij scrollen. Niet gepind. Direct eronder: de <code>.ticker</code>-marquee (sand-strook, CSS-lus, statisch bij reduced motion). Illustratieregel: <strong>geen getekende paddenstoelen</strong> &mdash; enkel fotografie en het merkicoon.</li>
-          <li><strong>underground</strong> &mdash; groene band met mycelium-SVG (<code>.myc-svg</code>): draden tekenen zichzelf via <code>stroke-dashoffset</code>, tekstfragmenten (<code>.scene__step</code>) crossfaden; een <code>.scene__hook</code>-brugzin sluit af. Pin, 180%.</li>
-          <li><strong>farm</strong> &mdash; fotostapel (<code>.scene__stack</code>) crossfadet naast het oorsprongsverhaal. Statisch: collage met gedraaide foto&rsquo;s. Pin, 250%. Na de pin volgt de werkproces-strip (<code>.process</code>, zes stappen van stro tot bord met Font Awesome Free-iconen, CC BY 4.0 &mdash; zie <code>assets/vendor/fontawesome/</code>).</li>
-          <li><strong>werelden</strong> &mdash; twee fotopanelen (<code>.worlds__panel</code>): binnenkweek in de zeecontainer naast buitenkweek in het voedselbos; reveal-gedreven, niet gepind.</li>
-          <li><strong>varieties</strong> &mdash; soortenparade (<code>.parade</code>): horizontale track, gescrubd. Mobiel: native scroll-snap-carrousel; zonder JS op desktop: raster. Pin, 200%.</li>
-          <li><strong>route</strong> &mdash; leverronde: grote claimcijfers (<code>.stat-row</code>: 0 voedselkilometers &middot; 30 minuten &middot; 6 kleuren), route tekent zich (masker-truc), het truckje (Font Awesome <code>truck-fast</code>) volgt via CSS <code>offset-path</code> (GSAP scrubt enkel <code>offset-distance</code>), haltes (dot + ring) poppen, pauze in Damme. Zonder JS rijdt de CSS-lus van 18s. Pin, 250%.</li>
-          <li><strong>plate</strong> &mdash; gerechten + pull-quote, bewust ongepind (ademruimte); enkel milde parallax.</li>
-          <li><strong>eigenaar</strong> &mdash; sand-band (<code>.eigenaar-band</code>) met twee fotokaarten (eigen kweekemmer / eigen boomstam) en de beleven-CTA; reveal-gedreven.</li>
-          <li><strong>router</strong> &mdash; conversiemoment: <code>.profile-grid</code> + CTA&rsquo;s, GSAP-vrij en saai-betrouwbaar.</li>
+          <li><strong>hero</strong> &mdash; full-bleed donkere productfoto (<code>.hero-photo</code>, assortiment) met scrim, mega-<code>.title-duo</code> in cream/sand, zwevende sporen (<code>.spores</code>) en CTA-rij; intro-timeline + trage foto-zoom, scrub-out bij scrollen. Niet gepind. Onderaan gedokt in de hero zelf: <code>.hero-foot</code> met de <code>.ticker</code>-marquee (sand-strook, CSS-lus, statisch bij reduced motion) en daaronder de <code>.wave</code>, die de onderrand van de foto vormt. Zo staan ticker &eacute;n golf boven de fold en zit er geen cream-strookje tussen. Illustratieregel: <strong>geen getekende paddenstoelen</strong> &mdash; enkel fotografie en het merkicoon.</li>
+          <li><strong>kweek</strong> (hoofdstuk 1) &mdash; twee fotopanelen (<code>.worlds__panel</code>): binnenkweek in de zeecontainer naast buitenkweek in het voedselbos, plus een <code>.kweek__note</code> over mycelium. Reveal-gedreven, niet gepind; sluit af met een <code>.scene__hook</code>-brugzin naar de soorten.</li>
+          <li><strong>varieties</strong> (hoofdstuk 2) &mdash; oesterzwam-parade (<code>.parade</code>): zeven oesterzwammen, horizontale track die GSAP scrubt. Mobiel: native scroll-snap-carrousel; zonder JS op desktop: raster van vier kolommen. Pin, 200%.</li>
+          <li><strong>proces</strong> (hoofdstuk 3) &mdash; werkproces-strip (<code>.process__steps</code>): zes stappen van stro tot bord in gewone taal, met de vakterm als <code>.process__term</code> eronder en Font Awesome Free-iconen (CC BY 4.0, inline &mdash; zie <code>assets/vendor/fontawesome/</code>). Daaronder de compacte founder-noot: het <a href="#founder"><code>.founder</code>-blok</a> in een <code>.founder-note</code>-wrapper, met de sticker buiten het blok gehangen. Niet gepind, reveal-gedreven.</li>
+          <li><strong>route</strong> (hoofdstuk 4) &mdash; leverronde: grote claimcijfers (<code>.stat-row</code>: 0 voedselkilometers &middot; 30 minuten &middot; 15+ soorten), route tekent zich (masker-truc), het truckje (Font Awesome <code>truck-fast</code>) volgt via CSS <code>offset-path</code> (GSAP scrubt enkel <code>offset-distance</code>), haltes (dot + ring) poppen met pauze in Damme, en per halte popt een polaroid (<code>.route-pop</code>) mee. Zonder JS rijdt de CSS-lus van 18s en staan alle polaroids gewoon te kijk. Pin, 250%.</li>
+          <li><strong>plate</strong> (hoofdstuk 5) &mdash; gerechten + pull-quote, bewust ongepind (ademruimte); enkel milde parallax.</li>
+          <li><strong>beleef</strong> (hoofdstuk 6) &mdash; de belevingslaag, gemapt op het mycelium-netwerk. Zie <a href="#story-beleef">Belevingskaart</a> hieronder. Niet gepind: de draden scrubben zichzelf en de kaart is daarna klikbaar.</li>
+          <li><strong>eigenaar</strong> &mdash; sand-band (<code>.eigenaar-band</code>) met twee fotokaarten (eigen kweekemmer / eigen boomstam) en de info-CTA; reveal-gedreven, buiten de hoofdstuknummering.</li>
+          <li><strong>router</strong> &mdash; conversiemoment: <code>.profile-grid</code> + CTA&rsquo;s, GSAP-vrij en saai-betrouwbaar. Ook buiten de nummering.</li>
         </ul>
+        <div class="ds-note">
+          <p><strong>Archief.</strong> <code>/index-v1/</code> is de eerste iteratie en gebruikt nog de scenes <code>underground</code> (mycelium-band met crossfadende <code>.scene__step</code>-fragmenten, pin 180%) en <code>farm</code> (fotostapel <code>.scene__stack</code>, pin 250%). Die scenes staan niet meer op de homepage: het mycelium-netwerk verhuisde naar <strong>beleef</strong> en het oorsprongsverhaal werd de founder-noot in <strong>proces</strong>. <code>story.js</code> initialiseert per scene op aanwezigheid, dus dat bestand werkt voor beide decks; de bijhorende regels in <code>story.css</code> staan gebundeld in sectie 11 en mogen niet verdwijnen.</p>
+        </div>
 
         <h3 style="margin-top: 3rem">Hoofdstuk-kicker (.kicker__chapter)</h3>
-        <p style="max-width: 46rem">Het terugkerende verhaalanker: een genummerd muntje in de kicker van elke scene.</p>
+        <p style="max-width: 46rem">Het terugkerende verhaalanker: een genummerd muntje in de kicker van een scene. De nummering loopt van 1 tot 6 (kweek, varieties, proces, route, plate, beleef); <strong>eigenaar</strong> en <strong>router</strong> krijgen bewust geen nummer, want die sluiten af in plaats van te vertellen.</p>
         <div class="ds-demo">
-          <span class="kicker"><span class="kicker__chapter">1</span>Onder de grond</span>
+          <span class="kicker"><span class="kicker__chapter">1</span>De kweek</span>
         </div>
-        <div class="ds-code"><pre><code>&lt;span class="kicker"&gt;&lt;span class="kicker__chapter"&gt;1&lt;/span&gt;Onder de grond&lt;/span&gt;</code></pre></div>
+        <div class="ds-code"><pre><code>&lt;span class="kicker"&gt;&lt;span class="kicker__chapter"&gt;1&lt;/span&gt;De kweek&lt;/span&gt;</code></pre></div>
 
         <h3 style="margin-top: 3rem">Soortenparade (.parade)</h3>
-        <p style="max-width: 46rem">Zes <code>.species</code>-cirkels met naam en smaaknoot, elk een link naar <code>/oesterzwammen/</code>. De tegels blijven in elke modus zichtbaar en focusbaar &mdash; GSAP verschuift ze enkel. Hieronder de statische fallback (raster vanaf 48rem, snap-carrousel daaronder).</p>
+        <p style="max-width: 46rem">Zeven <code>.species</code>-cirkels met naam en smaaknoot, elk een link naar <code>/oesterzwammen/</code>. Enkel oesterzwammen: de parade laat de familie zien, de rest van het assortiment staat op <code>/oesterzwammen/</code>. De tegels blijven in elke modus zichtbaar en focusbaar &mdash; GSAP verschuift ze enkel. Statische fallback: raster van vier kolommen vanaf 48rem, snap-carrousel daaronder.</p>
         <div class="ds-code"><pre><code>&lt;div class="container parade"&gt;
   &lt;div class="parade__track"&gt;
     &lt;a class="parade__item" href="../oesterzwammen/"&gt;
@@ -1288,12 +1291,42 @@
       &lt;span class="parade__name"&gt;Witte oesterzwam&lt;/span&gt;
       &lt;span class="parade__note"&gt;Mild en zacht, veelzijdig in de keuken.&lt;/span&gt;
     &lt;/a&gt;
-    &lt;!-- &times;6 --&gt;
+    &lt;!-- &times;7 --&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre></div>
 
+        <h3 id="story-beleef" style="margin-top: 3rem">Belevingskaart (.beleef)</h3>
+        <p style="max-width: 46rem">Het mycelium-netwerk uit de oude <em>underground</em>-scene, hergebruikt als <strong>interactieve kaart</strong>. Op zes kruispunten van het netwerk staat een <code>&lt;button class="beleef__node"&gt;</code> met een ronde foto en een label; klikken of Enter opent de bijbehorende <code>.beleef__card</code> in het paneel eronder. Ieder knooppunt draagt <code>aria-expanded</code> en <code>aria-controls</code> naar het id van zijn kaart, en <code>story.js</code> zet precies &eacute;&eacute;n kaart open (de eerste bij het armen).</p>
+        <p style="max-width: 46rem"><strong>Fallback-first.</strong> <code>.beleef__nodes</code> staat standaard op <code>display: none</code> en verschijnt enkel bij <code>.story-js</code> vanaf 48rem &mdash; zo is er nooit een focusbare knop die je niet ziet. Zonder JS, bij reduced motion en op mobiel zijn de zes belevingen een gewoon kaartenraster (1 / 2 / 3 kolommen) met het netwerk flauw op de achtergrond; alle zes zijn dan volledig leesbaar met foto, tekst en CTA. Het <code>&lt;svg&gt;</code> draagt zelf <code>aria-hidden</code>, de wrapper niet, anders zouden de knoppen uit de a11y-boom vallen. <code>initBeleef()</code> geeft een opruimfunctie terug, zodat <code>gsap.matchMedia()</code> bij resize naar mobiel de <code>hidden</code>-attributen weer weghaalt.</p>
+        <div class="ds-code"><pre><code>&lt;div class="container beleef"&gt;
+  &lt;div class="myc-svg beleef__web"&gt;
+    &lt;svg preserveAspectRatio="xMidYMid slice" viewBox="0 0 1000 520" aria-hidden="true"&gt;
+      &lt;path class="myc myc--main" d="&hellip;"/&gt;      &lt;!-- draden, GSAP scrubt stroke-dashoffset --&gt;
+      &lt;circle class="beleef__halo" cx="160" cy="140" r="34"/&gt;   &lt;!-- &times;6, onder de knopen --&gt;
+    &lt;/svg&gt;
+    &lt;ul class="beleef__nodes"&gt;
+      &lt;li style="--x: 16%; --y: 27%"&gt;   &lt;!-- % = cx/1000 en cy/520 van de halo --&gt;
+        &lt;button type="button" class="beleef__node" aria-expanded="false" aria-controls="beleef-rondleiding"&gt;
+          &lt;span class="beleef__node-photo"&gt;&lt;picture&gt;&hellip;&lt;/picture&gt;&lt;/span&gt;
+          &lt;span class="beleef__node-label"&gt;Rondleiding&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/li&gt;   &lt;!-- &times;6 --&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+  &lt;ul class="beleef__cards"&gt;
+    &lt;li class="beleef__card" id="beleef-rondleiding"&gt;
+      &lt;picture&gt;&hellip;&lt;/picture&gt;
+      &lt;div class="beleef__card-body"&gt;
+        &lt;h3&gt;Rondleiding&lt;/h3&gt;&lt;p&gt;&hellip;&lt;/p&gt;
+        &lt;a class="beleef__card-cta" href="../contact/"&gt;Plan je bezoek&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/li&gt;   &lt;!-- &times;6 --&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre></div>
+        <p style="max-width: 46rem">De zes belevingen: rondleiding, workshop, proeverij, Chef Experience, voedselbos en oogstdagen. Knooplabel en kaarttitel zijn <strong>identiek</strong> gehouden, ook in kopijdeck B, zodat de <code>aria-controls</code>-relatie klopt met wat je leest.</p>
+
         <h3 style="margin-top: 3rem">Leverronde (.route-scene)</h3>
-        <p style="max-width: 46rem">De opvolger van het <a href="#playful">.van-scene-busje</a> voor de homepage: &eacute;&eacute;n SVG met gebogen stippellijnroute, drie haltes en het bestaande busje als <code>.route-van</code>. Het busje rijdt via CSS <code>offset-path</code> (met <code>@supports</code>-fallback: geparkeerd in Brugge). De haltelabels blijven echte links. <code>.van-scene</code> blijft bestaan voor de andere pagina&rsquo;s.</p>
+        <p style="max-width: 46rem">De opvolger van het <a href="#playful">.van-scene-busje</a> voor de homepage: &eacute;&eacute;n SVG met gebogen stippellijnroute, drie haltes en het bestaande busje als <code>.route-van</code>. Het busje rijdt via CSS <code>offset-path</code> (met <code>@supports</code>-fallback: geparkeerd in Brugge). De haltelabels blijven echte links. Boven elk label hangt een polaroid (<code>.route-pop</code>) die met de haltepop meeschaalt; die bevat bewust g&eacute;&eacute;n link, zodat GSAP hem zonder a11y-schade mag wegschalen. Onder 48rem staat de <code>.scene__sticker</code> statisch b&oacute;ven de route: op smalle schermen is de SVG maar enkele tientallen pixels hoog en zou een absolute sticker het busje bedekken. <code>.van-scene</code> blijft bestaan voor de andere pagina&rsquo;s.</p>
         <div class="ds-demo ds-demo--green on-green">
           <div class="route-scene" style="margin-top: 0">
             <svg viewBox="0 20 1200 200" role="presentation" aria-hidden="true">
@@ -1320,7 +1353,7 @@
 &lt;/div&gt;</code></pre></div>
 
         <div class="ds-note">
-          <p>A/B-kopij: <code>/index.html</code> (deck A, warm vakmanschap) en <code>/index-b/</code> (deck B, uitgesproken speels; <code>noindex</code>, canonical naar A). Beide bestanden delen exact hetzelfde scene-skelet; elk kopijslot is gemarkeerd met een <code>&lt;!-- copy: scene.slot --&gt;</code>-commentaar zodat de decks slot-per-slot diffbaar blijven. Structurele wijzigingen eerst in A, dan overnemen in B.</p>
+          <p>A/B-kopij: <code>/index.html</code> (deck A, warm vakmanschap) en <code>/index-b/</code> (deck B, uitgesproken speels; <code>noindex</code>, canonical naar A). Beide bestanden delen exact hetzelfde scene-skelet; elk kopijslot is gemarkeerd met een <code>&lt;!-- copy: scene.slot --&gt;</code>-commentaar zodat de decks slot-per-slot diffbaar blijven. Structurele wijzigingen gebeuren <strong>altijd eerst in A</strong>; daarna genereert <code>python3 _resources/build-variant-b.py</code> deck B opnieuw. Dat script bevat de (A, B)-paren per slot en faalt luid wanneer een A-tekst niet meer exact voorkomt of wanneer de slotlijsten van de twee decks uiteenlopen &mdash; deck B kan dus niet stil verouderen. Deck B nooit met de hand aanpassen.</p>
         </div>
       </div>
     </section>
