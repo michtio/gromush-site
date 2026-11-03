@@ -1,0 +1,103 @@
+{# Request form (S5; plan AD7, AD9, AD10; PRD R33, R34, R38): the grid-paper order form of final.html, built from forms.json.
+   with: key (a form in forms.json "forms", e.g. "proefbox").
+   No JS: the form posts natively to action="mailto:<form_recipient>?subject=<subject>" with enctype="text/plain"; the
+   browser checks the required fields and hands the "name=value" lines to the mail app (AC28a).
+   With js/forms.js: inline validation (aria-invalid + aria-describedby, focus on the first invalid field), then one
+   mailto: with a "Label: value" line per field (submitRequest), and the hand-off note below replaces the form.
+   Fields: text, email, tel, select, textarea and checkboxes (a fieldset with a legend). options_from fills options from
+   data (towns in nav order, in-range varieties, contact reasons); extra_options come after them. Ids: f-<name>, err-<name>.
+   Modes (S6, R42): a form with "modes" switches with its "mode_field" select (a reason's "mode"); a field's mode_only /
+   mode_not / optional_in, and a "mode_note" entry (the mode's title, intro and points), follow the mode in js/forms.js.
+   Without JS every field shows; mode-only fields are never required. "hint": a line under the field (aria-describedby).
+   "subject_field": the chosen option's text is added to the mail subject (JS only). #}
+{% set form = data.forms.forms[key] %}
+{% set ui = data.forms.ui %}
+{% set modes = form.get("modes", {}) %}
+<form class="req-form" id="form-{{ key }}" data-form="{{ key }}" data-recipient="{{ site.form_recipient }}" data-subject="{{ form.subject }}"{% if form.get('subject_field') %} data-subject-field="{{ form.subject_field }}"{% endif %}{% if modes %} data-mode-field="{{ form.mode_field }}"{% for m, cfg in modes.items() %} data-mode-{{ m }}-announce="{{ cfg.announce }}" data-mode-{{ m }}-mail-label="{{ cfg.mail_label }}" data-mode-{{ m }}-mail="{{ cfg.mail_note }}"{% endfor %}{% endif %} data-empty="{{ ui.empty_value }}" data-truncated="{{ ui.truncated_mail }}" action="{{ mailto(form.subject) }}" method="post" enctype="text/plain">
+{% if modes %}
+  <p class="sr-only" role="status" aria-live="polite" data-mode-live></p>
+{% endif %}
+  <div class="fields">
+{% for f in form.fields %}
+{% set mail_label = f.get("mail_label", f.get("label", "")) %}
+{% set mode_attrs = (' data-mode-only="' + f.mode_only + '"' if f.get('mode_only') else '') + (' data-mode-not="' + f.mode_not + '"' if f.get('mode_not') else '') + (' data-optional-in="' + f.optional_in + '"' if f.get('optional_in') else '') %}
+{% set required = f.get("required") and not f.get("mode_only") %}
+{% if f.type == "mode_note" %}
+{% set cfg = modes[f.mode] %}
+    <div class="mode-note field-wide" data-mode-only="{{ f.mode }}" role="group" aria-labelledby="mode-{{ f.mode }}-title">
+      <h3 class="mode-note-title" id="mode-{{ f.mode }}-title">{{ cfg.title }}</h3>
+      <p>{{ cfg.intro }}</p>
+      <ul>
+{% for point in cfg.points %}
+        <li>{{ point }}</li>
+{% endfor %}
+      </ul>
+    </div>
+{% elif f.type == "checkboxes" %}
+    <fieldset class="soorten field-wide" id="f-{{ f.name }}" tabindex="-1" data-field="{{ f.name }}" data-label="{{ mail_label }}" data-prefill="{{ 'soort' if f.get('options_from') == 'varieties' else f.name }}"{{{ mode_attrs }}}>
+      <legend>{{ f.label }}{% if f.get('mode_only') %} {{ ui.optional }}{% endif %}</legend>
+      <div class="chips">
+{% if f.get("options_from") == "varieties" %}
+{% for v in varieties %}
+{% include "partials/variety_chip.html" with {"variety": v, "letter": "ABCDEFGHIJ"[loop.index0], "name": f.name, "id_prefix": "chk"} %}
+{% endfor %}
+{% endif %}
+{% for o in f.get("extra_options", []) %}
+        <label class="chip">
+          <input type="checkbox" name="{{ f.name }}" value="{{ o }}" id="chk-{{ f.name }}-{{ loop.index }}">
+          <span class="chip-face chip-face--plain"><span class="chip-tick" aria-hidden="true"><svg viewBox="0 0 16 16"><use href="#i-tick"/></svg></span>{{ o }}</span>
+        </label>
+{% endfor %}
+      </div>
+    </fieldset>
+{% else %}
+    <div class="field{% if f.type == 'textarea' or f.get('wide') %} field-wide{% endif %}" data-field="{{ f.name }}" data-label="{{ mail_label }}"{{{ mode_attrs }}}>
+      <label for="f-{{ f.name }}">{{ f.label }}{% if f.get('optional_in') %} <span aria-hidden="true" data-mark="required">{{ ui.required_mark }}</span><span data-mark="optional" hidden>{{ ui.optional }}</span>{% elif required %} <span aria-hidden="true">{{ ui.required_mark }}</span>{% else %} {{ ui.optional }}{% endif %}</label>
+{% if f.type == "select" %}
+{% if f.get("options_from") == "towns" %}
+{% set options = [(t.name, t.name) for t in sorted(data.towns.towns, key=lambda t: t.nav_order)] %}
+{% elif f.get("options_from") == "reasons" %}
+{% set options = [(r.key, r.label) for r in data.forms.reasons] %}
+{% set option_modes = {r.key: r.mode for r in data.forms.reasons if r.get("mode")} %}
+{% elif f.get("options_from") == "varieties" %}
+{% set options = [(v.name, v.name) for v in varieties] %}
+{% else %}
+{% set options = [(o, o) for o in f.get("options", [])] %}
+{% endif %}
+      <select id="f-{{ f.name }}" name="{{ f.name }}"{% if required %} required{% endif %}{% if f.get('hint') %} aria-describedby="hint-{{ f.name }}"{% endif %} data-error="{{ f.get('error', '') }}" data-prefill="{{ f.name }}">
+        <option value="">{{ f.get("placeholder", "") }}</option>
+{% for value, label in options + [(o, o) for o in f.get("extra_options", [])] %}
+        <option value="{{ value }}"{% if f.get("options_from") == "reasons" and value in option_modes %} data-mode="{{ option_modes[value] }}"{% endif %}>{{ label }}</option>
+{% endfor %}
+      </select>
+{% elif f.type == "textarea" %}
+      <textarea id="f-{{ f.name }}" name="{{ f.name }}" rows="5" maxlength="2000"{% if required %} required{% endif %} data-error="{{ f.get('error', '') }}"></textarea>
+{% else %}
+      <input id="f-{{ f.name }}" name="{{ f.name }}" type="{{ f.type }}"{% if f.get('autocomplete') %} autocomplete="{{ f.autocomplete }}"{% endif %}{% if f.type == 'email' %} inputmode="email" maxlength="254" spellcheck="false"{% elif f.type == 'tel' %} inputmode="tel" maxlength="40"{% else %} maxlength="160"{% endif %}{% if required %} required{% endif %} data-error="{{ f.get('error', '') }}">
+{% endif %}
+{% if f.get("hint") %}
+      <p class="field-hint" id="hint-{{ f.name }}">{{ f.hint }}</p>
+{% endif %}
+      <p class="err" id="err-{{ f.name }}"></p>
+    </div>
+{% endif %}
+{% endfor %}
+  </div>
+  <p class="form-privacy">{{ ui.privacy_before }} <a href="{{ url('/privacy/') }}">{{ ui.privacy_link }}</a>.</p>
+  <button class="submit-btn" type="submit"{% if modes %} data-text-default="{{ form.submit }}"{% for m, cfg in modes.items() %} data-text-{{ m }}="{{ cfg.submit }}"{% endfor %}{% endif %}>{{ form.submit }}</button>
+  <p class="form-how">{{ ui.how }}</p>
+</form>
+<noscript><p class="noscript-note">{{ ui.noscript }}</p></noscript>
+<div class="form-handoff" id="handoff-{{ key }}" data-handoff="{{ key }}" hidden>
+  <h2 class="form-handoff-title" tabindex="-1">{{ ui.handoff_title }}</h2>
+  <p>{{ ui.handoff_text }}</p>
+  <p class="form-handoff-trunc" hidden>{{ ui.truncated_page }}</p>
+{% for m, cfg in modes.items() %}
+  <p class="form-handoff-mode" data-mode-only="{{ m }}" hidden>{{ cfg.handoff }}</p>
+{% endfor %}
+  <p>{{ ui.handoff_fallback }} <a href="mailto:{{ site.email }}">{{ site.email }}</a>{% if flags.phone_published %}, {{ ui.handoff_fallback_phone }} <a href="tel:{{ site.phone.tel }}">{{ site.phone.display }}</a> (<a href="{{ site.whatsapp }}" rel="noopener">{{ ui.handoff_whatsapp }}</a>){% endif %}.</p>
+  <div class="form-handoff-actions">
+    <a class="form-handoff-reopen" href="{{ mailto(form.subject) }}">{{ ui.handoff_reopen }}</a>
+    <button class="form-handoff-edit" type="button">{{ ui.handoff_edit }}</button>
+  </div>
+</div>

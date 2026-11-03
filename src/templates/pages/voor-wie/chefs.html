@@ -1,0 +1,86 @@
+{% extends "layouts/audience.html" %}
+{# /voor-wie/chefs/ (S12, template D; PRD R2a, R4, R5, R18). Hero, problem, offer and closing come from audiences.json
+   ("chefs": page, primary_actions); the sections below are the Chefs page's own. Copy: Anthony's Chefpagina brief
+   (content-inventory 2.3), factual only (R2a: no health or superfood language). No prices, volumes or discounts (R3, Q4);
+   "ChefBox" names only the paid order (R5) and never shares a sentence with the free ProefBox. Varieties, their taste
+   words and taste sentences come from varieties.json (R4); towns from towns.json. #}
+{% block title %}Voor chefs: verse oesterzwammen uit Knokke-Heist · {{ site.name }}{% endblock %}
+{% block description %}Zes oesterzwammen met karakter, ambachtelijk gekweekt in {{ site.locality }} en persoonlijk geleverd aan restaurants in de regio. Vraag een gratis ProefBox aan.{% endblock %}
+{% block sections %}
+<section class="section aud-soorten" id="soorten" data-section="soorten" aria-labelledby="soorten-title">
+  <div class="wrap">
+{% include "partials/section_head.html" with {"id": "soorten-title", "title": "Onze soorten", "lede": "Ontdek paddenstoelen met verschillende smaken, texturen, kleuren en culinaire mogelijkheden."} %}
+    <ul class="aud-varieties">
+{% for v in varieties %}
+      <li class="aud-variety" style="--accent:var({{ v.accent }})">
+        <a href="{{ url('/zwammen/' + v.slug + '/') }}">
+          <span class="aud-variety-photo">{{ picture(v.photo, sizes="(min-width: 1100px) 300px, (min-width: 600px) 30vw, 42vw", decorative=True) }}</span>
+          <span class="aud-variety-name"><span class="aud-swatch" aria-hidden="true"></span>{{ v.name }}</span>
+        </a>
+        <p class="aud-variety-words">{{ ", ".join(v.taste_words) }}</p>
+        <p class="aud-variety-sentence">{{ v.taste_sentence }}</p>
+      </li>
+{% endfor %}
+    </ul>
+    <p class="aud-more">{% include "partials/button.html" with {"label": "Bekijk alle soorten", "path": "/zwammen/", "kind": "link"} %}{% include "partials/button.html" with {"label": "Meer inspiratie", "path": "/inspiratie/", "kind": "link"} %}</p>
+  </div>
+</section>
+<section class="section aud-proces grid-paper" id="kweekproces" data-section="kweekproces" aria-labelledby="kweekproces-title">
+  <div class="wrap">
+{% include "partials/section_head.html" with {"id": "kweekproces-title", "title": "Rechtstreeks uit onze kwekerij naar jouw keuken.", "lede": "Wij oogsten wanneer de paddenstoelen op hun best zijn, zodat we maximale versheid, smaak en houdbaarheid kunnen bieden.", "knip": False} %}
+    <ol class="aud-steps">
+      <li><span class="aud-step-num" aria-hidden="true">01</span><h3>Kwekerij</h3><p>Ambachtelijk gekweekt met respect voor natuur en grondstoffen.</p></li>
+      <li><span class="aud-step-num" aria-hidden="true">02</span><h3>Oogst</h3><p>Dagverse oogst op het juiste moment voor optimale kwaliteit.</p></li>
+      <li><span class="aud-step-num" aria-hidden="true">03</span><h3>Verpakking</h3><p>Zorgvuldig verpakt om de versheid te behouden.</p></li>
+      <li><span class="aud-step-num" aria-hidden="true">04</span><h3>Levering</h3><p>Gekoeld en op tijd geleverd, op de dag die jij kiest.</p></li>
+      <li><span class="aud-step-num" aria-hidden="true">05</span><h3>Jouw keuken</h3><p>Van kweker naar chef, voor uitzonderlijke gerechten.</p></li>
+    </ol>
+    <p class="aud-more">{% include "partials/button.html" with {"label": "Ontdek ons kweekproces", "path": "/ons-verhaal/kweekproces/", "kind": "link"} %}</p>
+  </div>
+</section>
+<section class="section aud-chefbox" id="chefbox" data-section="chefbox" aria-labelledby="chefbox-title">
+  <div class="wrap">
+    <div class="aud-chefbox-grid">
+      <div class="aud-chefbox-text">
+{% include "partials/section_head.html" with {"id": "chefbox-title", "title": "ChefBox-abonnementen", "lede": "Kies het abonnement dat past bij jouw keuken."} %}
+      <p class="statement">Alle abonnementen zijn flexibel en aanpasbaar aan jouw behoefte.</p>
+      <p class="aud-more">{% include "partials/button.html" with {"label": "Start een ChefBox", "path": "/contact/?reden=chef-restaurant#formulier", "kind": "second"} %}</p>
+      </div>
+    <div class="aud-boxes">
+      <article class="aud-box">
+        <h3>ChefBox Flexibel</h3>
+        <p class="aud-box-lead">Bestel wanneer je het nodig hebt.</p>
+        <ul>
+          <li>Eén of meerdere soorten</li>
+          <li>Wekelijks geleverd</li>
+        </ul>
+      </article>
+      <article class="aud-box">
+        <h3>ChefBox Vaste levering</h3>
+        <p class="aud-box-lead">Bij wekelijkse levering.</p>
+        <ul>
+          <li>Mix van soorten</li>
+          <li>Wekelijks geleverd</li>
+          <li>Flexibel aanpassen</li>
+        </ul>
+      </article>
+    </div>
+    </div>
+  </div>
+</section>
+<section class="section lv1 aud-levering" id="levering" data-section="levering" aria-labelledby="levering-title">
+  <div class="wrap">
+    <h2 id="levering-title">Lokaal geleverd, vers van hier.</h2>
+    <p class="lede aud-levering-lede">Wij leveren persoonlijk in de regio. Korte keten, maximale versheid zonder groothandel.</p>
+    <ul class="lv1-stops">
+{% for town in sorted(data.towns.towns, key=lambda t: t.nav_order) %}
+{% include "partials/town_card.html" with {"town": town} %}
+{% endfor %}
+    </ul>
+    <div class="aud-levering-cta">
+      <p><strong>Zit jouw restaurant in onze regio?</strong> Neem contact op en ontdek wat we voor jouw keuken kunnen betekenen.</p>
+{% include "partials/button.html" with {"label": "Bespreek jouw levering", "path": "/contact/?reden=chef-restaurant#formulier", "kind": "second"} %}
+    </div>
+  </div>
+</section>
+{% endblock %}

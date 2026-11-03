@@ -1,0 +1,297 @@
+{
+  "_note": "Form definitions (plan AD7). Every form hands off to site.form_recipient by mailto (partials/form.html, js/forms.js). Options marked options_from are built from that data file (in-range varieties, towns), never copied here; extra_options are added after them. label: the visible label; mail_label: the label in the mail body when it differs; error: the inline message when the field is empty or invalid. ui: the strings the form engine shows around every form. contact (S6): reasons select (R32) first, a mode per reason (\"afhalen\" for bestelling-thuis, R42) whose strings live under modes; fields with mode_only/mode_not/optional_in follow it in js/forms.js. Forms with an empty fields list are defined in their own slice: grootkeuken S13, speciaalzaak S14, adoptie S16, interesse-buitenkweek S17.",
+  "reasons": [
+    {
+      "key": "chef-restaurant",
+      "label": "Chef / restaurant"
+    },
+    {
+      "key": "grootkeuken",
+      "label": "Grootkeuken"
+    },
+    {
+      "key": "speciaalzaak",
+      "label": "Speciaalzaak"
+    },
+    {
+      "key": "bestelling-thuis",
+      "label": "Bestelling thuis (afhalen)",
+      "mode": "afhalen"
+    },
+    {
+      "key": "adoptie-emmer",
+      "label": "Adoptie emmer"
+    },
+    {
+      "key": "interesse-buitenkweek",
+      "label": "Interesse buitenkweek"
+    },
+    {
+      "key": "school-vereniging",
+      "label": "School of vereniging"
+    },
+    {
+      "key": "samenwerking",
+      "label": "Samenwerking"
+    },
+    {
+      "key": "andere",
+      "label": "Andere"
+    }
+  ],
+  "forms": {
+    "proefbox": {
+      "subject": "ProefBox-aanvraag",
+      "fields": [
+        {
+          "name": "naam",
+          "label": "Naam",
+          "type": "text",
+          "required": true,
+          "autocomplete": "name",
+          "error": "Vul je naam in."
+        },
+        {
+          "name": "zaak",
+          "label": "Naam van je zaak",
+          "type": "text",
+          "required": true,
+          "autocomplete": "organization",
+          "error": "Vul de naam van je zaak in.",
+          "mail_label": "Zaak"
+        },
+        {
+          "name": "type",
+          "label": "Type zaak",
+          "type": "select",
+          "required": true,
+          "placeholder": "Kies een type",
+          "options": [
+            "Restaurant / chef",
+            "Grootkeuken",
+            "Speciaalzaak",
+            "Andere"
+          ],
+          "error": "Kies je type zaak."
+        },
+        {
+          "name": "email",
+          "label": "E-mail",
+          "type": "email",
+          "required": true,
+          "autocomplete": "email",
+          "error": "Vul een geldig e-mailadres in, bijvoorbeeld naam@zaak.be."
+        },
+        {
+          "name": "gemeente",
+          "label": "Leveringsgemeente",
+          "type": "select",
+          "required": true,
+          "placeholder": "Kies je gemeente",
+          "options_from": "towns",
+          "extra_options": [
+            "Andere"
+          ],
+          "error": "Kies je leveringsgemeente."
+        },
+        {
+          "name": "tel",
+          "label": "Telefoon",
+          "type": "tel",
+          "required": false,
+          "autocomplete": "tel",
+          "error": "Vul een geldig telefoonnummer in, of laat dit veld leeg."
+        },
+        {
+          "name": "soorten",
+          "label": "Welke soorten wil je proeven?",
+          "type": "checkboxes",
+          "required": false,
+          "options_from": "varieties",
+          "extra_options": [
+            "Verras me"
+          ],
+          "mail_label": "Soorten"
+        },
+        {
+          "name": "bericht",
+          "label": "Bericht",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "submit": "Vraag mijn ProefBox aan"
+    },
+    "contact": {
+      "subject": "Contactaanvraag",
+      "subject_field": "reden",
+      "mode_field": "reden",
+      "fields": [
+        {
+          "name": "reden",
+          "label": "Waarvoor wil je contact opnemen?",
+          "type": "select",
+          "required": true,
+          "wide": true,
+          "options_from": "reasons",
+          "placeholder": "Kies een reden",
+          "mail_label": "Reden",
+          "error": "Kies waarvoor je contact opneemt."
+        },
+        {
+          "type": "mode_note",
+          "mode": "afhalen"
+        },
+        {
+          "name": "naam",
+          "label": "Naam",
+          "type": "text",
+          "required": true,
+          "autocomplete": "name",
+          "error": "Vul je naam in."
+        },
+        {
+          "name": "email",
+          "label": "E-mail",
+          "type": "email",
+          "required": true,
+          "autocomplete": "email",
+          "error": "Vul een geldig e-mailadres in, bijvoorbeeld naam@voorbeeld.be."
+        },
+        {
+          "name": "tel",
+          "label": "Telefoon",
+          "type": "tel",
+          "required": false,
+          "autocomplete": "tel",
+          "error": "Vul een geldig telefoonnummer in, of laat dit veld leeg."
+        },
+        {
+          "name": "organisatie",
+          "label": "Organisatie of zaak",
+          "type": "text",
+          "required": false,
+          "autocomplete": "organization",
+          "mode_not": "afhalen",
+          "mail_label": "Organisatie"
+        },
+        {
+          "name": "hoeveelheid",
+          "label": "Gewenste hoeveelheid",
+          "type": "select",
+          "required": false,
+          "placeholder": "Kies een hoeveelheid",
+          "options": [
+            "250 g",
+            "500 g",
+            "1 kg",
+            "Grotere hoeveelheid"
+          ],
+          "hint": "De verpakking ligt nog niet vast; Anthony bevestigt de hoeveelheid.",
+          "mode_only": "afhalen",
+          "mail_label": "Hoeveelheid"
+        },
+        {
+          "name": "soorten",
+          "label": "Welke soorten wil je bestellen?",
+          "type": "checkboxes",
+          "required": false,
+          "options_from": "varieties",
+          "extra_options": [
+            "Verras me"
+          ],
+          "mode_only": "afhalen",
+          "mail_label": "Soorten"
+        },
+        {
+          "name": "onderwerp",
+          "label": "Onderwerp",
+          "type": "text",
+          "required": false,
+          "mode_not": "afhalen",
+          "wide": true
+        },
+        {
+          "name": "bericht",
+          "label": "Bericht",
+          "type": "textarea",
+          "required": true,
+          "optional_in": "afhalen",
+          "error": "Vertel ons kort waarmee we je kunnen helpen."
+        }
+      ],
+      "submit": "Verstuur mijn bericht",
+      "modes": {
+        "afhalen": {
+          "title": "Bestel & haal af",
+          "intro": "Geniet van verse oesterzwammen uit onze kwekerij. Bestel om lokaal af te halen.",
+          "points": [
+            "Anthony bevestigt je bestelling, het afhaalmoment en de plaats persoonlijk.",
+            "De oogstdagen wisselen: wat klaarstaat, hangt af van de oogst.",
+            "Je betaalt met een overschrijving of cash bij het afhalen."
+          ],
+          "submit": "Vraag mijn bestelling aan",
+          "announce": "Formulier staat op bestelling voor thuis.",
+          "mail_label": "Afhalen",
+          "mail_note": "Anthony bevestigt de bestelling, het afhaalmoment en de plaats persoonlijk. De oogstdagen wisselen. Betaling met een overschrijving of cash bij het afhalen.",
+          "handoff": "Anthony bevestigt daarna je bestelling, het afhaalmoment en de plaats persoonlijk. De oogstdagen wisselen; je betaalt met een overschrijving of cash bij het afhalen."
+        }
+      }
+    },
+    "grootkeuken": {
+      "subject": "Behoefte grootkeuken",
+      "helper": [
+        {
+          "name": "maaltijden",
+          "label": "Maaltijden per dag"
+        },
+        {
+          "name": "frequentie",
+          "label": "Hoe vaak paddenstoelen op het menu"
+        },
+        {
+          "name": "soorten",
+          "label": "Soorten",
+          "options_from": "varieties"
+        },
+        {
+          "name": "gemeente",
+          "label": "Gemeente",
+          "options_from": "towns"
+        }
+      ],
+      "fields": []
+    },
+    "speciaalzaak": {
+      "subject": "Intake speciaalzaak",
+      "fields": []
+    },
+    "adoptie": {
+      "subject": "Adoptie emmer",
+      "fields": []
+    },
+    "interesse-buitenkweek": {
+      "subject": "Interesse buitenkweek",
+      "fields": []
+    }
+  },
+  "ui": {
+    "_note": "Shared by every form (S5). handoff_*: the note that replaces the form after the mailto hand-off (R33, AD7): it never says the request was received.",
+    "optional": "(optioneel)",
+    "required_mark": "*",
+    "empty_value": "niet ingevuld",
+    "privacy_before": "Hoe we met je gegevens omgaan, lees je in de",
+    "privacy_link": "privacyverklaring",
+    "how": "Je aanvraag opent als mail in je eigen mailprogramma.",
+    "noscript": "Je mailprogramma opent met de ingevulde velden. Verstuur die mail om je aanvraag af te ronden.",
+    "handoff_title": "Verstuur de mail om af te ronden.",
+    "handoff_text": "Je mailprogramma opent met je aanvraag. Verstuur die mail om je aanvraag af te ronden.",
+    "handoff_fallback": "Opent er geen mailprogramma? Mail je aanvraag naar",
+    "handoff_fallback_phone": "of bel of stuur een WhatsApp naar",
+    "handoff_whatsapp": "WhatsApp",
+    "handoff_reopen": "Open de mail opnieuw",
+    "handoff_edit": "Pas je aanvraag aan",
+    "truncated_page": "Je bericht was te lang voor één mail en is ingekort. Vul het aan in je mailprogramma voor je de mail verstuurt.",
+    "truncated_mail": "[Bericht ingekort: te lang voor één mail.]"
+  }
+}

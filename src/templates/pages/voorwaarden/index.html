@@ -1,0 +1,31 @@
+{% extends "layouts/text.html" %}
+{# Terms of use (S7, PRD R3, R31, Q22): drafted placeholder. States only what the content supports: no prices,
+   no online sales, requests answered personally, the ProefBox free for professionals in the delivery region. #}
+{% block title %}Voorwaarden · {{ site.name }}{% endblock %}
+{% block description %}De voorwaarden voor het gebruik van de site van {{ site.name }}: geen online verkoop, aanvragen zijn vrijblijvend en worden persoonlijk beantwoord.{% endblock %}
+{% block heading %}Voorwaarden{% endblock %}
+{% block lede %}Wat je van deze site mag verwachten, en wat niet.{% endblock %}
+{% block body %}
+<h2>Over deze site</h2>
+<p>Deze site is van {{ site.name }}, de kwekerij van Anthony Watteeuw in {{ site.locality }} ({{ site.municipality }}). Ondernemingsnummer: <span class="placeholder">[ondernemingsnummer]</span>.</p>
+
+<h2>Geen online verkoop</h2>
+<p>Op deze site kun je niets kopen of betalen. Er staan geen prijzen op. Via de formulieren stuur je ons een aanvraag of een vraag; dat is vrijblijvend en verplicht je tot niets.</p>
+<p>We beantwoorden elke aanvraag persoonlijk. Wat we leveren, wanneer en tegen welke voorwaarden, spreken we dan samen af. Wat er te krijgen is, hangt af van de oogst.</p>
+
+<h2>De ProefBox</h2>
+<p>De ProefBox is gratis en bedoeld voor professionele klanten in onze leveringsregio: {{ ", ".join(t.name for t in sorted(data.towns.towns, key=lambda t: t.nav_order)) }}. We nemen na je aanvraag contact met je op om de levering af te spreken.</p>
+
+<h2>Inhoud en beelden</h2>
+<p>De teksten en foto's op deze site zijn van {{ site.name }}. Wil je iets overnemen, vraag het ons dan eerst via <a href="mailto:{{ site.email }}">{{ site.email }}</a>.</p>
+<p>We houden de informatie op de site zo juist mogelijk. De smaakbeschrijvingen van onze soorten zijn culinaire indicaties.</p>
+
+<h2>Links naar andere sites</h2>
+<p>De links naar Instagram en Facebook brengen je naar sites van andere partijen. Daar gelden hun eigen voorwaarden.</p>
+
+<h2>Je gegevens</h2>
+<p>Hoe we omgaan met wat je ons stuurt, lees je in de <a href="{{ url('/privacy/') }}">privacyverklaring</a> en op de <a href="{{ url('/cookies/') }}">cookiepagina</a>.</p>
+
+<h2>Toepasselijk recht</h2>
+<p>Op deze voorwaarden is het Belgisch recht van toepassing. <span class="placeholder">[bevoegde rechtbank]</span></p>
+{% endblock %}

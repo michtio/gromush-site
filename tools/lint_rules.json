@@ -1,0 +1,125 @@
+{
+  "_about": [
+    "Content rules for tools/lint_content.py (plan AD16). Each rule encodes one acceptance criterion of specs/2026-10-19-gromush-site/prd.md.",
+    "Matching: case-insensitive. A 'terms' list is joined into one regex; each term is a Python regex fragment wrapped in word boundaries (no letter or digit directly before or after), so 'bio' matches 'bio' and 'bio-' but not 'biografie' or 'biodiversiteit'. A trailing \\w* in a term allows Dutch inflections.",
+    "Text: visible text of every .html file (script, style and comments ignored), plus the attributes in 'text_attributes' and the content of the meta tags in 'meta_content'. Hidden elements, noscript and dialogs are included: JavaScript can show them.",
+    "Units: text is split into units at block-level elements (inline elements such as a, span, strong do not split), and every attribute value is its own unit. A unit is split into sentences at . ! ? … · | followed by whitespace. 'near' rules need both patterns in the same sentence.",
+    "One hit per rule per sentence. Page paths are relative to the scanned folder: docs/voor-wie/chefs/index.html is /voor-wie/chefs/ (paths from specs/2026-10-19-gromush-site/sitemap.md, with the trailing slash of plan AD5).",
+    "Fields: id, req, ac, terms or pattern, near (terms or pattern) for co-occurrence, allow (exact matched strings that are fine), strip (phrases removed from the sentence before matching), paths (only these pages), except_paths (all pages but these), region 'main' (only text inside <main>), unless_flag (rule off when that flag is true), when_flag_false (rule on only when that flag is false), target 'href' (match href values instead of text), note (the reading taken)."
+  ],
+  "text_attributes": ["alt", "title", "aria-label", "placeholder", "value"],
+  "_text_attributes_note": "alt, title and aria-label as briefed. placeholder (visible in empty fields) and value (only on input type submit/button/reset, where it is the button label) are added as the stricter reading: both are text a visitor reads.",
+  "meta_content": ["description", "og:*", "twitter:*", "application-name", "apple-mobile-web-app-title"],
+  "consumer_paths": ["/voor-wie/thuis/", "/inspiratie/", "/ons-verhaal/"],
+  "_consumer_paths_note": "R2a names three consumer pages: Thuis & MushLove (/voor-wie/thuis/), Inspiratie (/inspiratie/) and Ons verhaal (/ons-verhaal/, the Over Anthony page). Stricter reading: only those exact pages, not the Ons verhaal sub-pages (kweekproces, buitenkweek, adopteer). Health language anywhere else is a hit.",
+  "rules": [
+    {
+      "id": "R1-brand",
+      "req": "R1",
+      "ac": "AC1",
+      "pattern": "(?<![@\\w/.])gro[\\s_-]*mush(?!\\.[a-z])",
+      "allow": ["GroMush"],
+      "strip": ["gromush-promo"],
+      "note": "Any spelling of the brand other than exactly 'GroMush' (Gromush, GROMUSH, Gro Mush, Gro-Mush, GroMUSH). The domain and handle (gromush.be, info@gromush.be, /gromush-site/) are addresses, not the brand name, and are skipped. 'gromush-promo' is the promo's sessionStorage key (plan AD15), named on the cookie page (S7): an identifier, not the brand name."
+    },
+    {
+      "id": "R2-organic",
+      "req": "R2",
+      "ac": "AC2",
+      "unless_flag": "certified_organic",
+      "terms": ["biologisch\\w*", "bio", "eco", "ecologisch\\w*", "gecertificeerd\\w*", "organic", "biologique\\w*", "certified"],
+      "note": "Off when flags.certified_organic is true (AC3). 'bio' and 'eco' are the EU 2018/848 protected prefixes, matched as a word or with a hyphen (bio-teelt), never inside a word (biografie, ecosysteem). 'organic', 'biologique' and 'certified' are added as the stricter reading of 'all EU 2018/848 terms' (decisions log 2026-11-03)."
+    },
+    {
+      "id": "R2a-health",
+      "req": "R2a",
+      "ac": "AC3a",
+      "except_paths_from": "consumer_paths",
+      "terms": ["superfood\\w*", "super food", "gezond\\w*", "immuun\\w*", "immuniteit", "weerstand", "cholesterol\\w*", "bloeddruk", "antioxidant\\w*", "ontstekingsremmend\\w*", "vitamine\\w*", "mineralen", "eiwitrijk\\w*", "vezelrijk\\w*", "voedzaam\\w*", "voedingswaarde\\w*", "goed voor (?:je|jouw|uw|het|de) (?:lichaam|hart|darmen|darm|weerstand|gezondheid|immuunsysteem)"],
+      "note": "Health and superfood language only on the consumer pages (consumer_paths); a hit anywhere else (AC3a names Chefs, Grootkeukens, Speciaalzaken; R2a 'MAY appear only on consumer pages' makes it every other page). Nutrition words (vitamine, eiwitrijk, voedingswaarde) count as health language: stricter reading."
+    },
+    {
+      "id": "R2a-medical",
+      "req": "R2a",
+      "ac": "AC3a",
+      "terms": ["geneeskrachtig\\w*", "medicinal\\w*", "medicinaal", "geneesmiddel\\w*", "therapeutisch\\w*", "heilzaam\\w*", "kankerwerend\\w*", "anti-kanker\\w*", "geneest", "genezen", "genezend\\w*", "behandelt", "behandelen", "voorkomt", "voorkomen", "bestrijdt", "bestrijden", "beschermt tegen", "helpt tegen", "werkt tegen", "verlaagt", "verlagen", "versterkt", "versterken"],
+      "near": ["kanker\\w*", "tumor\\w*", "ziekte\\w*", "ziek", "infectie\\w*", "diabetes", "cholesterol\\w*", "bloeddruk", "ontsteking\\w*", "virus\\w*", "griep", "verkoudheid", "alzheimer", "dementie", "depressie", "kwaal", "kwalen", "aandoening\\w*", "symptomen", "klachten", "immuunsysteem", "weerstand", "hart- en vaatziekten", "geneeskrachtig\\w*", "medicinal\\w*", "medicinaal", "geneesmiddel\\w*", "therapeutisch\\w*", "heilzaam\\w*", "kankerwerend\\w*", "anti-kanker\\w*"],
+      "note": "Medical claims on every page, consumer pages included. A claim is a medical verb (voorkomt, geneest, behandelt, verlaagt...) in the same sentence as a disease or body-function word; the words that are claims by themselves (geneeskrachtig, medicinaal, geneesmiddel, therapeutisch, heilzaam, kankerwerend) are in both lists, so they hit alone. 'voorkomen' and 'behandelen' have ordinary meanings (to occur, to handle), which is why the verbs need a disease word nearby."
+    },
+    {
+      "id": "R3-price",
+      "req": "R3",
+      "ac": "AC4",
+      "pattern": "€|(?<![\\w])(?:eur|euro|euros)(?![\\w])|[$£]|\\d+\\s*,-|(?<![\\w])vanaf\\s+(?:€\\s*)?\\d[\\d.,]*|(?<![\\w%])-\\s?\\d+(?:[.,]\\d+)?\\s?%|(?<![\\w])korting\\w*|(?<![\\w])(?:prijs|prijzen)\\s*:?\\s*\\d|\\d+(?:[.,]\\d+)?\\s?%\\s*(?:korting|goedkoper|minder|reductie|voordeel|off)(?![\\w])|(?<![\\w])(?:actieprijs|promoprijs|introductieprijs|kortingscode|volumekorting|staffelprijs\\w*)",
+      "note": "No price at all (Q4): a currency sign or word (€, EUR, euro, $, £), a '12,-' price, 'vanaf' followed by a number (a 'vanaf' figure or volume tier), a discount percentage (-20%, 20% korting), 'korting' in any form, or 'prijs: 12'. A plain percentage that is not a discount (100% natuurlijk) is not a price; R2 catches '100% biologisch'."
+    },
+    {
+      "id": "R3-phone",
+      "req": "R3",
+      "ac": "AC5",
+      "target": "href",
+      "when_flag_false": "phone_published",
+      "pattern": "^(?:tel:|sms:|https?://(?:api\\.)?(?:wa\\.me|whatsapp\\.com|web\\.whatsapp\\.com)\\b)",
+      "note": "When flags.phone_published is false, no tel:, sms: or WhatsApp link may remain (AC5)."
+    },
+    {
+      "id": "R5-name",
+      "req": "R5",
+      "ac": "AC7",
+      "pattern": "(?<![\\w/.])proef[\\s_-]*box(?![\\w.])",
+      "allow": ["ProefBox"],
+      "note": "The free offer is always written 'ProefBox' (Proefbox, PROEFBOX, Proef Box are hits). Stricter reading of R5 'called ProefBox site-wide'; the /proefbox/ URL is not text."
+    },
+    {
+      "id": "R5-chefbox-free",
+      "req": "R5",
+      "ac": "AC7",
+      "terms": ["chef[\\s_-]*box\\w*"],
+      "near": ["gratis", "kosteloos", "kostenloos", "gratuit\\w*", "free", "proefbox", "proef[\\s_-]*box", "proefpakket\\w*", "proeflevering\\w*", "om te proeven", "probeer\\w*", "uitproberen", "kennismaking\\w*", "vrijblijvend\\w*", "cadeau"],
+      "note": "ChefBox (any spelling) never labels the free offer. Pragmatic rule: a hit when ChefBox and a free-offer word (gratis, free, ProefBox, proefpakket, proeflevering, kennismaking, vrijblijvend, cadeau...) stand in the same sentence, or when the text of a link to /proefbox/ says ChefBox (rule R5-chefbox-link)."
+    },
+    {
+      "id": "R5-chefbox-link",
+      "req": "R5",
+      "ac": "AC7",
+      "target": "link_text",
+      "href_pattern": "proefbox",
+      "terms": ["chef[\\s_-]*box\\w*"],
+      "note": "A link whose href points at the ProefBox page (/proefbox/) and whose text or aria-label says ChefBox labels the free offer as ChefBox."
+    },
+    {
+      "id": "R21-speciaalzaken",
+      "req": "R21",
+      "ac": "AC21",
+      "paths": ["/voor-wie/speciaalzaken/"],
+      "region": "main",
+      "terms": ["gratis", "proeflevering\\w*", "kosteloos", "proefbox", "proef[\\s_-]*box", "proefpakket\\w*"],
+      "note": "AC21: the Speciaalzaken page has no 'gratis' and no 'proeflevering'. Checked inside <main> only, because the site-wide header CTA 'Gratis ProefBox' (R5, R6: identical on every page) would otherwise make AC21 impossible; see the open question in the S2 report. Stricter within main: ProefBox and proefpakket also count as a free trial delivery promise."
+    },
+    {
+      "id": "R23-ours",
+      "req": "R23",
+      "ac": "AC22",
+      "terms": ["(?:ons|onze|het gromush|gromush|gromush's)[\\s-]+(?:voedselbos\\w*|boomgaard|bos|buitenkwekerij\\w*|stammen|boomstammen|perceel)", "mede-?eigenaar\\w*", "stammenset\\w*", "boomstamset\\w*", "stamset\\w*", "log-?sets?", "oogstpakket\\w*", "oogstabonnement\\w*", "oogstgarantie\\w*"],
+      "note": "Outdoor growing never described as existing or owned: 'ons voedselbos' (and onze/GroMush variants with bos, stammen, perceel), co-ownership, log sets, harvest packages or subscriptions anywhere on the site."
+    },
+    {
+      "id": "R23-timing",
+      "req": "R23",
+      "ac": "AC22",
+      "strip": ["gepland voor 2027"],
+      "terms": ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december", "jan\\.", "feb\\.", "mrt\\.", "apr\\.", "aug\\.", "sept?\\.", "okt\\.", "nov\\.", "dec\\.", "lente", "voorjaar", "zomer", "najaar", "herfst", "winter", "(?:19|20)\\d\\d", "q[1-4]", "kwartaal", "seizoen\\w*", "binnen (?:enkele|een paar|\\d+) (?:weken|maanden)"],
+      "near": ["buitenkweek\\w*", "buitenteelt\\w*", "buiten gekweekt\\w*", "voedselbos\\w*", "boomstam\\w*", "houtstam\\w*", "stammen", "stam", "logs?"],
+      "near_or_paths": ["/ons-verhaal/buitenkweek/"],
+      "note": "The only timing allowed for outdoor growing is 'gepland voor 2027' (stripped before matching). Any month, season, year, quarter or 'binnen x maanden' in a sentence about outdoor growing is a hit (indoor harvest wording such as 'volgens oogst en seizoen' is R3 content, not R23); on the Buitenkweek page every such timing word is a hit, outdoor term or not. Seasons and years are the stricter reading of 'names a start month or harvest date'."
+    },
+    {
+      "id": "R23-offer",
+      "req": "R23",
+      "ac": "AC22",
+      "terms": ["adopt\\w*", "adoptie\\w*", "eigenaar\\w*", "eigendom\\w*", "sponsor\\w*", "peter", "meter", "huur\\w*", "beschikbaar", "verkrijgbaar", "te koop", "bestel\\w*", "reserveer\\w*", "reserveren", "boek(?:en|t)?", "bezoek\\w*", "rondleiding\\w*", "(?:jouw|je|uw|eigen) oogst", "deel van de oogst"],
+      "near": ["voedselbos\\w*", "boomstam\\w*", "houtstam\\w*", "stammen", "stam", "logs?", "buitenkweek\\w*", "buitenteelt\\w*"],
+      "note": "Outdoor growing never offered: a sentence that pairs an outdoor term (voedselbos, boomstam, stammen, buitenkweek) with adoption, ownership, renting, ordering, booking, visiting or 'jouw oogst' is a hit. Bucket adoption ('Adopteer een emmer') has no outdoor term and passes; keep a link to Buitenkweek out of the same sentence as 'adopteer'."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "_note": "R45: shown on Buitenkweek only while flags.show_future_species is true. Names from the Extra Blok zip (content-inventory 2.15); the one neutral line per species is drafted in S17 for Anthony's check (no health or availability claim).",
+  "status_label": "binnenkort",
+  "species": [
+    {"key": "morieltje", "name": "Morieltje", "line": null, "image": null},
+    {"key": "shiitake", "name": "Shiitake", "line": null, "image": null},
+    {"key": "paarse-ridderzwam", "name": "Paarse ridderzwam", "line": null, "image": null},
+    {"key": "judasoor", "name": "Judasoor", "line": null, "image": null},
+    {"key": "wijnrode-stropharia", "name": "Wijnrode stropharia", "line": null, "image": null},
+    {"key": "reishi", "name": "Reishi", "line": null, "image": null},
+    {"key": "nameko", "name": "Nameko", "line": null, "image": null},
+    {"key": "pioppino", "name": "Pioppino", "line": null, "image": null}
+  ]
+}

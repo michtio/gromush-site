@@ -1,0 +1,17 @@
+{# Taped note on grid paper (S3; final.html outdoor note). with: title, level (heading level, default 3), status (optional, bold first line),
+   text (optional), link {label, path} (optional). #}
+{% set level = opt("level", 3) %}
+<div class="paper-note grid-paper">
+  <span class="tape tape--l" aria-hidden="true"></span>
+  <span class="tape tape--r" aria-hidden="true"></span>
+  <h{{ level }}>{{ title }}</h{{ level }}>
+{% if opt("status") %}
+  <p class="status">{{ status }}</p>
+{% endif %}
+{% if opt("text") %}
+  <p>{{ text }}</p>
+{% endif %}
+{% if opt("link") %}
+  <a class="note-link hit" href="{{ url(link['path']) }}">{{ link['label'] }}</a>
+{% endif %}
+</div>

@@ -1,0 +1,45 @@
+{
+  "_note": "The 4 supplied recipes (content-inventory 2.25). Ingredients, steps and tips are copied from the Inspiratie PDF in slice S18 (ghee/boter made consistent there); varieties lists only what the brief names. Add a recipe by adding an object: the page shows however many there are (R27).",
+  "recipes": [
+    {
+      "id": "pulled-mushroom-burger",
+      "title": "Forest Pulled Mushroom Burger",
+      "servings": "2 burgers",
+      "varieties": [],
+      "image": null,
+      "ingredients": [],
+      "steps": [],
+      "tip": null
+    },
+    {
+      "id": "geroosterde-oesterzwam",
+      "title": "Geroosterde oesterzwam met kruiden-ghee, miso en citroen",
+      "servings": "4 personen",
+      "varieties": ["gele-oesterzwam", "blauwe-oesterzwam", "grijze-oesterzwam"],
+      "image": "dish-geroosterd",
+      "ingredients": [],
+      "steps": [],
+      "tip": null
+    },
+    {
+      "id": "vlaamse-stoofpot",
+      "title": "Vlaamse stoofpot van oesterzwammen met rode wijn",
+      "servings": "4 personen",
+      "varieties": [],
+      "image": "dish-stoof",
+      "ingredients": [],
+      "steps": [],
+      "tip": null
+    },
+    {
+      "id": "kokos-curry",
+      "title": "Oesterzwammen in romige kokos-curry met rijst",
+      "servings": "4 personen",
+      "varieties": [],
+      "image": "dish-curry",
+      "ingredients": [],
+      "steps": [],
+      "tip": null
+    }
+  ]
+}

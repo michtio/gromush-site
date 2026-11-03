@@ -1,0 +1,37 @@
+{# Site header (S4, plan AD19): logo, the primary navigation from nav.json (five items, dropdowns from data), the
+   "Gratis ProefBox" CTA and the mobile menu. Identical on every page (R6, AC8); only aria-current differs.
+   DOM order logo, menu button, nav, CTA: with the mobile menu open, Tab goes from the button into the panel.
+   An item with children is a link to its hub plus a disclosure button (aria-expanded) for the dropdown.
+   Without JS the buttons are hidden, the hubs are links and a dropdown opens on hover or keyboard focus. #}
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="logo" href="{{ url('/') }}" aria-label="{{ t('logo_label') }}"{% if page.path == "/" %} aria-current="page"{% endif %}>
+      {{ picture('logo', sizes="88px", loading="eager") }}
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="{{ t('menu_open') }}" data-label-open="{{ t('menu_open') }}" data-label-close="{{ t('menu_close') }}">
+      <svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true" focusable="false"><path d="M1 2h20M1 8h20M1 14h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+    </button>
+    <nav class="main-nav" id="main-nav" aria-label="{{ nav.label }}">
+      <ul class="nav-list">
+{% for item in nav.main %}
+{% if item.children %}
+        <li class="nav-item has-sub">
+          <a class="nav-link" href="{{ url(item.path) }}"{% if page.path == item.path %} aria-current="page"{% endif %}>{{ item.label }}</a>
+          <button class="sub-toggle" type="button" aria-expanded="false" aria-controls="sub-{{ loop.index }}" aria-label="{{ t('submenu') }} {{ item.label }}" hidden>
+            <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true" focusable="false"><path d="M1 1.5l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          </button>
+          <ul class="sub" id="sub-{{ loop.index }}">
+{% for child in item.children %}
+            <li><a href="{{ url(child.path) }}"{% if page.path == child.path %} aria-current="page"{% endif %}>{{ child.label }}</a></li>
+{% endfor %}
+          </ul>
+        </li>
+{% else %}
+        <li class="nav-item"><a class="nav-link" href="{{ url(item.path) }}"{% if page.path == item.path %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+{% endif %}
+{% endfor %}
+      </ul>
+    </nav>
+    <a class="btn-cta" href="{{ url(nav.cta.path) }}"{% if page.path == nav.cta.path %} aria-current="page"{% endif %}>{{ nav.cta.label }}</a>
+  </div>
+</header>

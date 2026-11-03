@@ -1,0 +1,15 @@
+{% extends "layouts/base.html" %}
+{# Plain text page (S7: privacy, cookies, voorwaarden). Pages fill title, description, heading, lede and body.
+   The concept note stays until the final legal texts replace these drafts (PRD Q22). #}
+{% block main %}
+<article class="wrap text-page">
+  <header class="text-head">
+    <h1>{% block heading %}{% endblock %}</h1>
+    <p class="text-lede">{% block lede %}{% endblock %}</p>
+  </header>
+  <p class="concept-note" role="note"><strong>Concepttekst.</strong> Dit is een voorlopige tekst. De definitieve versie volgt; tot dan kun je met elke vraag terecht bij <a href="mailto:{{ site.email }}">{{ site.email }}</a>.</p>
+  <div class="text-body">
+{% block body %}{% endblock %}
+  </div>
+</article>
+{% endblock %}

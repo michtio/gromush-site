@@ -1,0 +1,18 @@
+{# Order slip (S3; final.html opening): grid paper, two strips of tape, a handwritten note and up to two actions plus a text link.
+   with: note (short handwritten line, aria-hidden), primary {label, path}, second {label, path} (optional), link {label, path} (optional). #}
+<div class="slip-wrap">
+  <div class="slip grid-paper">
+    <span class="tape tape--l" aria-hidden="true"></span>
+    <span class="tape tape--r" aria-hidden="true"></span>
+{% if opt("note") %}
+    <span class="slip-note" aria-hidden="true">{{ note }}</span>
+{% endif %}
+    <a class="btn-primary" href="{{ url(primary['path']) }}">{{ primary['label'] }}</a>
+{% if opt("second") %}
+    <a class="btn-second" href="{{ url(second['path']) }}">{{ second['label'] }}</a>
+{% endif %}
+{% if opt("link") %}
+    <a class="slip-secondary hit" href="{{ url(link['path']) }}">{{ link['label'] }}</a>
+{% endif %}
+  </div>
+</div>

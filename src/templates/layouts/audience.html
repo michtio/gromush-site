@@ -1,0 +1,73 @@
+{% extends "layouts/base.html" %}
+{# Template D, audience page (S12; PRD R18, AC18; wireframes.html template D): problem -> offer -> the audience's own
+   primary action, in the hero and again in the closing band.
+
+   Everything shared is data: the layout finds its audience in audiences.json by the page path and reads
+     primary_actions                 the R18 action(s), rendered by partials/audience_actions.html in hero and slot
+     page.hero      {title, tagline?, lede, image?, secondary? {label, path}}
+     page.problem   {title, lede?, points: [{text, anchor?}]}   anchor = id of a section on the page that answers it
+     page.offer     {title, lede?, points: [{title, text}]}
+     page.closing   {title, text?, points?: [str]}
+   A page fills title and description (S8) and may add its own sections in these blocks, in page order:
+     intro      between hero and problem (e.g. the Grootkeukens start-up statement, R19)
+     problem    extra content at the end of the problem section
+     offer      extra content at the end of the offer section
+     sections   audience-specific sections between offer and slot (give each a data-section name)
+   Section markers for tools/check_sections.py (the hero carries data-template="audience"): hero, probleem, aanbod,
+   <page sections>, slot. AC18 check: check_sections.py <page> --template audience --primary-action <first action path>. #}
+{% block main %}
+{% set audience = [a for a in data.audiences if a.path == page.path][0] %}
+{% set p = audience.page %}
+<section class="section aud-hero" data-template="audience" data-section="hero" aria-labelledby="aud-title">
+  <div class="wrap aud-hero-grid">
+    <div class="aud-hero-text">
+      <h1 id="aud-title">{{ p.hero.title }}</h1>
+{% if p.hero.get("tagline") %}
+      <p class="hand aud-tagline">{{ p.hero.tagline }}</p>
+{% endif %}
+      <p class="lede">{{ p.hero.lede }}</p>
+{% include "partials/audience_actions.html" with {"audience": audience, "secondary": p.hero.get("secondary")} %}
+    </div>
+{% if p.hero.get("image") %}
+    <figure class="aud-hero-photo">
+      <span class="tape tape--l" aria-hidden="true"></span>
+      {{ picture(p.hero.image, sizes="(min-width: 1440px) 560px, (min-width: 900px) 40vw, calc(100vw - 2.5rem)", loading="eager") }}
+    </figure>
+{% endif %}
+  </div>
+</section>
+{% block intro %}{% endblock %}
+<div class="wrap aud-po">
+<section class="aud-problem" data-section="probleem" aria-labelledby="aud-problem-title">
+    <div class="aud-problem-note grid-paper">
+      <span class="tape tape--l" aria-hidden="true"></span>
+      <span class="tape tape--r" aria-hidden="true"></span>
+      <h2 id="aud-problem-title">{{ p.problem.title }}</h2>
+{% if p.problem.get("lede") %}
+      <p class="lede">{{ p.problem.lede }}</p>
+{% endif %}
+      <ul class="aud-questions">
+{% for point in p.problem.points %}
+{% if point.get("anchor") %}
+        <li><a href="#{{ point.anchor }}"><span>{{ point.text }}</span> <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-hand-arrow"/></svg></a></li>
+{% else %}
+        <li>{{ point.text }}</li>
+{% endif %}
+{% endfor %}
+      </ul>
+    </div>
+{% block problem %}{% endblock %}
+</section>
+<section class="aud-offer" data-section="aanbod" aria-labelledby="aud-offer-title">
+{% include "partials/section_head.html" with {"id": "aud-offer-title", "title": p.offer.title, "lede": p.offer.get("lede")} %}
+    <ul class="aud-offer-list">
+{% for point in p.offer.points %}
+      <li><h3>{{ point.title }}</h3><p>{{ point.text }}</p></li>
+{% endfor %}
+    </ul>
+{% block offer %}{% endblock %}
+</section>
+</div>
+{% block sections %}{% endblock %}
+{% include "partials/closing_banner.html" with {"id": "aud-slot-title", "section": "slot", "title": p.closing.title, "text": p.closing.get("text"), "points": p.closing.get("points"), "audience": audience} %}
+{% endblock %}

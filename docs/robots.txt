@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://michtio.github.io/gromush-site/sitemap.xml

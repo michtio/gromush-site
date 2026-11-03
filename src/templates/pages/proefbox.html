@@ -1,0 +1,54 @@
+{% extends "layouts/base.html" %}
+{# /proefbox/ (S5, template I; PRD R5, R31, R33, R34). Copy: Anthony's ProefBox brief (content-inventory 2.26) and the
+   wireframe's template I. The form comes from forms.json "proefbox" through partials/form.html; flip cards and the
+   promo link here with ?soort=<key>#formulier (AD10). No photo: the box image says "ChefBox" (flagged, R5) and the mixed photo shows species outside the range. #}
+{% block title %}Gratis ProefBox aanvragen · {{ site.name }}{% endblock %}
+{% block description %}Vraag jouw gratis GroMush-ProefBox aan: verse oesterzwammen om te proeven, voor professionele klanten in onze leveringsregio.{% endblock %}
+{% block main %}
+{% set towns = sorted(data.towns.towns, key=lambda t: t.nav_order) %}
+{% set town_names = [t.name for t in towns] %}
+<section class="section pb-head" aria-labelledby="proefbox-title">
+  <div class="wrap">
+    <p class="overline">Gratis ProefBox</p>
+    <h1 id="proefbox-title">Vraag jouw gratis GroMush-ProefBox aan.</h1>
+    <p class="lede">Maak kennis met onze verschillende soorten verse oesterzwammen en ontdek welke variëteiten aansluiten bij jouw keuken.</p>
+  </div>
+</section>
+<section class="section grid-paper pb-form" id="formulier" aria-labelledby="formulier-title">
+  <div class="wrap">
+    <div class="knip" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" focusable="false"><use href="#i-scissors"/></svg></div>
+    <div class="proefbox-grid">
+      <div class="pb-form-col">
+        <h2 class="sr-only" id="formulier-title">Je aanvraag</h2>
+{% include "partials/form.html" with {"key": "proefbox"} %}
+        <p class="homecook">Kook je thuis? <a href="{{ url('/contact/?reden=bestelling-thuis#formulier') }}">Vraag een bestelling aan</a> of volg <a href="{{ url('/voor-wie/thuis/') }}">MushLove</a>.</p>
+      </div>
+      <aside class="pb-aside" aria-label="Over de ProefBox">
+        <div class="pb-who">
+          <h2>Voor wie?</h2>
+          <p>Beschikbaar voor professionele klanten in onze leveringsregio: {{ ", ".join(town_names[:-1]) }} en {{ town_names[-1] }}.</p>
+          <ul class="pb-benefits">
+            <li><strong>Lokaal gekweekt</strong> {{ site.municipality }}</li>
+            <li><strong>Verschillende soorten</strong> Ontdek onze kleuren en smaken</li>
+            <li><strong>Rechtstreeks geleverd</strong> Van kweker naar keuken</li>
+          </ul>
+          <p class="hand pb-sign">Eerst proeven. Dan samen groeien.</p>
+        </div>
+        <div class="pb-contact">
+          <h2>Liever mailen of bellen?</h2>
+          <ul>
+            <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+{% if flags.phone_published %}
+            <li><a href="tel:{{ site.phone.tel }}">{{ site.phone.display }}</a></li>
+            <li><a href="{{ site.whatsapp }}" rel="noopener">WhatsApp</a></li>
+{% endif %}
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url('/js/forms.js') }}" defer></script>
+{% endblock %}

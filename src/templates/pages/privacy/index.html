@@ -1,0 +1,48 @@
+{% extends "layouts/text.html" %}
+{# Privacy policy (S7, PRD R34, R41, Q22): drafted placeholder. Text in [brackets] is for GroMush to fill in. #}
+{% block title %}Privacyverklaring · {{ site.name }}{% endblock %}
+{% block description %}Hoe {{ site.name }} omgaat met je gegevens: je aanvraag gaat via je eigen mailprogramma naar {{ site.email }}, de site bewaart niets en gebruikt geen cookies.{% endblock %}
+{% block heading %}Privacyverklaring{% endblock %}
+{% block lede %}Kort gezegd: deze site bewaart niets over jou. Een aanvraag stuur je zelf, met je eigen mailprogramma, naar {{ site.email }}.{% endblock %}
+{% block body %}
+<h2>Wie is verantwoordelijk?</h2>
+<p>{{ site.name }}, de kwekerij van Anthony Watteeuw in {{ site.locality }} ({{ site.municipality }}), is verantwoordelijk voor de gegevens die je ons stuurt.</p>
+<ul>
+  <li>E-mail: <a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+  <li>Ondernemingsnummer: <span class="placeholder">[ondernemingsnummer]</span></li>
+  <li>Adres: <span class="placeholder">[maatschappelijk adres]</span></li>
+</ul>
+
+<h2>Hoe je aanvraag bij ons komt</h2>
+<p>De formulieren op deze site versturen zelf niets. Als je een formulier invult, opent je eigen mailprogramma een mail aan {{ site.email }} met je antwoorden erin. Pas als jij die mail verstuurt, komt je aanvraag bij ons aan. Er zit geen formulierdienst of andere tussenpartij tussen, en de site slaat je antwoorden nergens op.</p>
+
+<h2>Welke gegevens we dan krijgen</h2>
+<p>Alleen wat in je mail staat: je naam en e-mailadres, en afhankelijk van het formulier de naam en het type van je zaak, je gemeente, je telefoonnummer (als je dat invult), de soorten die je interesseren en je bericht. Je mailprogramma voegt daar zelf je afzenderadres en de naam van je mailaccount aan toe.</p>
+
+<h2>Waarvoor we ze gebruiken</h2>
+<ul>
+  <li>om je vraag te beantwoorden;</li>
+  <li>om je ProefBox of je bestelling met je af te spreken en te leveren of klaar te zetten.</li>
+</ul>
+<p>We gebruiken je gegevens niet voor nieuwsbrieven of reclame en we verkopen ze aan niemand.</p>
+
+<h2>Op welke grond</h2>
+<p>We verwerken je gegevens omdat je ons zelf om iets vraagt, zoals een ProefBox, een bestelling of een voorstel (stappen vóór een mogelijke overeenkomst, artikel 6.1.b AVG), en voor algemene vragen omdat we die graag beantwoorden (gerechtvaardigd belang, artikel 6.1.f AVG).</p>
+
+<h2>Wie ze nog ziet</h2>
+<p>Je mail komt binnen in de mailbox van {{ site.email }}, die wordt aangeboden door <span class="placeholder">[e-mailprovider]</span>. Verder delen we je gegevens met niemand, tenzij de wet ons daartoe verplicht.</p>
+
+<h2>Hoe lang we ze bewaren</h2>
+<p><span class="placeholder">[bewaartermijn]</span></p>
+
+<h2>Bij het bezoeken van de site</h2>
+<p>Deze site gebruikt geen cookies, geen statistieken of analytics en geen ingesloten inhoud van andere sites, zoals video's of berichten van sociale media. De lettertypes staan op onze eigen site. Je browser maakt dus geen verbinding met andere partijen. Meer daarover lees je op de <a href="{{ url('/cookies/') }}">cookiepagina</a>.</p>
+<p>De site wordt gehost via GitHub Pages (GitHub, Inc.). Zoals bij elke webhosting registreert GitHub bij een bezoek je IP-adres, om de dienst te beveiligen. Die gegevens komen niet bij {{ site.name }} terecht. <span class="placeholder">[hosting nakijken bij de overstap naar gromush.be]</span></p>
+
+<h2>Je rechten</h2>
+<p>Je mag ons altijd vragen welke gegevens we van je hebben, en je kunt ze laten verbeteren of wissen. Je kunt ook bezwaar maken tegen het gebruik ervan, het gebruik laten beperken of je gegevens opvragen om ze mee te nemen. Mail daarvoor naar <a href="mailto:{{ site.email }}">{{ site.email }}</a>.</p>
+<p>Ben je niet tevreden over hoe we met je gegevens omgaan, dan kun je een klacht indienen bij de <a href="https://www.gegevensbeschermingsautoriteit.be/burger/acties/klacht-indienen">Gegevensbeschermingsautoriteit</a>.</p>
+
+<h2>Wijzigingen</h2>
+<p>Als deze verklaring verandert, staat de nieuwe versie op deze pagina.</p>
+{% endblock %}

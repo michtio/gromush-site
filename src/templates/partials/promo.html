@@ -1,0 +1,25 @@
+{# ProefBox promo (S4; PRD R35, plan AD15): a native <dialog> that site.js opens with showModal() at most once
+   per session, on the second page view or later, after delay_s seconds or `scroll` of the page scrolled; state in
+   sessionStorage. base.html leaves it out of the pages in site.promo.never_on (/proefbox/, /contact/), and
+   site.js checks the path as well. Closes with the button, Escape (native) or a click outside the paper.
+   Without JS it never opens. Copy in site.json "promo". #}
+{% set promo = site.promo %}
+<dialog class="promo" id="promo" aria-labelledby="promo-title" data-delay="{{ promo.delay_s }}" data-scroll="{{ promo.scroll }}" data-never-on="{{ ' '.join(url(p) for p in promo.never_on) }}">
+  <div class="promo-paper grid-paper">
+    <span class="tape tape--l" aria-hidden="true"></span>
+    <button class="promo-close" type="button" aria-label="{{ t('close') }}">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+    </button>
+    <div class="promo-body">
+      <p class="promo-label">{{ promo.label }}</p>
+      <h2 id="promo-title">{{ promo.title }}</h2>
+      <p class="promo-text">{{ promo.text }}</p>
+      <a class="btn-primary" href="{{ url(promo.action.path) }}">{{ promo.action.label }}</a>
+      <p class="promo-note">{{ promo.note }}</p>
+    </div>
+    <div class="promo-figure">
+      {{ picture(promo.image, cls="promo-cut", sizes="(min-width: 640px) 16rem, 70vw", loading="lazy", decorative=True) }}
+      <p class="promo-sign" aria-hidden="true">{{ promo.sign }}</p>
+    </div>
+  </div>
+</dialog>

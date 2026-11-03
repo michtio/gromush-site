@@ -1,0 +1,143 @@
+{
+  "_note": "Primary navigation and footer columns (plan AD19, sitemap.md 'Primary navigation' and 'Footer'). Labels are the sitemap's. 'from' fills a list from data: 'varieties' (in range, nav order, name) or 'towns' (nav order, name). 'main' is the primary navigation; R6: at most six items plus the ProefBox CTA; the build checks it.",
+  "label": "Hoofdnavigatie",
+  "main": [
+    {
+      "label": "Zwammen",
+      "path": "/zwammen/",
+      "children": [
+        {
+          "label": "Alle zwammen",
+          "path": "/zwammen/"
+        },
+        {
+          "from": "varieties"
+        }
+      ]
+    },
+    {
+      "label": "Voor wie",
+      "path": "/voor-wie/",
+      "children": [
+        {
+          "label": "Chefs",
+          "path": "/voor-wie/chefs/"
+        },
+        {
+          "label": "Grootkeukens",
+          "path": "/voor-wie/grootkeukens/"
+        },
+        {
+          "label": "Speciaalzaken",
+          "path": "/voor-wie/speciaalzaken/"
+        },
+        {
+          "label": "Thuis & MushLove",
+          "path": "/voor-wie/thuis/"
+        }
+      ]
+    },
+    {
+      "label": "Ons verhaal",
+      "path": "/ons-verhaal/",
+      "children": [
+        {
+          "label": "Over Anthony",
+          "path": "/ons-verhaal/"
+        },
+        {
+          "label": "Kweekproces",
+          "path": "/ons-verhaal/kweekproces/"
+        },
+        {
+          "label": "Buitenkweek",
+          "path": "/ons-verhaal/buitenkweek/"
+        },
+        {
+          "label": "Leveringsregio",
+          "path": "/leveringsregio/"
+        }
+      ]
+    },
+    {
+      "label": "Inspiratie",
+      "path": "/inspiratie/"
+    },
+    {
+      "label": "Contact",
+      "path": "/contact/"
+    }
+  ],
+  "cta": {
+    "label": "Gratis ProefBox",
+    "path": "/proefbox/"
+  },
+  "footer": [
+    {
+      "title": "Zwammen",
+      "links": [
+        {
+          "label": "Alle zwammen",
+          "path": "/zwammen/"
+        },
+        {
+          "from": "varieties"
+        }
+      ],
+      "path": "/zwammen/"
+    },
+    {
+      "title": "Voor wie",
+      "path": "/voor-wie/",
+      "links": [
+        {
+          "label": "Chefs",
+          "path": "/voor-wie/chefs/"
+        },
+        {
+          "label": "Grootkeukens",
+          "path": "/voor-wie/grootkeukens/"
+        },
+        {
+          "label": "Speciaalzaken",
+          "path": "/voor-wie/speciaalzaken/"
+        },
+        {
+          "label": "Thuis & MushLove",
+          "path": "/voor-wie/thuis/"
+        }
+      ]
+    },
+    {
+      "title": "Ons verhaal",
+      "links": [
+        {
+          "label": "Over Anthony",
+          "path": "/ons-verhaal/"
+        },
+        {
+          "label": "Kweekproces",
+          "path": "/ons-verhaal/kweekproces/"
+        },
+        {
+          "label": "Buitenkweek",
+          "path": "/ons-verhaal/buitenkweek/"
+        },
+        {
+          "label": "Adopteer",
+          "path": "/ons-verhaal/adopteer/"
+        }
+      ],
+      "path": "/ons-verhaal/"
+    },
+    {
+      "title": "Leveringsregio",
+      "path": "/leveringsregio/",
+      "links": [
+        {
+          "from": "towns"
+        }
+      ]
+    }
+  ]
+}

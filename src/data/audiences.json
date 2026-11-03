@@ -1,0 +1,164 @@
+[
+  {
+    "key": "chefs",
+    "slug": "chefs",
+    "path": "/voor-wie/chefs/",
+    "name": "Chefs",
+    "reason": "chef-restaurant",
+    "primary_actions": [
+      {
+        "label": "Vraag een ProefBox aan",
+        "path": "/proefbox/?type=Restaurant+%2F+chef#formulier"
+      }
+    ],
+    "card": {
+      "title": "Voor chefs.",
+      "text": "Bijzondere zwammen voor bijzondere gerechten. Verse, lokale oesterzwammen voor chefs die smaak, textuur en seizoensgebonden producten centraal zetten.",
+      "explore": "Ontdek voor chefs",
+      "image": "dish-geroosterd"
+    },
+    "page": {
+      "hero": {
+        "title": "Paddenstoelen met karakter.",
+        "tagline": "Voor chefs die smaak willen laten groeien.",
+        "lede": "Ambachtelijk gekweekte gourmetpaddenstoelen, rechtstreeks van de kweker naar jouw keuken.",
+        "image": "dish-geroosterd",
+        "secondary": {
+          "label": "Ontdek onze soorten",
+          "path": "#soorten"
+        }
+      },
+      "problem": {
+        "title": "Wat chefs écht willen weten.",
+        "points": [
+          {
+            "text": "Hoe smaakt deze soort?",
+            "anchor": "soorten"
+          },
+          {
+            "text": "Hoe bereid ik ze optimaal?",
+            "anchor": "soorten"
+          },
+          {
+            "text": "Hoe lang blijven ze vers?",
+            "anchor": "kweekproces"
+          },
+          {
+            "text": "Zijn ze lokaal?",
+            "anchor": "levering"
+          },
+          {
+            "text": "Kan ik erop rekenen dat je levert?",
+            "anchor": "levering"
+          }
+        ]
+      },
+      "offer": {
+        "title": "Waarom chefs kiezen voor GroMush",
+        "points": [
+          {
+            "title": "Uitzonderlijke smaak",
+            "text": "Natuurlijke umami en karakter in elke soort."
+          },
+          {
+            "title": "Unieke texturen",
+            "text": "Van krokant gebakken tot heerlijk vlezig."
+          },
+          {
+            "title": "Visueel onderscheidend",
+            "text": "Kleuren en vormen die gerechten laten spreken."
+          },
+          {
+            "title": "Veelzijdig inzetbaar",
+            "text": "Van amuse tot hoofdgerecht, van vegetarisch tot verfijnde begeleiding."
+          },
+          {
+            "title": "Rechtstreeks van de kweker",
+            "text": "Vers, lokaal en met liefde voor het vak gekweekt."
+          }
+        ]
+      },
+      "closing": {
+        "title": "Eerst proeven?",
+        "text": "Vraag jouw ProefBox aan en ontdek welke soorten passen bij jouw keuken.",
+        "points": [
+          "Verschillende soorten uitproberen",
+          "Ideaal om te testen in jouw gerechten",
+          "Geen verplichtingen",
+          "Snel en eenvoudig aangevraagd"
+        ]
+      }
+    },
+    "nav_order": 1
+  },
+  {
+    "key": "grootkeukens",
+    "slug": "grootkeukens",
+    "path": "/voor-wie/grootkeukens/",
+    "name": "Grootkeukens",
+    "reason": "grootkeuken",
+    "primary_actions": [
+      {
+        "label": "Bespreek jouw behoefte",
+        "path": "/contact/?reden=grootkeuken#formulier"
+      }
+    ],
+    "card": {
+      "title": "Voor grootkeukens.",
+      "text": "Lokaal gekweekt, gemaakt voor grotere volumes. Verse oesterzwammen voor zorginstellingen, scholen, bedrijfsrestaurants en catering.",
+      "startup_note": "We zitten in een opstartfase: grote volumes zijn nog niet gegarandeerd.",
+      "explore": "Ontdek voor grootkeukens"
+    },
+    "nav_order": 2
+  },
+  {
+    "key": "speciaalzaken",
+    "slug": "speciaalzaken",
+    "path": "/voor-wie/speciaalzaken/",
+    "name": "Speciaalzaken",
+    "reason": "speciaalzaak",
+    "primary_actions": [
+      {
+        "label": "Naar het intakeformulier",
+        "path": "/voor-wie/speciaalzaken/#formulier"
+      }
+    ],
+    "card": {
+      "title": "Voor speciaalzaken.",
+      "text": "Kwaliteit in het rek. Vers uit de polder. Voor groentewinkels, bakkers, traiteurs en delicatessenzaken die hun klanten iets bijzonders willen bieden.",
+      "explore": "Ontdek voor winkels"
+    },
+    "nav_order": 3
+  },
+  {
+    "key": "thuis",
+    "slug": "thuis",
+    "path": "/voor-wie/thuis/",
+    "name": "Thuis & MushLove",
+    "reason": "bestelling-thuis",
+    "primary_actions": [
+      {
+        "label": "Bestel & haal af",
+        "path": "/contact/?reden=bestelling-thuis#formulier"
+      },
+      {
+        "label": "Volg MushLove op Facebook & Instagram",
+        "social": [
+          "facebook_mushlove",
+          "instagram"
+        ]
+      },
+      {
+        "label": "Adopteer een emmer",
+        "path": "/ons-verhaal/adopteer/"
+      }
+    ],
+    "card": {
+      "title": "Voor thuis.",
+      "text": "Van onze kwekerij naar jouw keuken. Verse oesterzwammen om zelf mee te koken, en de MushLove-community om mee te groeien.",
+      "explore": "Ontdek voor thuis",
+      "image": "dish-curry"
+    },
+    "nav_order": 4
+  }
+]

@@ -1,0 +1,17 @@
+{# Primary actions of one audience (S12; PRD R18, AC18), shared by the hero and the closing band of layouts/audience.html.
+   with: audience (audiences.json entry), secondary {label, path} (optional, hero only: a second, outlined action).
+   Each primary action is {label, path} (a link through url(); a path starting with "#" stays on the page) or
+   {label, social: [site.json socials keys]} (the label, then one link per network). The first action is the ink
+   button; every link carries data-primary-action so tools can find it in hero and slot. #}
+<div class="aud-actions">
+{% for action in audience.primary_actions %}
+{% if action.get("path") %}
+  <a class="{{ 'btn-primary' if loop.first else 'btn-second' }}" href="{{ action.path if action.path.startswith('#') else url(action.path) }}" data-primary-action>{{ action.label }}</a>
+{% elif action.get("social") %}
+  <p class="aud-social"><span>{{ action.label }}:</span>{% for key in action.social %} <a href="{{ site.socials[key].url }}" rel="noopener" data-primary-action>{{ site.socials[key].label }}</a>{% endfor %}</p>
+{% endif %}
+{% endfor %}
+{% if opt("secondary") %}
+  <a class="btn-second" href="{{ secondary['path'] if secondary['path'].startswith('#') else url(secondary['path']) }}">{{ secondary['label'] }}</a>
+{% endif %}
+</div>

@@ -1,0 +1,3 @@
+{# "Vraag aan" pill in a variety's pill colour (S3, R15). with: variety (from varieties.json), label (optional, default t('pill_request')).
+   A label, not a link: it sits inside the variety's own link (opening, overview). witte gets an ink ring instead of a darker fill. #}
+<span class="pill{{ ' pill--ring' if variety.key == 'witte' else '' }}" style="--accent:var({{ variety.pill }})">{{ opt("label") or t('pill_request') }}</span>

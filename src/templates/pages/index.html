@@ -1,0 +1,22 @@
+{% extends "layouts/base.html" %}
+{# S1 smoke page: proves the shell and the data source. The homepage of final.html replaces it in S9. #}
+{% block title %}{{ site.name }} · Ambachtelijk gekweekte oesterzwammen uit {{ site.municipality }}{% endblock %}
+{% block description %}{{ site.name }} kweekt ambachtelijk oesterzwammen in {{ site.locality }}, lokaal geproduceerd met respect voor natuur, mens en smaak. {{ site.core_line }}{% endblock %}
+{% block main %}
+<div class="wrap smoke">
+  <h1>{{ site.core_line }}</h1>
+  <p class="measure">{{ site.baseline }}</p>
+  <p class="home-wip">Deze site is nog in opbouw. De startpagina en een aantal pagina's volgen binnenkort; de zwammen, de ProefBox en het contactformulier zijn al klaar.</p>
+  <h2>Onze oesterzwammen</h2>
+  <ul class="smoke-list">
+{% for v in varieties %}
+    <li style="--accent:var({{ v.accent }})" data-variety="{{ v.key }}">
+      <h3>{{ v.name }}</h3>
+      <p class="latin">{{ v.latin }}</p>
+      <p class="taste">{{ " · ".join(v.taste_words) }}</p>
+      <p>{{ v.taste_sentence }}</p>
+    </li>
+{% endfor %}
+  </ul>
+</div>
+{% endblock %}

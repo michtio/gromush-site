@@ -1,0 +1,30 @@
+{# Variety flip card (S3; final.html "assortiment"). with: variety (from varieties.json), number (1-based position).
+   Every text comes from the variety (R4); the colour comes in as --accent / --accent-tint from the variety's tokens (R15).
+   Front: number, cut-out, name band, taste words. Back: name, Latin name, stat pips, taste sentence, packs
+   and the request link, which sits on the back face and turns with it. Optional: more (true adds a link to the product
+   page under the card, outside both faces, so it is reachable without turning the card; S10 overview). Without JS both faces show, one under the other,
+   and the request link works; js/cards.js adds the "Draai om" button and inert handling. Reduced motion: a cross-fade. #}
+<li class="cat-cell">
+  <div class="tc tc--{{ variety.key }}" data-card="{{ variety.key }}" data-name="{{ variety.name }}" style="--accent:var({{ variety.accent }});--accent-tint:var({{ variety.tint }})">
+    <div class="tc-inner">
+      <div class="tc-face tc-front">
+        <p class="tc-number">{{ t('card_number') }} {{ "%02d" % number }}</p>
+        {{ picture(variety.cutout, cls="tc-cutout", sizes="(min-width: 900px) 236px, 196px", decorative=True) }}
+        <div class="tc-band"><h3>{{ variety.name }}</h3></div>
+        <p class="tc-taste">{{ " · ".join(variety.taste_words) }}</p>
+      </div>
+      <div class="tc-face tc-back">
+        <p class="tc-back-name">{{ variety.name }}</p>
+        <p class="tc-latin">{{ variety.latin }}</p>
+{% include "partials/pips.html" with {"variety": variety} %}
+        <p class="tc-sentence">{{ variety.taste_sentence }}</p>
+        <p class="tc-packs">{{ t('card_packs') }}</p>
+        <a class="tc-request" href="{{ url('/proefbox/?soort=' + variety.key + '#formulier') }}">{{ t('card_request') }}<span class="sr-only">: {{ variety.name.lower() }}</span></a>
+      </div>
+    </div>
+  </div>
+  <button class="tc-flip tc-flip--under" type="button" data-flip-back="{{ t('card_flip_back') }}" hidden>{{ t('card_flip') }}</button>
+{% if opt("more") %}
+  <a class="tc-more link-action" href="{{ url('/zwammen/' + variety.slug + '/') }}"><span>{{ t('card_more') }}<span class="sr-only">: {{ variety.name.lower() }}</span></span> <svg class="icon" viewBox="0 0 24 16" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+{% endif %}
+</li>

@@ -1,0 +1,3 @@
+{# Coupon (S3; final.html "Voor elke tafel"): a photo in a dashed cut-out frame with scissors on its edge.
+   with: image (images.json id), sizes (the img sizes attribute), caption (optional). #}
+<figure class="coupon"><svg class="icon coupon-scissors" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-scissors"/></svg>{{ picture(image, sizes=sizes) }}{% if opt("caption") %}<figcaption>{{ caption }}</figcaption>{% endif %}</figure>

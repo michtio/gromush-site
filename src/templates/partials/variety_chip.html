@@ -1,0 +1,6 @@
+{# Variety chip (S3; final.html request form): a checkbox in the variety's tint with a letter that becomes a red tick when chosen.
+   with: variety (from varieties.json), letter, name (form field name, default "soorten"), id_prefix (default "chk"). The value is the canonical name (R4); data-key is the variety key and data-slug its slug; ?soort= pre-selects by either (AD10, js/forms.js). #}
+<label class="chip" style="--tint:var({{ variety.tint }})">
+  <input type="checkbox" name="{{ opt('name', 'soorten') }}" value="{{ variety.name }}" data-key="{{ variety.key }}" data-slug="{{ variety.slug }}" id="{{ opt('id_prefix', 'chk') }}-{{ variety.key }}">
+  <span class="chip-face"><span class="chip-letter" aria-hidden="true">{{ letter }}</span><span class="chip-tick" aria-hidden="true"><svg viewBox="0 0 16 16"><use href="#i-tick"/></svg></span>{{ variety.name }}</span>
+</label>

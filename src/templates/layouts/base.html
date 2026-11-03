@@ -1,0 +1,35 @@
+{# Page shell: head, skip link, header, main, footer. Every page fills title and description (unique, title names
+   GroMush; the build fails otherwise, S8) and main. The build adds Open Graph tags to indexable pages. #}
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{% endblock %}</title>
+<meta name="description" content="{% block description %}{% endblock %}">
+{% block robots %}{% endblock %}
+{% block canonical %}<link rel="canonical" href="{{ abs_url(page.path) }}">
+{% endblock %}<meta name="theme-color" content="{{ site.theme_color }}">
+<link rel="icon" href="data:,">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preload" href="{{ url('/fonts/youngserif-regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ url('/css/site.css') }}">
+{{{ jsonld_site(page.path) }}}
+{% block head %}{% endblock %}
+</head>
+<body>
+{% include "partials/icons.html" %}
+<div class="fibre" aria-hidden="true"></div>
+<a class="skip" href="#inhoud">{{ t('skip_link') }}</a>
+{% include "partials/header.html" with {"page": page} %}
+<main id="inhoud">
+{% block main %}{% endblock %}
+</main>
+{% include "partials/footer.html" %}
+{% if page.path not in site.promo.never_on %}
+{% include "partials/promo.html" %}
+{% endif %}
+<script src="{{ url('/js/site.js') }}" defer></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

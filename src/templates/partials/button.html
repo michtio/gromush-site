@@ -1,0 +1,9 @@
+{# Button or action link (S3). with: label, path (site path through url()), kind = "primary" | "second" | "cta" | "link" (default "primary"), cls (extra classes, optional).
+   "link" is the underlined action with the hand-drawn arrow ("Ontdek voor chefs ->"). Every action is a real link; buttons that act on the page are written in place. #}
+{% set kind = opt("kind", "primary") %}
+{% set extra = (" " + opt("cls")) if opt("cls") else "" %}
+{% if kind == "link" %}
+<a class="link-action{{ extra }}" href="{{ url(path) }}"><span>{{ label }}</span> <svg class="icon" viewBox="0 0 24 16" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+{% else %}
+<a class="btn-{{ kind }}{{ extra }}" href="{{ url(path) }}">{{ label }}</a>
+{% endif %}

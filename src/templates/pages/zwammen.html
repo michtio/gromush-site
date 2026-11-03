@@ -1,0 +1,52 @@
+{% extends "layouts/base.html" %}
+{# /zwammen/ (S10, template B; PRD R4, R13, R17, R37, R38, R40). The range overview: every variety in the range
+   (the global `varieties`: in_range only, in nav order) as a flip card that links to its product page; a variety taken
+   out of the range drops out here by itself (AC14). Copy: Anthony's "Ontdek onze zwammen" brief (content-inventory 2.7),
+   final.html's assortiment and outdoor note, the wireframe's template B. No variety count is written in the copy, so
+   the page stays right when the range changes. #}
+{% block title %}Alle zwammen · {{ site.name }}{% endblock %}
+{% block description %}De oesterzwammen van {{ site.name }}, elk met hun eigen kleur, textuur en karakter: smaak, beet en culinaire indicaties per soort. Ambachtelijk gekweekt in {{ site.municipality }}.{% endblock %}
+{% block main %}
+<section class="zw-head" aria-labelledby="zwammen-title">
+  <div class="wrap zw-head-grid">
+    <h1 id="zwammen-title">Ontdek onze zwammen.</h1>
+    <div class="zw-head-side">
+      <p class="lede">Bijzondere oesterzwammen, elk met hun eigen kleur, textuur en karakter. Ambachtelijk gekweekt in {{ site.municipality }}, met aandacht voor kwaliteit, versheid en smaak.</p>
+      <div class="zw-actions">
+{% include "partials/button.html" with {"label": "Vraag je gratis ProefBox aan", "path": "/proefbox/#formulier"} %}
+{% include "partials/button.html" with {"label": "Kook je thuis? Vraag een bestelling aan", "path": "/contact/?reden=bestelling-thuis#formulier", "kind": "second"} %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section zw-range" aria-labelledby="zwammen-binnen">
+  <div class="wrap">
+{% include "partials/section_head.html" with {"id": "zwammen-binnen", "title": "Onze binnengekweekte zwammen.", "lede": "Met zorg gekweekt in onze klimaatgecontroleerde kweekruimte, voor een constante kwaliteit."} %}
+    <ul class="cat-grid zw-grid">
+{% for v in varieties %}
+{% include "partials/flip_card.html" with {"variety": v, "number": loop.index, "more": True} %}
+{% endfor %}
+    </ul>
+    <p class="cat-note">{{ t('card_note') }} {{ t('card_availability') }}</p>
+  </div>
+</section>
+
+<section class="section zw-more" aria-labelledby="zwammen-koken">
+  <div class="wrap zw-more-grid">
+    <div class="zw-cook">
+      <h2 id="zwammen-koken">Heerlijk koken met oesterzwammen.</h2>
+{% include "partials/coupon.html" with {"image": "dish-geroosterd", "sizes": "(min-width: 1440px) 560px, (min-width: 900px) 42vw, calc(100vw - 2.5rem)"} %}
+{% include "partials/button.html" with {"label": "Laat je inspireren", "path": "/inspiratie/", "kind": "link"} %}
+    </div>
+    <div class="zw-outdoor">
+{% include "partials/paper_note.html" with {"title": "Buiten gekweekt: groeien met het ritme van de natuur.", "level": 2, "status": "In voorbereiding, gepland voor 2027.", "text": "Later kweken we ook buiten, op hout, met het ritme van de seizoenen. We houden je op de hoogte.", "link": {"label": "Volg onze buitenkweek", "path": "/ons-verhaal/buitenkweek/"}} %}
+    </div>
+  </div>
+</section>
+
+{% include "partials/closing_banner.html" with {"id": "zwammen-slot", "title": "Welke zwam past op jouw menukaart?", "text": "Vraag een ProefBox aan en ontdek zelf de kwaliteit en smaak van " + site.name + ".", "action": {"label": "Vraag je gratis ProefBox aan", "path": "/proefbox/#formulier"}} %}
+{% endblock %}
+{% block scripts %}
+<script src="{{ url('/js/cards.js') }}" defer></script>
+{% endblock %}

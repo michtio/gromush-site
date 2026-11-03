@@ -1,0 +1,31 @@
+{% extends "layouts/text.html" %}
+{# Cookie policy (S7, PRD R41, plan AD15, Q22): drafted placeholder. Must stay true to src/static/js/site.js:
+   no cookies, one sessionStorage key "gromush-promo" for the ProefBox promo. #}
+{% block title %}Cookies · {{ site.name }}{% endblock %}
+{% block description %}{{ site.name }} gebruikt geen cookies, geen analytics en geen ingesloten inhoud van andere sites. Eén sessiewaarde onthoudt of je de ProefBox-melding al zag.{% endblock %}
+{% block heading %}Cookies{% endblock %}
+{% block lede %}Deze site zet geen cookies. Er is één kleine sessiewaarde in je browser, voor de ProefBox-melding.{% endblock %}
+{% block body %}
+<h2>Geen cookies</h2>
+<p>{{ site.name }} plaatst geen cookies op je toestel: geen eigen cookies en geen cookies van andere partijen.</p>
+
+<h2>Geen analytics, geen ingesloten inhoud</h2>
+<p>We meten je bezoek niet: er draait geen statistiek- of analyticsdienst. Er staan geen video's, kaarten of berichten van sociale media op de site die je browser bij een andere partij laat ophalen. De lettertypes en scripts komen van onze eigen site.</p>
+<p>De links naar Instagram en Facebook zijn gewone links. Pas als je erop klikt, kom je op die sites terecht, en daar gelden hun eigen regels over cookies.</p>
+
+<h2>Eén sessiewaarde voor de ProefBox-melding</h2>
+<p>Tijdens je bezoek kan er één keer een melding verschijnen over de gratis ProefBox. Om die niet bij elke pagina opnieuw te tonen, bewaart je browser één waarde in zijn sessie-opslag (sessionStorage):</p>
+<ul>
+  <li><strong>Naam:</strong> <code>gromush-promo</code></li>
+  <li><strong>Inhoud:</strong> hoeveel pagina's je in deze sessie bekeek en of de melding al getoond of gesloten is.</li>
+  <li><strong>Hoe lang:</strong> tot je het tabblad of de browser sluit; daarna is de waarde weg.</li>
+  <li><strong>Wie ziet ze:</strong> alleen je eigen browser. De waarde wordt niet naar ons of naar iemand anders verstuurd.</li>
+</ul>
+<p>Dit is geen cookie en er zit niets in dat jou herkent. Daarom toont de site geen cookiemelding.</p>
+
+<h2>Formulieren</h2>
+<p>De formulieren openen je eigen mailprogramma. De site zelf bewaart of verstuurt je antwoorden niet; meer daarover in de <a href="{{ url('/privacy/') }}">privacyverklaring</a>.</p>
+
+<h2>Vragen</h2>
+<p>Mail naar <a href="mailto:{{ site.email }}">{{ site.email }}</a>.</p>
+{% endblock %}
