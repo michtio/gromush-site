@@ -1,0 +1,18 @@
+{# Audience grid (S12; final.html "Voor elke tafel", the homepage audience scene): the four audience cards from
+   audiences.json in nav order, the first and last wide with a coupon photo. Used by /voor-wie/ and meant for the
+   homepage (S9). with: level (card heading level, default 3), link_to ("page": each card links to its audience page
+   with card.explore, the router; "action": each card links to its first primary action). The Grootkeukens start-up
+   line shows only while flags.startup_phase is on (R19). #}
+{% set link_to = opt("link_to", "page") %}
+<div class="versions">
+{% for a in sorted(data.audiences, key=lambda a: a.nav_order) %}
+{% set card = a.card %}
+{% set link = {"label": card.explore, "path": a.path} if link_to == "page" else None %}
+{% set note = card.get("startup_note") if flags.startup_phase else None %}
+{% if card.get("image") %}
+{% include "partials/audience_card.html" with {"audience": a, "letter": "ABCD"[loop.index0], "title": card.title, "text": card.text, "note": note, "link": link, "level": opt("level", 3), "image": card.image, "sizes": "(min-width: 1440px) 540px, (min-width: 769px) 38vw, calc(100vw - 5rem)", "rev": loop.last} %}
+{% else %}
+{% include "partials/audience_card.html" with {"audience": a, "letter": "ABCD"[loop.index0], "title": card.title, "text": card.text, "note": note, "link": link, "level": opt("level", 3)} %}
+{% endif %}
+{% endfor %}
+</div>

@@ -1,0 +1,196 @@
+{% extends "layouts/base.html" %}
+{# Components page (S3): every shared component, rendered from data, for side-by-side review against final.html.
+   Internal: noindex, not linked from the site, never in the sitemap (S13 skips /_dev/). Labels here are neutral; copy
+   inside the components is real data (varieties.json, audiences.json, towns.json, images.json) or final.html's approved copy. #}
+{% block title %}Componenten · {{ site.name }}{% endblock %}
+{% block description %}Interne referentiepagina met de gedeelde componenten van de site.{% endblock %}
+{% block robots %}<meta name="robots" content="noindex, nofollow">{% endblock %}
+{% block head %}
+<style>
+.dev-intro{padding-block:2.5rem 1.5rem}
+.dev-intro h1{font-size:clamp(2.2rem,5vw,3.5rem);margin-bottom:.6rem}
+.dev-sec{padding-block:2.75rem;border-top:1px dashed rgb(var(--ink-rgb) / .4)}
+.dev-sec .dev-label{font-family:var(--font-text);font-weight:600;font-size:.95rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 1.6rem}
+.dev-sub{font-weight:600;font-size:.95rem;margin:2rem 0 .8rem}
+.dev-row{display:flex;flex-wrap:wrap;gap:1.2rem 1.6rem;align-items:center}
+.dev-narrow{max-width:30rem}
+.dev-swatches{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,9rem),1fr));gap:1rem 1.2rem}
+.dev-swatch{font-size:.85rem;line-height:1.35}
+.dev-swatch span{display:block;height:3rem;border:1px solid var(--ink);border-radius:4px;background:var(--c);margin-bottom:.35rem}
+.dev-type{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem}
+.dev-type p{margin:0}
+.dev-pill{display:inline-flex;flex-direction:column;align-items:flex-start;gap:.1rem;font-size:.9rem}
+.dev-icons{display:flex;flex-wrap:wrap;gap:1.4rem 2rem;list-style:none;margin:0;padding:0}
+.dev-icons li{display:flex;align-items:center;gap:.6rem;font-size:.9rem}
+.dev-icons .icon{width:1.6rem;height:1.6rem}
+.dev-pips{background:var(--card);border:1px solid var(--ink);border-radius:8px;padding:1rem 1.2rem;max-width:20rem}
+.dev-grid-block{padding:clamp(1.5rem,4vw,2.5rem)}
+</style>
+{% endblock %}
+{% block main %}
+<div class="wrap dev-intro">
+  <h1>Componenten</h1>
+  <p class="lede">Interne referentie: de gedeelde componenten uit final.html, gevuld met de echte gegevens. Niet geïndexeerd en nergens gelinkt.</p>
+</div>
+
+<section class="dev-sec" aria-labelledby="dev-tokens">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-tokens">Kleuren</h2>
+    <ul class="dev-swatches">
+{% for token in ["ink", "ink-soft", "straw", "straw-deep", "grid-paper", "paper-card", "card", "polaroid", "kraft", "kraft-tint", "moss", "form-red", "form-red-deep", "van"] %}
+      <li class="dev-swatch"><span style="--c:var(--{{ token }})"></span>--{{ token }}</li>
+{% endfor %}
+    </ul>
+    <h3 class="dev-sub">Soorten (accent, tint, pill uit varieties.json)</h3>
+    <ul class="dev-swatches">
+{% for v in varieties %}
+      <li class="dev-swatch"><span style="--c:var({{ v.accent }})"></span>{{ v.name }}<br>{{ v.accent }} · {{ v.tint }}</li>
+{% endfor %}
+    </ul>
+    <h3 class="dev-sub">Typografie</h3>
+    <div class="dev-type">
+      <p style="font-family:var(--font-display);font-size:clamp(3rem,6vw,5.75rem);line-height:1.02;letter-spacing:-0.02em">{{ site.core_line }}</p>
+      <p style="font-family:var(--font-display);font-size:clamp(2.1rem,4vw,3.25rem);line-height:1.12">Young Serif, kop</p>
+      <p class="statement" style="margin:0">Young Serif, slotzin</p>
+      <p style="font-family:var(--font-display);font-size:clamp(1.45rem,2.2vw,1.85rem)">Young Serif, titel</p>
+      <p class="measure">Work Sans, lopende tekst. {{ varieties[0].taste_sentence }} <em>{{ varieties[0].latin }}</em></p>
+      <p class="lede">Work Sans, inleiding. {{ site.baseline }} {{ site.core_line }}</p>
+      <p class="hand">Kaushan Script, handschrift</p>
+      <p style="font-family:var(--font-mono);font-weight:700;font-size:.75rem">Courier Prime · {{ t('card_number') }} 01</p>
+    </div>
+  </div>
+</section>
+
+<section class="dev-sec" aria-labelledby="dev-buttons">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-buttons">Knoppen en acties</h2>
+    <div class="dev-row">
+{% include "partials/button.html" with {"label": "Vraag je gratis ProefBox aan", "path": "/proefbox/#formulier"} %}
+{% include "partials/button.html" with {"label": "Kook je thuis? Vraag een bestelling aan", "path": "/contact/?reden=bestelling-thuis#formulier", "kind": "second"} %}
+{% include "partials/button.html" with {"label": "Gratis ProefBox", "path": "/proefbox/", "kind": "cta"} %}
+{% include "partials/button.html" with {"label": data.audiences[0].primary_actions[0].label, "path": data.audiences[0].primary_actions[0].path, "kind": "link"} %}
+      <a class="hit" href="{{ url('/zwammen/') }}">Ontdek onze oesterzwammen</a>
+    </div>
+    <h3 class="dev-sub">Pill per soort</h3>
+    <div class="dev-row">
+{% for v in varieties %}
+      <span class="dev-pill">{{ v.name }}{% include "partials/pill.html" with {"variety": v} %}</span>
+{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="dev-sec" aria-labelledby="dev-slip">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-slip">Bestelbon met tape</h2>
+{% include "partials/slip.html" with {"note": "gratis, voor zaken", "primary": {"label": "Vraag je gratis ProefBox aan", "path": "/proefbox/#formulier"}, "second": {"label": "Kook je thuis? Vraag een bestelling aan", "path": "/contact/?reden=bestelling-thuis#formulier"}, "link": {"label": "Ontdek onze oesterzwammen", "path": "/zwammen/"}} %}
+  </div>
+</section>
+
+<section class="dev-sec" aria-labelledby="dev-paper">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-paper">Ruitjespapier, notitie met tape</h2>
+{% include "partials/paper_note.html" with {"title": "Buiten gekweekt: groeien met het ritme van de natuur.", "status": "In voorbereiding, gepland voor 2027.", "text": "Later kweken we ook buiten, op hout, met het ritme van de seizoenen. We houden je op de hoogte.", "link": {"label": "Volg onze buitenkweek", "path": "/ons-verhaal/buitenkweek/"}} %}
+  </div>
+</section>
+
+<section class="dev-sec grid-paper" aria-labelledby="dev-head">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-head">Sectiekop met knipkader</h2>
+{% include "partials/section_head.html" with {"id": "dev-head-demo", "title": "Proef het verschil.", "lede": "We stellen graag een gratis ProefBox samen met een selectie van onze soorten. Voor professionele keukens en zaken in onze leveringsregio.", "knip": True} %}
+    <fieldset class="soorten">
+      <legend>Soortkeuze</legend>
+      <div class="chips">
+{% for v in varieties %}
+{% include "partials/variety_chip.html" with {"variety": v, "letter": "ABCDEFGH"[loop.index0]} %}
+{% endfor %}
+      </div>
+    </fieldset>
+  </div>
+</section>
+
+<section class="dev-sec" aria-labelledby="dev-coupon">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-coupon">Bon (foto in knipkader)</h2>
+    <div class="dev-narrow">
+{% include "partials/coupon.html" with {"image": "dish-geroosterd", "sizes": "(min-width: 600px) 480px, calc(100vw - 3rem)"} %}
+    </div>
+  </div>
+</section>
+
+<section class="dev-sec" aria-labelledby="dev-polaroid">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-polaroid">Polaroids met tape</h2>
+    <div class="snaps-wrap">
+      <ol class="snaps">
+{% include "partials/polaroid.html" with {"image": "fase1-stro", "number": 1, "title": "Stro voorbereiden.", "text": "Het stro weekt in koud water en laat daarna uitlekken."} %}
+{% include "partials/polaroid.html" with {"image": "fase2-emmer", "number": 2, "title": "Opbouw in 20-literemmers.", "text": "Stro en paddenstoelenbroed in afwisselende lagen."} %}
+{% include "partials/polaroid.html" with {"image": "fase3-incubatie-a", "number": 3, "title": "Incubatie.", "text": "In het donker neemt het mycelium het stro over.", "extra": "fase3-incubatie-b"} %}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="dev-sec" aria-labelledby="dev-cards">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-cards">Draaikaarten per soort</h2>
+    <ul class="cat-grid">
+{% for v in varieties %}
+{% include "partials/flip_card.html" with {"variety": v, "number": loop.index} %}
+{% endfor %}
+    </ul>
+    <p class="cat-note">{{ t('card_note') }}</p>
+    <h3 class="dev-sub">Scoreblokjes los ({{ varieties[1].name }})</h3>
+    <div class="dev-pips" style="--accent-tint:var({{ varieties[1].tint }})">
+{% include "partials/pips.html" with {"variety": varieties[1]} %}
+    </div>
+  </div>
+</section>
+
+<section class="dev-sec" aria-labelledby="dev-icons">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-icons">Iconen</h2>
+    <ul class="dev-icons">
+{% for name, box in [("i-scissors", "0 0 24 24"), ("i-arrow", "0 0 24 16"), ("i-hand-arrow", "0 0 24 24"), ("i-tick", "0 0 16 16")] %}
+      <li><svg class="icon" viewBox="{{ box }}" aria-hidden="true" focusable="false"><use href="#{{ name }}"/></svg>{{ name }}</li>
+{% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="dev-sec grid-paper" aria-labelledby="dev-audiences">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-audiences">Doelgroepkaarten</h2>
+    <div class="versions">
+{% set audience_texts = {"chefs": "Bijzondere zwammen voor bijzondere gerechten. Verse, lokale oesterzwammen voor chefs die smaak, textuur en seizoensgebonden producten centraal zetten.", "grootkeukens": "Lokaal gekweekt, gemaakt voor grotere volumes. Verse oesterzwammen voor zorginstellingen, scholen, bedrijfsrestaurants en catering. We zitten in een opstartfase: grote volumes zijn nog niet gegarandeerd.", "speciaalzaken": "Kwaliteit in het rek. Vers uit de polder. Voor groentewinkels, bakkers, traiteurs en delicatessenzaken die hun klanten iets bijzonders willen bieden.", "thuis": "Van onze kwekerij naar jouw keuken. Verse oesterzwammen om zelf mee te koken, en de MushLove-community om mee te groeien."} %}
+{% set audience_images = {"chefs": "dish-geroosterd", "thuis": "dish-curry"} %}
+{% for a in sorted(data.audiences, key=lambda a: a.nav_order) %}
+{% if a.key in audience_images %}
+{% include "partials/audience_card.html" with {"audience": a, "letter": "ABCD"[loop.index0], "text": audience_texts[a.key], "image": audience_images[a.key], "sizes": "(min-width: 1440px) 540px, (min-width: 769px) 38vw, calc(100vw - 5rem)", "rev": loop.last} %}
+{% else %}
+{% include "partials/audience_card.html" with {"audience": a, "letter": "ABCD"[loop.index0], "text": audience_texts[a.key]} %}
+{% endif %}
+{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="dev-sec lv1" aria-labelledby="dev-towns">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-towns">Gemeentekaarten</h2>
+    <ul class="lv1-stops" aria-label="Waar we leveren">
+{% for town in sorted(data.towns.towns, key=lambda t: t.nav_order) %}
+{% include "partials/town_card.html" with {"town": town} %}
+{% endfor %}
+    </ul>
+  </div>
+</section>
+
+<div class="dev-sec" style="padding-bottom:0">
+  <div class="wrap"><p class="dev-label">Slotbanner</p></div>
+{% include "partials/closing_banner.html" with {"id": "dev-closing", "title": "Van onze kwekerij naar jouw bord.", "text": "Geen lange keten. Geen onnodige tussenstappen. Gewoon verse paddenstoelen, lokaal gekweekt.", "action": {"label": "Vraag je gratis ProefBox aan", "path": "/proefbox/#formulier"}} %}
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url('/js/cards.js') }}" defer></script>
+{% endblock %}

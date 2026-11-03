@@ -1,0 +1,21 @@
+{% extends "layouts/base.html" %}
+{# "In opbouw" placeholder for a sitemap page that is not built yet (src/data/wip.json). noindex, no canonical,
+   not in the sitemap. The build only renders it where no page template renders the path. #}
+{% block title %}{{ wip.title }} · in opbouw · {{ site.name }}{% endblock %}
+{% block description %}De pagina {{ wip.title }} van {{ site.name }} is nog in opbouw.{% endblock %}
+{% block robots %}<meta name="robots" content="noindex">
+{% endblock %}
+{% block canonical %}{% endblock %}
+{% block main %}
+<div class="wrap wip">
+  <p class="wip-label">In opbouw</p>
+  <h1>{{ wip.title }}</h1>
+  <p class="measure">Deze pagina bouwen we nog. Binnenkort vind je hier meer.</p>
+  <p class="measure">Intussen kun je al terecht bij:</p>
+  <ul class="wip-links">
+    <li><a class="hit" href="{{ url('/zwammen/') }}">Onze zwammen</a></li>
+    <li><a class="hit" href="{{ url('/ons-verhaal/') }}">Ons verhaal</a></li>
+    <li><a class="hit" href="{{ url('/contact/') }}">Contact</a></li>
+  </ul>
+</div>
+{% endblock %}

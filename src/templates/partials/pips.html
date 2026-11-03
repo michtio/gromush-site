@@ -1,0 +1,10 @@
+{# Stat pips (S3): the culinary indications of one variety as a table, five squares per row, filled in the variety tint.
+   with: variety (from varieties.json; uses name and pips). The squares are aria-hidden; "4 van 5" is read instead. #}
+<table class="tc-stats">
+  <caption class="sr-only">{{ t('card_stats_caption') }} {{ variety.name.lower() }}</caption>
+  <tbody>
+{% for label, value in variety.pips.items() %}
+    <tr><th scope="row">{{ label }}</th><td><span class="pips" aria-hidden="true">{{{ "".join('<span class="pip pip--on"></span>' if i < value else '<span class="pip"></span>' for i in range(5)) }}}</span><span class="sr-only">{{ value }} {{ t('card_stats_of') }}</span></td></tr>
+{% endfor %}
+  </tbody>
+</table>

@@ -1,0 +1,232 @@
+{% extends "layouts/base.html" %}
+{# Product page, template C (S11; PRD R2a, R3, R4, R14, R15, R16, R17, R40). One template, rendered by the build
+   (gen/build.py product_pages) at /zwammen/<slug>/ for every variety in the range, never for one with in_range false
+   (that path is the AD17 forward page). Context: variety (one entry of varieties.json).
+   Sections in R14 order, each marked data-section for tools/check_sections.py (AC16):
+   hero, intro, smaak, tijdlijn, kweker, keuken, voor-wie, product, bewaren, andere, slot.
+   Copy: the canonical fields (R4: name, latin, taste_words, taste_sentence, pips) and variety.page (Anthony's
+   product briefs, content-inventory 2.8 to 2.13, sentences that contradict the Q10 taste table left out); the shared
+   blocks below are the master copy of the Gele brief (2.8), the same on every page. A field a variety does not have
+   hides its block (R3): page.kitchen, quote, kitchen_text, highlight, profile_title (falls back to the Gele title).
+   Colour (R15): the variety colour reaches only the hero plate's edge, the stat pips and the other varieties' own
+   cards; witte takes its darker stand-ins (witte-edge, pip-witte) as on the flip card. No price, ever (R3). #}
+{% block title %}{{ variety.name }}: {{ ", ".join(w.lower() for w in variety.taste_words) }} · {{ site.name }}{% endblock %}
+{% block description %}{{ variety.name }} ({{ variety.latin }}), lokaal gekweekt in {{ site.municipality }}. {{ variety.page.hero_title }} Bestel voor thuis of vraag een gratis ProefBox aan.{% endblock %}
+{% block head %}
+{{{ og_image(variety.photo) }}}
+{{{ jsonld_product(variety) }}}
+{% endblock %}
+{% block main %}
+{% set p = variety.page %}
+{% set others = [v for v in varieties if v.key != variety.key] %}
+{% set order_path = '/contact/?reden=bestelling-thuis&soort=' + variety.slug + '#formulier' %}
+{% set proefbox_path = '/proefbox/?soort=' + variety.key + '#formulier' %}
+{% set order_label = 'Bestel ' + p.plural %}
+{% set proefbox_label = 'Vraag je gratis ProefBox aan' %}
+{% set audiences = dict((a.key, a) for a in data.audiences) %}
+<div class="zw zw--{{ variety.key }}" data-template="product" data-product="{{ variety.key }}" style="--accent:var({{ variety.accent }});--accent-tint:var({{ variety.tint }})">
+
+<section class="section zw-hero" data-section="hero" aria-labelledby="zw-title">
+  <div class="wrap zw-hero-grid">
+    <div class="zw-hero-text">
+      <nav class="crumbs" aria-label="Kruimelpad">
+        <ol>
+          <li><a href="{{ url('/zwammen/') }}">Zwammen</a></li>
+          <li><span aria-current="page">{{ variety.name }}</span></li>
+        </ol>
+      </nav>
+      <h1 id="zw-title">{{ variety.name }}</h1>
+      <p class="zw-latin" lang="la">{{ variety.latin }}</p>
+      <p class="zw-slogan">{{ p.hero_title }}</p>
+      <p class="lede">Lokaal gekweekt in {{ site.municipality }}. Vers geoogst voor jouw keuken.</p>
+      <div class="zw-actions">
+        <a class="btn-primary" href="{{ url(order_path) }}">{{ order_label }}</a>
+        <a class="btn-second" href="{{ url(proefbox_path) }}">{{ proefbox_label }}</a>
+      </div>
+      <p class="zw-action-note">De ProefBox is gratis, voor professionele klanten in onze leveringsregio. Kook je thuis, dan haal je je bestelling af.</p>
+    </div>
+    <figure class="zw-plate">
+      {{ picture(variety.photo, sizes="(min-width: 1440px) 520px, (min-width: 900px) 36vw, min(92vw, 30rem)", loading="eager") }}
+    </figure>
+    <ul class="zw-usps" aria-label="Waarom GroMush">
+      <li><strong>Lokaal gekweekt</strong> <span>In {{ site.municipality }}</span></li>
+      <li><strong>Vers geoogst</strong> <span>Rechtstreeks uit onze kwekerij</span></li>
+      <li><strong>Ambachtelijk</strong> <span>Met zorg gekweekt</span></li>
+      <li><strong>Korte keten</strong> <span>Van kweker naar keuken</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section zw-intro" data-section="intro" aria-labelledby="zw-intro-title">
+  <div class="wrap zw-intro-grid">
+    <div class="zw-cutout">{{ picture(variety.cutout, sizes="(min-width: 900px) 40vw, min(86vw, 30rem)", decorative=True) }}</div>
+    <div>
+      <h2 id="zw-intro-title">{{ p.intro_title }}</h2>
+      <p class="zw-intro-text">{{ p.intro_text }}</p>
+      <dl class="zw-traits">
+        <div><dt>Smaak</dt><dd>{{ ", ".join([variety.taste_words[0]] + [w.lower() for w in variety.taste_words[1:]]) }}</dd></div>
+        <div><dt>Uiterlijk</dt><dd>{{ p.appearance }}</dd></div>
+{% if p.get("kitchen") %}
+        <div><dt>Keuken</dt><dd>{{ p.kitchen }}</dd></div>
+{% endif %}
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="section zw-profile" data-section="smaak" aria-labelledby="zw-smaak-title">
+  <div class="wrap zw-profile-grid">
+    <div>
+      <h2 id="zw-smaak-title">{{ p.get("profile_title") or "Hoe smaakt hij?" }}</h2>
+      <p class="lede">{{ variety.taste_sentence }}</p>
+{% if p.get("quote") %}
+      <blockquote class="zw-quote"><p>“{{ p.quote }}”</p></blockquote>
+{% endif %}
+    </div>
+    <div class="zw-card">
+      <p class="zw-card-name">{{ variety.name }}</p>
+      <p class="zw-card-words">{{ " · ".join(variety.taste_words) }}</p>
+{% include "partials/pips.html" with {"variety": variety} %}
+      <p class="zw-card-note">{{ t('card_note') }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section zw-steps" data-section="tijdlijn" aria-labelledby="zw-tijdlijn-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="zw-tijdlijn-title">Van kwekerij tot keuken</h2>
+      <p class="lede">Lokaal gekweekt. Lokaal verbonden.</p>
+    </div>
+    <div class="zw-steps-wrap">
+      <svg class="zw-steps-line" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M8 22C150 8 260 34 400 20S640 8 800 24 1050 34 1192 18"/></svg>
+      <ol class="zw-step-list">
+{% for title, text in zip(["Groeien", "Vruchten", "Oogsten", "Leveren"], p.timeline) %}
+        <li><span class="zw-step-num" aria-hidden="true">{{ "%02d" % loop.index }}</span><h3>{{ title }}</h3><p>{{ text }}</p></li>
+{% endfor %}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="section zw-kweker" data-section="kweker" aria-labelledby="zw-kweker-title">
+  <div class="wrap zw-kweker-grid">
+    {{ picture("anthony-krat", cls="zw-kweker-photo", sizes="(min-width: 1440px) 500px, (min-width: 900px) 36vw, min(92vw, 34rem)") }}
+    <div>
+      <h2 id="zw-kweker-title">{{ site.name }}: lokaal gekweekt, met passie en vakmanschap</h2>
+      <p class="zw-story">{{ site.name }} is een kleinschalige kwekerij waar we met veel zorg onze oesterzwammen kweken. Kwaliteit, duurzaamheid en een korte keten staan bij ons centraal. We geloven in de kracht van lokaal en de puurheid van een natuurlijk product.</p>
+      <figure class="zw-kweker-quote">
+        <blockquote><p>“We willen mensen laten genieten van eerlijke, kwaliteitsvolle oesterzwammen, rechtstreeks van bij ons.”</p></blockquote>
+        <figcaption>{{ site.name }}</figcaption>
+      </figure>
+{% include "partials/button.html" with {"label": "Lees meer over onze kwekerij", "path": "/ons-verhaal/", "kind": "link"} %}
+    </div>
+  </div>
+</section>
+
+<section class="section zw-kitchen" data-section="keuken" aria-labelledby="zw-keuken-title">
+  <div class="wrap zw-kitchen-grid">
+    <div>
+      <h2 id="zw-keuken-title">{{ variety.name }} in de keuken</h2>
+{% if p.get("kitchen_text") %}
+      <p class="zw-kitchen-text">{{ p.kitchen_text }}</p>
+{% endif %}
+      <h3 class="zw-uses-title">Perfect voor:</h3>
+{% if any(u.get("text") for u in p.uses) %}
+      <dl class="zw-uses zw-uses--tiles">
+{% for u in p.uses %}
+        <div><dt>{{ u.label }}</dt><dd>{{ u.get("text", "") }}</dd></div>
+{% endfor %}
+      </dl>
+{% else %}
+      <ul class="zw-uses">
+{% for u in p.uses %}
+        <li><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-tick"/></svg>{{ u.label }}</li>
+{% endfor %}
+      </ul>
+{% endif %}
+{% include "partials/button.html" with {"label": "Bekijk meer inspiratie", "path": "/inspiratie/", "kind": "link"} %}
+    </div>
+    <div class="zw-kitchen-media">
+{% include "partials/coupon.html" with {"image": p.kitchen_image, "sizes": "(min-width: 1440px) 560px, (min-width: 900px) 40vw, 92vw"} %}
+{% if p.get("highlight") %}
+      <div class="zw-highlight">
+        <p class="zw-highlight-title">{{ p.highlight.title }}</p>
+{% if p.highlight.get("text") %}
+        <p>{{ p.highlight.text }}</p>
+{% endif %}
+      </div>
+{% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="section grid-paper zw-who" data-section="voor-wie" aria-labelledby="zw-wie-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="zw-wie-title">{{ p.who_title }}</h2>
+    </div>
+    <div class="zw-who-grid">
+{% for key, name, audience_key in [("chefs", "Chefs", "chefs"), ("thuis", "Thuiskeuken", "thuis"), ("vegetarisch", "Vegetarische keuken", None)] %}
+{% if p.who.get(key) %}
+      <article class="version">
+        <div class="version-head"><span class="view-letter" aria-hidden="true">{{ "ABC"[loop.index0] }}</span><h3>{{ name }}</h3></div>
+        <p>{{ p.who[key] }}</p>
+{% if audience_key and audience_key in audiences %}
+        <a class="link-action" href="{{ url(audiences[audience_key].path) }}"><span>{{ audiences[audience_key].card.explore }}</span> <svg class="icon" viewBox="0 0 24 16" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+{% endif %}
+      </article>
+{% endif %}
+{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section zw-product" data-section="product" aria-labelledby="zw-product-title">
+  <div class="wrap zw-product-grid">
+    <div>
+      <h2 id="zw-product-title">Beschikbaar bij {{ site.name }}</h2>
+      <p class="zw-product-name">{{ variety.name }}</p>
+      <p>Vers gekweekt in België.</p>
+      <dl class="zw-facts">
+        <div><dt>Verpakking</dt><dd>{{ t('card_packs') }}</dd></div>
+        <div><dt>Beschikbaarheid</dt><dd>Volgens oogst en seizoen.</dd></div>
+        <div><dt>Herkomst</dt><dd>{{ site.name }}, {{ site.municipality }}</dd></div>
+        <div><dt>Voor horeca</dt><dd>Voor horeca en professionele keukens is levering binnen onze lokale regio mogelijk.</dd></div>
+        <div><dt>Voor thuis</dt><dd>Je haalt je bestelling af. Anthony bevestigt persoonlijk wanneer en waar; de oogstdagen wisselen.</dd></div>
+      </dl>
+    </div>
+{% include "partials/slip.html" with {"primary": {"label": order_label, "path": order_path}, "second": {"label": proefbox_label, "path": proefbox_path}} %}
+  </div>
+</section>
+
+<section class="section zw-store" data-section="bewaren" aria-labelledby="zw-bewaren-title">
+  <div class="wrap zw-store-grid">
+    <div>
+      <h2 id="zw-bewaren-title">Zo bewaar je ze het best</h2>
+      <p>Bewaar oesterzwammen gekoeld en gebruik ze bij voorkeur zo vers mogelijk.</p>
+    </div>
+{% include "partials/paper_note.html" with {"title": "Tip van " + site.name, "text": "Bewaar ze niet luchtdicht afgesloten wanneer er veel condens kan ontstaan. Een ademende verpakking helpt de kwaliteit te behouden."} %}
+  </div>
+</section>
+
+{% if others %}
+<section class="section zw-others" data-section="andere" aria-labelledby="zw-andere-title">
+  <div class="wrap">
+    <div class="zw-others-head">
+      <h2 id="zw-andere-title">Ontdek onze andere oesterzwammen</h2>
+{% include "partials/button.html" with {"label": "Bekijk alle soorten", "path": "/zwammen/", "kind": "link"} %}
+    </div>
+    <ul class="zw-other-list">
+{% for v in others %}
+      <li><a class="zw-other zw-other--{{ v.key }}" href="{{ url('/zwammen/' + v.slug + '/') }}" style="--accent:var({{ v.accent }})">{{ picture(v.cutout, cls="zw-other-cutout", sizes="(min-width: 1100px) 220px, 200px", decorative=True) }}<span class="zw-other-name">{{ v.name }}</span><span class="zw-other-words">{{ " · ".join(v.taste_words) }}</span></a></li>
+{% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+{% include "partials/closing_banner.html" with {"section": "slot", "id": "zw-slot-title", "title": "Van onze kwekerij naar jouw bord.", "text": "Geen lange keten. Geen onnodige tussenstappen. Gewoon verse paddenstoelen, lokaal gekweekt.", "action": {"label": order_label, "path": order_path}, "link": {"label": "Ontdek " + site.name, "path": "/ons-verhaal/"}} %}
+
+</div>
+{% endblock %}

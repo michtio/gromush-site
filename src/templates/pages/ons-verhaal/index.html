@@ -1,0 +1,163 @@
+{% extends "layouts/base.html" %}
+{# /ons-verhaal/ (S15, template E; PRD R2, R2a, R25, R37, R38, R40). Over Anthony, in his own voice.
+   Copy: Anthony's "Over GroMush" brief (content-inventory 2.23, over-ons PDF), lightly edited; the wireframe's template E.
+   Consumer page: his health and superfood lines may stay (R2a), never a medical claim. Left out on purpose:
+   "100% biologisch" (R2, certification in progress), the "Reserveer nu" / "Kom langs & beleef" reservation flow (none
+   exists) and the "Beleving delen" value (rondleidingen and proeverijen are not bookable).
+   Photos: only Anthony's real ones (R25, R44). The grower photo slot in the hero is empty on purpose: the only grower
+   photo supplied (anthony-krat) is AI-styled and flagged, so it is not used here until a real one arrives. #}
+{% block title %}Het verhaal van kweker Anthony Watteeuw · {{ site.name }}{% endblock %}
+{% block description %}Ontdek het verhaal achter {{ site.name }}: de passie van Anthony Watteeuw voor ambachtelijk gekweekte oesterzwammen, gezonde voeding, lokale teelt en leven in harmonie met de natuur.{% endblock %}
+{% block head %}{{{ og_image('anthony-camera') }}}{% endblock %}
+{% block main %}
+{% set towns = sorted(data.towns.towns, key=lambda t: t.nav_order) %}
+{% set town_names = [t.name for t in towns] %}
+<section class="ov-hero" aria-labelledby="ov-title">
+  <div class="wrap ov-hero-grid">
+    <div class="ov-hero-text">
+      <h1 id="ov-title">Wie is Anthony Watteeuw?</h1>
+      <p class="ov-roles">Kweker. Dromer. Vader. Verbinder.</p>
+      <p class="ov-intro">Ik ben Anthony, oprichter en kweker bij {{ site.name }}. Mijn reis bracht me van de wereld van beeld en film naar de wondere wereld van paddenstoelen. Wat begon als nieuwsgierigheid, groeide uit tot een diepe passie en een missie: <strong>gezonde voeding, lokale teelt en pure beleving delen met zoveel mogelijk mensen.</strong></p>
+{% include "partials/button.html" with {"label": "Ontdek ons verhaal", "path": "/ons-verhaal/#mijn-verhaal", "kind": "link"} %}
+    </div>
+    <figure class="paper-note grid-paper ov-quote">
+      <span class="tape tape--l" aria-hidden="true"></span>
+      <span class="tape tape--r" aria-hidden="true"></span>
+      <blockquote>
+        <p>De natuur heeft alle antwoorden. Wij moeten alleen luisteren en zorgen.</p>
+      </blockquote>
+      <figcaption class="ov-sign">Anthony</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section ov-story" id="mijn-verhaal" aria-labelledby="mijn-verhaal-title">
+  <div class="wrap">
+{% include "partials/section_head.html" with {"id": "mijn-verhaal-title", "title": "Mijn verhaal.", "lede": "Een pad van creatie naar cultivatie."} %}
+    <ol class="ov-chapters">
+      <li class="ov-chapter ov-chapter--photo">
+        <div class="snap ov-snap">
+          <span class="tape tape--l" aria-hidden="true"></span>
+          <span class="tape tape--r" aria-hidden="true"></span>
+          <figure>
+            <span class="snap-photo">{{ picture('anthony-camera', sizes="(min-width: 900px) 352px, min(80vw, 352px)") }}</span>
+            <figcaption><strong>Achter de camera.</strong> <span>Cinematograaf en cameraman voor tv en film.</span></figcaption>
+          </figure>
+        </div>
+        <div class="ov-chapter-text">
+          <h3><span class="ov-num" aria-hidden="true">1</span> De wereld van beeld</h3>
+          <p>Van jongs af aan had ik een passie voor verhalen vertellen in beeld. Als cinematograaf en cameraman werkte ik voor tv en film en bouwde ik mijn eigen productiehuis uit. Talloze ervaringen, reizen en projecten leerden me kijken, doorzetten en creëren.</p>
+        </div>
+      </li>
+      <li class="ov-chapter ov-chapter--photo ov-chapter--rev">
+        <div class="snap ov-snap ov-snap--wide">
+          <span class="tape tape--l" aria-hidden="true"></span>
+          <span class="tape tape--r" aria-hidden="true"></span>
+          <figure>
+            <span class="snap-photo">{{ picture('anthony-familie', sizes="(min-width: 900px) 512px, min(88vw, 512px)") }}</span>
+            <figcaption><strong>Ons gezin.</strong> <span>Met onze vier kinderen.</span></figcaption>
+          </figure>
+        </div>
+        <div class="ov-chapter-text">
+          <h3><span class="ov-num" aria-hidden="true">2</span> Vader worden</h3>
+          <p>Toen onze vier kinderen kwamen, verschoof alles. Ik wilde er zijn. Echte momenten. Ik koos ervoor om meer thuis te zijn en mijn leven anders in te richten. Mijn focus kwam te liggen op wat echt belangrijk is: familie, gezondheid en bewust leven.</p>
+        </div>
+      </li>
+      <li class="ov-chapter">
+        <h3><span class="ov-num" aria-hidden="true">3</span> Gezonde keuzes</h3>
+        <p>Als pescotariër ontdekte ik hoe voeding je energie, gezondheid en geluk bepaalt. Ik verdiepte me in de voedingswaarde van paddenstoelen, en raakte er niet meer van los.</p>
+      </li>
+      <li class="ov-chapter">
+        <h3><span class="ov-num" aria-hidden="true">4</span> De magie van mycelium</h3>
+        <p>Ik raakte gefascineerd door mycelium, het ‘internet van de natuur’. Ik leerde over het ontstaan, de kracht en de balans die paddenstoelen brengen in ecosystemen. Ik begon ze te kweken. Thuis. Voor mijn gezin, familie en vrienden.</p>
+      </li>
+      <li class="ov-chapter">
+        <h3><span class="ov-num" aria-hidden="true">5</span> Een missie geboren</h3>
+        <p>Wat begon als een kleine passie, groeide uit tot een droom: een ambachtelijke kwekerij waar kwaliteit, duurzaamheid en beleving centraal staan. Vandaag deel ik die beleving met onze lokale gemeenschap.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section ov-values" aria-labelledby="waarden-title">
+  <div class="wrap">
+{% include "partials/section_head.html" with {"id": "waarden-title", "title": "Waar ik voor sta."} %}
+    <ul class="ov-value-list">
+      <li>
+        <h3>Natuurlijk</h3>
+        <p>We werken met respect voor de natuur.</p>
+      </li>
+      <li>
+        <h3>Lokaal &amp; eerlijk</h3>
+        <p>We telen lokaal in {{ site.municipality }} en leveren in {{ ", ".join(town_names[:-1]) }} en {{ town_names[-1] }}.</p>
+      </li>
+      <li>
+        <h3>Gezondheid eerst</h3>
+        <p>Voeding die voedt. Echt, puur en boordevol goede eigenschappen.</p>
+      </li>
+      <li>
+        <h3>Duurzaam denken</h3>
+        <p>We bouwen aan een toekomst waarin mens en natuur samen groeien.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section grid-paper ov-philosophy" aria-labelledby="filosofie-title">
+  <div class="wrap ov-philosophy-grid">
+    <h2 class="sr-only" id="filosofie-title">Waar ik in geloof</h2>
+    <figure class="ov-belief">
+      <blockquote>
+        <p>Ik geloof in de kracht van eenvoud, de wijsheid van de natuur en de magie die ontstaat wanneer we zorg dragen voor elkaar en onze planeet. Samen kunnen we een gezondere, mooiere toekomst kweken.</p>
+      </blockquote>
+      <figcaption class="ov-sign">Anthony Watteeuw<span class="ov-sign-role"><span class="sr-only">, </span>kweker en oprichter van {{ site.name }}</span></figcaption>
+    </figure>
+    <ul class="ov-traits">
+      <li>
+        <h3>Kweker met een hart</h3>
+        <p>Ik kweek niet alleen paddenstoelen, ik kweek verbinding.</p>
+      </li>
+      <li>
+        <h3>Levensgenieter</h3>
+        <p>Koken, natuur, reizen en tijd met mijn gezin geven me energie.</p>
+      </li>
+      <li>
+        <h3>Altijd blijven leren</h3>
+        <p>De natuur is mijn grootste leraar. Elke dag ontdek ik iets nieuws.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section ov-next" aria-labelledby="verder-title">
+  <div class="wrap">
+{% include "partials/section_head.html" with {"id": "verder-title", "title": "Verder in ons verhaal."} %}
+    <ul class="ov-next-list">
+      <li>
+{% include "partials/button.html" with {"label": "Ons kweekproces", "path": "/ons-verhaal/kweekproces/", "kind": "link"} %}
+        <p>Van stro tot verse zwammen, binnen gekweekt in vier fases.</p>
+      </li>
+      <li>
+{% include "partials/button.html" with {"label": "Buitenkweek", "path": "/ons-verhaal/buitenkweek/", "kind": "link"} %}
+        <p>Buitenkweek op boomstammen, gepland voor 2027. Nu nog een plan.</p>
+      </li>
+      <li>
+{% include "partials/button.html" with {"label": "Leveringsregio", "path": "/leveringsregio/", "kind": "link"} %}
+        <p>{{ ", ".join(town_names[:-1]) }} en {{ town_names[-1] }}.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="closing ov-closing" aria-labelledby="samen-title">
+  <div class="wrap">
+    <h2 id="samen-title">Laten we samen groeien.</h2>
+    <p>{{ site.name }} is meer dan een kwekerij. Het is een beweging. Een lokaal verhaal, met grote dromen. Voor onze kinderen. Voor jouw gezondheid. Voor onze planeet.</p>
+    <p class="ov-thanks">Bedankt dat je deel uitmaakt van dit verhaal.</p>
+    <div class="ov-closing-actions">
+      <a class="btn-primary" href="{{ url('/zwammen/') }}">Ontdek onze zwammen</a>
+      <a class="ov-closing-link" href="{{ url('/contact/') }}">Of neem contact op</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

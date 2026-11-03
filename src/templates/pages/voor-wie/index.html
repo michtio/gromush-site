@@ -1,0 +1,31 @@
+{% extends "layouts/base.html" %}
+{# /voor-wie/ (S12, template D-lite; sitemap.md "a short router page reusing the homepage's four cards"). Copy: Anthony's
+   Voor-wie brief (content-inventory 2.2) and final.html "Voor elke tafel". The cards come from audiences.json through
+   partials/audience_grid.html, each linking to its audience page. #}
+{% block title %}Voor wie kweken we? Chefs, grootkeukens, speciaalzaken en thuis · {{ site.name }}{% endblock %}
+{% block description %}Verse oesterzwammen uit {{ site.municipality }} voor chefs, grootkeukens, speciaalzaken en wie thuis lekker en lokaal wil koken. Kies wat bij jou past.{% endblock %}
+{% block main %}
+{% set towns = sorted(data.towns.towns, key=lambda t: t.nav_order) %}
+<section class="section tafels grid-paper aud-router" data-section="hero" aria-labelledby="router-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h1 id="router-title">Voor elke tafel een eigen verhaal.</h1>
+      <p class="lede">Van de chef die op zoek is naar een bijzondere oesterzwam tot de keuken die dagelijks voor honderden mensen kookt. Van de ambachtelijke speciaalzaak tot wie thuis gewoon beter wil eten.</p>
+    </div>
+    <div data-section="doelgroepen">
+{% include "partials/audience_grid.html" with {"level": 2, "link_to": "page"} %}
+    </div>
+  </div>
+</section>
+<section class="section aud-router-close" data-section="slot" aria-labelledby="router-close-title">
+  <div class="wrap">
+    <h2 class="statement statement--center" id="router-close-title">Eén kwekerij. Verschillende behoeften.</h2>
+    <p class="aud-router-text">Wij kweken lokaal in {{ site.municipality }} en bouwen aan een netwerk met chefs, grootkeukens, speciaalzaken en liefhebbers in de hele regio.</p>
+    <ul class="aud-towns" aria-label="Onze leveringsregio">
+{% for town in towns %}
+      <li><a href="{{ url('/leveringsregio/' + town.slug + '/') }}">{{ town.name }}</a></li>
+{% endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock %}

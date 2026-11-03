@@ -1,0 +1,12 @@
+{# Polaroid (S3; final.html growing phases): a taped photo with a handwritten step number and a caption. One <li> of <ol class="snaps">.
+   with: image (images.json id), number, title, text, extra (optional second images.json id, pinned over the corner).
+   The sizes match the 4/2/1-column .snaps grid. #}
+{% set sizes = "(min-width: 1440px) 300px, (min-width: 1100px) 21vw, (min-width: 600px) 44vw, 22rem" %}
+<li class="snap">
+  <span class="tape tape--l" aria-hidden="true"></span>
+  <span class="tape tape--r" aria-hidden="true"></span>
+  <figure>
+    <span class="snap-photo">{{ picture(image, sizes=sizes) }}<span class="num" aria-hidden="true">{{ number }}</span>{% if opt("extra") %}{{ picture(extra, cls="snap-extra", sizes="(min-width: 1100px) 120px, 40vw") }}{% endif %}</span>
+    <figcaption><strong>{{ title }}</strong> <span>{{ text }}</span></figcaption>
+  </figure>
+</li>

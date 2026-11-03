@@ -1,0 +1,25 @@
+{# Audience card (S3; final.html "Voor elke tafel"): a dashed coupon card with a letter disc, the audience name, a short text
+   and the audience's first primary action from audiences.json (R18). with: audience, letter, text (optional),
+   image + sizes (optional: a wide card with a coupon photo), rev (optional: photo on the right).
+   S12 additions (all optional, defaults unchanged): title (heading text, default audience.name), level (heading level,
+   default 3), note (an extra line under the text), link {label, path} (default: the first primary action). #}
+{% set action = opt("link") or [a for a in audience.primary_actions if a.get("path")][0] %}
+{% set wide = opt("image") is not None %}
+{% set level = opt("level", 3) %}
+<article class="version{{ ' version-wide' if wide else '' }}{{ ' rev' if opt('rev') else '' }}">
+{% if wide %}
+{% include "partials/coupon.html" with {"image": image, "sizes": opt("sizes", "100vw")} %}
+  <div>
+{% endif %}
+  <div class="version-head"><span class="view-letter" aria-hidden="true">{{ letter }}</span><h{{ level }}>{{ opt("title") or audience.name }}</h{{ level }}></div>
+{% if opt("text") %}
+  <p>{{ text }}</p>
+{% endif %}
+{% if opt("note") %}
+  <p class="version-note">{{ note }}</p>
+{% endif %}
+  <a class="link-action" href="{{ url(action['path']) }}"><span>{{ action['label'] }}</span> <svg class="icon" viewBox="0 0 24 16" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+{% if wide %}
+  </div>
+{% endif %}
+</article>

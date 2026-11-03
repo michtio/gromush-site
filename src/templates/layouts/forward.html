@@ -1,0 +1,18 @@
+{% extends "layouts/base.html" %}
+{# Forward page for a variety taken out of the range (PRD R17, AC15; plan AD17). The build renders it at
+   /zwammen/<slug>/ for every variety with in_range false: noindex, a meta refresh and a canonical to the
+   overview, one visible link. Never in the sitemap, nav, listings, cross-sells or form options. #}
+{% block title %}{{ variety.name }} · niet meer in het assortiment · {{ site.name }}{% endblock %}
+{% block description %}De {{ variety.name.lower() }} zit niet meer in het assortiment van {{ site.name }}. Bekijk alle zwammen die we nu kweken.{% endblock %}
+{% block robots %}<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url={{ url('/zwammen/') }}">
+{% endblock %}
+{% block canonical %}<link rel="canonical" href="{{ abs_url('/zwammen/') }}">
+{% endblock %}
+{% block main %}
+<div class="wrap smoke">
+  <h1>{{ variety.name }}</h1>
+  <p>De {{ variety.name.lower() }} zit niet meer in ons assortiment.</p>
+  <p><a href="{{ url('/zwammen/') }}">Bekijk alle zwammen</a></p>
+</div>
+{% endblock %}

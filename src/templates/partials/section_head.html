@@ -1,0 +1,11 @@
+{# Section head (S3): optional dashed cut line with scissors, the section heading and a lede.
+   with: id (heading id, for aria-labelledby on the section), title, lede (optional), knip (true for the cut line; default false). #}
+{% if opt("knip") %}
+<div class="knip" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" focusable="false"><use href="#i-scissors"/></svg></div>
+{% endif %}
+<div class="section-head">
+  <h2 id="{{ id }}">{{ title }}</h2>
+{% if opt("lede") %}
+  <p class="lede">{{ lede }}</p>
+{% endif %}
+</div>

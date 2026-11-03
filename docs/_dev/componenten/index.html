@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Componenten · GroMush</title>
+<meta name="description" content="Interne referentiepagina met de gedeelde componenten van de site.">
+<meta name="robots" content="noindex, nofollow"><link rel="canonical" href="https://michtio.github.io/gromush-site/_dev/componenten/">
+<meta name="theme-color" content="#ece2c8">
+<link rel="icon" href="data:,">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preload" href="/gromush-site/fonts/youngserif-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/gromush-site/css/site.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Organization",
+ "@id": "https://michtio.github.io/gromush-site/#organisatie",
+ "name": "GroMush",
+ "url": "https://michtio.github.io/gromush-site/",
+ "logo": "https://michtio.github.io/gromush-site/img/r/logo-264.png",
+ "email": "info@gromush.be",
+ "telephone": "+32499242359",
+ "sameAs": [
+  "https://www.instagram.com/gromush.be/",
+  "https://www.facebook.com/profile.php?id=61590322125848"
+ ]
+}
+</script>
+
+<style>
+.dev-intro{padding-block:2.5rem 1.5rem}
+.dev-intro h1{font-size:clamp(2.2rem,5vw,3.5rem);margin-bottom:.6rem}
+.dev-sec{padding-block:2.75rem;border-top:1px dashed rgb(var(--ink-rgb) / .4)}
+.dev-sec .dev-label{font-family:var(--font-text);font-weight:600;font-size:.95rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 1.6rem}
+.dev-sub{font-weight:600;font-size:.95rem;margin:2rem 0 .8rem}
+.dev-row{display:flex;flex-wrap:wrap;gap:1.2rem 1.6rem;align-items:center}
+.dev-narrow{max-width:30rem}
+.dev-swatches{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,9rem),1fr));gap:1rem 1.2rem}
+.dev-swatch{font-size:.85rem;line-height:1.35}
+.dev-swatch span{display:block;height:3rem;border:1px solid var(--ink);border-radius:4px;background:var(--c);margin-bottom:.35rem}
+.dev-type{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem}
+.dev-type p{margin:0}
+.dev-pill{display:inline-flex;flex-direction:column;align-items:flex-start;gap:.1rem;font-size:.9rem}
+.dev-icons{display:flex;flex-wrap:wrap;gap:1.4rem 2rem;list-style:none;margin:0;padding:0}
+.dev-icons li{display:flex;align-items:center;gap:.6rem;font-size:.9rem}
+.dev-icons .icon{width:1.6rem;height:1.6rem}
+.dev-pips{background:var(--card);border:1px solid var(--ink);border-radius:8px;padding:1rem 1.2rem;max-width:20rem}
+.dev-grid-block{padding:clamp(1.5rem,4vw,2.5rem)}
+</style>
+</head>
+<body>
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="5.5" cy="6.5" r="2.7" fill="none"/><circle cx="5.5" cy="17.5" r="2.7" fill="none"/><path fill="none" d="M7.7 7.9 L21 17.4 M7.7 16.1 L21 6.6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 16"><path fill="none" d="M2 8 H20 M14 2.5 L21 8 L14 13.5"/></symbol>
+  <symbol id="i-hand-arrow" viewBox="0 0 24 24"><path fill="none" d="M4 12.5C9 11.8 14 12.4 19 12M14 7l5.2 5L14 17"/></symbol>
+  <symbol id="i-tick" viewBox="0 0 16 16"><path fill="none" d="M3 8.5 L6.5 12 L13 4"/></symbol>
+</svg>
+<div class="fibre" aria-hidden="true"></div>
+<a class="skip" href="#inhoud">Ga naar inhoud</a>
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="logo" href="/gromush-site/" aria-label="GroMush, naar de beginpagina">
+      <picture><source type="image/avif" srcset="/gromush-site/img/r/logo-264.avif 264w" sizes="88px"><source type="image/webp" srcset="/gromush-site/img/r/logo-264.webp 264w" sizes="88px"><img src="/gromush-site/img/r/logo-264.png" srcset="/gromush-site/img/r/logo-264.png 264w" sizes="88px" alt="GroMush" width="264" height="132" loading="eager" decoding="async" fetchpriority="high"></picture>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Menu openen" data-label-open="Menu openen" data-label-close="Menu sluiten">
+      <svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true" focusable="false"><path d="M1 2h20M1 8h20M1 14h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+    </button>
+    <nav class="main-nav" id="main-nav" aria-label="Hoofdnavigatie">
+      <ul class="nav-list">
+        <li class="nav-item has-sub">
+          <a class="nav-link" href="/gromush-site/zwammen/">Zwammen</a>
+          <button class="sub-toggle" type="button" aria-expanded="false" aria-controls="sub-1" aria-label="Submenu Zwammen" hidden>
+            <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true" focusable="false"><path d="M1 1.5l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          </button>
+          <ul class="sub" id="sub-1">
+            <li><a href="/gromush-site/zwammen/">Alle zwammen</a></li>
+            <li><a href="/gromush-site/zwammen/gele-oesterzwam/">Gele oesterzwam</a></li>
+            <li><a href="/gromush-site/zwammen/roze-oesterzwam/">Roze oesterzwam</a></li>
+            <li><a href="/gromush-site/zwammen/witte-oesterzwam/">Witte oesterzwam</a></li>
+            <li><a href="/gromush-site/zwammen/blauwe-oesterzwam/">Blauwe oesterzwam</a></li>
+            <li><a href="/gromush-site/zwammen/grijze-oesterzwam/">Grijze oesterzwam</a></li>
+            <li><a href="/gromush-site/zwammen/italiaanse-oesterzwam/">Italiaanse oesterzwam</a></li>
+          </ul>
+        </li>
+        <li class="nav-item has-sub">
+          <a class="nav-link" href="/gromush-site/voor-wie/">Voor wie</a>
+          <button class="sub-toggle" type="button" aria-expanded="false" aria-controls="sub-2" aria-label="Submenu Voor wie" hidden>
+            <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true" focusable="false"><path d="M1 1.5l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          </button>
+          <ul class="sub" id="sub-2">
+            <li><a href="/gromush-site/voor-wie/chefs/">Chefs</a></li>
+            <li><a href="/gromush-site/voor-wie/grootkeukens/">Grootkeukens</a></li>
+            <li><a href="/gromush-site/voor-wie/speciaalzaken/">Speciaalzaken</a></li>
+            <li><a href="/gromush-site/voor-wie/thuis/">Thuis &amp; MushLove</a></li>
+          </ul>
+        </li>
+        <li class="nav-item has-sub">
+          <a class="nav-link" href="/gromush-site/ons-verhaal/">Ons verhaal</a>
+          <button class="sub-toggle" type="button" aria-expanded="false" aria-controls="sub-3" aria-label="Submenu Ons verhaal" hidden>
+            <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true" focusable="false"><path d="M1 1.5l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          </button>
+          <ul class="sub" id="sub-3">
+            <li><a href="/gromush-site/ons-verhaal/">Over Anthony</a></li>
+            <li><a href="/gromush-site/ons-verhaal/kweekproces/">Kweekproces</a></li>
+            <li><a href="/gromush-site/ons-verhaal/buitenkweek/">Buitenkweek</a></li>
+            <li><a href="/gromush-site/leveringsregio/">Leveringsregio</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="/gromush-site/inspiratie/">Inspiratie</a></li>
+        <li class="nav-item"><a class="nav-link" href="/gromush-site/contact/">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="btn-cta" href="/gromush-site/proefbox/">Gratis ProefBox</a>
+  </div>
+</header>
+<main id="inhoud">
+<div class="wrap dev-intro">
+  <h1>Componenten</h1>
+  <p class="lede">Interne referentie: de gedeelde componenten uit final.html, gevuld met de echte gegevens. Niet geïndexeerd en nergens gelinkt.</p>
+</div>
+
+<section class="dev-sec" aria-labelledby="dev-tokens">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-tokens">Kleuren</h2>
+    <ul class="dev-swatches">
+      <li class="dev-swatch"><span style="--c:var(--ink)"></span>--ink</li>
+      <li class="dev-swatch"><span style="--c:var(--ink-soft)"></span>--ink-soft</li>
+      <li class="dev-swatch"><span style="--c:var(--straw)"></span>--straw</li>
+      <li class="dev-swatch"><span style="--c:var(--straw-deep)"></span>--straw-deep</li>
+      <li class="dev-swatch"><span style="--c:var(--grid-paper)"></span>--grid-paper</li>
+      <li class="dev-swatch"><span style="--c:var(--paper-card)"></span>--paper-card</li>
+      <li class="dev-swatch"><span style="--c:var(--card)"></span>--card</li>
+      <li class="dev-swatch"><span style="--c:var(--polaroid)"></span>--polaroid</li>
+      <li class="dev-swatch"><span style="--c:var(--kraft)"></span>--kraft</li>
+      <li class="dev-swatch"><span style="--c:var(--kraft-tint)"></span>--kraft-tint</li>
+      <li class="dev-swatch"><span style="--c:var(--moss)"></span>--moss</li>
+      <li class="dev-swatch"><span style="--c:var(--form-red)"></span>--form-red</li>
+      <li class="dev-swatch"><span style="--c:var(--form-red-deep)"></span>--form-red-deep</li>
+      <li class="dev-swatch"><span style="--c:var(--van)"></span>--van</li>
+    </ul>
+    <h3 class="dev-sub">Soorten (accent, tint, pill uit varieties.json)</h3>
+    <ul class="dev-swatches">
+      <li class="dev-swatch"><span style="--c:var(--gele)"></span>Gele oesterzwam<br>--gele · --tint-gele</li>
+      <li class="dev-swatch"><span style="--c:var(--roze)"></span>Roze oesterzwam<br>--roze · --tint-roze</li>
+      <li class="dev-swatch"><span style="--c:var(--witte)"></span>Witte oesterzwam<br>--witte · --tint-witte</li>
+      <li class="dev-swatch"><span style="--c:var(--blauwe)"></span>Blauwe oesterzwam<br>--blauwe · --tint-blauwe</li>
+      <li class="dev-swatch"><span style="--c:var(--grijze)"></span>Grijze oesterzwam<br>--grijze · --tint-grijze</li>
+      <li class="dev-swatch"><span style="--c:var(--italiaanse)"></span>Italiaanse oesterzwam<br>--italiaanse · --tint-italiaanse</li>
+    </ul>
+    <h3 class="dev-sub">Typografie</h3>
+    <div class="dev-type">
+      <p style="font-family:var(--font-display);font-size:clamp(3rem,6vw,5.75rem);line-height:1.02;letter-spacing:-0.02em">Van kwekerij tot bord.</p>
+      <p style="font-family:var(--font-display);font-size:clamp(2.1rem,4vw,3.25rem);line-height:1.12">Young Serif, kop</p>
+      <p class="statement" style="margin:0">Young Serif, slotzin</p>
+      <p style="font-family:var(--font-display);font-size:clamp(1.45rem,2.2vw,1.85rem)">Young Serif, titel</p>
+      <p class="measure">Work Sans, lopende tekst. Licht nootachtig met een fruitige geur; dun en teer, dus kort en heet bakken. <em>Pleurotus citrinopileatus</em></p>
+      <p class="lede">Work Sans, inleiding. Ambachtelijk gekweekt. Van kwekerij tot bord.</p>
+      <p class="hand">Kaushan Script, handschrift</p>
+      <p style="font-family:var(--font-mono);font-weight:700;font-size:.75rem">Courier Prime · Nr. 01</p>
+    </div>
+  </div>
+</section>
+
+<section class="dev-sec" aria-labelledby="dev-buttons">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-buttons">Knoppen en acties</h2>
+    <div class="dev-row">
+<a class="btn-primary" href="/gromush-site/proefbox/#formulier">Vraag je gratis ProefBox aan</a>
+<a class="btn-second" href="/gromush-site/contact/?reden=bestelling-thuis#formulier">Kook je thuis? Vraag een bestelling aan</a>
+<a class="btn-cta" href="/gromush-site/proefbox/">Gratis ProefBox</a>
+<a class="link-action" href="/gromush-site/proefbox/?type=Restaurant+%2F+chef#formulier"><span>Vraag een ProefBox aan</span> <svg class="icon" viewBox="0 0 24 16" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+      <a class="hit" href="/gromush-site/zwammen/">Ontdek onze oesterzwammen</a>
+    </div>
+    <h3 class="dev-sub">Pill per soort</h3>
+    <div class="dev-row">
+      <span class="dev-pill">Gele oesterzwam<span class="pill" style="--accent:var(--gele)">Vraag aan</span>
+</span>
+      <span class="dev-pill">Roze oesterzwam<span class="pill" style="--accent:var(--roze)">Vraag aan</span>
+</span>
+      <span class="dev-pill">Witte oesterzwam<span class="pill pill--ring" style="--accent:var(--witte)">Vraag aan</span>
+</span>
+      <span class="dev-pill">Blauwe oesterzwam<span class="pill" style="--accent:var(--pill-blauwe)">Vraag aan</span>
+</span>
+      <span class="dev-pill">Grijze oesterzwam<span class="pill" style="--accent:var(--pill-grijze)">Vraag aan</span>
+</span>
+      <span class="dev-pill">Italiaanse oesterzwam<span class="pill" style="--accent:var(--pill-italiaanse)">Vraag aan</span>
+</span>
+    </div>
+  </div>
+</section>
+
+<section class="dev-sec" aria-labelledby="dev-slip">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-slip">Bestelbon met tape</h2>
+<div class="slip-wrap">
+  <div class="slip grid-paper">
+    <span class="tape tape--l" aria-hidden="true"></span>
+    <span class="tape tape--r" aria-hidden="true"></span>
+    <span class="slip-note" aria-hidden="true">gratis, voor zaken</span>
+    <a class="btn-primary" href="/gromush-site/proefbox/#formulier">Vraag je gratis ProefBox aan</a>
+    <a class="btn-second" href="/gromush-site/contact/?reden=bestelling-thuis#formulier">Kook je thuis? Vraag een bestelling aan</a>
+    <a class="slip-secondary hit" href="/gromush-site/zwammen/">Ontdek onze oesterzwammen</a>
+  </div>
+</div>
+  </div>
+</section>
+
+<section class="dev-sec" aria-labelledby="dev-paper">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-paper">Ruitjespapier, notitie met tape</h2>
+<div class="paper-note grid-paper">
+  <span class="tape tape--l" aria-hidden="true"></span>
+  <span class="tape tape--r" aria-hidden="true"></span>
+  <h3>Buiten gekweekt: groeien met het ritme van de natuur.</h3>
+  <p class="status">In voorbereiding, gepland voor 2027.</p>
+  <p>Later kweken we ook buiten, op hout, met het ritme van de seizoenen. We houden je op de hoogte.</p>
+  <a class="note-link hit" href="/gromush-site/ons-verhaal/buitenkweek/">Volg onze buitenkweek</a>
+</div>
+  </div>
+</section>
+
+<section class="dev-sec grid-paper" aria-labelledby="dev-head">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-head">Sectiekop met knipkader</h2>
+<div class="knip" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" focusable="false"><use href="#i-scissors"/></svg></div>
+<div class="section-head">
+  <h2 id="dev-head-demo">Proef het verschil.</h2>
+  <p class="lede">We stellen graag een gratis ProefBox samen met een selectie van onze soorten. Voor professionele keukens en zaken in onze leveringsregio.</p>
+</div>
+    <fieldset class="soorten">
+      <legend>Soortkeuze</legend>
+      <div class="chips">
+<label class="chip" style="--tint:var(--tint-gele)">
+  <input type="checkbox" name="soorten" value="Gele oesterzwam" data-key="gele" data-slug="gele-oesterzwam" id="chk-gele">
+  <span class="chip-face"><span class="chip-letter" aria-hidden="true">A</span><span class="chip-tick" aria-hidden="true"><svg viewBox="0 0 16 16"><use href="#i-tick"/></svg></span>Gele oesterzwam</span>
+</label>
+<label class="chip" style="--tint:var(--tint-roze)">
+  <input type="checkbox" name="soorten" value="Roze oesterzwam" data-key="roze" data-slug="roze-oesterzwam" id="chk-roze">
+  <span class="chip-face"><span class="chip-letter" aria-hidden="true">B</span><span class="chip-tick" aria-hidden="true"><svg viewBox="0 0 16 16"><use href="#i-tick"/></svg></span>Roze oesterzwam</span>
+</label>
+<label class="chip" style="--tint:var(--tint-witte)">
+  <input type="checkbox" name="soorten" value="Witte oesterzwam" data-key="witte" data-slug="witte-oesterzwam" id="chk-witte">
+  <span class="chip-face"><span class="chip-letter" aria-hidden="true">C</span><span class="chip-tick" aria-hidden="true"><svg viewBox="0 0 16 16"><use href="#i-tick"/></svg></span>Witte oesterzwam</span>
+</label>
+<label class="chip" style="--tint:var(--tint-blauwe)">
+  <input type="checkbox" name="soorten" value="Blauwe oesterzwam" data-key="blauwe" data-slug="blauwe-oesterzwam" id="chk-blauwe">
+  <span class="chip-face"><span class="chip-letter" aria-hidden="true">D</span><span class="chip-tick" aria-hidden="true"><svg viewBox="0 0 16 16"><use href="#i-tick"/></svg></span>Blauwe oesterzwam</span>
+</label>
+<label class="chip" style="--tint:var(--tint-grijze)">
+  <input type="checkbox" name="soorten" value="Grijze oesterzwam" data-key="grijze" data-slug="grijze-oesterzwam" id="chk-grijze">
+  <span class="chip-face"><span class="chip-letter" aria-hidden="true">E</span><span class="chip-tick" aria-hidden="true"><svg viewBox="0 0 16 16"><use href="#i-tick"/></svg></span>Grijze oesterzwam</span>
+</label>
+<label class="chip" style="--tint:var(--tint-italiaanse)">
+  <input type="checkbox" name="soorten" value="Italiaanse oesterzwam" data-key="italiaanse" data-slug="italiaanse-oesterzwam" id="chk-italiaanse">
+  <span class="chip-face"><span class="chip-letter" aria-hidden="true">F</span><span class="chip-tick" aria-hidden="true"><svg viewBox="0 0 16 16"><use href="#i-tick"/></svg></span>Italiaanse oesterzwam</span>
+</label>
+      </div>
+    </fieldset>
+  </div>
+</section>
+
+<section class="dev-sec" aria-labelledby="dev-coupon">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-coupon">Bon (foto in knipkader)</h2>
+    <div class="dev-narrow">
+<figure class="coupon"><svg class="icon coupon-scissors" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-scissors"/></svg><picture><source type="image/avif" srcset="/gromush-site/img/r/dish-geroosterd-400.avif 400w, /gromush-site/img/r/dish-geroosterd-800.avif 800w, /gromush-site/img/r/dish-geroosterd-1200.avif 1200w" sizes="(min-width: 600px) 480px, calc(100vw - 3rem)"><source type="image/webp" srcset="/gromush-site/img/r/dish-geroosterd-400.webp 400w, /gromush-site/img/r/dish-geroosterd-800.webp 800w, /gromush-site/img/r/dish-geroosterd-1200.webp 1200w" sizes="(min-width: 600px) 480px, calc(100vw - 3rem)"><img src="/gromush-site/img/r/dish-geroosterd-800.jpg" srcset="/gromush-site/img/r/dish-geroosterd-400.jpg 400w, /gromush-site/img/r/dish-geroosterd-800.jpg 800w" sizes="(min-width: 600px) 480px, calc(100vw - 3rem)" alt="Geroosterde oesterzwam uit de oven" width="1200" height="900" loading="lazy" decoding="async"></picture></figure>
+    </div>
+  </div>
+</section>
+
+<section class="dev-sec" aria-labelledby="dev-polaroid">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-polaroid">Polaroids met tape</h2>
+    <div class="snaps-wrap">
+      <ol class="snaps">
+<li class="snap">
+  <span class="tape tape--l" aria-hidden="true"></span>
+  <span class="tape tape--r" aria-hidden="true"></span>
+  <figure>
+    <span class="snap-photo"><picture><source type="image/avif" srcset="/gromush-site/img/r/fase1-stro-400.avif 400w, /gromush-site/img/r/fase1-stro-800.avif 800w, /gromush-site/img/r/fase1-stro-1200.avif 1200w" sizes="(min-width: 1440px) 300px, (min-width: 1100px) 21vw, (min-width: 600px) 44vw, 22rem"><source type="image/webp" srcset="/gromush-site/img/r/fase1-stro-400.webp 400w, /gromush-site/img/r/fase1-stro-800.webp 800w, /gromush-site/img/r/fase1-stro-1200.webp 1200w" sizes="(min-width: 1440px) 300px, (min-width: 1100px) 21vw, (min-width: 600px) 44vw, 22rem"><img src="/gromush-site/img/r/fase1-stro-800.jpg" srcset="/gromush-site/img/r/fase1-stro-400.jpg 400w, /gromush-site/img/r/fase1-stro-800.jpg 800w" sizes="(min-width: 1440px) 300px, (min-width: 1100px) 21vw, (min-width: 600px) 44vw, 22rem" alt="Stro weekt in koud water" width="1200" height="1600" loading="lazy" decoding="async"></picture><span class="num" aria-hidden="true">1</span></span>
+    <figcaption><strong>Stro voorbereiden.</strong> <span>Het stro weekt in koud water en laat daarna uitlekken.</span></figcaption>
+  </figure>
+</li>
+<li class="snap">
+  <span class="tape tape--l" aria-hidden="true"></span>
+  <span class="tape tape--r" aria-hidden="true"></span>
+  <figure>
+    <span class="snap-photo"><picture><source type="image/avif" srcset="/gromush-site/img/r/fase2-emmer-400.avif 400w, /gromush-site/img/r/fase2-emmer-800.avif 800w, /gromush-site/img/r/fase2-emmer-1200.avif 1200w" sizes="(min-width: 1440px) 300px, (min-width: 1100px) 21vw, (min-width: 600px) 44vw, 22rem"><source type="image/webp" srcset="/gromush-site/img/r/fase2-emmer-400.webp 400w, /gromush-site/img/r/fase2-emmer-800.webp 800w, /gromush-site/img/r/fase2-emmer-1200.webp 1200w" sizes="(min-width: 1440px) 300px, (min-width: 1100px) 21vw, (min-width: 600px) 44vw, 22rem"><img src="/gromush-site/img/r/fase2-emmer-800.jpg" srcset="/gromush-site/img/r/fase2-emmer-400.jpg 400w, /gromush-site/img/r/fase2-emmer-800.jpg 800w" sizes="(min-width: 1440px) 300px, (min-width: 1100px) 21vw, (min-width: 600px) 44vw, 22rem" alt="Stro en broed in lagen in een emmer" width="1200" height="1600" loading="lazy" decoding="async"></picture><span class="num" aria-hidden="true">2</span></span>
+    <figcaption><strong>Opbouw in 20-literemmers.</strong> <span>Stro en paddenstoelenbroed in afwisselende lagen.</span></figcaption>
+  </figure>
+</li>
+<li class="snap">
+  <span class="tape tape--l" aria-hidden="true"></span>
+  <span class="tape tape--r" aria-hidden="true"></span>
+  <figure>
+    <span class="snap-photo"><picture><source type="image/avif" srcset="/gromush-site/img/r/fase3-incubatie-a-400.avif 400w, /gromush-site/img/r/fase3-incubatie-a-800.avif 800w, /gromush-site/img/r/fase3-incubatie-a-1200.avif 1200w" sizes="(min-width: 1440px) 300px, (min-width: 1100px) 21vw, (min-width: 600px) 44vw, 22rem"><source type="image/webp" srcset="/gromush-site/img/r/fase3-incubatie-a-400.webp 400w, /gromush-site/img/r/fase3-incubatie-a-800.webp 800w, /gromush-site/img/r/fase3-incubatie-a-1200.webp 1200w" sizes="(min-width: 1440px) 300px, (min-width: 1100px) 21vw, (min-width: 600px) 44vw, 22rem"><img src="/gromush-site/img/r/fase3-incubatie-a-800.jpg" srcset="/gromush-site/img/r/fase3-incubatie-a-400.jpg 400w, /gromush-site/img/r/fase3-incubatie-a-800.jpg 800w" sizes="(min-width: 1440px) 300px, (min-width: 1100px) 21vw, (min-width: 600px) 44vw, 22rem" alt="Emmers met mycelium in incubatie" width="1200" height="1600" loading="lazy" decoding="async"></picture><span class="num" aria-hidden="true">3</span><picture><source type="image/avif" srcset="/gromush-site/img/r/fase3-incubatie-b-400.avif 400w, /gromush-site/img/r/fase3-incubatie-b-800.avif 800w, /gromush-site/img/r/fase3-incubatie-b-1200.avif 1200w" sizes="(min-width: 1100px) 120px, 40vw"><source type="image/webp" srcset="/gromush-site/img/r/fase3-incubatie-b-400.webp 400w, /gromush-site/img/r/fase3-incubatie-b-800.webp 800w, /gromush-site/img/r/fase3-incubatie-b-1200.webp 1200w" sizes="(min-width: 1100px) 120px, 40vw"><img class="snap-extra" src="/gromush-site/img/r/fase3-incubatie-b-800.jpg" srcset="/gromush-site/img/r/fase3-incubatie-b-400.jpg 400w, /gromush-site/img/r/fase3-incubatie-b-800.jpg 800w" sizes="(min-width: 1100px) 120px, 40vw" alt="Wit mycelium dat het stro overgroeit" width="1200" height="1600" loading="lazy" decoding="async"></picture></span>
+    <figcaption><strong>Incubatie.</strong> <span>In het donker neemt het mycelium het stro over.</span></figcaption>
+  </figure>
+</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="dev-sec" aria-labelledby="dev-cards">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-cards">Draaikaarten per soort</h2>
+    <ul class="cat-grid">
+<li class="cat-cell">
+  <div class="tc tc--gele" data-card="gele" data-name="Gele oesterzwam" style="--accent:var(--gele);--accent-tint:var(--tint-gele)">
+    <div class="tc-inner">
+      <div class="tc-face tc-front">
+        <p class="tc-number">Nr. 01</p>
+        <picture><source type="image/avif" srcset="/gromush-site/img/r/cutout-gele-400.avif 400w, /gromush-site/img/r/cutout-gele-800.avif 800w" sizes="(min-width: 900px) 236px, 196px"><source type="image/webp" srcset="/gromush-site/img/r/cutout-gele-400.webp 400w, /gromush-site/img/r/cutout-gele-800.webp 800w" sizes="(min-width: 900px) 236px, 196px"><img class="tc-cutout" src="/gromush-site/img/r/cutout-gele-800.png" srcset="/gromush-site/img/r/cutout-gele-400.png 400w, /gromush-site/img/r/cutout-gele-800.png 800w" sizes="(min-width: 900px) 236px, 196px" alt="" width="800" height="533" loading="lazy" decoding="async"></picture>
+        <div class="tc-band"><h3>Gele oesterzwam</h3></div>
+        <p class="tc-taste">Nootachtig · fruitig · delicaat</p>
+      </div>
+      <div class="tc-face tc-back">
+        <p class="tc-back-name">Gele oesterzwam</p>
+        <p class="tc-latin">Pleurotus citrinopileatus</p>
+<table class="tc-stats">
+  <caption class="sr-only">Culinaire indicaties van de gele oesterzwam</caption>
+  <tbody>
+    <tr><th scope="row">Smaak</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span><span class="pip"></span></span><span class="sr-only">3 van 5</span></td></tr>
+    <tr><th scope="row">Textuur</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span><span class="sr-only">2 van 5</span></td></tr>
+    <tr><th scope="row">Aardsheid</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span><span class="sr-only">2 van 5</span></td></tr>
+    <tr><th scope="row">Geur</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span></span><span class="sr-only">4 van 5</span></td></tr>
+  </tbody>
+</table>
+        <p class="tc-sentence">Licht nootachtig met een fruitige geur; dun en teer, dus kort en heet bakken.</p>
+        <p class="tc-packs">250 g · 500 g · 1 kg · meer op aanvraag</p>
+        <a class="tc-request" href="/gromush-site/proefbox/?soort=gele#formulier">Vraag deze soort aan<span class="sr-only">: gele oesterzwam</span></a>
+      </div>
+    </div>
+  </div>
+  <button class="tc-flip tc-flip--under" type="button" data-flip-back="Draai terug" hidden>Draai om</button>
+</li>
+<li class="cat-cell">
+  <div class="tc tc--roze" data-card="roze" data-name="Roze oesterzwam" style="--accent:var(--roze);--accent-tint:var(--tint-roze)">
+    <div class="tc-inner">
+      <div class="tc-face tc-front">
+        <p class="tc-number">Nr. 02</p>
+        <picture><source type="image/avif" srcset="/gromush-site/img/r/cutout-roze-400.avif 400w, /gromush-site/img/r/cutout-roze-800.avif 800w" sizes="(min-width: 900px) 236px, 196px"><source type="image/webp" srcset="/gromush-site/img/r/cutout-roze-400.webp 400w, /gromush-site/img/r/cutout-roze-800.webp 800w" sizes="(min-width: 900px) 236px, 196px"><img class="tc-cutout" src="/gromush-site/img/r/cutout-roze-800.png" srcset="/gromush-site/img/r/cutout-roze-400.png 400w, /gromush-site/img/r/cutout-roze-800.png 800w" sizes="(min-width: 900px) 236px, 196px" alt="" width="800" height="533" loading="lazy" decoding="async"></picture>
+        <div class="tc-band"><h3>Roze oesterzwam</h3></div>
+        <p class="tc-taste">Hartig · houtig · stevig</p>
+      </div>
+      <div class="tc-face tc-back">
+        <p class="tc-back-name">Roze oesterzwam</p>
+        <p class="tc-latin">Pleurotus djamor</p>
+<table class="tc-stats">
+  <caption class="sr-only">Culinaire indicaties van de roze oesterzwam</caption>
+  <tbody>
+    <tr><th scope="row">Smaak</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span></span><span class="sr-only">5 van 5</span></td></tr>
+    <tr><th scope="row">Textuur</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span></span><span class="sr-only">4 van 5</span></td></tr>
+    <tr><th scope="row">Aardsheid</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span><span class="pip"></span></span><span class="sr-only">3 van 5</span></td></tr>
+    <tr><th scope="row">Geur</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span><span class="pip"></span></span><span class="sr-only">3 van 5</span></td></tr>
+  </tbody>
+</table>
+        <p class="tc-sentence">Hartig en licht houtig, krokant gebakken met een spekachtige toets; steviger van beet dan andere oesterzwammen, en bij het bakken verbleekt het roze naar goudbruin.</p>
+        <p class="tc-packs">250 g · 500 g · 1 kg · meer op aanvraag</p>
+        <a class="tc-request" href="/gromush-site/proefbox/?soort=roze#formulier">Vraag deze soort aan<span class="sr-only">: roze oesterzwam</span></a>
+      </div>
+    </div>
+  </div>
+  <button class="tc-flip tc-flip--under" type="button" data-flip-back="Draai terug" hidden>Draai om</button>
+</li>
+<li class="cat-cell">
+  <div class="tc tc--witte" data-card="witte" data-name="Witte oesterzwam" style="--accent:var(--witte);--accent-tint:var(--tint-witte)">
+    <div class="tc-inner">
+      <div class="tc-face tc-front">
+        <p class="tc-number">Nr. 03</p>
+        <picture><source type="image/avif" srcset="/gromush-site/img/r/cutout-witte-400.avif 400w, /gromush-site/img/r/cutout-witte-800.avif 800w" sizes="(min-width: 900px) 236px, 196px"><source type="image/webp" srcset="/gromush-site/img/r/cutout-witte-400.webp 400w, /gromush-site/img/r/cutout-witte-800.webp 800w" sizes="(min-width: 900px) 236px, 196px"><img class="tc-cutout" src="/gromush-site/img/r/cutout-witte-800.png" srcset="/gromush-site/img/r/cutout-witte-400.png 400w, /gromush-site/img/r/cutout-witte-800.png 800w" sizes="(min-width: 900px) 236px, 196px" alt="" width="800" height="533" loading="lazy" decoding="async"></picture>
+        <div class="tc-band"><h3>Witte oesterzwam</h3></div>
+        <p class="tc-taste">Mild · zacht · veelzijdig</p>
+      </div>
+      <div class="tc-face tc-back">
+        <p class="tc-back-name">Witte oesterzwam</p>
+        <p class="tc-latin">Pleurotus ostreatus</p>
+<table class="tc-stats">
+  <caption class="sr-only">Culinaire indicaties van de witte oesterzwam</caption>
+  <tbody>
+    <tr><th scope="row">Smaak</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span><span class="sr-only">2 van 5</span></td></tr>
+    <tr><th scope="row">Textuur</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span><span class="pip"></span></span><span class="sr-only">3 van 5</span></td></tr>
+    <tr><th scope="row">Aardsheid</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span><span class="sr-only">2 van 5</span></td></tr>
+    <tr><th scope="row">Geur</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span><span class="sr-only">2 van 5</span></td></tr>
+  </tbody>
+</table>
+        <p class="tc-sentence">Mild en zacht van smaak, mals van structuur: een rustige basis voor sauzen, pasta en risotto.</p>
+        <p class="tc-packs">250 g · 500 g · 1 kg · meer op aanvraag</p>
+        <a class="tc-request" href="/gromush-site/proefbox/?soort=witte#formulier">Vraag deze soort aan<span class="sr-only">: witte oesterzwam</span></a>
+      </div>
+    </div>
+  </div>
+  <button class="tc-flip tc-flip--under" type="button" data-flip-back="Draai terug" hidden>Draai om</button>
+</li>
+<li class="cat-cell">
+  <div class="tc tc--blauwe" data-card="blauwe" data-name="Blauwe oesterzwam" style="--accent:var(--blauwe);--accent-tint:var(--tint-blauwe)">
+    <div class="tc-inner">
+      <div class="tc-face tc-front">
+        <p class="tc-number">Nr. 04</p>
+        <picture><source type="image/avif" srcset="/gromush-site/img/r/cutout-blauwe-400.avif 400w, /gromush-site/img/r/cutout-blauwe-800.avif 800w" sizes="(min-width: 900px) 236px, 196px"><source type="image/webp" srcset="/gromush-site/img/r/cutout-blauwe-400.webp 400w, /gromush-site/img/r/cutout-blauwe-800.webp 800w" sizes="(min-width: 900px) 236px, 196px"><img class="tc-cutout" src="/gromush-site/img/r/cutout-blauwe-800.png" srcset="/gromush-site/img/r/cutout-blauwe-400.png 400w, /gromush-site/img/r/cutout-blauwe-800.png 800w" sizes="(min-width: 900px) 236px, 196px" alt="" width="800" height="533" loading="lazy" decoding="async"></picture>
+        <div class="tc-band"><h3>Blauwe oesterzwam</h3></div>
+        <p class="tc-taste">Hartig · aards · vlezig</p>
+      </div>
+      <div class="tc-face tc-back">
+        <p class="tc-back-name">Blauwe oesterzwam</p>
+        <p class="tc-latin">P. ostreatus var. columbinus</p>
+<table class="tc-stats">
+  <caption class="sr-only">Culinaire indicaties van de blauwe oesterzwam</caption>
+  <tbody>
+    <tr><th scope="row">Smaak</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span></span><span class="sr-only">4 van 5</span></td></tr>
+    <tr><th scope="row">Textuur</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span></span><span class="sr-only">5 van 5</span></td></tr>
+    <tr><th scope="row">Aardsheid</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span></span><span class="sr-only">4 van 5</span></td></tr>
+    <tr><th scope="row">Geur</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span><span class="pip"></span></span><span class="sr-only">3 van 5</span></td></tr>
+  </tbody>
+</table>
+        <p class="tc-sentence">Hartig en licht aards, vlezig en stevig; de blauwe tint verkleurt naar grijs in de pan.</p>
+        <p class="tc-packs">250 g · 500 g · 1 kg · meer op aanvraag</p>
+        <a class="tc-request" href="/gromush-site/proefbox/?soort=blauwe#formulier">Vraag deze soort aan<span class="sr-only">: blauwe oesterzwam</span></a>
+      </div>
+    </div>
+  </div>
+  <button class="tc-flip tc-flip--under" type="button" data-flip-back="Draai terug" hidden>Draai om</button>
+</li>
+<li class="cat-cell">
+  <div class="tc tc--grijze" data-card="grijze" data-name="Grijze oesterzwam" style="--accent:var(--grijze);--accent-tint:var(--tint-grijze)">
+    <div class="tc-inner">
+      <div class="tc-face tc-front">
+        <p class="tc-number">Nr. 05</p>
+        <picture><source type="image/avif" srcset="/gromush-site/img/r/cutout-grijs-italiaans-400.avif 400w, /gromush-site/img/r/cutout-grijs-italiaans-800.avif 800w" sizes="(min-width: 900px) 236px, 196px"><source type="image/webp" srcset="/gromush-site/img/r/cutout-grijs-italiaans-400.webp 400w, /gromush-site/img/r/cutout-grijs-italiaans-800.webp 800w" sizes="(min-width: 900px) 236px, 196px"><img class="tc-cutout" src="/gromush-site/img/r/cutout-grijs-italiaans-800.png" srcset="/gromush-site/img/r/cutout-grijs-italiaans-400.png 400w, /gromush-site/img/r/cutout-grijs-italiaans-800.png 800w" sizes="(min-width: 900px) 236px, 196px" alt="" width="800" height="533" loading="lazy" decoding="async"></picture>
+        <div class="tc-band"><h3>Grijze oesterzwam</h3></div>
+        <p class="tc-taste">Hartig · umami · stevig</p>
+      </div>
+      <div class="tc-face tc-back">
+        <p class="tc-back-name">Grijze oesterzwam</p>
+        <p class="tc-latin">Pleurotus ostreatus</p>
+<table class="tc-stats">
+  <caption class="sr-only">Culinaire indicaties van de grijze oesterzwam</caption>
+  <tbody>
+    <tr><th scope="row">Smaak</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span></span><span class="sr-only">4 van 5</span></td></tr>
+    <tr><th scope="row">Textuur</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span></span><span class="sr-only">4 van 5</span></td></tr>
+    <tr><th scope="row">Aardsheid</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span><span class="pip"></span></span><span class="sr-only">3 van 5</span></td></tr>
+    <tr><th scope="row">Geur</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span><span class="sr-only">2 van 5</span></td></tr>
+  </tbody>
+</table>
+        <p class="tc-sentence">De klassieker: hartig met een ronde umami, stevig en vlezig van beet.</p>
+        <p class="tc-packs">250 g · 500 g · 1 kg · meer op aanvraag</p>
+        <a class="tc-request" href="/gromush-site/proefbox/?soort=grijze#formulier">Vraag deze soort aan<span class="sr-only">: grijze oesterzwam</span></a>
+      </div>
+    </div>
+  </div>
+  <button class="tc-flip tc-flip--under" type="button" data-flip-back="Draai terug" hidden>Draai om</button>
+</li>
+<li class="cat-cell">
+  <div class="tc tc--italiaanse" data-card="italiaanse" data-name="Italiaanse oesterzwam" style="--accent:var(--italiaanse);--accent-tint:var(--tint-italiaanse)">
+    <div class="tc-inner">
+      <div class="tc-face tc-front">
+        <p class="tc-number">Nr. 06</p>
+        <picture><source type="image/avif" srcset="/gromush-site/img/r/cutout-grijs-italiaans-400.avif 400w, /gromush-site/img/r/cutout-grijs-italiaans-800.avif 800w" sizes="(min-width: 900px) 236px, 196px"><source type="image/webp" srcset="/gromush-site/img/r/cutout-grijs-italiaans-400.webp 400w, /gromush-site/img/r/cutout-grijs-italiaans-800.webp 800w" sizes="(min-width: 900px) 236px, 196px"><img class="tc-cutout" src="/gromush-site/img/r/cutout-grijs-italiaans-800.png" srcset="/gromush-site/img/r/cutout-grijs-italiaans-400.png 400w, /gromush-site/img/r/cutout-grijs-italiaans-800.png 800w" sizes="(min-width: 900px) 236px, 196px" alt="" width="800" height="533" loading="lazy" decoding="async"></picture>
+        <div class="tc-band"><h3>Italiaanse oesterzwam</h3></div>
+        <p class="tc-taste">Mild · licht zoet · mals</p>
+      </div>
+      <div class="tc-face tc-back">
+        <p class="tc-back-name">Italiaanse oesterzwam</p>
+        <p class="tc-latin">Pleurotus pulmonarius</p>
+<table class="tc-stats">
+  <caption class="sr-only">Culinaire indicaties van de italiaanse oesterzwam</caption>
+  <tbody>
+    <tr><th scope="row">Smaak</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span><span class="pip"></span></span><span class="sr-only">3 van 5</span></td></tr>
+    <tr><th scope="row">Textuur</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span><span class="pip"></span></span><span class="sr-only">3 van 5</span></td></tr>
+    <tr><th scope="row">Aardsheid</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span><span class="sr-only">2 van 5</span></td></tr>
+    <tr><th scope="row">Geur</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span><span class="sr-only">2 van 5</span></td></tr>
+  </tbody>
+</table>
+        <p class="tc-sentence">Mild en licht zoet, met een nootachtige toets en dunne, malse hoeden.</p>
+        <p class="tc-packs">250 g · 500 g · 1 kg · meer op aanvraag</p>
+        <a class="tc-request" href="/gromush-site/proefbox/?soort=italiaanse#formulier">Vraag deze soort aan<span class="sr-only">: italiaanse oesterzwam</span></a>
+      </div>
+    </div>
+  </div>
+  <button class="tc-flip tc-flip--under" type="button" data-flip-back="Draai terug" hidden>Draai om</button>
+</li>
+    </ul>
+    <p class="cat-note">Culinaire indicatie, geen wetenschap.</p>
+    <h3 class="dev-sub">Scoreblokjes los (Roze oesterzwam)</h3>
+    <div class="dev-pips" style="--accent-tint:var(--tint-roze)">
+<table class="tc-stats">
+  <caption class="sr-only">Culinaire indicaties van de roze oesterzwam</caption>
+  <tbody>
+    <tr><th scope="row">Smaak</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span></span><span class="sr-only">5 van 5</span></td></tr>
+    <tr><th scope="row">Textuur</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span></span><span class="sr-only">4 van 5</span></td></tr>
+    <tr><th scope="row">Aardsheid</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span><span class="pip"></span></span><span class="sr-only">3 van 5</span></td></tr>
+    <tr><th scope="row">Geur</th><td><span class="pips" aria-hidden="true"><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip pip--on"></span><span class="pip"></span><span class="pip"></span></span><span class="sr-only">3 van 5</span></td></tr>
+  </tbody>
+</table>
+    </div>
+  </div>
+</section>
+
+<section class="dev-sec" aria-labelledby="dev-icons">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-icons">Iconen</h2>
+    <ul class="dev-icons">
+      <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-scissors"/></svg>i-scissors</li>
+      <li><svg class="icon" viewBox="0 0 24 16" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg>i-arrow</li>
+      <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-hand-arrow"/></svg>i-hand-arrow</li>
+      <li><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-tick"/></svg>i-tick</li>
+    </ul>
+  </div>
+</section>
+
+<section class="dev-sec grid-paper" aria-labelledby="dev-audiences">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-audiences">Doelgroepkaarten</h2>
+    <div class="versions">
+<article class="version version-wide">
+<figure class="coupon"><svg class="icon coupon-scissors" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-scissors"/></svg><picture><source type="image/avif" srcset="/gromush-site/img/r/dish-geroosterd-400.avif 400w, /gromush-site/img/r/dish-geroosterd-800.avif 800w, /gromush-site/img/r/dish-geroosterd-1200.avif 1200w" sizes="(min-width: 1440px) 540px, (min-width: 769px) 38vw, calc(100vw - 5rem)"><source type="image/webp" srcset="/gromush-site/img/r/dish-geroosterd-400.webp 400w, /gromush-site/img/r/dish-geroosterd-800.webp 800w, /gromush-site/img/r/dish-geroosterd-1200.webp 1200w" sizes="(min-width: 1440px) 540px, (min-width: 769px) 38vw, calc(100vw - 5rem)"><img src="/gromush-site/img/r/dish-geroosterd-800.jpg" srcset="/gromush-site/img/r/dish-geroosterd-400.jpg 400w, /gromush-site/img/r/dish-geroosterd-800.jpg 800w" sizes="(min-width: 1440px) 540px, (min-width: 769px) 38vw, calc(100vw - 5rem)" alt="Geroosterde oesterzwam uit de oven" width="1200" height="900" loading="lazy" decoding="async"></picture></figure>
+  <div>
+  <div class="version-head"><span class="view-letter" aria-hidden="true">A</span><h3>Chefs</h3></div>
+  <p>Bijzondere zwammen voor bijzondere gerechten. Verse, lokale oesterzwammen voor chefs die smaak, textuur en seizoensgebonden producten centraal zetten.</p>
+  <a class="link-action" href="/gromush-site/proefbox/?type=Restaurant+%2F+chef#formulier"><span>Vraag een ProefBox aan</span> <svg class="icon" viewBox="0 0 24 16" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+  </div>
+</article>
+<article class="version">
+  <div class="version-head"><span class="view-letter" aria-hidden="true">B</span><h3>Grootkeukens</h3></div>
+  <p>Lokaal gekweekt, gemaakt voor grotere volumes. Verse oesterzwammen voor zorginstellingen, scholen, bedrijfsrestaurants en catering. We zitten in een opstartfase: grote volumes zijn nog niet gegarandeerd.</p>
+  <a class="link-action" href="/gromush-site/contact/?reden=grootkeuken#formulier"><span>Bespreek jouw behoefte</span> <svg class="icon" viewBox="0 0 24 16" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+</article>
+<article class="version">
+  <div class="version-head"><span class="view-letter" aria-hidden="true">C</span><h3>Speciaalzaken</h3></div>
+  <p>Kwaliteit in het rek. Vers uit de polder. Voor groentewinkels, bakkers, traiteurs en delicatessenzaken die hun klanten iets bijzonders willen bieden.</p>
+  <a class="link-action" href="/gromush-site/voor-wie/speciaalzaken/#formulier"><span>Naar het intakeformulier</span> <svg class="icon" viewBox="0 0 24 16" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+</article>
+<article class="version version-wide rev">
+<figure class="coupon"><svg class="icon coupon-scissors" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-scissors"/></svg><picture><source type="image/avif" srcset="/gromush-site/img/r/dish-curry-400.avif 400w, /gromush-site/img/r/dish-curry-800.avif 800w, /gromush-site/img/r/dish-curry-1200.avif 1200w" sizes="(min-width: 1440px) 540px, (min-width: 769px) 38vw, calc(100vw - 5rem)"><source type="image/webp" srcset="/gromush-site/img/r/dish-curry-400.webp 400w, /gromush-site/img/r/dish-curry-800.webp 800w, /gromush-site/img/r/dish-curry-1200.webp 1200w" sizes="(min-width: 1440px) 540px, (min-width: 769px) 38vw, calc(100vw - 5rem)"><img src="/gromush-site/img/r/dish-curry-800.jpg" srcset="/gromush-site/img/r/dish-curry-400.jpg 400w, /gromush-site/img/r/dish-curry-800.jpg 800w" sizes="(min-width: 1440px) 540px, (min-width: 769px) 38vw, calc(100vw - 5rem)" alt="Romige curry met oesterzwammen" width="1200" height="799" loading="lazy" decoding="async"></picture></figure>
+  <div>
+  <div class="version-head"><span class="view-letter" aria-hidden="true">D</span><h3>Thuis &amp; MushLove</h3></div>
+  <p>Van onze kwekerij naar jouw keuken. Verse oesterzwammen om zelf mee te koken, en de MushLove-community om mee te groeien.</p>
+  <a class="link-action" href="/gromush-site/contact/?reden=bestelling-thuis#formulier"><span>Bestel &amp; haal af</span> <svg class="icon" viewBox="0 0 24 16" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+  </div>
+</article>
+    </div>
+  </div>
+</section>
+
+<section class="dev-sec lv1" aria-labelledby="dev-towns">
+  <div class="wrap">
+    <h2 class="dev-label" id="dev-towns">Gemeentekaarten</h2>
+    <ul class="lv1-stops" aria-label="Waar we leveren">
+<li class="lv1-stop" data-t="knokke-heist"><a class="lv1-card" href="/gromush-site/leveringsregio/knokke-heist/"><span class="lv1-ph"><picture><source type="image/avif" srcset="/gromush-site/img/r/town-knokke-heist-400.avif 400w, /gromush-site/img/r/town-knokke-heist-800.avif 800w" sizes="64px"><source type="image/webp" srcset="/gromush-site/img/r/town-knokke-heist-400.webp 400w, /gromush-site/img/r/town-knokke-heist-800.webp 800w" sizes="64px"><img src="/gromush-site/img/r/town-knokke-heist-800.jpg" srcset="/gromush-site/img/r/town-knokke-heist-400.jpg 400w, /gromush-site/img/r/town-knokke-heist-800.jpg 800w" sizes="64px" alt="" width="800" height="393" loading="lazy" decoding="async"></picture></span><span class="lv1-txt"><span class="lv1-name">Knokke-Heist</span></span><svg class="lv1-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-hand-arrow"/></svg></a></li>
+<li class="lv1-stop" data-t="damme"><a class="lv1-card" href="/gromush-site/leveringsregio/damme/"><span class="lv1-ph"><picture><source type="image/avif" srcset="/gromush-site/img/r/town-damme-400.avif 400w, /gromush-site/img/r/town-damme-800.avif 800w" sizes="64px"><source type="image/webp" srcset="/gromush-site/img/r/town-damme-400.webp 400w, /gromush-site/img/r/town-damme-800.webp 800w" sizes="64px"><img src="/gromush-site/img/r/town-damme-800.jpg" srcset="/gromush-site/img/r/town-damme-400.jpg 400w, /gromush-site/img/r/town-damme-800.jpg 800w" sizes="64px" alt="" width="800" height="534" loading="lazy" decoding="async"></picture></span><span class="lv1-txt"><span class="lv1-name">Damme</span><span class="lv1-subs">Oostkerke · Hoeke · Lapscheure · Moerkerke · Sijsele</span></span><svg class="lv1-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-hand-arrow"/></svg></a></li>
+<li class="lv1-stop" data-t="sluis"><a class="lv1-card" href="/gromush-site/leveringsregio/sluis/"><span class="lv1-ph"><picture><source type="image/avif" srcset="/gromush-site/img/r/town-sluis-400.avif 400w, /gromush-site/img/r/town-sluis-800.avif 800w" sizes="64px"><source type="image/webp" srcset="/gromush-site/img/r/town-sluis-400.webp 400w, /gromush-site/img/r/town-sluis-800.webp 800w" sizes="64px"><img src="/gromush-site/img/r/town-sluis-800.jpg" srcset="/gromush-site/img/r/town-sluis-400.jpg 400w, /gromush-site/img/r/town-sluis-800.jpg 800w" sizes="64px" alt="" width="800" height="533" loading="lazy" decoding="async"></picture></span><span class="lv1-txt"><span class="lv1-name">Sluis <span class="lv1-nl">NL</span></span></span><svg class="lv1-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-hand-arrow"/></svg></a></li>
+<li class="lv1-stop" data-t="brugge"><a class="lv1-card" href="/gromush-site/leveringsregio/brugge/"><span class="lv1-ph"><picture><source type="image/avif" srcset="/gromush-site/img/r/town-brugge-400.avif 400w, /gromush-site/img/r/town-brugge-800.avif 800w" sizes="64px"><source type="image/webp" srcset="/gromush-site/img/r/town-brugge-400.webp 400w, /gromush-site/img/r/town-brugge-800.webp 800w" sizes="64px"><img src="/gromush-site/img/r/town-brugge-800.jpg" srcset="/gromush-site/img/r/town-brugge-400.jpg 400w, /gromush-site/img/r/town-brugge-800.jpg 800w" sizes="64px" alt="" width="800" height="640" loading="lazy" decoding="async"></picture></span><span class="lv1-txt"><span class="lv1-name">Brugge</span><span class="lv1-subs">Sint-Andries · Sint-Kruis · Assebroek · Koolkerke · Dudzele · Male</span></span><svg class="lv1-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-hand-arrow"/></svg></a></li>
+<li class="lv1-stop" data-t="blankenberge"><a class="lv1-card" href="/gromush-site/leveringsregio/blankenberge/"><span class="lv1-ph"><picture><source type="image/avif" srcset="/gromush-site/img/r/town-blankenberge-400.avif 400w, /gromush-site/img/r/town-blankenberge-800.avif 800w" sizes="64px"><source type="image/webp" srcset="/gromush-site/img/r/town-blankenberge-400.webp 400w, /gromush-site/img/r/town-blankenberge-800.webp 800w" sizes="64px"><img src="/gromush-site/img/r/town-blankenberge-800.jpg" srcset="/gromush-site/img/r/town-blankenberge-400.jpg 400w, /gromush-site/img/r/town-blankenberge-800.jpg 800w" sizes="64px" alt="" width="800" height="396" loading="lazy" decoding="async"></picture></span><span class="lv1-txt"><span class="lv1-name">Blankenberge</span><span class="lv1-subs">Uitkerke · Zwankendamme · Lissewege</span></span><svg class="lv1-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-hand-arrow"/></svg></a></li>
+    </ul>
+  </div>
+</section>
+
+<div class="dev-sec" style="padding-bottom:0">
+  <div class="wrap"><p class="dev-label">Slotbanner</p></div>
+<section class="closing" aria-labelledby="dev-closing">
+  <div class="wrap">
+    <h2 id="dev-closing">Van onze kwekerij naar jouw bord.</h2>
+    <p>Geen lange keten. Geen onnodige tussenstappen. Gewoon verse paddenstoelen, lokaal gekweekt.</p>
+    <a class="btn-primary" href="/gromush-site/proefbox/#formulier">Vraag je gratis ProefBox aan</a>
+  </div>
+</section>
+</div>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <p class="wordmark">GroMush</p>
+        <p class="baseline">Ambachtelijk gekweekt. Van kwekerij tot bord.</p>
+        <ul class="foot-contact">
+          <li><a href="mailto:info@gromush.be">info@gromush.be</a></li>
+          <li><a href="tel:+32499242359">0499 24 23 59</a></li>
+          <li><a href="https://wa.me/32499242359" rel="noopener">WhatsApp</a></li>
+        </ul>
+        <p class="foot-meta">Westkapelle (Knokke-Heist)</p>
+        <ul class="foot-social">
+          <li><a href="https://www.instagram.com/gromush.be/" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=61590322125848" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h2 class="foot-title"><a href="/gromush-site/zwammen/">Zwammen</a></h2>
+        <ul>
+          <li><a href="/gromush-site/zwammen/">Alle zwammen</a></li>
+          <li><a href="/gromush-site/zwammen/gele-oesterzwam/">Gele oesterzwam</a></li>
+          <li><a href="/gromush-site/zwammen/roze-oesterzwam/">Roze oesterzwam</a></li>
+          <li><a href="/gromush-site/zwammen/witte-oesterzwam/">Witte oesterzwam</a></li>
+          <li><a href="/gromush-site/zwammen/blauwe-oesterzwam/">Blauwe oesterzwam</a></li>
+          <li><a href="/gromush-site/zwammen/grijze-oesterzwam/">Grijze oesterzwam</a></li>
+          <li><a href="/gromush-site/zwammen/italiaanse-oesterzwam/">Italiaanse oesterzwam</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h2 class="foot-title"><a href="/gromush-site/voor-wie/">Voor wie</a></h2>
+        <ul>
+          <li><a href="/gromush-site/voor-wie/chefs/">Chefs</a></li>
+          <li><a href="/gromush-site/voor-wie/grootkeukens/">Grootkeukens</a></li>
+          <li><a href="/gromush-site/voor-wie/speciaalzaken/">Speciaalzaken</a></li>
+          <li><a href="/gromush-site/voor-wie/thuis/">Thuis &amp; MushLove</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h2 class="foot-title"><a href="/gromush-site/ons-verhaal/">Ons verhaal</a></h2>
+        <ul>
+          <li><a href="/gromush-site/ons-verhaal/">Over Anthony</a></li>
+          <li><a href="/gromush-site/ons-verhaal/kweekproces/">Kweekproces</a></li>
+          <li><a href="/gromush-site/ons-verhaal/buitenkweek/">Buitenkweek</a></li>
+          <li><a href="/gromush-site/ons-verhaal/adopteer/">Adopteer</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h2 class="foot-title"><a href="/gromush-site/leveringsregio/">Leveringsregio</a></h2>
+        <ul>
+          <li><a href="/gromush-site/leveringsregio/knokke-heist/">Knokke-Heist</a></li>
+          <li><a href="/gromush-site/leveringsregio/damme/">Damme</a></li>
+          <li><a href="/gromush-site/leveringsregio/sluis/">Sluis</a></li>
+          <li><a href="/gromush-site/leveringsregio/brugge/">Brugge</a></li>
+          <li><a href="/gromush-site/leveringsregio/blankenberge/">Blankenberge</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <p>© GroMush</p>
+      <ul>
+        <li><a href="/gromush-site/privacy/">Privacy</a></li>
+        <li><a href="/gromush-site/cookies/">Cookies</a></li>
+        <li><a href="/gromush-site/voorwaarden/">Voorwaarden</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+<dialog class="promo" id="promo" aria-labelledby="promo-title" data-delay="8" data-scroll="0.4" data-never-on="/gromush-site/proefbox/ /gromush-site/contact/ /gromush-site/privacy/ /gromush-site/cookies/ /gromush-site/voorwaarden/">
+  <div class="promo-paper grid-paper">
+    <span class="tape tape--l" aria-hidden="true"></span>
+    <button class="promo-close" type="button" aria-label="Sluiten">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+    </button>
+    <div class="promo-body">
+      <p class="promo-label">Proef GroMush</p>
+      <h2 id="promo-title">Proef GroMush. Helemaal gratis.</h2>
+      <p class="promo-text">Ontdek de smaak, textuur en kleuren van onze ambachtelijk gekweekte oesterzwammen. Vraag jouw gratis ProefBox aan en ontdek welke soorten bij jouw keuken passen.</p>
+      <a class="btn-primary" href="/gromush-site/proefbox/">Vraag je ProefBox aan</a>
+      <p class="promo-note">Voor professionele klanten in onze leveringsregio.</p>
+    </div>
+    <div class="promo-figure">
+      <picture><source type="image/avif" srcset="/gromush-site/img/r/cutout-roze-400.avif 400w, /gromush-site/img/r/cutout-roze-800.avif 800w" sizes="(min-width: 640px) 16rem, 70vw"><source type="image/webp" srcset="/gromush-site/img/r/cutout-roze-400.webp 400w, /gromush-site/img/r/cutout-roze-800.webp 800w" sizes="(min-width: 640px) 16rem, 70vw"><img class="promo-cut" src="/gromush-site/img/r/cutout-roze-800.png" srcset="/gromush-site/img/r/cutout-roze-400.png 400w, /gromush-site/img/r/cutout-roze-800.png 800w" sizes="(min-width: 640px) 16rem, 70vw" alt="" width="800" height="533" loading="lazy" decoding="async"></picture>
+      <p class="promo-sign" aria-hidden="true">Eerst proeven. Dan samen groeien.</p>
+    </div>
+  </div>
+</dialog>
+<script src="/gromush-site/js/site.js" defer></script>
+<script src="/gromush-site/js/cards.js" defer></script>
+</body>
+</html>

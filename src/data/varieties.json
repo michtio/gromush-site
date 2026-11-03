@@ -1,0 +1,284 @@
+[
+  {
+    "key": "gele",
+    "slug": "gele-oesterzwam",
+    "name": "Gele oesterzwam",
+    "latin": "Pleurotus citrinopileatus",
+    "taste_words": ["Nootachtig", "fruitig", "delicaat"],
+    "taste_sentence": "Licht nootachtig met een fruitige geur; dun en teer, dus kort en heet bakken.",
+    "accent": "--gele",
+    "tint": "--tint-gele",
+    "pill": "--gele",
+    "cutout": "cutout-gele",
+    "photo": "var-gele",
+    "pips": {"Smaak": 3, "Textuur": 2, "Aardsheid": 2, "Geur": 4},
+    "page": {
+      "plural": "gele oesterzwammen",
+      "hero_title": "Fris van kleur. Vol van smaak.",
+      "intro_title": "Een kleur die je niet kunt negeren",
+      "intro_text": "De gele oesterzwam brengt niet alleen smaak, maar ook kleur en karakter. Met haar zonnige kleur en elegante waaiervormige hoeden is ze een opvallende verschijning in elke keuken.",
+      "appearance": "Zonnig geel, met elegante waaiervormige hoeden.",
+      "kitchen": "Van eenvoudige bereidingen tot verfijnde gerechten.",
+      "quote": "Een paddenstoel die kleur geeft aan het bord én karakter aan het gerecht.",
+      "timeline": [
+        "Het mycelium krijgt de tijd om zich volledig te ontwikkelen.",
+        "De eerste vruchtlichamen verschijnen en de gele kleur komt tevoorschijn.",
+        "We oogsten op het moment dat de paddenstoelen op hun best zijn.",
+        "Vanuit onze kwekerij vertrekken ze vers richting keuken."
+      ],
+      "uses": [
+        {"label": "Gebakken"},
+        {"label": "Gegrild"},
+        {"label": "In sauzen & pasta"},
+        {"label": "Lauwwarme gerechten"},
+        {"label": "Gastronomische bereidingen"}
+      ],
+      "who_title": "Voor elke keuken die iets bijzonders wil",
+      "who": {
+        "chefs": "Voor gerechten waar smaak, textuur en presentatie samenkomen.",
+        "thuis": "Makkelijk te verwerken in dagelijkse én bijzondere gerechten.",
+        "vegetarisch": "Een natuurlijke manier om textuur en diepte aan een gerecht toe te voegen."
+      },
+      "kitchen_image": "dish-curry"
+    },
+    "in_range": true,
+    "nav_order": 1
+  },
+  {
+    "key": "roze",
+    "slug": "roze-oesterzwam",
+    "name": "Roze oesterzwam",
+    "latin": "Pleurotus djamor",
+    "taste_words": ["Hartig", "houtig", "stevig"],
+    "taste_sentence": "Hartig en licht houtig, krokant gebakken met een spekachtige toets; steviger van beet dan andere oesterzwammen, en bij het bakken verbleekt het roze naar goudbruin.",
+    "accent": "--roze",
+    "tint": "--tint-roze",
+    "pill": "--roze",
+    "cutout": "cutout-roze",
+    "photo": "var-roze",
+    "pips": {"Smaak": 5, "Textuur": 4, "Aardsheid": 3, "Geur": 3},
+    "page": {
+      "plural": "roze oesterzwammen",
+      "hero_title": "Kleur met karakter. Smaak die blijft hangen.",
+      "intro_title": "Een kleur die meteen opvalt",
+      "intro_text": "De roze oesterzwam is een echte blikvanger.",
+      "appearance": "Opvallend roze, met elegante waaiervormige hoeden.",
+      "kitchen": "Bijzonder geschikt voor bakken, grillen en gastronomische bereidingen.",
+      "timeline": [
+        "Het mycelium krijgt de tijd om zich volledig te ontwikkelen.",
+        "De eerste vruchtlichamen verschijnen en de karakteristieke roze kleur ontwikkelt zich.",
+        "We oogsten de paddenstoelen wanneer ze op hun best zijn.",
+        "Vanuit onze kwekerij vertrekken ze vers richting keuken."
+      ],
+      "uses": [
+        {"label": "Gebakken"},
+        {"label": "Gegrild"},
+        {"label": "Pasta & sauzen"},
+        {"label": "Lauwwarme gerechten"},
+        {"label": "Gastronomische bereidingen"}
+      ],
+      "who_title": "Voor elke keuken die iets bijzonders wil",
+      "who": {
+        "chefs": "Voor gerechten waar smaak, textuur en presentatie samenkomen.",
+        "thuis": "Voor wie een bijzonder ingrediënt wil gebruiken in dagelijkse of feestelijke gerechten.",
+        "vegetarisch": "Voor extra textuur, kleur en diepte in het gerecht."
+      },
+      "kitchen_image": "dish-geroosterd"
+    },
+    "in_range": true,
+    "nav_order": 2
+  },
+  {
+    "key": "witte",
+    "slug": "witte-oesterzwam",
+    "name": "Witte oesterzwam",
+    "latin": "Pleurotus ostreatus",
+    "taste_words": ["Mild", "zacht", "veelzijdig"],
+    "taste_sentence": "Mild en zacht van smaak, mals van structuur: een rustige basis voor sauzen, pasta en risotto.",
+    "accent": "--witte",
+    "tint": "--tint-witte",
+    "pill": "--witte",
+    "cutout": "cutout-witte",
+    "photo": "var-witte",
+    "pips": {"Smaak": 2, "Textuur": 3, "Aardsheid": 2, "Geur": 2},
+    "page": {
+      "plural": "witte oesterzwammen",
+      "hero_title": "Puur van smaak. Eindeloos veelzijdig.",
+      "intro_title": "Puur, elegant en verrassend veelzijdig",
+      "intro_text": "De witte oesterzwam is een tijdloze klassieker. Met haar zachte kleur, elegante vorm en veelzijdige karakter past ze moeiteloos in uiteenlopende gerechten: van een eenvoudige bereiding tot een verfijnd bord.",
+      "appearance": "Zacht wit tot ivoorkleurig, met elegante waaiervormige hoeden.",
+      "kitchen": "Een veelzijdige basis voor zowel dagelijkse als gastronomische bereidingen.",
+      "quote": "Een verfijnde klassieker die zich thuis voelt in elke keuken.",
+      "timeline": [
+        "Het mycelium krijgt de tijd om zich volledig te ontwikkelen.",
+        "De eerste vruchtlichamen verschijnen en ontwikkelen hun karakteristieke vorm en lichte kleur.",
+        "We oogsten de paddenstoelen wanneer ze op hun best zijn.",
+        "Vanuit onze kwekerij vertrekken ze vers richting keuken."
+      ],
+      "kitchen_text": "De witte oesterzwam is een echte alleskunner.",
+      "uses": [
+        {"label": "Gebakken"},
+        {"label": "Gegrild"},
+        {"label": "Pasta & risotto"},
+        {"label": "Sauzen"},
+        {"label": "Soepen"},
+        {"label": "Gastronomische bereidingen"}
+      ],
+      "highlight": {
+        "title": "Een klassieker die altijd past.",
+        "text": "Van een snelle doordeweekse bereiding tot een verfijnd gastronomisch bord: de witte oesterzwam laat zich gemakkelijk combineren."
+      },
+      "who_title": "Voor elke keuken die goed wil koken",
+      "who": {
+        "chefs": "Een veelzijdige paddenstoel die zich gemakkelijk laat verwerken in uiteenlopende gerechten.",
+        "thuis": "Toegankelijk, veelzijdig en eenvoudig te bereiden.",
+        "vegetarisch": "Een mooie basis voor gerechten waarin textuur en smaak centraal staan."
+      },
+      "kitchen_image": "dish-stoof"
+    },
+    "in_range": true,
+    "nav_order": 3
+  },
+  {
+    "key": "blauwe",
+    "slug": "blauwe-oesterzwam",
+    "name": "Blauwe oesterzwam",
+    "latin": "P. ostreatus var. columbinus",
+    "taste_words": ["Hartig", "aards", "vlezig"],
+    "taste_sentence": "Hartig en licht aards, vlezig en stevig; de blauwe tint verkleurt naar grijs in de pan.",
+    "accent": "--blauwe",
+    "tint": "--tint-blauwe",
+    "pill": "--pill-blauwe",
+    "cutout": "cutout-blauwe",
+    "photo": "var-blauwe",
+    "pips": {"Smaak": 4, "Textuur": 5, "Aardsheid": 4, "Geur": 3},
+    "page": {
+      "plural": "blauwe oesterzwammen",
+      "hero_title": "Karaktervol van kleur. Krachtig van smaak.",
+      "intro_title": "Een paddenstoel met karakter",
+      "intro_text": "De blauwe oesterzwam valt op door haar natuurlijke blauwgrijze kleur en stevige structuur. Ze is een veelzijdige paddenstoel voor bereidingen waarin smaak, textuur en uitstraling samenkomen.",
+      "appearance": "Blauwgrijze tot grijzige waaiervormige hoeden.",
+      "kitchen": "Uitstekend geschikt voor bakken, grillen en warme gastronomische bereidingen.",
+      "quote": "Een stevige paddenstoel met een uitgesproken karakter.",
+      "timeline": [
+        "Het mycelium krijgt de tijd om zich volledig te ontwikkelen.",
+        "De eerste vruchtlichamen verschijnen en ontwikkelen hun karakteristieke blauwgrijze kleur.",
+        "We oogsten de paddenstoelen wanneer ze op hun best zijn.",
+        "Vanuit onze kwekerij vertrekken ze vers richting keuken."
+      ],
+      "kitchen_text": "Dankzij haar stevige structuur en karaktervolle uitstraling komt de blauwe oesterzwam bijzonder goed tot haar recht in warme bereidingen.",
+      "uses": [
+        {"label": "Gebakken"},
+        {"label": "Gegrild"},
+        {"label": "Geroosterd"},
+        {"label": "Pasta & risotto"},
+        {"label": "Sauzen"},
+        {"label": "Gastronomische bereidingen"}
+      ],
+      "who_title": "Voor elke keuken die iets bijzonders wil",
+      "who": {
+        "chefs": "Voor gerechten waarin textuur, smaak en presentatie samenkomen.",
+        "thuis": "Voor wie een karaktervolle paddenstoel wil gebruiken in warme bereidingen.",
+        "vegetarisch": "Een stevige en veelzijdige basis voor gerechten waarin de paddenstoel centraal mag staan."
+      },
+      "kitchen_image": "dish-geroosterd"
+    },
+    "in_range": true,
+    "nav_order": 4
+  },
+  {
+    "key": "grijze",
+    "slug": "grijze-oesterzwam",
+    "name": "Grijze oesterzwam",
+    "latin": "Pleurotus ostreatus",
+    "taste_words": ["Hartig", "umami", "stevig"],
+    "taste_sentence": "De klassieker: hartig met een ronde umami, stevig en vlezig van beet.",
+    "accent": "--grijze",
+    "tint": "--tint-grijze",
+    "pill": "--pill-grijze",
+    "cutout": "cutout-grijs-italiaans",
+    "photo": "var-grijze",
+    "pips": {"Smaak": 4, "Textuur": 4, "Aardsheid": 3, "Geur": 2},
+    "page": {
+      "plural": "grijze oesterzwammen",
+      "hero_title": "De klassieker. Puur van smaak.",
+      "intro_title": "De oesterzwam die overal thuishoort",
+      "intro_text": "De grijze oesterzwam is een echte klassieker. Van eenvoudig gebakken tot verfijnd gastronomisch: deze paddenstoel past zich moeiteloos aan.",
+      "appearance": "Natuurlijk grijs.",
+      "profile_title": "Puur karakter, eindeloze mogelijkheden",
+      "quote": "Een vertrouwde klassieker die zich thuis voelt in elke keuken.",
+      "timeline": [
+        "In onze kwekerij krijgt het mycelium de tijd en omstandigheden om zich volledig te ontwikkelen.",
+        "Wanneer de omstandigheden juist zijn, verschijnen de eerste vruchtlichamen.",
+        "We oogsten de paddenstoelen op het moment waarop ze op hun best zijn.",
+        "Vers vanuit Knokke-Heist naar jouw keuken."
+      ],
+      "kitchen_text": "De grijze oesterzwam is een veelzijdige basis voor talloze bereidingen. Door zijn stevige structuur kan hij mooi worden aangebakken en gekaramelliseerd, maar hij voelt zich net zo goed thuis in sauzen, pasta's, risotto's en gastronomische gerechten.",
+      "uses": [
+        {"label": "Gebakken", "text": "Goudbruin en hartig"},
+        {"label": "Gegrild", "text": "Krachtige geroosterde smaak"},
+        {"label": "Geroosterd", "text": "Diep en aromatisch"},
+        {"label": "Pasta & risotto", "text": "Romig en rijk"},
+        {"label": "Sauzen", "text": "Extra umami en diepte"},
+        {"label": "Gastronomisch", "text": "Van klassiek tot verfijnd"}
+      ],
+      "highlight": {"title": "De klassieker van de keuken.", "text": "Eenvoudig wanneer het kan. Verfijnd wanneer het moet."},
+      "who_title": "Voor elke keuken",
+      "who": {
+        "chefs": "Veelzijdig inzetbaar en geschikt voor zowel dagelijkse bereidingen als gastronomische creaties.",
+        "thuis": "Een toegankelijke paddenstoel die zich aanpast aan talloze gerechten.",
+        "vegetarisch": "Door de stevige structuur vormt hij een uitstekende basis voor vegetarische bereidingen."
+      },
+      "kitchen_image": "dish-stoof"
+    },
+    "in_range": true,
+    "nav_order": 5
+  },
+  {
+    "key": "italiaanse",
+    "slug": "italiaanse-oesterzwam",
+    "name": "Italiaanse oesterzwam",
+    "latin": "Pleurotus pulmonarius",
+    "taste_words": ["Mild", "licht zoet", "mals"],
+    "taste_sentence": "Mild en licht zoet, met een nootachtige toets en dunne, malse hoeden.",
+    "accent": "--italiaanse",
+    "tint": "--tint-italiaanse",
+    "pill": "--pill-italiaanse",
+    "cutout": "cutout-grijs-italiaans",
+    "photo": "var-italiaanse",
+    "pips": {"Smaak": 3, "Textuur": 3, "Aardsheid": 2, "Geur": 2},
+    "page": {
+      "plural": "Italiaanse oesterzwammen",
+      "hero_title": "Warm van karakter. Verfijnd van smaak.",
+      "intro_title": "Een oesterzwam met een warme uitstraling",
+      "intro_text": "De Italiaanse oesterzwam combineert een elegante uitstraling met een uitgesproken culinaire veelzijdigheid.",
+      "appearance": "Warm beige tot aardse tinten.",
+      "profile_title": "Een verfijnd karakter",
+      "timeline": [
+        "In onze kwekerij krijgt het mycelium de tijd en omstandigheden om zich volledig te ontwikkelen.",
+        "Wanneer de omstandigheden juist zijn, verschijnen de eerste vruchtlichamen.",
+        "We oogsten de paddenstoelen op het moment waarop ze op hun best zijn.",
+        "Zo vertrekken ze vers vanuit Knokke-Heist naar jouw keuken."
+      ],
+      "kitchen_text": "Bak hem goudbruin, grill hem kort of verwerk hem in een gastronomische bereiding waarin de paddenstoel zelf centraal mag staan.",
+      "uses": [
+        {"label": "Gebakken", "text": "Karamelliseer de randen en laat de natuurlijke smaak naar voren komen."},
+        {"label": "Gegrild", "text": "Ideaal voor een krachtige, licht geroosterde smaak."},
+        {"label": "Geroosterd", "text": "Mooi als onderdeel van warme groenten en gastronomische bereidingen."},
+        {"label": "Pasta & risotto", "text": "Een natuurlijke combinatie met romige en hartige bereidingen."},
+        {"label": "Sauzen", "text": "Geeft extra diepte aan sauzen en jus."},
+        {"label": "Gastronomisch", "text": "Een elegante keuze voor verfijnde borden."}
+      ],
+      "highlight": {"title": "Voor gerechten waarin eenvoud en karakter samenkomen."},
+      "who_title": "Voor elke keuken die iets bijzonders wil",
+      "who": {
+        "chefs": "Een karaktervolle paddenstoel voor chefs die met textuur, smaak en presentatie willen werken.",
+        "thuis": "Van eenvoudig gebakken tot een uitgebreid diner.",
+        "vegetarisch": "De structuur maakt hem bijzonder geschikt voor gerechten waarin paddenstoelen een centrale rol spelen."
+      },
+      "kitchen_image": "dish-curry"
+    },
+    "in_range": true,
+    "nav_order": 6
+  }
+]

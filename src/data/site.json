@@ -1,0 +1,98 @@
+{
+  "name": "GroMush",
+  "origin": "https://michtio.github.io",
+  "base": "/gromush-site/",
+  "lang": "nl-BE",
+  "theme_color": "#ece2c8",
+  "baseline": "Ambachtelijk gekweekt.",
+  "core_line": "Van kwekerij tot bord.",
+  "email": "info@gromush.be",
+  "form_recipient": "info@gromush.be",
+  "phone": {
+    "display": "0499 24 23 59",
+    "tel": "+32499242359"
+  },
+  "whatsapp": "https://wa.me/32499242359",
+  "locality": "Westkapelle",
+  "municipality": "Knokke-Heist",
+  "socials": {
+    "instagram": {
+      "label": "Instagram",
+      "handle": "gromush.be",
+      "url": "https://www.instagram.com/gromush.be/"
+    },
+    "facebook": {
+      "label": "Facebook",
+      "name": "GroMush",
+      "url": "https://www.facebook.com/profile.php?id=61590322125848"
+    },
+    "facebook_mushlove": {
+      "label": "Facebook",
+      "name": "MushLove | Knokke-Heist",
+      "url": "https://www.facebook.com/profile.php?id=61594707453474"
+    }
+  },
+  "legal": [
+    {
+      "label": "Privacy",
+      "path": "/privacy/"
+    },
+    {
+      "label": "Cookies",
+      "path": "/cookies/"
+    },
+    {
+      "label": "Voorwaarden",
+      "path": "/voorwaarden/"
+    }
+  ],
+  "strings": {
+    "skip_link": "Ga naar inhoud",
+    "logo_label": "GroMush, naar de beginpagina",
+    "delivery_in": "Levering in",
+    "not_found_title": "Pagina niet gevonden",
+    "not_found_text": "Deze pagina bestaat niet (meer).",
+    "not_found_link": "Naar de beginpagina",
+    "card_number": "Nr.",
+    "card_flip": "Draai om",
+    "card_flip_back": "Draai terug",
+    "card_more": "Ontdek deze soort",
+    "card_request": "Vraag deze soort aan",
+    "card_stats_caption": "Culinaire indicaties van de",
+    "card_stats_of": "van 5",
+    "card_packs": "250 g · 500 g · 1 kg · meer op aanvraag",
+    "card_availability": "Beschikbaarheid: volgens oogst en seizoen.",
+    "card_note": "Culinaire indicatie, geen wetenschap.",
+    "pill_request": "Vraag aan",
+    "menu_open": "Menu openen",
+    "menu_close": "Menu sluiten",
+    "submenu": "Submenu",
+    "close": "Sluiten"
+  },
+  "seo": {
+    "_note": "S8 (R40): og_image is the default Open Graph image (an images.json id with alt text) for pages that set none.",
+    "og_image": "dish-geroosterd"
+  },
+  "promo": {
+    "_note": "ProefBox promo dialog (PRD R35, plan AD15). Copy from the brief 'Proefbox-pushmelding' (content-inventory 2.26) and the wireframe promo; never on the pages in never_on. image: a cut-out from images.json, shown decoratively.",
+    "label": "Proef GroMush",
+    "title": "Proef GroMush. Helemaal gratis.",
+    "text": "Ontdek de smaak, textuur en kleuren van onze ambachtelijk gekweekte oesterzwammen. Vraag jouw gratis ProefBox aan en ontdek welke soorten bij jouw keuken passen.",
+    "note": "Voor professionele klanten in onze leveringsregio.",
+    "action": {
+      "label": "Vraag je ProefBox aan",
+      "path": "/proefbox/"
+    },
+    "sign": "Eerst proeven. Dan samen groeien.",
+    "image": "cutout-roze",
+    "never_on": [
+      "/proefbox/",
+      "/contact/",
+      "/privacy/",
+      "/cookies/",
+      "/voorwaarden/"
+    ],
+    "delay_s": 8,
+    "scroll": 0.4
+  }
+}

@@ -3,3 +3,9 @@
 
 # Design resources (screenshots, original unoptimised images) - not part of the site
 /_resources/
+
+# Local visual QA tools (headless Chrome)
+.impeccable/tools/
+
+# Python bytecode from the build
+__pycache__/

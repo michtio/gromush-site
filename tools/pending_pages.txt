@@ -1,0 +1,16 @@
+# Sitemap pages (specs/2026-10-19-gromush-site/sitemap.md) that are linked from the header or footer but not
+# built yet. tools/check_links.py --pending counts links to them as "pending", not "broken".
+# Each page slice removes its own line(s) when it builds the page; at launch (S21) this file is empty.
+/voor-wie/grootkeukens/
+/voor-wie/speciaalzaken/
+/voor-wie/thuis/
+/ons-verhaal/kweekproces/
+/ons-verhaal/buitenkweek/
+/ons-verhaal/adopteer/
+/inspiratie/
+/leveringsregio/
+/leveringsregio/knokke-heist/
+/leveringsregio/damme/
+/leveringsregio/sluis/
+/leveringsregio/brugge/
+/leveringsregio/blankenberge/

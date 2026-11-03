@@ -1,0 +1,50 @@
+{
+  "map": {
+    "source": "build_levering.py (delivery variant 1): viewBox 0 0 1000 820 from real lat/lon, 40 units per km, coast along the top",
+    "viewbox": "0 0 1000 820",
+    "origin": {"key": "westkapelle", "name": "Westkapelle", "x": 625, "y": 280, "placement": "left", "label": "kweek & vertrekpunt"}
+  },
+  "towns": [
+    {
+      "slug": "knokke-heist",
+      "name": "Knokke-Heist",
+      "sub_areas": [],
+      "map": {"x": 569, "y": 133, "placement": "left"},
+      "hero": "town-knokke-heist",
+      "nav_order": 1
+    },
+    {
+      "slug": "damme",
+      "name": "Damme",
+      "sub_areas": ["Oostkerke", "Hoeke", "Lapscheure", "Moerkerke", "Sijsele"],
+      "map": {"x": 561, "y": 550, "placement": "left"},
+      "hero": "town-damme",
+      "nav_order": 2
+    },
+    {
+      "slug": "sluis",
+      "name": "Sluis",
+      "country": "NL",
+      "sub_areas": [],
+      "map": {"x": 850, "y": 293, "placement": "left"},
+      "hero": "town-sluis",
+      "nav_order": 3
+    },
+    {
+      "slug": "brugge",
+      "name": "Brugge",
+      "sub_areas": ["Sint-Andries", "Sint-Kruis", "Assebroek", "Koolkerke", "Dudzele", "Male"],
+      "map": {"x": 403, "y": 737, "placement": "right"},
+      "hero": "town-brugge",
+      "nav_order": 4
+    },
+    {
+      "slug": "blankenberge",
+      "name": "Blankenberge",
+      "sub_areas": ["Uitkerke", "Zwankendamme", "Lissewege"],
+      "map": {"x": 144, "y": 275, "placement": "above"},
+      "hero": "town-blankenberge",
+      "nav_order": 5
+    }
+  ]
+}

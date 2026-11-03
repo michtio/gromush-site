@@ -1,0 +1,13 @@
+{% extends "layouts/base.html" %}
+{# GitHub Pages serves this for any missing path, at that path: every link goes through url(). #}
+{% block title %}{{ t('not_found_title') }} · {{ site.name }}{% endblock %}
+{% block description %}{{ t('not_found_text') }}{% endblock %}
+{% block robots %}<meta name="robots" content="noindex">{% endblock %}
+{% block canonical %}{% endblock %}
+{% block main %}
+<div class="wrap smoke">
+  <h1>{{ t('not_found_title') }}</h1>
+  <p>{{ t('not_found_text') }}</p>
+  <p><a href="{{ url('/') }}">{{ t('not_found_link') }}</a></p>
+</div>
+{% endblock %}

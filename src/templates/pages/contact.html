@@ -1,0 +1,64 @@
+{% extends "layouts/base.html" %}
+{# /contact/ (S6, template I; PRD R9, R32, R33, R34, R42). Copy: Anthony's contact brief (content-inventory 2.24) and,
+   for the home-cook pick-up, his "Bestel & haal af" card (2.21) and final.html's home-order wording. The form comes
+   from forms.json "contact" through partials/form.html: the reason selector (R32) is pre-selected by ?reden=<key>, the
+   reason "Bestelling thuis (afhalen)" switches the form to the pick-up mode (R42) with ?soort=<key or slug> ticking a
+   variety (AD10). Contact details and towns come from site.json and towns.json (R36); no street address (R9). #}
+{% block title %}Contact · {{ site.name }}{% endblock %}
+{% block description %}Neem contact op met GroMush voor verse oesterzwammen, professionele aanvragen, samenwerkingen of vragen over onze lokale paddenstoelenkwekerij.{% endblock %}
+{% block main %}
+{% set towns = sorted(data.towns.towns, key=lambda t: t.nav_order) %}
+<section class="section pb-head ct-head" aria-labelledby="contact-title">
+  <div class="wrap">
+    <p class="overline">Contact</p>
+    <h1 id="contact-title">Laten we verbinden.</h1>
+    <p class="lede">Heb je een vraag, wil je samenwerken of meer weten over onze oesterzwammen? We horen graag van je.</p>
+    <p class="lede">Of je nu chef-kok, inkoper, speciaalzaak, thuiskweker of nieuwsgierige liefhebber bent: bij {{ site.name }} begint een mooi verhaal vaak met een eenvoudig gesprek.</p>
+  </div>
+</section>
+<section class="section grid-paper pb-form" id="formulier" aria-labelledby="formulier-title">
+  <div class="wrap">
+    <div class="knip" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" focusable="false"><use href="#i-scissors"/></svg></div>
+    <div class="proefbox-grid">
+      <div class="pb-form-col">
+        <p class="overline">Neem contact op</p>
+        <h2 id="formulier-title">We horen graag van je.</h2>
+        <p class="ct-intro">Een concrete vraag, een idee voor samenwerking of gewoon benieuwd naar onze paddenstoelen? Laat iets van je horen. Vertel ons waarmee we je kunnen helpen.</p>
+{% include "partials/form.html" with {"key": "contact"} %}
+      </div>
+      <aside class="pb-aside" aria-labelledby="ct-card-title">
+        <div class="pb-who ct-card">
+          <h2 id="ct-card-title">Liever mailen of bellen?</h2>
+          <p>Stuur ons gerust je vraag of voorstel.</p>
+          <ul class="ct-lines">
+            <li><span class="ct-key">E-mail</span> <a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+{% if flags.phone_published %}
+            <li><span class="ct-key">Telefoon</span> <a href="tel:{{ site.phone.tel }}">{{ site.phone.display }}</a></li>
+            <li><span class="ct-key">WhatsApp</span> <a href="{{ site.whatsapp }}" rel="noopener">{{ site.phone.display }}</a></li>
+{% endif %}
+            <li><span class="ct-key">Kwekerij</span> <span class="ct-val">{{ site.locality }} ({{ site.municipality }})</span></li>
+            <li><span class="ct-key">Volg ons</span> <span class="ct-val"><a href="{{ site.socials.instagram.url }}" rel="noopener">{{ site.socials.instagram.label }}</a> · <a href="{{ site.socials.facebook.url }}" rel="noopener">{{ site.socials.facebook.label }}</a></span></li>
+          </ul>
+          <p>Bij {{ site.name }} houden we het graag persoonlijk. We denken met je mee en bekijken samen welke mogelijkheden er zijn.</p>
+          <p class="hand pb-sign">Samen laten groeien.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+<section class="section ct-region" aria-labelledby="regio-title">
+  <div class="wrap">
+    <p class="overline">Lokaal verbonden</p>
+    <h2 id="regio-title">Geworteld in de streek.</h2>
+    <p class="lede">{{ site.name }} vertrekt vanuit {{ site.municipality }} en bouwt aan een lokaal netwerk rond verse, ambachtelijk gekweekte oesterzwammen. We willen de verbinding versterken tussen kweker, keuken, winkel en liefhebber.</p>
+    <ul class="ct-towns" aria-label="Leveringsregio">
+{% for t in towns %}
+      <li>{% include "partials/button.html" with {"label": t.name, "path": "/leveringsregio/" + t.slug + "/", "kind": "link"} %}</li>
+{% endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url('/js/forms.js') }}" defer></script>
+{% endblock %}

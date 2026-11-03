@@ -1,0 +1,28 @@
+{# Closing banner (S3; wireframes "slot"): an ink band with one statement, an optional line and one action.
+   with: id (heading id), title, text (optional), action {label, path} (optional).
+   S12 additions (optional, defaults unchanged): section (a data-section name on the band, e.g. "slot"), points (a short
+   list of strings under the text), audience (an audiences.json entry: renders all its primary actions in place of action, R18).
+   S11 addition (optional): link {label, path}, a plain text link under the action. #}
+<section class="closing" aria-labelledby="{{ id }}"{% if opt("section") %} data-section="{{ section }}"{% endif %}>
+  <div class="wrap">
+    <h2 id="{{ id }}">{{ title }}</h2>
+{% if opt("text") %}
+    <p>{{ text }}</p>
+{% endif %}
+{% if opt("points") %}
+    <ul class="closing-points">
+{% for point in points %}
+      <li>{{ point }}</li>
+{% endfor %}
+    </ul>
+{% endif %}
+{% if opt("audience") %}
+{% include "partials/audience_actions.html" with {"audience": audience} %}
+{% elif opt("action") %}
+    <a class="btn-primary" href="{{ url(action['path']) }}">{{ action['label'] }}</a>
+{% endif %}
+{% if opt("link") %}
+    <p class="closing-link"><a href="{{ url(link['path']) }}">{{ link['label'] }}</a></p>
+{% endif %}
+  </div>
+</section>

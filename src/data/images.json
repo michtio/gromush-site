@@ -1,0 +1,305 @@
+{
+  "_note": "Image register (PRD R37, R44). source is the original; the S3 pipeline renders the responsive sizes. alt null = not yet written (must be set before the image is used); alt \"\" = decorative. flagged = shows something that does not exist or is unverified; approved_by records Anthony's written approval (AC40).",
+  "images": [
+    {
+      "id": "logo",
+      "source": "src/static/img/logo-gromush.png",
+      "width": 264,
+      "height": 132,
+      "alt": "GroMush",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "cutout-gele",
+      "source": ".impeccable/prototypes/directions/assets/cutout-gele.webp",
+      "width": 800,
+      "height": 533,
+      "alt": "",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "cutout-roze",
+      "source": ".impeccable/prototypes/directions/assets/cutout-roze.webp",
+      "width": 800,
+      "height": 533,
+      "alt": "",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "cutout-witte",
+      "source": ".impeccable/prototypes/directions/assets/cutout-witte.webp",
+      "width": 800,
+      "height": 533,
+      "alt": "",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "cutout-blauwe",
+      "source": ".impeccable/prototypes/directions/assets/cutout-blauwe.webp",
+      "width": 800,
+      "height": 533,
+      "alt": "",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "cutout-grijs-italiaans",
+      "source": ".impeccable/prototypes/directions/assets/cutout-grijs-italiaans.webp",
+      "width": 800,
+      "height": 533,
+      "alt": "",
+      "flagged": true,
+      "flag_reason": "Italiaanse cut-out, ook gebruikt voor de grijze tot Anthony een eigen foto stuurt",
+      "approved_by": null
+    },
+    {
+      "id": "var-gele",
+      "source": ".impeccable/prototypes/directions/assets/var-gele.webp",
+      "width": 800,
+      "height": 800,
+      "alt": "Gele oesterzwammen",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "var-roze",
+      "source": ".impeccable/prototypes/directions/assets/var-roze.webp",
+      "width": 800,
+      "height": 800,
+      "alt": "Roze oesterzwammen",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "var-witte",
+      "source": ".impeccable/prototypes/directions/assets/var-witte.webp",
+      "width": 800,
+      "height": 800,
+      "alt": "Witte oesterzwammen",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "var-blauwe",
+      "source": ".impeccable/prototypes/directions/assets/var-blauwe.webp",
+      "width": 800,
+      "height": 800,
+      "alt": "Blauwe oesterzwammen",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "var-grijze",
+      "source": ".impeccable/prototypes/directions/assets/var-grijze.webp",
+      "width": 800,
+      "height": 800,
+      "alt": "Grijze oesterzwammen",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "var-italiaanse",
+      "source": ".impeccable/prototypes/directions/assets/var-italiaanse.webp",
+      "width": 800,
+      "height": 800,
+      "alt": "Italiaanse oesterzwammen",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "anthony-camera",
+      "source": ".impeccable/prototypes/directions/assets/anthony-camera.webp",
+      "width": 1189,
+      "height": 1600,
+      "alt": "Anthony Watteeuw als cameraman",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "anthony-familie",
+      "source": ".impeccable/prototypes/directions/assets/anthony-familie.webp",
+      "width": 1280,
+      "height": 960,
+      "alt": "Anthony Watteeuw met zijn gezin",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "anthony-krat",
+      "source": ".impeccable/prototypes/directions/assets/anthony-krat.webp",
+      "width": 1200,
+      "height": 1600,
+      "alt": "Anthony met een krat gemengde oesterzwammen in de kweekruimte",
+      "flagged": true,
+      "flag_reason": "AI-gestileerd beeld (PRD R44)",
+      "approved_by": null
+    },
+    {
+      "id": "fase1-stro",
+      "source": ".impeccable/prototypes/directions/assets/fase1-stro.webp",
+      "width": 1200,
+      "height": 1600,
+      "alt": "Stro weekt in koud water",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "fase2-emmer",
+      "source": ".impeccable/prototypes/directions/assets/fase2-emmer.webp",
+      "width": 1200,
+      "height": 1600,
+      "alt": "Stro en broed in lagen in een emmer",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "fase3-incubatie-a",
+      "source": ".impeccable/prototypes/directions/assets/fase3-incubatie-a.webp",
+      "width": 1200,
+      "height": 1600,
+      "alt": "Emmers met mycelium in incubatie",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "fase3-incubatie-b",
+      "source": ".impeccable/prototypes/directions/assets/fase3-incubatie-b.webp",
+      "width": 1200,
+      "height": 1600,
+      "alt": "Wit mycelium dat het stro overgroeit",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "fase4-kweekruimte",
+      "source": ".impeccable/prototypes/directions/assets/fase4-kweekruimte.webp",
+      "width": 1280,
+      "height": 1536,
+      "alt": "Oesterzwammen groeien in de vochtige kweekruimte",
+      "flagged": true,
+      "flag_reason": "AI-gegenereerd, art direction door Anthony zelf; goedgekeurd voor gebruik (Michael, 2026-11-03)",
+      "approved_by": "Michael Thomas"
+    },
+    {
+      "id": "dish-curry",
+      "source": ".impeccable/prototypes/directions/assets/dish-curry.webp",
+      "width": 1280,
+      "height": 852,
+      "alt": "Romige curry met oesterzwammen",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "dish-geroosterd",
+      "source": ".impeccable/prototypes/directions/assets/dish-geroosterd.webp",
+      "width": 1280,
+      "height": 960,
+      "alt": "Geroosterde oesterzwam uit de oven",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "dish-stoof",
+      "source": ".impeccable/prototypes/directions/assets/dish-stoof.webp",
+      "width": 1280,
+      "height": 1066,
+      "alt": "Stoofpot van oesterzwammen",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "mix",
+      "source": ".impeccable/prototypes/directions/assets/mix.webp",
+      "width": 1280,
+      "height": 853,
+      "alt": null,
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "proefbox",
+      "source": ".impeccable/prototypes/directions/assets/proefbox.webp",
+      "width": 1280,
+      "height": 852,
+      "alt": "Houten box met een selectie oesterzwammen",
+      "flagged": true,
+      "flag_reason": "Krat met 'GroMush ChefBox' ingebrand; mag de gratis ProefBox niet illustreren (PRD R5, R44)",
+      "approved_by": null
+    },
+    {
+      "id": "town-knokke-heist",
+      "source": ".impeccable/prototypes/directions/assets/town-knokke-heist.webp",
+      "width": 800,
+      "height": 393,
+      "alt": null,
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "town-damme",
+      "source": ".impeccable/prototypes/directions/assets/town-damme.webp",
+      "width": 800,
+      "height": 534,
+      "alt": null,
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "town-sluis",
+      "source": ".impeccable/prototypes/directions/assets/town-sluis.webp",
+      "width": 800,
+      "height": 533,
+      "alt": null,
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "town-brugge",
+      "source": ".impeccable/prototypes/directions/assets/town-brugge.webp",
+      "width": 800,
+      "height": 640,
+      "alt": null,
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "town-blankenberge",
+      "source": ".impeccable/prototypes/directions/assets/town-blankenberge.webp",
+      "width": 800,
+      "height": 396,
+      "alt": null,
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    }
+  ]
+}

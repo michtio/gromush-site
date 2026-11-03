@@ -1,0 +1,43 @@
+{# Site footer (S4; sitemap.md "Footer", PRD R9): brand column with email, phone and WhatsApp (only when
+   flags.phone_published, AC5), the locality without street address and the socials; four link columns from
+   nav.json (varieties and towns from data); legal links from site.json. Identical on every page (R6). #}
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <p class="wordmark">{{ site.name }}</p>
+        <p class="baseline">{{ site.baseline }} {{ site.core_line }}</p>
+        <ul class="foot-contact">
+          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+{% if flags.phone_published %}
+          <li><a href="tel:{{ site.phone.tel }}">{{ site.phone.display }}</a></li>
+          <li><a href="{{ site.whatsapp }}" rel="noopener">WhatsApp</a></li>
+{% endif %}
+        </ul>
+        <p class="foot-meta">{{ site.locality }} ({{ site.municipality }})</p>
+        <ul class="foot-social">
+          <li><a href="{{ site.socials.instagram.url }}" rel="noopener">{{ site.socials.instagram.label }}</a></li>
+          <li><a href="{{ site.socials.facebook.url }}" rel="noopener">{{ site.socials.facebook.label }}</a></li>
+        </ul>
+      </div>
+{% for col in nav.footer %}
+      <div class="foot-col">
+        <h2 class="foot-title">{% if col.get("path") %}<a href="{{ url(col.path) }}">{{ col.title }}</a>{% else %}{{ col.title }}{% endif %}</h2>
+        <ul>
+{% for link in col.links %}
+          <li><a href="{{ url(link.path) }}">{{ link.label }}</a></li>
+{% endfor %}
+        </ul>
+      </div>
+{% endfor %}
+    </div>
+    <div class="foot-legal">
+      <p>© {{ site.name }}</p>
+      <ul>
+{% for item in site.legal %}
+        <li><a href="{{ url(item.path) }}">{{ item.label }}</a></li>
+{% endfor %}
+      </ul>
+    </div>
+  </div>
+</footer>
