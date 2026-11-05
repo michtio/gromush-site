@@ -4,6 +4,7 @@
 
 Per page (every *.html under the folder; docs/x/index.html is /x/, docs/404.html is the 404 page):
   - a title naming GroMush and a meta description; both unique across all pages (R1, R40)
+  - indexable pages: at least one <h1>, its text on no other indexable page (AC26: town pages each their own)
   - indexable pages (no robots noindex): canonical = origin + base + path with a trailing slash (AD4, AD5);
     og:title, og:description and og:url equal to title, description and canonical; og:type; og:image an
     absolute URL to a file in the folder, with og:image:alt
@@ -37,11 +38,14 @@ class Head(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.title, self.meta, self.og, self.canonicals, self.jsonld = None, {}, {}, [], []
+        self.h1s, self._h1 = [], None  # S19: the text of every <h1> (AC26)
         self._in_title = self._in_ld = False
         self._buf = []
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
+        if tag == "h1":
+            self._h1 = []
         if tag == "title":
             self._in_title, self._buf = True, []
         elif tag == "meta":
@@ -59,8 +63,13 @@ class Head(HTMLParser):
     def handle_data(self, data):
         if self._in_title or self._in_ld:
             self._buf.append(data)
+        if self._h1 is not None:
+            self._h1.append(data)
 
     def handle_endtag(self, tag):
+        if tag == "h1" and self._h1 is not None:
+            self.h1s.append(" ".join("".join(self._h1).split()))
+            self._h1 = None
         if tag == "title" and self._in_title:
             self.title, self._in_title = " ".join("".join(self._buf).split()), False
         elif tag == "script" and self._in_ld:
@@ -106,6 +115,10 @@ def check_jsonld(path, blocks, problems):
             types.append(kind)
             if kind not in TOP_TYPES:
                 problems.append(f"{where}: type {kind!r} is not one of {', '.join(sorted(TOP_TYPES))} (AD18)")
+            if kind == "Recipe":  # S18: a Recipe needs a name and image, ingredients and steps (schema.org/Recipe)
+                for key in ("name", "image", "recipeIngredient", "recipeInstructions"):
+                    if not item.get(key):
+                        problems.append(f"{where}: Recipe has no {key}")
         if isinstance(obj, dict) and obj.get("@context") not in ("https://schema.org", "http://schema.org"):
             problems.append(f"{where}: @context is not schema.org")
         for key in forbidden_keys(obj, []):
@@ -123,7 +136,7 @@ def check(folder, base, origin):
     folder = Path(folder)
     base = "/" + base.strip("/") + "/" if base.strip("/") else "/"
     prefix = origin.rstrip("/") + base[:-1]
-    problems, seen_title, seen_desc, indexable = [], {}, {}, set()
+    problems, seen_title, seen_desc, seen_h1, indexable = [], {}, {}, {}, set()
     pages = sorted(folder.rglob("*.html"))
     if not pages:
         return [f"{folder}: no html files"]
@@ -178,6 +191,14 @@ def check(folder, base, origin):
             problems.append(f"{path}: no og:image:alt")
         if "Organization" not in types:
             problems.append(f"{path}: no Organization JSON-LD (AD18)")
+        h1s = {h for h in h.h1s if h}  # the homepage carries one heading in two layouts (radial and list)
+        if not h1s:
+            problems.append(f"{path}: no <h1> (AC26)")
+        for text in sorted(h1s):
+            if text in seen_h1:
+                problems.append(f"{path}: same h1 as {seen_h1[text]}: {text!r} (AC26)")
+            else:
+                seen_h1[text] = path
     problems += check_sitemap(folder, prefix, indexable)
     return problems
 

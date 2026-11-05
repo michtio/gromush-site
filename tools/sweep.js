@@ -9,6 +9,8 @@ for(const e of els){let t=e;
  if(e.tagName==='INPUT'){const l=e.closest('label')||(e.id&&document.querySelector('label[for="'+e.id+'"]'));if(l&&['checkbox','radio'].includes(e.type))t=l;}
  const cs=getComputedStyle(t);if(cs.display==='none'||cs.visibility==='hidden'||!t.getClientRects().length)continue;
  if(t.closest('[hidden],[aria-hidden=true]'))continue;
+ // content of a closed <details> is not rendered (Chrome still reports its rects); its summary is
+ const d=t.closest('details');if(d&&!d.open&&!t.closest('summary'))continue;
  t.scrollIntoView({block:'center',inline:'center'});await new Promise(r=>setTimeout(r,16));
  const r=t.getBoundingClientRect();if(r.width>=44&&r.height>=44)continue;
  const x=r.left+r.width/2,y=r.top+r.height/2;const hit=(px,py)=>{const q=document.elementFromPoint(px,py);return q&&(q===t||t.contains(q)||q.contains(t)&&false)};

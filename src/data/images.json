@@ -148,8 +148,8 @@
       "height": 1600,
       "alt": "Anthony met een krat gemengde oesterzwammen in de kweekruimte",
       "flagged": true,
-      "flag_reason": "AI-gestileerd beeld (PRD R44)",
-      "approved_by": null
+      "flag_reason": "AI-gestileerd, art direction door Anthony zelf; goedgekeurd voor gebruik (Michael, 2026-11-05)",
+      "approved_by": "Michael Thomas"
     },
     {
       "id": "fase1-stro",
@@ -166,7 +166,7 @@
       "source": ".impeccable/prototypes/directions/assets/fase2-emmer.webp",
       "width": 1200,
       "height": 1600,
-      "alt": "Stro en broed in lagen in een emmer",
+      "alt": "Zakken paddenstoelenbroed op graan, klaar om met stro in de emmers te gaan",
       "flagged": false,
       "flag_reason": null,
       "approved_by": null
@@ -201,6 +201,14 @@
       "flag_reason": "AI-gegenereerd, art direction door Anthony zelf; goedgekeurd voor gebruik (Michael, 2026-11-03)",
       "approved_by": "Michael Thomas"
     },
+    {"id": "soort-morieltje", "source": "_resources/2026-10-mails-anthony/Extra Blok !!! Buitenkweek - webpagina - GroMush/Buitenkweek-paddenstoelen/soort-morieltje.png", "width": 1254, "height": 1254, "alt": "Morieltjes met hun honingraathoed op de bosbodem", "flagged": false, "flag_reason": null, "approved_by": null},
+    {"id": "soort-shiitake", "source": "_resources/2026-10-mails-anthony/Extra Blok !!! Buitenkweek - webpagina - GroMush/Buitenkweek-paddenstoelen/soort-shiitake.png", "width": 1254, "height": 1254, "alt": "Shiitake met bruine, wit gespikkelde hoeden op hout", "flagged": false, "flag_reason": null, "approved_by": null},
+    {"id": "soort-paarse-ridderzwam", "source": "_resources/2026-10-mails-anthony/Extra Blok !!! Buitenkweek - webpagina - GroMush/Buitenkweek-paddenstoelen/soort-paarse-ridderzwam.png", "width": 1254, "height": 1254, "alt": "Paarse ridderzwammen tussen afgevallen bladeren", "flagged": false, "flag_reason": null, "approved_by": null},
+    {"id": "soort-judasoor", "source": "_resources/2026-10-mails-anthony/Extra Blok !!! Buitenkweek - webpagina - GroMush/Buitenkweek-paddenstoelen/soort-judasoor.png", "width": 1254, "height": 1254, "alt": "Judasoor, oorvormige bruine zwammen op een boomstam", "flagged": false, "flag_reason": null, "approved_by": null},
+    {"id": "soort-wijnrode-stropharia", "source": "_resources/2026-10-mails-anthony/Extra Blok !!! Buitenkweek - webpagina - GroMush/Buitenkweek-paddenstoelen/soort-wijnrode-stropharia.png", "width": 1254, "height": 1254, "alt": "Wijnrode stropharia's met donkerrode hoeden in het gras", "flagged": false, "flag_reason": null, "approved_by": null},
+    {"id": "soort-reishi", "source": "_resources/2026-10-mails-anthony/Extra Blok !!! Buitenkweek - webpagina - GroMush/Buitenkweek-paddenstoelen/soort-reishi.png", "width": 1254, "height": 1254, "alt": "Reishi, glanzende roodbruine houtzwammen op een bemoste stam", "flagged": false, "flag_reason": null, "approved_by": null},
+    {"id": "soort-nameko", "source": "_resources/2026-10-mails-anthony/Extra Blok !!! Buitenkweek - webpagina - GroMush/Buitenkweek-paddenstoelen/soort-nameko.png", "width": 1254, "height": 1254, "alt": "Een tros nameko met kleine oranjebruine hoedjes", "flagged": false, "flag_reason": null, "approved_by": null},
+    {"id": "soort-pioppino", "source": "_resources/2026-10-mails-anthony/Extra Blok !!! Buitenkweek - webpagina - GroMush/Buitenkweek-paddenstoelen/soort-pioppino.png", "width": 1254, "height": 1254, "alt": "Een tros pioppino met lichtbruine hoedjes op slanke steeltjes", "flagged": false, "flag_reason": null, "approved_by": null},
     {
       "id": "dish-curry",
       "source": ".impeccable/prototypes/directions/assets/dish-curry.webp",
@@ -248,8 +256,8 @@
       "height": 852,
       "alt": "Houten box met een selectie oesterzwammen",
       "flagged": true,
-      "flag_reason": "Krat met 'GroMush ChefBox' ingebrand; mag de gratis ProefBox niet illustreren (PRD R5, R44)",
-      "approved_by": null
+      "flag_reason": "Krat met 'GroMush ChefBox' ingebrand; goedgekeurd voor de ProefBox-sectie op de homepage, zoals in final.html (Michael, 2026-11-05)",
+      "approved_by": "Michael Thomas"
     },
     {
       "id": "town-knokke-heist",
@@ -297,6 +305,156 @@
       "width": 800,
       "height": 396,
       "alt": null,
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "grootkeuken-kratten",
+      "source": ".impeccable/prototypes/directions/assets/grootkeuken-kratten.jpg",
+      "width": 1927,
+      "height": 816,
+      "alt": "Kok in een grootkeuken met kratten gele, roze en witte oesterzwammen",
+      "flagged": true,
+      "flag_reason": "AI-gestileerd, art direction door Anthony zelf; goedgekeurd voor gebruik (Michael, 2026-11-05)",
+      "approved_by": "Michael Thomas"
+    },
+    {
+      "id": "grootkeuken-gerechten",
+      "source": ".impeccable/prototypes/directions/assets/grootkeuken-gerechten.jpg",
+      "width": 1536,
+      "height": 1024,
+      "alt": "Koks aan het fornuis in een grote professionele keuken, met op het werkblad een houten GroMush-kist en inoxbakken vol verse paddenstoelen",
+      "flagged": true,
+      "flag_reason": "AI-gestileerd, art direction door Anthony zelf; toont ook paddenstoelen die GroMush niet kweekt, daarom zonder bijschrift over soorten; goedgekeurd voor gebruik (Michael, 2026-11-05)",
+      "approved_by": "Michael Thomas"
+    },
+    {
+      "id": "dish-burger",
+      "source": ".impeccable/prototypes/directions/assets/dish-burger.jpg",
+      "width": 1658,
+      "height": 1492,
+      "alt": "Twee briochebroodjes met pulled oesterzwammen en verse kruiden op een houten plank",
+      "flagged": true,
+      "flag_reason": "Schermafbeelding uit Anthony's Inspiratie-map (Gerechten.zip); herkomst en rechten van de foto na te gaan bij Anthony",
+      "approved_by": null
+    },
+    {
+      "id": "pan-tijm",
+      "source": ".impeccable/prototypes/directions/assets/pan-tijm.jpg",
+      "width": 1774,
+      "height": 887,
+      "alt": "Goudbruin gebakken oesterzwammen met verse tijm in een zwarte pan",
+      "flagged": true,
+      "flag_reason": "AI-gestileerd, art direction door Anthony zelf; goedgekeurd voor gebruik (Michael, 2026-11-05)",
+      "approved_by": "Michael Thomas"
+    },
+    {
+      "id": "pan-roze-droog",
+      "source": ".impeccable/prototypes/directions/assets/pan-roze-droog.jpg",
+      "width": 1536,
+      "height": 1024,
+      "alt": "Roze oesterzwammen die goudbruin bakken in een gietijzeren pan, zonder water",
+      "flagged": true,
+      "flag_reason": "AI-gestileerd, art direction door Anthony zelf; goedgekeurd voor gebruik (Michael, 2026-11-05)",
+      "approved_by": "Michael Thomas"
+    },
+    {
+      "id": "pan-geel-water",
+      "source": ".impeccable/prototypes/directions/assets/pan-geel-water.jpg",
+      "width": 1536,
+      "height": 1024,
+      "alt": "Gele oesterzwammen die zachtjes garen in een laagje kokend water",
+      "flagged": true,
+      "flag_reason": "AI-gestileerd, art direction door Anthony zelf; goedgekeurd voor gebruik (Michael, 2026-11-05)",
+      "approved_by": "Michael Thomas"
+    },
+    {
+      "id": "krat-overdracht",
+      "source": ".impeccable/prototypes/directions/assets/krat-overdracht.jpg",
+      "width": 1536,
+      "height": 1024,
+      "alt": "Een krat gemengde verse oesterzwammen wordt van hand tot hand doorgegeven",
+      "flagged": true,
+      "flag_reason": "AI-gestileerd, art direction door Anthony zelf; goedgekeurd voor gebruik (Michael, 2026-11-05)",
+      "approved_by": "Michael Thomas"
+    },
+    {
+      "id": "speciaalzaak-groenteboer",
+      "source": ".impeccable/prototypes/directions/assets/speciaalzaak-groenteboer.jpg",
+      "width": 1376,
+      "height": 628,
+      "alt": "Groenteboer in een groene schort voor kratten witte, gele, roze en grijze oesterzwammen",
+      "flagged": true,
+      "flag_reason": "AI-gestileerd, art direction door Anthony zelf; goedgekeurd voor gebruik (Michael, 2026-11-05). Bovenrand (krijtborden met prijzen) bijgesneden: geen prijzen in beeld (R3).",
+      "approved_by": "Michael Thomas"
+    },
+    {
+      "id": "thuis-gezin",
+      "source": ".impeccable/prototypes/directions/assets/thuis-gezin.jpg",
+      "width": 1537,
+      "height": 1023,
+      "alt": "Een gezin bekijkt samen met de kweker een bakje verse oesterzwammen",
+      "flagged": true,
+      "flag_reason": "AI-gestileerd, art direction door Anthony zelf; goedgekeurd voor gebruik (Michael, 2026-11-05)",
+      "approved_by": "Michael Thomas"
+    },
+    {
+      "id": "mushlove-plank",
+      "source": ".impeccable/prototypes/directions/assets/mushlove-plank.jpg",
+      "width": 1024,
+      "height": 1024,
+      "alt": "Houten snijplank met het MushLove-logo tussen verse paddenstoelen op een keukentafel",
+      "flagged": true,
+      "flag_reason": "AI-gestileerd, art direction door Anthony zelf; goedgekeurd voor gebruik (Michael, 2026-11-05)",
+      "approved_by": "Michael Thomas"
+    },
+    {
+      "id": "hero-knokke-heist",
+      "source": ".impeccable/prototypes/directions/assets/hero-knokke-heist.webp",
+      "width": 2048,
+      "height": 1006,
+      "alt": "Het strand van Knokke-Heist met duinen en helmgras op de voorgrond",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "hero-damme",
+      "source": ".impeccable/prototypes/directions/assets/hero-damme.jpg",
+      "width": 1200,
+      "height": 801,
+      "alt": "Witte huisjes met rode daken aan het water bij Damme, met riet op de oever",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "hero-sluis",
+      "source": ".impeccable/prototypes/directions/assets/hero-sluis.jpg",
+      "width": 1400,
+      "height": 933,
+      "alt": "Het centrum van Sluis met het belfort, gezien over het water met narcissen op de oever",
+      "flagged": false,
+      "flag_reason": null,
+      "approved_by": null
+    },
+    {
+      "id": "hero-brugge",
+      "source": ".impeccable/prototypes/directions/assets/hero-brugge.jpg",
+      "width": 1000,
+      "height": 800,
+      "alt": "Trapgevels en terrassen op de Markt in Brugge",
+      "flagged": true,
+      "flag_reason": "Draagt het watermerk @MATEIANA: foto van derden; rechten na te gaan bij Anthony",
+      "approved_by": null
+    },
+    {
+      "id": "hero-blankenberge",
+      "source": ".impeccable/prototypes/directions/assets/hero-blankenberge.jpg",
+      "width": 1616,
+      "height": 800,
+      "alt": "De pier van Blankenberge bij zonsondergang, gezien vanaf het strand",
       "flagged": false,
       "flag_reason": null,
       "approved_by": null

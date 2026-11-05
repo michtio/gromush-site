@@ -1,0 +1,335 @@
+/* GroMush homepage (S9, template A): the scenes of final.html that only the homepage has. Loaded after site.css by
+   pages/index.html. Ported rule for rule from .impeccable/prototypes/directions/final.html (radial opening, round 4,
+   approved 2026-11-04; delivery variant 1); the shared components (slip, flip cards, polaroids, audience cards,
+   form, town cards) stay in site.css. */
+
+/* ---------- opening: the radial ring from 1100 px, the trunk-and-twig list below (R10, R10b) ---------- */
+.ring-pin{display:none;position:relative}
+.ring-pin.is-pinned .ring{position:sticky}
+/* in em, so a large default font size (200 % text) gets the list, which reflows; 68.75em = 1100 px at 16 px */
+@media (min-width:68.75em){.ring-pin{display:block}}
+
+/* ---------- radial opening ----------
+   One drawing in a 1320x780 frame: medallions in percentages, sizes in cqi, so the ring scales as one piece from
+   1100 px up. The network (src/gen/hyphae.py) avoids the measured title block, curved labels, pills and discs; any
+   change to their sizes here must be re-measured (src/gen/hyphae_obs) and re-probed. */
+.ring{padding-block:.4rem 1.4rem}
+.ring-stage{position:relative;aspect-ratio:1320/780;container-type:inline-size}
+.ring-svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.ring-svg path{fill:none;stroke:var(--ink);stroke-linecap:round;stroke-linejoin:round}
+/* mains with a tapering underlay, longer strands, then the fine web (merged per class) */
+.ring-svg .mb{stroke-width:2.9;stroke-opacity:.9}
+.ring-svg .m{stroke-width:1.8}
+.ring-svg .s{stroke-width:1.1;stroke-opacity:.85}
+.ring-svg .f3{stroke-width:.7;stroke-opacity:.8}
+.ring-svg .f2{stroke-width:.5;stroke-opacity:.74}
+.ring-svg .f1{stroke-width:.35;stroke-opacity:.7}
+.ring-svg .ring-ko{fill:var(--straw)}
+/* two baked networks: the title block takes relatively more room below 1280px */
+.ring-hy--s{display:none}
+@media (max-width:79.9375em){.ring-hy--l{display:none}.ring-hy--s{display:inline}} /* 1279 px */
+/* the drawing is hidden only while the script grows it (class set before paint) */
+.ring-grow .ring-svg path[data-b]{stroke-dasharray:1 1;stroke-dashoffset:1;visibility:hidden}
+.ring-grow .ring-svg path[data-f]{opacity:0}
+.ring-core{
+  position:absolute;left:50%;top:50%;width:38cqi;transform:translate(-50%,-50%);
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+}
+.ring-core h1{font-size:5.15cqi;line-height:1.02;letter-spacing:-0.02em;margin-bottom:1.6cqi}
+.ring-core h1 span{display:block}
+.ring-core .support{font-size:clamp(1rem,1.38cqi,1.15rem);color:var(--ink-soft);max-width:36ch;margin:0}
+.ring-core .slip-wrap{width:min(430px,100%);margin-top:2.2cqi}
+.ring-core .slip{padding:2.4rem 1.3rem 1.4rem}
+/* the slip's actions keep final.html's line height: the network was measured around this slip */
+.ring-core .slip .btn-primary,.ring-core .slip .btn-second{line-height:1.65}
+.ring-meds{list-style:none;margin:0;padding:0}
+.med{
+  position:absolute;left:var(--x);top:var(--y);width:13.03cqi;aspect-ratio:1;
+  transform:translate(-50%,-50%) scale(var(--s,1));opacity:var(--o,1);
+  color:var(--ink);
+}
+.med-link{position:absolute;inset:0;border-radius:50%;color:var(--ink);text-decoration:none}
+.med-link:hover{color:var(--ink)}
+.med-link:focus-visible{outline:3px solid var(--moss);outline-offset:5px;border-radius:50%}
+.med-disc{
+  position:absolute;inset:0;border-radius:50%;overflow:hidden;
+  background:var(--straw);
+  /* stamped double ring: 2px ink, a straw gap, an ink hairline */
+  box-shadow:inset 0 0 0 2px var(--ink),inset 0 0 0 6px var(--straw),inset 0 0 0 7px rgb(var(--ink-rgb) / .38);
+  display:grid;place-items:center;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+}
+.med-disc source{display:none} /* picture{display:contents} would make them grid rows */
+.med-disc img{width:80%;height:auto;display:block;margin-top:9%;filter:var(--shadow-cut);transition:transform .35s var(--ease)}
+/* known asset gap (images.json, flagged): grijze reuses the italiaanse cut-out, toned towards grey */
+.med[data-variety=grijze] .med-disc img{filter:grayscale(.85) var(--shadow-cut)}
+.med:hover .med-disc,.med:focus-within .med-disc{
+  transform:translateY(-3px);
+  box-shadow:inset 0 0 0 2px var(--ink),inset 0 0 0 6px var(--straw),inset 0 0 0 7px rgb(var(--ink-rgb) / .38),var(--shadow-lift);
+}
+.med:hover .med-disc img,.med:focus-within .med-disc img{transform:scale(1.04)}
+.med-label{position:absolute;left:50%;top:50%;width:19.7cqi;height:19.7cqi;transform:translate(-50%,-50%);overflow:visible;pointer-events:none}
+.med-label text{
+  font-family:var(--font-display);font-size:18.5px;letter-spacing:.6px;fill:var(--ink);
+  paint-order:stroke;stroke:var(--straw);stroke-width:3px;stroke-linejoin:round;
+}
+/* the "Vraag aan" pill: its own link to the request form (R10a), on the disc's lower edge */
+.med .pill,.node .pill{line-height:1.65}
+.med .pill{
+  position:absolute;left:50%;top:100%;margin:0;white-space:nowrap;z-index:1;
+  transform:translate(-50%,-62%);
+  transition:transform .35s var(--ease);
+}
+.med:hover .pill,.med:focus-within .pill{transform:translate(-50%,-62%) translateY(-3px)}
+.pill-link{text-decoration:none;color:var(--ink)}
+.pill-link:hover{color:var(--ink);text-decoration:underline;text-underline-offset:.18em}
+.pill-link::after{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:44px;transform:translate(-50%,-50%)}
+@media (prefers-reduced-motion:reduce){
+  .med-disc,.med-disc img,.med .pill{transition:none}
+}
+
+/* ---------- trunk-and-twig list (below 1100 px) ---------- */
+.opening{
+  min-height:calc(100svh - 76px);
+  display:grid;grid-template-columns:minmax(0,1fr);gap:2.5rem;align-items:start;
+  padding-block:clamp(1.5rem,4vh,3.5rem) 3rem;
+  position:relative;
+}
+.opening-copy{min-width:0}
+.opening-copy h1{
+  font-size:clamp(3rem,6vw,5.75rem);
+  line-height:1.02;letter-spacing:-0.02em;
+  margin-bottom:1.2rem;
+}
+.opening-copy .support{font-size:1.15rem;color:var(--ink-soft);max-width:34ch;margin-bottom:0}
+.opening .slip .btn-primary,.opening .slip .btn-second{line-height:1.65}
+.net{position:relative;min-width:0;padding-left:56px;container-type:inline-size}
+.net-trunk{display:block;position:absolute;left:18px;top:0;bottom:0;width:16px;height:100%;color:var(--ink)}
+.west-label{
+  display:flex;align-items:center;gap:.5rem;margin:0 0 1.6rem;
+  font-family:var(--font-hand);font-size:1rem;color:var(--ink-soft);
+}
+.west-label svg{flex:none}
+.net-list{list-style:none;margin:0;padding:0}
+.node{
+  position:relative;display:flex;flex-wrap:wrap;align-items:flex-start;gap:1rem;
+  margin-block:2.4rem;color:var(--ink);
+}
+.node .cut{
+  display:block;width:96px;flex:none;
+  transition:transform .35s var(--ease),filter .35s var(--ease);
+  filter:var(--shadow-cut);
+}
+.node .cut img{width:100%;height:auto;display:block}
+.node[data-variety=grijze] .cut img{filter:grayscale(.85)}
+.node:hover .cut,.node:focus-within .cut{transform:translateY(-4px);filter:var(--shadow-cut-lift)}
+.node .ntxt{
+  display:flex;flex-direction:column;align-items:flex-start;gap:.15rem;
+  min-width:0;flex:1 1 7rem;overflow-wrap:break-word;hyphens:auto;
+  background:var(--straw);padding:.4rem .55rem .35rem;border-radius:8px;
+}
+.node .nname{
+  font-family:var(--font-display);font-size:clamp(.95rem,2.36cqi,1.3rem);line-height:1.15;
+  color:var(--ink);text-decoration:none;
+  text-shadow:-1px 0 var(--straw),1px 0 var(--straw),0 -1px var(--straw),0 1px var(--straw);
+}
+.node .nname:hover{text-decoration:underline;text-underline-offset:.18em}
+/* the name is the variety's link; its hit area covers the cut-out and the text, the pill sits above it */
+.node .nname::after{content:"";position:absolute;inset:-14px 0} /* a little past the node: 44 px round the name; nodes are 38 px apart */
+.node .ntaste{font-size:clamp(.72rem,1.47cqi,.8rem);color:var(--ink-soft);text-shadow:-1px 0 var(--straw),1px 0 var(--straw),0 -1px var(--straw),0 1px var(--straw)}
+.node .pill{position:relative;z-index:1;max-width:100%}
+.twig{display:block;position:absolute;left:-42px;top:32px;width:44px;height:24px;overflow:visible}
+.twig path{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linecap:round}
+@media (prefers-reduced-motion:reduce){.node .cut{transition:none}}
+@media (min-width:68.75em){.opening{display:none}}
+
+/* ---------- delivery: route with the van (.lv1, variant 1) ----------
+   Live (JS, motion allowed, stage fits the screen): a sticky map, the route draws from the farm and the van drives
+   it; each town's card appears on the map as the van arrives (desktop) or in the register below (phones).
+   Static (no JS, reduced motion, short screens): full route, van parked at the farm, and the register beside or
+   under the map. The register rows themselves (.lv1-stops, .lv1-card) are in site.css. */
+.lv1-hand{font-family:var(--font-hand);font-size:clamp(1.2rem,1.9vw,1.5rem);color:var(--ink-soft);margin:0}
+.lv1-body{margin-top:clamp(1.8rem,3.5vw,2.8rem);display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(1.8rem,3vw,2.6rem)}
+/* the three blocks, each under its legend icon; the icon carries the route progress */
+.lv1-log{list-style:none;margin:0;padding:0;display:grid;gap:1.4rem;position:relative}
+.lv1-log::before{content:"";position:absolute;left:23px;top:24px;bottom:24px;width:1.5px;background:var(--ink-soft);opacity:.6}
+.lv1-log li{position:relative;display:grid;grid-template-columns:48px minmax(0,1fr);gap:1rem;align-items:start}
+.lv1-ico{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--straw-deep);border:1.5px solid var(--ink-soft);
+  transition:background .4s var(--ease),border-color .4s var(--ease),transform .4s var(--ease)}
+.lv1-ico svg{width:34px;height:23px;transition:opacity .4s var(--ease)}
+.lv1-ico .s-ring{fill:none;stroke:var(--ink);stroke-width:1.6}
+.lv1-ico .s-fill{fill:var(--ink)}
+.lv1-ico .s-line{fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round}
+.lv1-log li.is-on .lv1-ico{border:2px solid var(--ink);background:var(--straw)}
+.lv1.is-live .lv1-log li:not(.is-on) .lv1-ico svg{opacity:.45}
+.lv1.is-live .lv1-log li.is-cur .lv1-ico{background:var(--kraft-tint);transform:scale(1.08)}
+.lv1-log h3{font-size:1.4rem;margin:.55rem 0 .3rem}
+.lv1-log p{color:var(--ink-soft);font-size:.98rem;max-width:56ch}
+@media (min-width:700px){
+  .lv1:not(.is-live) .lv1-log{grid-template-columns:repeat(3,minmax(0,1fr));gap:1.8rem}
+  .lv1:not(.is-live) .lv1-log::before{display:none}
+}
+@media (min-width:700px) and (max-width:1279px){
+  .lv1.is-live .lv1-log{grid-template-columns:repeat(3,minmax(0,1fr));gap:1.8rem}
+  .lv1.is-live .lv1-log::before{display:none}
+}
+@media (min-width:1280px){
+  .lv1.is-live .lv1-body{grid-template-columns:minmax(16rem,20rem) minmax(0,1fr);gap:3rem;align-items:start}
+  .lv1.is-live .lv1-log{position:sticky;top:var(--lv1-top);height:calc(100svh - var(--lv1-top));align-content:center}
+  .lv1.is-live .lv1-log::before{top:calc(50% - 9rem);bottom:calc(50% - 9rem)}
+}
+/* stage */
+.lv1-track{position:relative;min-width:0}
+.lv1.is-live .lv1-track{height:420svh}
+.lv1.is-live .lv1-stage{position:sticky;top:var(--lv1-top);height:calc(100svh - var(--lv1-top));display:flex;flex-direction:column;justify-content:center;padding-block:1rem}
+.lv1-map{position:relative;margin-inline:auto;width:100%}
+.lv1.is-live .lv1-map{width:min(100%,calc((100svh - var(--lv1-top) - 2rem) * 1000 / 820))}
+.lv1-canvas{position:relative;container-type:inline-size}
+.lv1-svg{display:block;width:100%;height:auto}
+/* the map ground: ink at low opacity so the route and the van lead */
+.lv1-waves path{fill:none;stroke:var(--ink);stroke-width:.8;opacity:.2;stroke-linecap:round}
+.lv1-polder path{fill:none;stroke:var(--ink);stroke-width:.9;opacity:.12;stroke-linecap:round}
+.lv1-coast{fill:none;stroke:var(--ink);stroke-width:2.1;stroke-linecap:round;opacity:.72}
+.lv1-beach{fill:none;stroke:var(--ink);stroke-width:.8;opacity:.3}
+.lv1-dune{fill:none;stroke:var(--ink);stroke-width:1;opacity:.32;stroke-linecap:round}
+.lv1-grass{fill:none;stroke:var(--ink);stroke-width:.8;opacity:.28;stroke-linecap:round}
+.lv1-wb{fill:none;stroke:var(--ink);stroke-width:5;stroke-linecap:round;opacity:.22}
+.lv1-ww{fill:none;stroke:var(--straw-deep);stroke-width:2.6;stroke-linecap:round}
+.lv1-creek{fill:none;stroke:var(--ink);stroke-width:1;opacity:.22;stroke-linecap:round}
+.lv1-cb{fill:none;stroke:var(--ink);stroke-width:1.2;opacity:.24;stroke-linecap:round}
+.lv1-roads .r-main{fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round;opacity:.16}
+.lv1-roads .r-main-in{fill:none;stroke:var(--straw-deep);stroke-width:2;stroke-linecap:round}
+.lv1-roads .r-minor{fill:none;stroke:var(--ink);stroke-width:1.1;stroke-linecap:round;opacity:.2}
+.lv1-rose .r-ring{fill:var(--straw-deep);stroke:var(--ink);stroke-width:1;opacity:.85}
+.lv1-rose .r-thin{fill:none;stroke-width:.6;opacity:.6}
+.lv1-rose .r-rays path,.lv1-rose .r-ticks path{stroke:var(--ink);stroke-width:.5;opacity:.45}
+.lv1-rose .r-ticks path{opacity:.7}
+.lv1-rose .r-dark{fill:var(--ink-soft)}
+.lv1-rose .r-light{fill:var(--straw);stroke:var(--ink-soft);stroke-width:.6}
+.lv1-rose .r-hub{fill:var(--ink)}
+.lv1-rose .r-n{font-family:var(--font-display);font-size:17px;fill:var(--ink);text-anchor:middle}
+.lv1-rose-turn{transform-box:view-box;transform-origin:0 0}
+.lv1-zee{font-family:var(--font-hand);font-size:34px;fill:var(--ink-soft)}
+.lv1-road{fill:none;stroke:var(--ink);stroke-width:7;stroke-linecap:round;stroke-linejoin:round;opacity:.1}
+.lv1-route{fill:none;stroke:var(--ink);stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+.lv1-dot{fill:var(--ink);stroke:var(--straw-deep);stroke-width:3}
+.lv1-home{fill:var(--ink)}
+.lv1-ring{fill:none;stroke:var(--ink);stroke-width:1.6}
+@media (prefers-reduced-motion:no-preference){
+  .lv1.is-rose-armed .lv1-rose-turn{transform:rotate(-38deg)}
+  .lv1.is-rose-in .lv1-rose-turn{transform:rotate(0deg);transition:transform 2.8s cubic-bezier(0.16,1,0.3,1) .2s}
+}
+/* the van: parked at the farm by default (--vx/--vy from src/gen/levering.py), driven by JS when live */
+.lv1-van{position:absolute;left:var(--vx);top:var(--vy);width:clamp(56px,13%,140px);transform:translate(-50%,-88%);transform-origin:50% 88%;z-index:3;pointer-events:none}
+.lv1.is-live .lv1-van{left:0;top:0;will-change:transform}
+.lv1 .lv-van-svg{display:block;width:100%;height:auto;overflow:visible}
+.lv1 .v-cream{fill:var(--witte)}
+.lv1 .v-low{fill:var(--van)}
+.lv1 .v-belt,.lv1 .v-seam{fill:none;stroke:var(--ink);stroke-width:1.3;stroke-linecap:round}
+.lv1 .v-glass{fill:var(--ink-soft);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round}
+.lv1 .v-pillar{fill:none;stroke:var(--witte);stroke-width:3.2}
+.lv1 .v-crates rect{fill:var(--kraft);stroke:var(--ink);stroke-width:1}
+.lv1 .m-gele{fill:var(--gele)}.lv1 .m-roze{fill:var(--roze)}.lv1 .m-blauwe{fill:var(--pill-blauwe)}.lv1 .m-witte{fill:var(--witte)}
+.lv1 .v-bar-ink{fill:none;stroke:var(--ink);stroke-width:4.6;stroke-linecap:round}
+.lv1 .v-bar{fill:none;stroke:var(--straw);stroke-width:2.2;stroke-linecap:round}
+.lv1 .v-tail{fill:none;stroke:var(--kraft);stroke-width:2.6;stroke-linecap:round}
+.lv1 .v-line{fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linejoin:round}
+.lv1 .v-arch{fill:var(--ink-soft);stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+.lv1 .v-tyre{fill:var(--ink)}
+.lv1 .v-hub{fill:var(--straw-deep);stroke:var(--ink);stroke-width:1.2}
+.lv1 .v-spoke{fill:none;stroke:var(--ink);stroke-width:1.4;stroke-linecap:round}
+.lv1 .v-wheel{transform-box:fill-box;transform-origin:center;transform:rotate(var(--w,0deg))}
+.lv1 .v-word{transform-box:fill-box;transform-origin:center;transform:scaleX(var(--fs,1))}
+.lv1 .v-text{font-family:var(--font-display);font-size:16px;fill:var(--straw);text-anchor:middle}
+/* map labels: shown whenever the stops are not on the map itself */
+.lv1-pins{position:absolute;inset:0;pointer-events:none}
+.lv1-pin{position:absolute;left:var(--x);top:var(--y);font-family:var(--font-display);font-size:clamp(.78rem,2.1cqi,1.2rem);line-height:1.15;background:var(--straw-deep);border-radius:4px;padding:0 .25em;white-space:nowrap}
+.lv1-pin[data-t=knokke-heist]{transform:translate(calc(-100% - 1.6cqi),-50%)}
+.lv1-pin[data-t=westkapelle]{font-family:var(--font-hand);font-size:clamp(.86rem,2.3cqi,1.3rem);transform:translate(calc(-100% - 2.8cqi),-50%)}
+.lv1-pin[data-t=sluis]{transform:translate(-50%,2cqi)}
+.lv1-pin[data-t=damme]{transform:translate(1.6cqi,-50%)}
+.lv1-pin[data-t=brugge]{transform:translate(1.6cqi,-50%)}
+.lv1-pin[data-t=blankenberge]{transform:translate(-30%,calc(-100% - 1.6cqi));background:transparent}
+/* the register: the farm and "en omgeving" (the town rows are site.css) */
+.lv1 .lv1-more{grid-template-columns:minmax(0,1fr);padding-left:calc(64px + 1.4rem)}
+.lv1-stop--home .lv1-name,.lv1-more .lv1-name{font-family:var(--font-hand);font-size:1.45rem}
+@media (min-width:1100px){
+  .lv1:not(.is-live) .lv1-map{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4.6fr);gap:clamp(2rem,4vw,3.5rem);align-items:start}
+  .lv1:not(.is-live) .lv1-stops{display:block;border-top:1px solid var(--ink)}
+  .lv1:not(.is-live) .lv1-stop{border-top:0;margin-top:0}
+}
+@media (max-width:479px){
+  .lv1 .lv1-more{padding-left:calc(52px + 1.2rem)}
+}
+/* live on phones: a compact register under the map so the stage fits one screen */
+@media (max-width:899px){
+  .lv1.is-live .lv1-stops{margin-top:.8rem}
+  .lv1.is-live .lv1-card{grid-template-columns:44px minmax(0,1fr) auto;gap:.7rem;padding:.3rem .25rem}
+  .lv1.is-live .lv1-ph{width:44px;height:44px}
+  .lv1.is-live .lv1-name{font-size:1.08rem}
+  .lv1.is-live .lv1-stop--home .lv1-name,.lv1.is-live .lv1-more .lv1-name{font-size:1.15rem}
+  .lv1.is-live .lv1-subs{font-size:.8rem;line-height:1.35;margin-top:0}
+  .lv1.is-live .lv1-pick{display:none}
+  .lv1.is-live .lv1-more{grid-template-columns:minmax(0,1fr);padding-left:calc(44px + .95rem)}
+  .lv1.is-live .lv1-arrow{width:20px;height:20px}
+}
+@media (min-width:600px) and (max-width:899px){
+  .lv1.is-live .lv1-stops{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:1.4rem;border-top:0}
+  .lv1.is-live .lv1-stop{border-top:1px solid var(--ink);margin-top:-1px}
+}
+/* live on wider screens: the stops sit on the map at their town */
+@media (min-width:900px){
+  .lv1.is-live .lv1-pins{display:none}
+  .lv1.is-live .lv1-stops{position:absolute;inset:0;pointer-events:none;border:0}
+  .lv1.is-live .lv1-stop{position:absolute;left:var(--x);top:var(--y);width:max-content;max-width:16rem;pointer-events:auto;z-index:2;border:0}
+  .lv1.is-live .lv1-card{display:flex;align-items:center;gap:.6rem;padding:0}
+  .lv1.is-live a.lv1-card:hover{background:transparent}
+  .lv1.is-live a.lv1-card:focus-visible{outline-offset:4px;border-radius:12px}
+  .lv1.is-live .lv1-arrow,.lv1.is-live .lv1-pick{display:none}
+  .lv1.is-live .lv1-ph{width:56px;height:56px}
+  .lv1.is-live .lv1-txt{background:var(--straw-deep);border-radius:8px;padding:.15rem .45rem}
+  .lv1.is-live .lv1-name{font-size:1.15rem}
+  .lv1.is-live .lv1-subs{font-size:.8rem;line-height:1.35;max-width:12rem}
+  .lv1.is-live .lv1-stop[data-pl=left]{transform:translate(calc(-100% - 4.2rem),-50%)}
+  .lv1.is-live .lv1-stop[data-pl=left] .lv1-card{flex-direction:row-reverse;text-align:right}
+  .lv1.is-live .lv1-stop[data-pl=left] .lv1-txt{align-items:flex-end}
+  .lv1.is-live .lv1-stop[data-pl=right]{transform:translate(4.2rem,-50%)}
+  .lv1.is-live .lv1-stop[data-pl=below]{transform:translate(-25%,1.6rem)}
+  .lv1.is-live .lv1-stop[data-pl=above]{transform:translate(-50%,calc(-100% - 4rem))}
+  .lv1.is-live .lv1-stop[data-pl=above] .lv1-card{flex-direction:column;text-align:center;gap:.35rem}
+  .lv1.is-live .lv1-stop[data-pl=above] .lv1-txt{align-items:center}
+  .lv1.is-live .lv1-stop[data-pl=above] .lv1-subs{max-width:14rem}
+  .lv1.is-live .lv1-stop[data-pl=none]{transform:translate(-50%,-50%)}
+  .lv1.is-live .lv1-more{padding:0}
+  .lv1.is-live .lv1-more .lv1-name{font-size:1.35rem}
+  /* the farm: the medallion sits on the route's start dot, its label to the left */
+  .lv1.is-live .lv1-stop--home{transform:translate(-50%,-50%);z-index:1}
+  .lv1.is-live .lv1-stop--home .lv1-ph{width:62px;height:62px;box-shadow:0 0 0 4px var(--straw-deep)}
+  .lv1.is-live .lv1-stop--home .lv1-txt{position:absolute;right:calc(100% + .7rem);top:50%;transform:translateY(-50%);white-space:nowrap;align-items:flex-end;text-align:right}
+  .lv1.is-live .lv1-stop--home .lv1-name{font-size:1.3rem}
+}
+/* reveal (live only; no JS and reduced motion keep everything shown) */
+.lv1.is-live:not(.lv1-all) .lv1-stop:not(.is-on) .lv1-card{opacity:0;transform:translateY(8px)}
+.lv1.is-live:not(.lv1-all) .lv1-stop:not(.is-on){border-color:transparent}
+.lv1-close{font-family:var(--font-display);font-size:clamp(1.6rem,3.2vw,2.6rem);line-height:1.25;max-width:26ch;margin:clamp(2.4rem,5vw,3.5rem) auto 0;text-align:center;text-wrap:balance}
+
+/* ---------- the range, growing, audiences ---------- */
+.cat-more{margin:1.6rem 0 0;font-weight:500}
+.outdoor{margin-top:4.5rem}
+.tafels h2{margin-bottom:clamp(2rem,4vw,3rem);max-width:20ch}
+.versions-close{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.3rem);line-height:1.12;margin-top:clamp(2.5rem,5vw,3.5rem);text-wrap:balance}
+
+/* ---------- the grower ---------- */
+.kweker-grid{display:grid;grid-template-columns:5fr 7fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.kweker-grid .photo{border-radius:12px;width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+.kweker-grid h2{font-size:clamp(1.9rem,3.6vw,3rem);margin-bottom:1.2rem}
+.kweker-grid .story{max-width:60ch}
+.signature{font-family:var(--font-hand);font-size:1.75rem;line-height:1.3;color:var(--ink);margin:1.6rem 0 1.4rem}
+.signature-role{display:block;font:600 .92rem/1.4 var(--font-text);color:var(--ink-soft);margin-top:.1rem}
+@media (max-width:1099px){
+  .kweker-grid{grid-template-columns:minmax(0,1fr)}
+  .kweker-grid .photo{aspect-ratio:4/3;max-height:70vh}
+}
+
+/* ---------- the request form scene ---------- */
+#proefbox .coupon img{aspect-ratio:auto;height:auto}

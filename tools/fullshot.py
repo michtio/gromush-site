@@ -2,17 +2,23 @@
 
 usage: python3 -I tools/fullshot.py <html-or-url> <out-prefix> [widths=1440,390]
 writes <prefix>-<w>.png (full page, max 16000px tall) and <prefix>-<w>-sNN.png slices
-(1400px tall at desktop, 1600px on phones); prints unloaded image count and scrollWidth.
+(1400px tall at desktop, 1600px on phones); prints unloaded image count, scrollWidth and textfit=N, the
+number of text-fit problems found by tools/textfit.js (words off screen, clipped, broken mid-word, or a
+horizontal scroll), followed by one "  textfit: ..." line per problem.
 
 env:
   PRE_JS='<js>'      run before capturing (e.g. click "Kook je thuis?" to show Particulier mode)
   SHOT_SEL='<css>'   capture only that element as <prefix>-<w>-el.png (skips the full page)
-  FONT_SIZE=32       real browser default font size (200% text)
+  FONT_SIZE=32       real browser default font size (200% text): written to the throwaway profile's
+                     preferences by tools/cdp.py, so it survives captureBeyondViewport
   MOTION=1           do not force reduced motion
 """
 import base64, os, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from cdp import WS, CHROME, launch, viewport, to_url, evaluate, stop  # noqa: E402,F401
+
+with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "textfit.js"), encoding="utf-8") as _f:
+    TEXTFIT = _f.read()
 
 JS_LOAD = """(async()=>{document.documentElement.style.scrollBehavior='auto';
 for(const i of document.images){i.loading='eager'}
@@ -46,12 +52,15 @@ def main():
                 out = f"{prefix}-{w}-el.png"
                 shot(ws, out, {"x": max(0, x - 16), "y": max(0, y - 16), "width": min(w, ew + 32), "height": min(eh + 32, 6000)})
                 print(out); continue
+            fit = evaluate(ws, TEXTFIT) or {"n": -1, "problems": ["textfit.js did not run"]}
             h = min(int(ws.send("Page.getLayoutMetrics")["cssContentSize"]["height"]), 16000)
             shot(ws, f"{prefix}-{w}.png", {"x": 0, "y": 0, "width": w, "height": h})
             sl = 1400 if w > 600 else 1600
             for i, y in enumerate(range(0, h, sl)):
                 shot(ws, f"{prefix}-{w}-s{i+1:02d}.png", {"x": 0, "y": y, "width": w, "height": min(sl, h - y)})
-            print(f"{prefix}-{w}.png unloaded_imgs={unloaded} height={h} scrollWidth={evaluate(ws, 'document.documentElement.scrollWidth')}")
+            print(f"{prefix}-{w}.png unloaded_imgs={unloaded} height={h} scrollWidth={evaluate(ws, 'document.documentElement.scrollWidth')} textfit={fit['n']}")
+            for problem in fit["problems"]:
+                print("  textfit:", problem)
     finally:
         stop(proc)
 

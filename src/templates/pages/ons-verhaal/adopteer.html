@@ -1,0 +1,119 @@
+{% extends "layouts/process.html" %}
+{# /ons-verhaal/adopteer/ (S16, template F; PRD R23, R24, R33, R34, R37, R38). Bucket adoption by request form.
+   Copy: the Adoptie brief's bucket card and the Community brief's "Adopteer een emmer" block (content-inventory 2.21,
+   2.22), lightly edited. Left out on purpose (R23, R24, Q4): every price (the brief's per-cycle amount), the log-set card,
+   price card and "Wat krijg je" lines about logs or a forest, "biologisch" (R2), the "1 volle oogst (ca. 2–3 kg)"
+   figure, "De cyclus gaat door / productief voor vele oogsten" (contradicts one harvest per cycle) and the payment flow
+   (none exists: Anthony confirms every adoption personally). The AI images of the Adoptie folder (buckets and tagged
+   logs in a forest) are not used: they would be the evidence for a forest that does not exist (R44). The real phase
+   photos of the Kweekproces page show the bucket instead.
+   The link to the Buitenkweek interest registration stands in its own block, never in a sentence about adoption. #}
+{% block title %}Adopteer een emmer oesterzwammen · {{ site.name }}{% endblock %}
+{% block description %}Adopteer een 20-literemmer in de binnenkweek van {{ site.name }}: kies je oesterzwam, volg de groei met foto's en updates en geniet van de oogst uit jouw emmer.{% endblock %}
+{% block page_head %}{{{ og_image('fase3-incubatie-a') }}}{% endblock %}
+{% block overline %}Adopteer een emmer{% endblock %}
+{% block heading %}Jouw eigen oesterzwammen, rechtstreeks van onze kwekerij.{% endblock %}
+{% block hero_text %}
+      <p class="lede">Met een adoptie-emmer haal je een stukje {{ site.name }} in huis. Je kiest jouw favoriete oesterzwam en adopteert een 20-literemmer in onze binnenkweek. Wij begeleiden de kweek; jij volgt hoe jouw oesterzwammen groeien, tot aan de oogst.</p>
+      <div class="pf-actions">
+{% include "partials/button.html" with {"label": "Vraag je emmer aan", "path": "/ons-verhaal/adopteer/#formulier"} %}
+{% include "partials/button.html" with {"label": "Hoe werkt het?", "path": "/ons-verhaal/adopteer/#stappen", "kind": "link"} %}
+      </div>
+{% endblock %}
+{% block hero_aside %}
+    <figure class="snap pf-snap pf-hero-snap">
+      <span class="tape tape--l" aria-hidden="true"></span>
+      <span class="tape tape--r" aria-hidden="true"></span>
+      <span class="snap-photo">{{ picture('fase3-incubatie-a', sizes="(min-width: 1100px) 368px, (min-width: 900px) 38vw, min(86vw, 22rem)", loading="eager") }}</span>
+      <figcaption><strong>Onze 20-literemmers.</strong> <span>Met stro en broed, in onze binnenkweek.</span></figcaption>
+    </figure>
+{% endblock %}
+{% block sections %}
+<section class="section pf-adopt" data-section="emmer" aria-labelledby="emmer-title">
+  <div class="wrap">
+{% include "partials/section_head.html" with {"id": "emmer-title", "title": "Wat krijg je als adoptant?", "lede": "Je adopteert een emmer waarin wij het kweekproces begeleiden. Ondertussen kijk je mee over onze schouder."} %}
+    <ul class="pf-benefit-list">
+      <li>
+        <h3>Je kiest de soort</h3>
+        <p>Kies een van onze oesterzwammen, of laat je verrassen.</p>
+      </li>
+      <li>
+        <h3>Je emmer krijgt een nummer</h3>
+        <p>Zo weet je altijd welke emmer de jouwe is.</p>
+      </li>
+      <li>
+        <h3>Volg de groei</h3>
+        <p>Je krijgt updates met foto's en video's van de verschillende groeifasen.</p>
+      </li>
+      <li>
+        <h3>De oogst is voor jou</h3>
+        <p>Je ontvangt de verse oesterzwammen uit jouw emmer. Afhalen of levering spreken we samen af.</p>
+      </li>
+      <li>
+        <h3>Samen leren</h3>
+        <p>Je ziet van dichtbij hoe stro en broed verse oesterzwammen worden.</p>
+      </li>
+    </ul>
+    <p class="pf-for">Voor particulieren, gezinnen en iedereen die van paddenstoelen houdt.</p>
+  </div>
+</section>
+
+<section class="section pf-steps" id="stappen" data-section="stappen" aria-labelledby="stappen-title">
+  <div class="wrap">
+{% include "partials/section_head.html" with {"id": "stappen-title", "title": "Hoe werkt het?", "lede": "Van je aanvraag tot de oogst, in vier stappen."} %}
+    <div class="snaps-wrap">
+      <svg class="phase-line" viewBox="0 0 1100 64" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path vector-effect="non-scaling-stroke" d="M0 32C150 18,300 46,450 32C600 18,750 46,900 32C990 22,1050 42,1100 32"/>
+      </svg>
+      <ol class="snaps">
+{% include "partials/polaroid.html" with {"image": "anthony-krat", "number": 1, "title": "Je vraagt je emmer aan.", "text": "Kies je oesterzwam in het formulier. Anthony neemt persoonlijk contact met je op en bevestigt je adoptie."} %}
+{% include "partials/polaroid.html" with {"image": "fase2-emmer", "number": 2, "title": "Wij starten de kweek.", "text": "We vullen jouw emmer met stro en broed. Je emmer krijgt een uniek nummer."} %}
+{% include "partials/polaroid.html" with {"image": "fase3-incubatie-a", "number": 3, "title": "Je volgt de groei.", "text": "Je krijgt foto's en updates terwijl het mycelium het stro overneemt.", "extra": "fase3-incubatie-b"} %}
+{% include "partials/polaroid.html" with {"image": "fase4-kweekruimte", "number": 4, "title": "Je geniet van de oogst.", "text": "We oogsten jouw oesterzwammen op het juiste moment. Afhalen of levering, in overleg."} %}
+      </ol>
+    </div>
+    <p class="pf-more">{% include "partials/button.html" with {"label": "Meer over ons kweekproces", "path": "/ons-verhaal/kweekproces/", "kind": "link"} %}</p>
+  </div>
+</section>
+
+<section class="section grid-paper pf-form" id="formulier" data-section="formulier" aria-labelledby="formulier-title">
+  <div class="wrap">
+    <div class="knip" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" focusable="false"><use href="#i-scissors"/></svg></div>
+    <div class="pf-form-grid">
+      <div class="pf-form-col">
+        <h2 id="formulier-title">Vraag je emmer aan.</h2>
+        <p class="lede">Vul het formulier in. Anthony neemt persoonlijk contact met je op en bespreekt de voorwaarden met je.</p>
+{% include "partials/form.html" with {"key": "adoptie"} %}
+      </div>
+      <aside class="pf-aside" aria-label="Goed om te weten">
+        <div class="pf-aside-card">
+          <h2>Goed om te weten</h2>
+          <ul class="pf-aside-points">
+            <li>Je aanvraag is vrijblijvend. Er wordt online niets betaald.</li>
+            <li>Anthony bevestigt elke adoptie persoonlijk.</li>
+            <li>Je emmer staat in onze binnenkweek in {{ site.municipality }}.</li>
+          </ul>
+        </div>
+        <div class="pf-contact">
+          <h2>Liever mailen of bellen?</h2>
+          <ul>
+            <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+{% if flags.phone_published %}
+            <li><a href="tel:{{ site.phone.tel }}">{{ site.phone.display }}</a></li>
+            <li><a href="{{ site.whatsapp }}" rel="noopener">WhatsApp</a></li>
+{% endif %}
+          </ul>
+        </div>
+        <div class="pf-aside-next">
+          <h2>Buitenkweek</h2>
+          <p>De buitenkweek is gepland voor 2027. Wil je daarover op de hoogte blijven?</p>
+{% include "partials/button.html" with {"label": "Schrijf je in voor nieuws", "path": "/ons-verhaal/buitenkweek/#interesse", "kind": "link"} %}
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url('/js/forms.js') }}" defer></script>
+{% endblock %}

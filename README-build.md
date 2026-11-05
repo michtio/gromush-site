@@ -36,9 +36,40 @@ Fonts are self-hosted in `src/static/fonts/` (OFL, licence files beside them): l
 
 Components: `src/templates/partials/` holds the shared components of `final.html`; `/_dev/componenten/` shows them all (noindex, never in nav or sitemap).
 
+## Homepage (template A)
+
+`pages/index.html` is the scroll story of the approved `final.html` in PRD R11's order: opening, delivery region, the range, growing, the four audiences, the grower, the ProefBox form. Each scene carries `data-scene`. Its own styles are in `css/home.css`, its script in `js/home.js` (vanilla: requestAnimationFrame and IntersectionObserver); the page is complete without the script and with reduced motion.
+
+- **Opening, radial (from 68.75em, 1100 px at the default text size; R10, R10a):** the title block in the centre, the varieties in the range as medallions with curved names, and the hyphae network of `src/gen/hyphae.py`, generated at build time from a seeded generator (the approved round-4 generator, moved here) and written into the page fully grown. The network routes around obstacles measured from the layout (`src/gen/hyphae_obs/obs-<width>.json`). Each medallion links to its product page by its plain name, and its "Vraag aan" pill opens `/proefbox/?soort=<slug>#formulier`.
+- **Opening, list (below 68.75em; R10b):** the trunk-and-twig list, same links.
+- **Delivery (variant 1):** the map and the electric van of `src/gen/levering.py` (seeded engraving, the route through the towns of `towns.json`, `map` per town). The build fails when a town's map point is off the drawn route.
+- **A variety out of the range** leaves every scene; the network is regenerated without its medallion (deterministic, but no longer the approved drawing: run the checks below).
+
+After any change to the opening's layout, fonts or a variety name, check that the network still fits:
+
+```sh
+python3 -I tools/ring_obstacles.py http://127.0.0.1:8766/gromush-site/   # "obstacles ok": layout = measured obstacles
+WRITE=1 python3 -I tools/ring_obstacles.py <url>                          # re-measure (then rebuild, re-probe, re-approve)
+sh tools/ringprobes.sh http://127.0.0.1:8766/gromush-site/               # "net 0 ... label 0 rev net 0 ... label 0" at 1100-1920
+python3 -I tools/check.py <url>/ 1440 "$(cat tools/story-order.js)"      # scenes in R11 order, focusables per scene
+python3 -I tools/tabwalk.py <url>/ 1440                                   # real Tab walk: "tab ok"
+```
+
+`src/gen/tests/test_home.py` pins the hash of the approved network and map; a change to either is a design change.
+
 ## Audience pages (template D)
 
 `layouts/audience.html` serves the four `/voor-wie/<slug>/` pages (S12; PRD R18). It finds its audience in `src/data/audiences.json` by the page path and renders problem, offer and the audience's own primary action(s), in the hero and again in the closing band, from that entry's `primary_actions` and `page` (`hero`, `problem`, `offer`, `closing`). A new audience page adds its `page` data and a page file with title, description and its own sections in `{% block sections %}` (also `intro`, `problem`, `offer`); the layout itself does not change. `card` in the same entry feeds the four cards of `/voor-wie/` and the homepage (`partials/audience_grid.html`). Check AC18: `python3 -I tools/check_sections.py docs/voor-wie/chefs/index.html --template audience --primary-action /proefbox/` prints `1 ok`.
+
+## Inspiratie (template G)
+
+`pages/inspiratie.html` (S18; PRD R26, R27) shows every recipe in `src/data/recipes.json`, in file order, with no fixed count. `partials/recipe.html` renders each recipe twice: a card (`view: "card"`) and the full `<article id="recept-<id>">` (ingredients, steps, servings, the varieties it names linked to their product page, tip). Without JS the card links to the article, which reads in place; `js/recipes.js` moves each article into a native `<dialog>` and turns the card link into a button (Escape, the close button and the backdrop close it; focus returns to the card; `/inspiratie/#recept-<id>` opens it on load). Styles in `css/inspiratie.css`. Add a recipe: add an object to `recipes.json` (an `image` from `images.json`), rebuild. Check AC24: `python3 -I tools/check.py <url>/inspiratie/ 390 "$(cat tools/dialog.js)"` prints `open focus-inside esc-closed focus-returned`; `nojs.py` reports `"recipes": {"articles": N, "readable": N}`.
+
+## Leveringsregio: hub and town pages (templates H-lite and H)
+
+- **Town pages (S19; R28, R30):** `src/templates/towns/gemeente.html` is rendered by the build at `/leveringsregio/<slug>/` for every town in `src/data/towns.json` (like the product pages). All copy is the town's `page` entry: `title`, `description`, `image` (hero), `subtitle` (second half of the H1), `tagline`, `intro`, `region`, `audiences`, `route`, `delivery` (`line`, `text`, optional `areas`, else `sub_areas`) and `proefbox`; the build fails when one is missing. Only Westkapelle is named as where GroMush grows: `tools/lint_rules.json` rule `R30-town` flags "kwekerij / gevestigd / kweken in <town>" and "vanuit <town>" on the hub and the town pages.
+- **Hub (S20; R29):** `pages/leveringsregio/index.html` draws the homepage's delivery map (`levering_map()`) in its static state and loads `css/home.css` for it; its labels link to the town pages (for pointer users; the register beside it carries the same links for keyboard and screen readers). Below 17.5em of width (a phone at 200 % text) the map keeps its size and scrolls sideways in its own frame.
+- `tools/check_seo.py` also fails on an indexable page without an `<h1>` or with the same `<h1>` as another page (AC26).
 
 ## Titles, metadata and SEO
 
@@ -77,13 +108,22 @@ python3 -I -m unittest discover -s tools/tests
 tools/qa.sh / /_dev/componenten/                       # the standard gate
 python3 -I tools/check_links.py docs --base /gromush-site/ --pending tools/pending_pages.txt --same-chrome
 python3 -I tools/check_depth.py docs --base /gromush-site/   # R7: every sitemap page within 2 clicks
+python3 -I tools/crawl.py docs --base /gromush-site/         # AC9 in the plan's words: '29/29 within 2 clicks' (alias of check_depth)
 python3 -I tools/check_seo.py docs --base /gromush-site/     # R40: titles, descriptions, OG, canonical, sitemap, JSON-LD
 python3 -I tools/check_sections.py docs/zwammen/*/index.html --order hero,intro,smaak,tijdlijn,kweker,keuken,voor-wie,product,bewaren,andere,slot   # AC16: '6 ok'
 python3 -I tools/check.py <url> 390 "$(cat tools/nav-a11y.js)"   # header keyboard/disclosure check: ok
+python3 -I tools/check.py <url> 390 "$(cat tools/a11y.js)"       # R38/AC35 structure: alt, labels, landmarks, one h1, heading order, names, ids
+FONT_SIZE=32 python3 -I tools/fullshot.py <url> /tmp/x 320      # 200 % text: prints textfit=0 when no word runs out, is clipped or breaks mid-word
 python3 -I tools/promo.py http://127.0.0.1:<port>/gromush-site [--close escape]   # none shown dismissed-none
 ```
 
 `tools/pending_pages.txt` lists the sitemap pages that the header and footer link to but that are not built yet; links to them count as "pending", not "broken". A slice that builds a page removes its line.
+
+## Publishing
+
+GitHub Pages serves the `main` branch, folder `/docs`, at https://michtio.github.io/gromush-site/. Build with `python3 -I build.py --base /gromush-site/` before committing `docs/` (the base `qa.sh` uses too).
+
+For gromush.be later: build with `--base /` (and set `origin` in `src/data/site.json` to `https://gromush.be`, so canonical, Open Graph and sitemap URLs follow), add a `CNAME` file with `gromush.be` to `docs/` and point the domain's DNS at GitHub Pages. The switch, redirects from the old site and the launch checks get their own launch PRD. A `--base /` build already passes the checks: `python3 -I build.py --base / --out /tmp/gromush-root` then `python3 -I tools/check_links.py /tmp/gromush-root --base / --pending tools/pending_pages.txt --same-chrome`.
 
 ## Where things live
 
@@ -104,7 +144,7 @@ python3 -I tools/promo.py http://127.0.0.1:<port>/gromush-site [--close escape] 
 | `src/templates/pages/` | One file per page: `pages/x/index.html` or `pages/x.html` becomes `/x/`; `pages/404.html` becomes `docs/404.html`. |
 | `src/templates/products/zwam.html` | The one product template (S11, R14): the build renders it at `/zwammen/<slug>/` for every variety in the range. Sections carry `data-section`, the page `data-template="product"` (see `tools/check_sections.py`). |
 | `src/static/` | Copied as-is into `docs/` (CSS, images, later fonts and JS). |
-| `src/gen/` | The generator (`build.py`) and template engine (`template.py`). |
+| `src/gen/` | The generator (`build.py`), template engine (`template.py`), and the homepage's network (`hyphae.py`, obstacles in `hyphae_obs/`) and delivery map (`levering.py`). |
 
 ## Common edits
 

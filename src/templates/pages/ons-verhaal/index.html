@@ -4,11 +4,11 @@
    Consumer page: his health and superfood lines may stay (R2a), never a medical claim. Left out on purpose:
    "100% biologisch" (R2, certification in progress), the "Reserveer nu" / "Kom langs & beleef" reservation flow (none
    exists) and the "Beleving delen" value (rondleidingen and proeverijen are not bookable).
-   Photos: only Anthony's real ones (R25, R44). The grower photo slot in the hero is empty on purpose: the only grower
-   photo supplied (anthony-krat) is AI-styled and flagged, so it is not used here until a real one arrives. #}
+   Photos: only Anthony's own (R25, R44). The hero shows anthony-krat (AI-styled by Anthony, approved by Michael on
+   2026-11-05) as a taped snap with his quote note over its lower corner; it is the LCP image, so it loads eagerly. #}
 {% block title %}Het verhaal van kweker Anthony Watteeuw · {{ site.name }}{% endblock %}
 {% block description %}Ontdek het verhaal achter {{ site.name }}: de passie van Anthony Watteeuw voor ambachtelijk gekweekte oesterzwammen, gezonde voeding, lokale teelt en leven in harmonie met de natuur.{% endblock %}
-{% block head %}{{{ og_image('anthony-camera') }}}{% endblock %}
+{% block head %}{{{ og_image('anthony-krat') }}}{% endblock %}
 {% block main %}
 {% set towns = sorted(data.towns.towns, key=lambda t: t.nav_order) %}
 {% set town_names = [t.name for t in towns] %}
@@ -20,14 +20,20 @@
       <p class="ov-intro">Ik ben Anthony, oprichter en kweker bij {{ site.name }}. Mijn reis bracht me van de wereld van beeld en film naar de wondere wereld van paddenstoelen. Wat begon als nieuwsgierigheid, groeide uit tot een diepe passie en een missie: <strong>gezonde voeding, lokale teelt en pure beleving delen met zoveel mogelijk mensen.</strong></p>
 {% include "partials/button.html" with {"label": "Ontdek ons verhaal", "path": "/ons-verhaal/#mijn-verhaal", "kind": "link"} %}
     </div>
-    <figure class="paper-note grid-paper ov-quote">
-      <span class="tape tape--l" aria-hidden="true"></span>
-      <span class="tape tape--r" aria-hidden="true"></span>
-      <blockquote>
-        <p>De natuur heeft alle antwoorden. Wij moeten alleen luisteren en zorgen.</p>
-      </blockquote>
-      <figcaption class="ov-sign">Anthony</figcaption>
-    </figure>
+    <div class="ov-hero-visual">
+      <div class="snap ov-hero-snap">
+        <span class="tape tape--l" aria-hidden="true"></span>
+        <span class="tape tape--r" aria-hidden="true"></span>
+        <span class="snap-photo">{{ picture('anthony-krat', sizes="(min-width: 900px) 384px, min(78vw, 320px)", loading="eager") }}</span>
+      </div>
+      <figure class="paper-note grid-paper ov-quote">
+        <span class="tape tape--r" aria-hidden="true"></span>
+        <blockquote>
+          <p>De natuur heeft alle antwoorden. Wij moeten alleen luisteren en zorgen.</p>
+        </blockquote>
+        <figcaption class="ov-sign">Anthony</figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 

@@ -9,7 +9,11 @@
    Modes (S6, R42): a form with "modes" switches with its "mode_field" select (a reason's "mode"); a field's mode_only /
    mode_not / optional_in, and a "mode_note" entry (the mode's title, intro and points), follow the mode in js/forms.js.
    Without JS every field shows; mode-only fields are never required. "hint": a line under the field (aria-describedby).
-   "subject_field": the chosen option's text is added to the mail subject (JS only). #}
+   "subject_field": the chosen option's text is added to the mail subject (JS only).
+   S13 additions: "radios" (a fieldset of single-choice chips, options or options_from "towns", data-prefill by name)
+   and "group_start" / "group_end" entries that wrap the fields between them in a fieldset with a legend (optional
+   intro, section = a data-section marker, progress = "{n} van {total} beantwoord": js/forms.js counts the answered
+   fields of the group, hidden without JS). #}
 {% set form = data.forms.forms[key] %}
 {% set ui = data.forms.ui %}
 {% set modes = form.get("modes", {}) %}
@@ -22,7 +26,33 @@
 {% set mail_label = f.get("mail_label", f.get("label", "")) %}
 {% set mode_attrs = (' data-mode-only="' + f.mode_only + '"' if f.get('mode_only') else '') + (' data-mode-not="' + f.mode_not + '"' if f.get('mode_not') else '') + (' data-optional-in="' + f.optional_in + '"' if f.get('optional_in') else '') %}
 {% set required = f.get("required") and not f.get("mode_only") %}
-{% if f.type == "mode_note" %}
+{% if f.type == "group_start" %}
+    <fieldset class="form-group field-wide{{ ' form-group--' + f.name if f.get('name') else '' }}"{% if f.get('section') %} data-section="{{ f.section }}"{% endif %}>
+      <legend class="form-group-legend">{{ f.legend }}</legend>
+{% if f.get("intro") %}
+      <p class="form-group-intro">{{ f.intro }}</p>
+{% endif %}
+{% if f.get("progress") %}
+      <p class="form-progress" data-progress="{{ f.progress }}" aria-hidden="true" hidden></p>
+{% endif %}
+      <div class="fields">
+{% elif f.type == "group_end" %}
+      </div>
+    </fieldset>
+{% elif f.type == "radios" %}
+{% set choices = [t.name for t in sorted(data.towns.towns, key=lambda t: t.nav_order)] if f.get("options_from") == "towns" else f.get("options", []) %}
+    <fieldset class="soorten choice field-wide" id="f-{{ f.name }}" tabindex="-1" data-field="{{ f.name }}" data-label="{{ mail_label }}" data-prefill="{{ f.name }}"{{{ mode_attrs }}}>
+      <legend>{{ f.label }}</legend>
+      <div class="chips">
+{% for o in choices + f.get("extra_options", []) %}
+        <label class="chip">
+          <input type="radio" name="{{ f.name }}" value="{{ o }}" id="rad-{{ f.name }}-{{ loop.index }}">
+          <span class="chip-face chip-face--plain"><span class="chip-tick" aria-hidden="true"><svg viewBox="0 0 16 16"><use href="#i-tick"/></svg></span>{{ o }}</span>
+        </label>
+{% endfor %}
+      </div>
+    </fieldset>
+{% elif f.type == "mode_note" %}
 {% set cfg = modes[f.mode] %}
     <div class="mode-note field-wide" data-mode-only="{{ f.mode }}" role="group" aria-labelledby="mode-{{ f.mode }}-title">
       <h3 class="mode-note-title" id="mode-{{ f.mode }}-title">{{ cfg.title }}</h3>

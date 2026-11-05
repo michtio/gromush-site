@@ -11,7 +11,38 @@
       "sub_areas": [],
       "map": {"x": 569, "y": 133, "placement": "left"},
       "hero": "town-knokke-heist",
-      "nav_order": 1
+      "nav_order": 1,
+      "page": {
+        "title": "Lokale oesterzwammen in Knokke-Heist · GroMush",
+        "description": "GroMush levert ambachtelijk gekweekte oesterzwammen aan restaurants, grootkeukens, speciaalzaken en thuiskoks in heel Knokke-Heist. Chefs vragen een gratis ProefBox aan.",
+        "image": "hero-knokke-heist",
+        "subtitle": "Van de kweker naar de topkeuken en jouw tafel.",
+        "tagline": "Lokaal gekweekt. Voor een bewuste toekomst.",
+        "intro": "Onze kwekerij ligt in Westkapelle, en daar vertrekt onze reis. Van daaruit brengen we verse, ambachtelijk gekweekte oesterzwammen naar restaurants, grootkeukens, speciaalzaken en thuiskoks in heel Knokke-Heist.",
+        "region": {
+          "eyebrow": "Een unieke regio",
+          "title": "Gastronomie, natuur en lokale kwaliteit.",
+          "text": ["Knokke-Heist heeft een uitgesproken culinaire identiteit, waar smaak, presentatie en kwaliteit een belangrijke rol spelen. Met GroMush brengen we daar een lokaal gekweekt product bij: verse oesterzwammen met karakter, textuur en veelzijdige culinaire mogelijkheden.", "Van de verfijnde restaurantkeuken tot de professionele grootkeuken en de speciaalzaak: we willen de afstand tussen kweker en gebruiker zo klein mogelijk maken."],
+          "note": "Knokke-Heist. Een culinaire hotspot met een lokaal verhaal.",
+          "values": ["Lokale kweek", "Bewuste keuzes", "Culinaire veelzijdigheid", "Persoonlijk contact"]
+        },
+        "audiences": {
+          "eyebrow": "Samen met de regio",
+          "title": "Voor wie leveren we in Knokke-Heist?",
+          "lede": "Van gastronomische restaurants tot professionele keukens, speciaalzaken en thuiskoks. Ontdek hoe GroMush aansluit bij jouw manier van werken, koken of genieten."
+        },
+        "route": {
+          "title": "Van de kust, voor de kust.",
+          "text": ["GroMush vertrekt vanuit een fascinatie voor paddenstoelen, hun natuurlijke groeikracht en hun plaats in onze keuken. Vanuit onze kwekerij in Westkapelle brengen we verse, ambachtelijk gekweekte oesterzwammen dichter bij de mensen die ermee koken.", "We geloven in korte lijnen, persoonlijk contact en producten die uitnodigen om anders naar koken te kijken. Zo bouwen we stap voor stap aan een lokale samenwerking tussen kweker, keuken en community."]
+        },
+        "delivery": {
+          "eyebrow": "Dichtbij gekweekt",
+          "line": "Persoonlijk geleverd in heel Knokke-Heist.",
+          "areas": ["Knokke", "Het Zoute", "Albertstrand", "Duinbergen", "Heist", "Ramskapelle"],
+          "text": ["Wil je samenwerken, een levering bespreken of meer weten over onze oesterzwammen? We horen graag van je."]
+        },
+        "proefbox": "Ben je chef-kok en wil je onze oesterzwammen leren kennen? Vraag een gratis ProefBox aan en ontdek zelf de smaak, de textuur en de culinaire mogelijkheden van onze kweek."
+      }
     },
     {
       "slug": "damme",
@@ -19,16 +50,77 @@
       "sub_areas": ["Oostkerke", "Hoeke", "Lapscheure", "Moerkerke", "Sijsele"],
       "map": {"x": 561, "y": 550, "placement": "left"},
       "hero": "town-damme",
-      "nav_order": 2
+      "nav_order": 2,
+      "page": {
+        "title": "Verse oesterzwammen in Damme en de polderstreek · GroMush",
+        "description": "Verse, ambachtelijk gekweekte oesterzwammen voor restaurants, speciaalzaken en grootkeukens in Damme, Oostkerke, Sijsele en Moerkerke. Persoonlijk geleverd vanuit Westkapelle.",
+        "image": "hero-damme",
+        "subtitle": "Lokale paddenstoelen voor een authentieke polderkeuken.",
+        "tagline": "In de polder geworteld. Met passie gekweekt.",
+        "intro": "Vanuit onze kwekerij in Westkapelle laten we chefs, speciaalzaken en liefhebbers in Damme en de omliggende polderstreek kennismaken met verse, ambachtelijk gekweekte oesterzwammen.",
+        "region": {
+          "eyebrow": "De smaak van de polders",
+          "title": "Poldergastronomie, ambachtelijk geïnspireerd.",
+          "text": ["Damme en het omliggende polderlandschap staan bekend om hun rust, rijke historie en authentieke eetcultuur. Van gezellige dorpsbistro's tot verfijnde gastronomische tafels: de streek ademt een passie voor eerlijke, kwalitatieve ingrediënten.", "Met GroMush brengen we een veelzijdig polderproduct naar de lokale keuken. Onze ambachtelijk gekweekte oesterzwammen onderscheiden zich door hun stevige textuur, diepe umamismaak en eindeloze culinaire mogelijkheden: een verrijking voor zowel klassieke als moderne vegetarische gerechten."],
+          "note": "Damme. Een streek met karakter.",
+          "values": ["Lokale verankering", "Ambachtelijke kweek", "Veelzijdig in de keuken", "Persoonlijk contact"]
+        },
+        "audiences": {
+          "eyebrow": "Samen met de streek",
+          "title": "Voor wie leveren we in Damme en omgeving?",
+          "lede": "Van professionele keukens tot ambachtelijke speciaalzaken en nieuwsgierige thuiskoks: ontdek hoe GroMush aansluit bij jouw manier van koken, werken en genieten."
+        },
+        "route": {
+          "title": "Van Westkapelle naar Damme.",
+          "text": ["GroMush is ontstaan uit bewondering voor de groeikracht van paddenstoelen en hun verbindende rol in onze voeding. Wat begint als een fijn myceliumnetwerk onder de grond, groeit uit tot een krachtig lokaal ingrediënt.", "Vanuit onze ambachtelijke kwekerij in Westkapelle bouwen we aan korte ketens richting de omliggende dorpen en steden. Damme, met haar rijke polderlandschap en culinaire ziel, is voor ons een natuurlijke partner. Zo brengen we kweker en bord in de polder weer dicht bij elkaar."]
+        },
+        "delivery": {
+          "eyebrow": "Dichtbij onze polderpartners",
+          "line": "Vers van de kweker in Damme en de polderstreek.",
+          "text": ["We leveren vers geoogste oesterzwammen aan restaurants, speciaalzaken en grootkeukens in Damme en omgeving.", "Kook je met het ritme van de seizoenen en zoek je een lokaal topproduct met een transparant verhaal? We komen graag langs om kennis te maken en de mogelijkheden voor jouw keuken te bespreken."]
+        },
+        "proefbox": "Ben je chef-kok of keukenchef in Damme of de polderstreek? Ervaar zelf de vlezige structuur, de umamismaak en de versheid van onze oesterzwammen. Vraag vrijblijvend een gratis ProefBox aan."
+      }
     },
     {
       "slug": "sluis",
       "name": "Sluis",
       "country": "NL",
       "sub_areas": [],
-      "map": {"x": 850, "y": 293, "placement": "left"},
+      "map": {"x": 850, "y": 293, "placement": "below"},
       "hero": "town-sluis",
-      "nav_order": 3
+      "nav_order": 3,
+      "page": {
+        "title": "Verse oesterzwammen in Sluis en omgeving · GroMush",
+        "description": "GroMush levert verse, ambachtelijk gekweekte oesterzwammen aan chefs, speciaalzaken en liefhebbers in Sluis en Zeeuws-Vlaanderen, net over de grens. Chefs vragen een gratis ProefBox aan.",
+        "image": "hero-sluis",
+        "subtitle": "Lokale paddenstoelen voor een bourgondische keuken.",
+        "tagline": "Dichtbij gekweekt. Met smaak gedeeld.",
+        "intro": "Vanuit onze kwekerij in Westkapelle, aan de andere kant van de grens, laten we chefs, speciaalzaken en liefhebbers in Sluis en omgeving kennismaken met verse, ambachtelijk gekweekte oesterzwammen.",
+        "region": {
+          "eyebrow": "De smaak van de streek",
+          "title": "Bourgondisch genieten, lokaal geïnspireerd.",
+          "text": ["Sluis en Zeeuws-Vlaanderen hebben een eigen karakter, waar gastvrijheid, regionale producten en genieten aan tafel mooi samenkomen. Met GroMush willen we daar een verrassend ingrediënt aan toevoegen: verse oesterzwammen met een rijke textuur, een herkenbare smaak en tal van culinaire mogelijkheden.", "Van een verfijnd restaurantgerecht tot een creatieve vegetarische bereiding: oesterzwammen bieden ruimte voor smaak, techniek en experiment."],
+          "note": "Sluis. Een streek met smaak.",
+          "values": ["Lokale samenwerking", "Ambachtelijke kweek", "Veelzijdig in de keuken", "Persoonlijk contact"]
+        },
+        "audiences": {
+          "eyebrow": "Over de grens",
+          "title": "Voor wie leveren we in Sluis en omgeving?",
+          "lede": "Van professionele keukens tot speciaalzaken en liefhebbers: ontdek hoe GroMush aansluit bij jouw manier van koken, werken en genieten."
+        },
+        "route": {
+          "title": "Van Westkapelle naar Sluis.",
+          "text": ["GroMush vertrekt vanuit een fascinatie voor paddenstoelen, hun natuurlijke groeikracht en hun plaats in onze voeding. In onze kwekerij in Westkapelle kweken we verse, ambachtelijke oesterzwammen voor mensen die bewust met smaak en kwaliteit bezig zijn.", "Vanuit die basis maken we de verbinding met de omliggende regio's, waaronder Sluis en Zeeuws-Vlaanderen. Zo brengen we kweker en keuken dichter bij elkaar en bouwen we aan samenwerkingen die lokaal geworteld zijn."]
+        },
+        "delivery": {
+          "eyebrow": "Dichtbij onze klanten",
+          "line": "Dagverse levering in Sluis en omgeving.",
+          "areas": ["Sluis", "Zeeuws-Vlaanderen"],
+          "text": ["We bouwen aan lokale samenwerkingen met restaurants, grootkeukens, speciaalzaken en particuliere liefhebbers in Sluis en omgeving. Werk je met verse ingrediënten en zoek je een bijzonder product met een lokaal verhaal? Dan maken we graag kennis."]
+        },
+        "proefbox": "Ben je chef-kok in Sluis of omgeving? Maak kennis met onze verse oesterzwammen en ontdek hoe hun smaak en textuur jouw gerechten kunnen verrijken. Vraag een gratis ProefBox aan en proef zelf het verschil."
+      }
     },
     {
       "slug": "brugge",
@@ -36,7 +128,37 @@
       "sub_areas": ["Sint-Andries", "Sint-Kruis", "Assebroek", "Koolkerke", "Dudzele", "Male"],
       "map": {"x": 403, "y": 737, "placement": "right"},
       "hero": "town-brugge",
-      "nav_order": 4
+      "nav_order": 4,
+      "page": {
+        "title": "Verse oesterzwammen in Brugge en de stadsrand · GroMush",
+        "description": "Dagverse, ambachtelijk gekweekte oesterzwammen voor restaurants, speciaalzaken en grootkeukens in Brugge, Sint-Andries, Sint-Kruis en Assebroek. Persoonlijk geleverd vanuit Westkapelle.",
+        "image": "hero-brugge",
+        "subtitle": "Verse paddenstoelen voor een verfijnde culinaire traditie.",
+        "tagline": "Dichtbij gekweekt. Met verfijning geserveerd.",
+        "intro": "Vanuit onze kwekerij in Westkapelle brengen we dagvers geplukte oesterzwammen naar de keukens, speciaalzaken en fijnproevers van Brugge. Ambachtelijk gekweekt, rijk aan textuur en vol karakter.",
+        "region": {
+          "eyebrow": "Cultuur op het bord",
+          "title": "Waar historisch ambacht en moderne smaak samenkomen.",
+          "text": ["Brugge staat wereldwijd bekend om haar culturele rijkdom en haar gastronomie. Van sterrenrestaurants tot eigentijdse bistro's en creatieve keukens: de Brugse chef zoekt ingrediënten met een authentieke oorsprong en een uitgesproken smaakprofiel.", "Met GroMush leveren we een lokaal polderproduct dat aansluit bij die hoge culinaire standaard. Onze oesterzwammen worden met de hand geplukt en bieden een stevige textuur, een diepe umamismaak en eindeloze mogelijkheden voor creatieve vegetarische én klassieke bereidingen."],
+          "note": "Brugge. Een stad met smaak.",
+          "values": ["Culinair niveau", "Dagverse pluk", "Duurzame herkomst", "Persoonlijk contact"]
+        },
+        "audiences": {
+          "eyebrow": "Verbonden met de stad",
+          "title": "Voor wie leveren we in Brugge en omgeving?",
+          "lede": "Van ambitieuze keukenchefs tot ambachtelijke speciaalzaken en nieuwsgierige thuiskoks: ontdek hoe GroMush verfijning brengt in jouw keuken."
+        },
+        "route": {
+          "title": "Van Westkapelle naar Brugge.",
+          "text": ["GroMush vertrekt vanuit een passie voor de natuurlijke groeikracht van paddenstoelen. In het mycelium onder de grond zien we de perfecte metafoor voor onze visie: een hecht lokaal netwerk waarin mens, natuur en voeding met elkaar verbonden zijn.", "In onze ambachtelijke kwekerij in Westkapelle kweken we oesterzwammen met zorg voor kwaliteit en omgeving. Vanuit die basis brengen we de verse oogst rechtstreeks naar Brugge, zonder omwegen of lange transportroutes."]
+        },
+        "delivery": {
+          "eyebrow": "Dichtbij de Brugse keuken",
+          "line": "Snel geleverd in Brugge en de stadsrand.",
+          "text": ["We leveren verse oesterzwammen aan restaurants, speciaalzaken, grootkeukens en liefhebbers in de Brugse binnenstad en de stadsrand.", "Stel je hoge eisen aan smaak, versheid en korte keten? We komen graag langs om kennis te maken en een samenwerking op maat te bespreken."]
+        },
+        "proefbox": "Ben je chef-kok of keukenchef in Brugge of omgeving? Ervaar zelf de vlezige structuur, de umamismaak en de versheid van onze ambachtelijke oesterzwammen. Vraag vrijblijvend een gratis ProefBox aan."
+      }
     },
     {
       "slug": "blankenberge",
@@ -44,7 +166,37 @@
       "sub_areas": ["Uitkerke", "Zwankendamme", "Lissewege"],
       "map": {"x": 144, "y": 275, "placement": "above"},
       "hero": "town-blankenberge",
-      "nav_order": 5
+      "nav_order": 5,
+      "page": {
+        "title": "Verse oesterzwammen in Blankenberge en de kuststreek · GroMush",
+        "description": "Ambachtelijk gekweekte oesterzwammen voor visrestaurants, brasseries, speciaalzaken en grootkeukens in Blankenberge, Uitkerke, Lissewege en Zwankendamme. Dagvers en dichtbij.",
+        "image": "hero-blankenberge",
+        "subtitle": "Verse oesterzwammen voor een levendige kustgastronomie.",
+        "tagline": "Verfrissend lokaal. Met zeewind en smaak.",
+        "intro": "Vanuit onze kwekerij in Westkapelle brengen we ambachtelijk gekweekte oesterzwammen naar de keukens, speciaalzaken en liefhebbers in Blankenberge. Dagvers geplukt, vol smaak en dichtbij gekweekt.",
+        "region": {
+          "eyebrow": "Vers van de kust- en poldergrond",
+          "title": "Waar de zilte zeelucht en het polderland samenkomen.",
+          "text": ["Blankenberge combineert het ritme van de zee met een rijke culinaire traditie. Van bruisende visrestaurants en klassieke brasseries tot moderne eethuizen: de Blankenbergse horeca zoekt steeds vaker naar dagverse, lokale ingrediënten die het verschil maken op het bord.", "Met GroMush leveren we een veelzijdig product uit de nabije polderstreek. Onze oesterzwammen hebben een opmerkelijke textuur en een diepe umamismaak, en passen bij visgerechten, in verfijnde sauzen of als hoofdrolspeler in een eigentijds vegetarisch gerecht."],
+          "note": "Blankenberge. Een stad met dynamiek.",
+          "values": ["Zilte korte keten", "Dagverse oogst", "Veelzijdig op de kaart", "Persoonlijke service"]
+        },
+        "audiences": {
+          "eyebrow": "Samen met de kuststreek",
+          "title": "Voor wie leveren we in Blankenberge en omgeving?",
+          "lede": "Van creatieve chefs aan de kust tot ambachtelijke speciaalzaken en enthousiaste thuiskoks: ontdek hoe GroMush kwaliteit brengt in jouw keuken."
+        },
+        "route": {
+          "title": "Van Westkapelle naar Blankenberge.",
+          "text": ["GroMush groeit vanuit een fascinatie voor de natuurlijke kracht van paddenstoelen. In onze ambachtelijke kwekerij in Westkapelle kweken we oesterzwammen met respect voor de grondstoffen en het ritme van de natuur.", "Blankenberge ligt maar een steenworp verderop langs de kust. Die korte afstand laat ons toe om de oesterzwammen uiterst vers te leveren, rechtstreeks van de kwekerij naar de keukens aan de kust. Zo houden we de keten kort en de smaak groot."]
+        },
+        "delivery": {
+          "eyebrow": "Dichtbij de kustkeuken",
+          "line": "Dagvers aan de kust in Blankenberge.",
+          "text": ["We leveren dagverse oesterzwammen aan restaurants, speciaalzaken en grootkeukens in Blankenberge en omgeving.", "Wil je je gasten verrassen met een eerlijk streekproduct uit de regio? We komen graag langs voor een persoonlijke kennismaking."]
+        },
+        "proefbox": "Ben je chef-kok of keukenchef in Blankenberge of de kuststreek? Ontdek zelf de stevigheid, de umamismaak en de versheid van onze oesterzwammen. Vraag vrijblijvend een gratis ProefBox aan en proef ze op je eigen werkblad."
+      }
     }
   ]
 }

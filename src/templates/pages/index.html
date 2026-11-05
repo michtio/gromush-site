@@ -1,22 +1,196 @@
 {% extends "layouts/base.html" %}
-{# S1 smoke page: proves the shell and the data source. The homepage of final.html replaces it in S9. #}
+{# / (S9, template A; PRD R4, R10, R10a, R10b, R11, R12, R16, R23, R37, R40). The scroll-driven story of the approved
+   design reference final.html (radial opening, round 4, approved 2026-11-04), in R11's order: opening, delivery region,
+   the range, growing, the four audiences, the grower, the ProefBox request form.
+   Opening: from 1100 px the radial ring (.ring: title block in the centre, the in-range varieties as medallions with
+   curved names, the baked hyphae network of src/gen/hyphae.py); below 1100 px the trunk-and-twig list (.opening, R10b).
+   Each medallion links to its product page by its plain name (R10a) and has its own "Vraag aan" pill to the request
+   form with the variety pre-selected (AD10). Delivery: variant 1, the route with the electric van (src/gen/levering.py).
+   Every variety text comes from varieties.json (R4); a variety out of the range drops out of every scene.
+   js/home.js grows the network and drives the van; without it, or with reduced motion, all of it is drawn (R12). #}
 {% block title %}{{ site.name }} · Ambachtelijk gekweekte oesterzwammen uit {{ site.municipality }}{% endblock %}
-{% block description %}{{ site.name }} kweekt ambachtelijk oesterzwammen in {{ site.locality }}, lokaal geproduceerd met respect voor natuur, mens en smaak. {{ site.core_line }}{% endblock %}
+{% block description %}Ambachtelijk gekweekte oesterzwammen uit {{ site.municipality }}, lokaal geproduceerd met respect voor natuur, mens en smaak. Vraag je gratis ProefBox aan en proef het verschil.{% endblock %}
+{% block head %}
+<script>/* the radial network is hidden only while home.js grows it; set before paint, never without script or with reduced motion */
+if(matchMedia('(min-width:68.75em)').matches&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('ring-grow');</script>
+<link rel="stylesheet" href="{{ url('/css/home.css') }}">
+{% endblock %}
 {% block main %}
-<div class="wrap smoke">
-  <h1>{{ site.core_line }}</h1>
-  <p class="measure">{{ site.baseline }}</p>
-  <p class="home-wip">Deze site is nog in opbouw. De startpagina en een aantal pagina's volgen binnenkort; de zwammen, de ProefBox en het contactformulier zijn al klaar.</p>
-  <h2>Onze oesterzwammen</h2>
-  <ul class="smoke-list">
-{% for v in varieties %}
-    <li style="--accent:var({{ v.accent }})" data-variety="{{ v.key }}">
-      <h3>{{ v.name }}</h3>
-      <p class="latin">{{ v.latin }}</p>
-      <p class="taste">{{ " · ".join(v.taste_words) }}</p>
-      <p>{{ v.taste_sentence }}</p>
-    </li>
+{% set towns = sorted(data.towns.towns, key=lambda t: t.nav_order) %}
+{% set origin = data.towns.map.origin %}
+{% set hero_primary = {"label": "Vraag je gratis ProefBox aan", "path": "/#proefbox"} %}
+{% set hero_second = {"label": "Kook je thuis? Vraag een bestelling aan", "path": "/contact/?reden=bestelling-thuis#formulier"} %}
+{% set twigs = ["M2 12C14 6,28 18,42 12", "M2 14C14 20,26 8,42 13", "M2 13C16 7,26 19,42 12", "M2 12C12 18,30 7,42 14", "M2 14C18 8,24 20,42 11", "M2 13C14 7,28 19,42 13"] %}
+{# ---------- opening: one scene, two drawings (CSS shows one per width; both carry the same title) ---------- #}
+<section class="hero" data-scene="opening" aria-labelledby="opening-title">
+{# radial (1100 px and up) #}
+<div class="ring-pin">
+<div class="ring wrap">
+  <div class="ring-stage">
+    <svg class="ring-svg" viewBox="0 0 1320 780" aria-hidden="true" focusable="false">
+{{{ hyphae_ring() }}}
+    </svg>
+    <div class="ring-core">
+      <h1 id="ring-title"><span>Van kwekerij</span> <span>tot bord</span></h1>
+      <p class="support">Ambachtelijk gekweekte oesterzwammen, lokaal geproduceerd met respect voor natuur, mens en smaak.</p>
+{% include "partials/slip.html" with {"note": "gratis, voor zaken", "primary": hero_primary, "second": hero_second} %}
+    </div>
+    <ul class="ring-meds" aria-label="Onze oesterzwammen">
+{% for m in hyphae_medallions() %}
+{% set v = m.variety %}
+      <li class="med" data-variety="{{ v.key }}" style="--x:{{ m.x }};--y:{{ m.y }};--branch:var({{ v.accent }})">
+        <svg class="med-label" viewBox="-130 -130 260 260" aria-hidden="true" focusable="false"><path id="arc-{{ v.key }}" d="M-99 0A99 99 0 0 1 99 0" fill="none"/><text><textPath href="#arc-{{ v.key }}" startOffset="50%" text-anchor="middle">{{ v.name }}</textPath></text></svg>
+        <a class="med-link" href="{{ url('/zwammen/' + v.slug + '/') }}" data-variety="{{ v.key }}"><span class="med-disc">{{ picture(v.cutout, sizes="140px", decorative=True) }}</span><span class="sr-only">{{ v.name }}</span></a>
+{% include "partials/pill.html" with {"variety": v, "href": "/proefbox/?soort=" + v.slug + "#formulier"} %}
+      </li>
 {% endfor %}
-  </ul>
+    </ul>
+  </div>
 </div>
+</div>
+{# trunk-and-twig list (below 1100 px, R10b) #}
+<div class="opening wrap">
+  <div class="opening-copy">
+    <h1 id="opening-title">Van kwekerij tot bord</h1>
+    <p class="support">Ambachtelijk gekweekte oesterzwammen, lokaal geproduceerd met respect voor natuur, mens en smaak.</p>
+{% include "partials/slip.html" with {"note": "gratis, voor zaken", "primary": hero_primary, "second": hero_second} %}
+  </div>
+  <div class="net">
+    <svg class="net-trunk" viewBox="0 0 16 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path vector-effect="non-scaling-stroke" d="M8 0C2 180,14 340,8 520C2 700,14 850,8 1000" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    </svg>
+    <p class="west-label"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="5.5" fill="var(--ink)"/></svg>{{ origin.name }} · kweek &amp; vertrekpunt</p>
+    <ul class="net-list" aria-label="Onze oesterzwammen">
+{% for v in varieties %}
+      <li class="node" data-variety="{{ v.key }}">
+        <span class="cut">{{ picture(v.cutout, sizes="96px", decorative=True) }}</span>
+        <span class="ntxt">
+          <a class="nname" href="{{ url('/zwammen/' + v.slug + '/') }}" data-variety="{{ v.key }}">{{ v.name }}</a>
+          <span class="ntaste">{{ " · ".join(v.taste_words) }}</span>
+{% include "partials/pill.html" with {"variety": v, "href": "/proefbox/?soort=" + v.slug + "#formulier"} %}
+        </span>
+        <svg class="twig" viewBox="0 0 44 26" aria-hidden="true" focusable="false"><path d="{{ twigs[loop.index0 % 6] }}"/></svg>
+      </li>
+{% endfor %}
+    </ul>
+  </div>
+</div>
+</section>
+
+{# ---------- delivery region: variant 1, the route with the van ---------- #}
+<section class="section lv1" id="levering" data-scene="levering" data-start="{{ levering_start }}" aria-labelledby="levering-title">
+  <div class="wrap">
+    <h2 id="levering-title">Vanuit {{ site.municipality }} naar de hele streek.</h2>
+    <p class="lv1-hand">Lokaal gekweekt. Lokaal verbonden.</p>
+  </div>
+  <div class="wrap lv1-body">
+    <ol class="lv1-log">
+      <li class="is-on"><span class="lv1-ico"><svg viewBox="0 0 48 32" aria-hidden="true" focusable="false"><circle cx="24" cy="16" r="12" class="s-ring"/><circle cx="24" cy="16" r="6.5" class="s-fill"/></svg></span><div><h3>Gekweekt in {{ site.municipality }}.</h3><p>{{ site.name }} kweekt ambachtelijke oesterzwammen lokaal in {{ site.municipality }}, dicht bij de mensen en keukens waarvoor ze bestemd zijn.</p></div></li>
+      <li class="is-on"><span class="lv1-ico"><svg viewBox="0 0 48 32" aria-hidden="true" focusable="false"><path class="s-line" d="M8 20C18 12 30 22 40 13"/><circle cx="8" cy="20" r="4.5" class="s-fill"/><circle cx="40" cy="13" r="4.5" class="s-fill"/></svg></span><div><h3>Korte keten.</h3><p>Door lokaal te kweken houden we de afstand tussen kweker, chef en consument klein. Minder kilometers, meer versheid en rechtstreeks contact.</p></div></li>
+{% set others = [t.name for t in towns if t.name != site.municipality] %}
+      <li class="is-on"><span class="lv1-ico"><svg viewBox="0 0 48 32" aria-hidden="true" focusable="false"><path class="s-line" d="M6 26C14 22 20 18 24 16M24 16C30 10 36 7 43 5M24 16C31 17 37 20 43 25M24 16C26 11 25 7 27 3"/><circle cx="24" cy="16" r="4" class="s-fill"/></svg></span><div><h3>Een netwerk dat groeit.</h3><p>Vanuit {{ site.municipality }} verbinden we ons met {{ ", ".join(others) }} en de omliggende streek.</p></div></li>
+    </ol>
+    <div class="lv1-track">
+      <div class="lv1-stage">
+        <div class="lv1-map">
+          <div class="lv1-canvas">
+          {{{ levering_map() }}}
+            <div class="lv1-pins" aria-hidden="true"><span class="lv1-pin" data-t="{{ origin.key }}" style="{{ levering_pos(origin.x, origin.y) }}">{{ origin.name }}</span>{% for t in towns %}<span class="lv1-pin" data-t="{{ t.slug }}" style="{{ levering_pos(t.map.x, t.map.y) }}">{{ t.name }}</span>{% endfor %}</div>
+            <div class="lv1-van" aria-hidden="true" style="{{ levering_van_style() }}">{{{ levering_van() }}}</div>
+          </div>
+          <ul class="lv1-stops" aria-label="Waar we leveren, vanuit {{ origin.name }}">
+          <li class="lv1-stop lv1-stop--home is-on" data-t="{{ origin.key }}" data-x="{{ origin.x }}" data-y="{{ origin.y }}" data-pl="home" style="{{ levering_pos(origin.x, origin.y) }}"><div class="lv1-card"><span class="lv1-ph">{{ picture('fase4-kweekruimte', sizes="64px") }}</span><span class="lv1-txt"><span class="lv1-name">{{ origin.name }}</span><span class="lv1-subs">Kweek &amp; vertrekpunt.<span class="lv1-pick"> Kook je thuis? Dan haal je hier af.</span></span></span></div></li>
+{% for t in levering_route_order(towns) %}
+{% include "partials/town_card.html" with {"town": t, "on_map": True} %}
+{% endfor %}
+          <li class="lv1-stop lv1-stop--more" data-pl="none" style="{{ levering_pos(842, 690) }}"><p class="lv1-card lv1-more"><span class="lv1-txt"><span class="lv1-name">en omgeving</span><span class="lv1-subs">Persoonlijk geleverd, op afspraak.</span></span></p></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><p class="lv1-close">Een paddenstoel groeit niet alleen. Hij groeit dankzij zijn netwerk. {{ site.name }} doet hetzelfde.</p></div>
+</section>
+
+{# ---------- the range: flip cards ---------- #}
+<section class="section" id="assortiment" data-scene="assortiment" aria-labelledby="assortiment-title">
+  <div class="wrap">
+    <h2 id="assortiment-title">Oesterzwammen van topkwaliteit.</h2>
+    <p class="lead">Bijzondere oesterzwammen, elk met hun eigen kleur, textuur en karakter. Ambachtelijk gekweekt in {{ site.municipality }}, met aandacht voor kwaliteit, versheid en smaak.</p>
+    <h3 class="cat-h">De volledige set</h3>
+    <ul class="cat-grid">
+{% for v in varieties %}
+{% include "partials/flip_card.html" with {"variety": v, "number": loop.index} %}
+{% endfor %}
+    </ul>
+    <p class="cat-note">{{ t('card_note') }}</p>
+    <p class="cat-more"><a class="hit" href="{{ url('/zwammen/') }}">Bekijk alle soorten</a></p>
+  </div>
+</section>
+
+{# ---------- growing: taped polaroids, then the outdoor plan (R23: "gepland voor 2027" only) ---------- #}
+<section class="section" id="kweek" data-scene="kweek" aria-labelledby="kweek-title">
+  <div class="wrap">
+    <h2 id="kweek-title">Van gecontroleerde groei tot de kracht van de natuur</h2>
+    <h3 class="subhead">Binnen gekweekt: precisie die je kunt proeven.</h3>
+    <p class="measure">In onze kweekruimte creëren we het klimaat waarin oesterzwammen optimaal groeien. Temperatuur, luchtvochtigheid, luchtstroom en licht worden afgestemd op elke soort.</p>
+    <p><a class="hit" href="{{ url('/ons-verhaal/kweekproces/') }}">Ontdek ons kweekproces</a></p>
+    <div class="snaps-wrap">
+      <svg class="phase-line" viewBox="0 0 1100 64" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path vector-effect="non-scaling-stroke" d="M0 32C150 18,300 46,450 32C600 18,750 46,900 32C990 22,1050 42,1100 32"/>
+      </svg>
+      <ol class="snaps">
+{% include "partials/polaroid.html" with {"image": "fase1-stro", "number": 1, "title": "Stro voorbereiden.", "text": "Het stro weekt in koud water en laat daarna uitlekken."} %}
+{% include "partials/polaroid.html" with {"image": "fase2-emmer", "number": 2, "title": "Opbouw in 20-literemmers.", "text": "Stro en paddenstoelenbroed in afwisselende lagen."} %}
+{% include "partials/polaroid.html" with {"image": "fase3-incubatie-a", "number": 3, "title": "Incubatie.", "text": "In het donker neemt het mycelium het stro over.", "extra": "fase3-incubatie-b"} %}
+{% include "partials/polaroid.html" with {"image": "fase4-kweekruimte", "number": 4, "title": "Groei en oogst.", "text": "Vochtig, licht en frisse lucht: de zwammen groeien en worden met de hand geoogst."} %}
+      </ol>
+    </div>
+    <div class="outdoor">
+{% include "partials/paper_note.html" with {"title": "Buiten gekweekt: groeien met het ritme van de natuur.", "status": "In voorbereiding, gepland voor 2027.", "text": "Later kweken we ook buiten, op hout, met het ritme van de seizoenen. We houden je op de hoogte.", "link": {"label": "Volg onze buitenkweek", "path": "/ons-verhaal/buitenkweek/"}} %}
+    </div>
+  </div>
+</section>
+
+{# ---------- the four audiences ---------- #}
+<section class="section tafels grid-paper" id="tafels" data-scene="tafels" aria-labelledby="tafels-title">
+  <div class="wrap">
+    <h2 id="tafels-title">Voor elke tafel een eigen verhaal.</h2>
+{% include "partials/audience_grid.html" with {"level": 3, "link_to": "page"} %}
+    <p class="versions-close">Eén kwekerij. Verschillende behoeften.</p>
+  </div>
+</section>
+
+{# ---------- the grower (anthony-krat: AI-styled, art-directed by Anthony, approved by Michael 2026-11-05) ---------- #}
+<section class="section" id="kweker" data-scene="kweker" aria-labelledby="kweker-title">
+  <div class="wrap kweker-grid">
+    {{ picture('anthony-krat', cls="photo", sizes="(min-width: 1440px) 528px, (min-width: 1100px) 37vw, 92vw") }}
+    <div>
+      <h2 id="kweker-title">“Ik wil weten waar mijn eten vandaan komt.”</h2>
+      <p class="story">{{ site.name }} is ontstaan vanuit een fascinatie voor paddenstoelen en de overtuiging dat lokaal voedsel opnieuw dichter bij de mensen mag komen. Vanuit {{ site.municipality }} bouw ik aan een kleinschalige, ambachtelijke kwekerij. Ik wil een korte verbinding creëren tussen kweker, chef en consument: verse zwammen waarvan je weet waar ze vandaan komen én wie ze heeft gekweekt.</p>
+      <p class="signature">Anthony Watteeuw<span class="signature-role"><span class="sr-only">, </span>kweker en oprichter</span></p>
+      <a class="hit" href="{{ url('/ons-verhaal/') }}">Ontdek het verhaal achter {{ site.name }}</a>
+    </div>
+  </div>
+</section>
+
+{# ---------- the ProefBox request form (the S5 engine, the same form as /proefbox/) ---------- #}
+<section class="section grid-paper" id="proefbox" data-scene="proefbox" aria-labelledby="proefbox-title">
+  <div class="wrap">
+{% include "partials/section_head.html" with {"id": "proefbox-title", "title": "Proef het verschil.", "lede": "We stellen graag een gratis ProefBox samen met een selectie van onze soorten. Voor professionele keukens en zaken in onze leveringsregio.", "knip": True} %}
+    <div class="proefbox-grid">
+      <div class="pb-form-col">
+{% include "partials/form.html" with {"key": "proefbox"} %}
+        <p class="homecook">Kook je thuis? <a href="{{ url('/contact/?reden=bestelling-thuis#formulier') }}">Vraag een bestelling aan</a> of volg <a href="{{ url('/voor-wie/thuis/') }}">MushLove</a>.</p>
+      </div>
+{# the ProefBox crate photo of final.html (its "ChefBox" brand mark approved for this spot by Michael, 2026-11-05) #}
+{% include "partials/coupon.html" with {"image": "proefbox", "sizes": "(min-width: 1440px) 500px, (min-width: 769px) 34vw, calc(100vw - 3.75rem)"} %}
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url('/js/cards.js') }}" defer></script>
+<script src="{{ url('/js/forms.js') }}" defer></script>
+<script src="{{ url('/js/home.js') }}" defer></script>
 {% endblock %}

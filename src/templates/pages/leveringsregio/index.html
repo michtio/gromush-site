@@ -1,0 +1,48 @@
+{% extends "layouts/base.html" %}
+{# /leveringsregio/ (S20, template H-lite; PRD R29, R30, R37, R38). Every delivery town on the stylised region map of
+   delivery variant 1 (src/gen/levering.py, the homepage's map, drawn in its static state: full route, van parked at the
+   farm, no script), each with a link to its town page on the map and in the register beside it, then the ProefBox
+   call to action. No map service, no embed (R29). Towns are delivery regions; Westkapelle is the only place named as
+   where GroMush grows (R30). The map styles are the homepage's (css/home.css, .lv1 without .is-live); this page's own
+   additions (map labels as links) are in css/leveringsregio.css. #}
+{% block title %}Onze leveringsregio: Knokke-Heist, Damme, Sluis, Brugge en Blankenberge · {{ site.name }}{% endblock %}
+{% block description %}Vanuit onze kwekerij in {{ site.locality }} leveren we verse oesterzwammen persoonlijk in Knokke-Heist, Damme, Sluis, Brugge, Blankenberge en de omgeving. Bekijk waar we leveren.{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url('/css/home.css') }}">
+<link rel="stylesheet" href="{{ url('/css/leveringsregio.css') }}">
+{% endblock %}
+{% block main %}
+{% set towns = sorted(data.towns.towns, key=lambda t: t.nav_order) %}
+{% set origin = data.towns.map.origin %}
+<section class="section lv1 regio-hub" id="levering" data-template="hub" data-section="kaart" aria-labelledby="regio-title">
+  <div class="wrap">
+    <h1 id="regio-title">Onze leveringsregio.</h1>
+    <p class="lv1-hand">Lokaal gekweekt. Lokaal verbonden.</p>
+    <p class="lede regio-lede">Vanuit onze kwekerij in {{ origin.name }} leveren we persoonlijk aan keukens en zaken in {{ ", ".join([t.name for t in towns][:-1]) }} en {{ towns[-1].name }}, en in de omgeving op afspraak. Korte keten, persoonlijk contact. Kies je gemeente.</p>
+  </div>
+  <div class="wrap lv1-body">
+    <div class="lv1-track">
+      <div class="lv1-stage">
+        <div class="lv1-map">
+          <div class="regio-scroll" tabindex="0" role="region" aria-label="Kaart van de leveringsregio">
+          <div class="lv1-canvas">
+          {{{ levering_map() }}}
+            <div class="lv1-pins regio-pins" data-map-links><span class="lv1-pin" data-t="{{ origin.key }}" style="{{ levering_pos(origin.x, origin.y) }}" aria-hidden="true">{{ origin.name }}</span>{% for t in towns %}<a class="lv1-pin regio-pin" data-t="{{ t.slug }}" href="{{ url('/leveringsregio/' + t.slug + '/') }}" style="{{ levering_pos(t.map.x, t.map.y) }}" tabindex="-1" aria-hidden="true">{{ t.name }}</a>{% endfor %}</div>
+            <div class="lv1-van" aria-hidden="true" style="{{ levering_van_style() }}">{{{ levering_van() }}}</div>
+          </div>
+          </div>
+          <ul class="lv1-stops" data-list-links aria-label="Waar we leveren, vanuit {{ origin.name }}">
+          <li class="lv1-stop lv1-stop--home is-on" data-t="{{ origin.key }}"><div class="lv1-card"><span class="lv1-ph">{{ picture('fase4-kweekruimte', sizes="64px") }}</span><span class="lv1-txt"><span class="lv1-name">{{ origin.name }}</span><span class="lv1-subs">Kweek &amp; vertrekpunt.<span class="lv1-pick"> Kook je thuis? Dan haal je hier af.</span></span></span></div></li>
+{% for t in levering_route_order(towns) %}
+{% include "partials/town_card.html" with {"town": t} %}
+{% endfor %}
+          <li class="lv1-stop lv1-stop--more"><p class="lv1-card lv1-more"><span class="lv1-txt"><span class="lv1-name">en omgeving</span><span class="lv1-subs">Persoonlijk geleverd, op afspraak.</span></span></p></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><p class="lv1-close">Een paddenstoel groeit niet alleen. Hij groeit dankzij zijn netwerk. {{ site.name }} doet hetzelfde.</p></div>
+</section>
+{% include "partials/closing_banner.html" with {"id": "proefbox-title", "section": "proefbox", "title": "Proef het verschil.", "text": "Ben je chef, keukenverantwoordelijke of uitbater van een zaak in onze leveringsregio? We stellen graag een gratis ProefBox voor je samen met een selectie van onze soorten.", "action": {"label": "Vraag een gratis ProefBox aan", "path": "/proefbox/#formulier"}} %}
+{% endblock %}

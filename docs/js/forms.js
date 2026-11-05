@@ -6,7 +6,8 @@
       aria-invalid="true" and their message (#err-<name>) in aria-describedby.
    2. Pre-selection (AD10): ?soort=<variety key or slug> ticks that variety (?soort=blauwe or
       ?soort=blauwe-oesterzwam); ?<name>=<value> picks an option in a select marked data-prefill="<name>"
-      (contact: ?reden=).
+      (contact: ?reden=); a radio group marked data-prefill picks the option whose text matches (?gemeente=brugge).
+   2b. Progress (S13): a fieldset holding [data-progress] shows "{n} van {total}" answered fields (hidden without JS).
    2a. Modes (S6, PRD R42): a form with data-mode-field="<select name>" switches mode with that select; the chosen
       option's data-mode ("afhalen") is the mode. Elements with data-mode-only="<mode>" show only in that mode,
       data-mode-not="<mode>" hide in it, data-optional-in="<mode>" makes a required field optional in it (in the
@@ -113,7 +114,7 @@
       var label = wrap.getAttribute('data-label');
       var value, block = false;
       if (wrap.tagName === 'FIELDSET') {
-        value = Array.prototype.filter.call(wrap.querySelectorAll('input[type=checkbox]'), function (c) { return c.checked; })
+        value = Array.prototype.filter.call(wrap.querySelectorAll('input[type=checkbox], input[type=radio]'), function (c) { return c.checked; })
           .map(function (c) { return c.value; }).join(', ');
       } else {
         var input = form.elements[name];
@@ -156,10 +157,35 @@
         } else {
           var safe = value.toLowerCase().replace(/[^a-z0-9-]/g, '');
           var box = safe && el.querySelector('input[type=checkbox][data-key="' + safe + '"], input[type=checkbox][data-slug="' + safe + '"]');
+          /* a radio group (S13): the option whose text reads as the value (?gemeente=knokke-heist) */
+          if (!box && safe) box = Array.prototype.filter.call(el.querySelectorAll('input[type=radio]'), function (r) {
+            return r.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') === safe;
+          })[0];
           if (box) box.checked = true;
         }
       });
     }
+
+    /* 2b. progress (S13): a group with [data-progress="{n} van {total} …"] counts its answered fields */
+    form.querySelectorAll('[data-progress]').forEach(function (p) {
+      var group = p.closest('fieldset');
+      var wraps = group ? group.querySelectorAll('[data-field]') : [];
+      function answered(w) {
+        if (w.tagName === 'FIELDSET') return !!w.querySelector('input:checked');
+        var c = form.elements[w.getAttribute('data-field')];
+        return !!c && c.value.trim() !== '';
+      }
+      function update() {
+        var n = Array.prototype.filter.call(wraps, answered).length;
+        p.textContent = p.getAttribute('data-progress').replace('{n}', n).replace('{total}', wraps.length);
+        p.classList.toggle('is-complete', n === wraps.length);
+      }
+      if (!wraps.length) return;
+      group.addEventListener('change', update);
+      group.addEventListener('input', update);
+      update();
+      p.hidden = false;
+    });
 
     /* 2a. modes (R42): the mode follows the chosen option of data-mode-field */
     var modeField = form.getAttribute('data-mode-field');

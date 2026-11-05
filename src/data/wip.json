@@ -1,18 +1,4 @@
 {
   "_note": "Pages not built yet. The build renders a noindex 'in opbouw' page at each path that no page template renders yet; once a slice builds the real page, its placeholder disappears by itself. Remove an entry when its page is built.",
-  "pages": [
-    {"path": "/voor-wie/grootkeukens/", "title": "Grootkeukens"},
-    {"path": "/voor-wie/speciaalzaken/", "title": "Speciaalzaken"},
-    {"path": "/voor-wie/thuis/", "title": "Thuis & MushLove"},
-    {"path": "/ons-verhaal/kweekproces/", "title": "Kweekproces"},
-    {"path": "/ons-verhaal/buitenkweek/", "title": "Buitenkweek"},
-    {"path": "/ons-verhaal/adopteer/", "title": "Adopteer een emmer"},
-    {"path": "/inspiratie/", "title": "Inspiratie"},
-    {"path": "/leveringsregio/", "title": "Leveringsregio"},
-    {"path": "/leveringsregio/knokke-heist/", "title": "Levering in Knokke-Heist"},
-    {"path": "/leveringsregio/damme/", "title": "Levering in Damme"},
-    {"path": "/leveringsregio/sluis/", "title": "Levering in Sluis"},
-    {"path": "/leveringsregio/brugge/", "title": "Levering in Brugge"},
-    {"path": "/leveringsregio/blankenberge/", "title": "Levering in Blankenberge"}
-  ]
+  "pages": []
 }

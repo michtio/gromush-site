@@ -1,0 +1,189 @@
+/* Template F: the Ons verhaal process pages (S16 Kweekproces and Adopteer, S17 Buitenkweek; layouts/process.html).
+   Built from the shared components of final.html in site.css (polaroid .snap, .paper-note, .grid-paper, tape, the
+   phase line, .closing, the request form); only what these pages add lives here.
+   pf-*  shared by the three pages: hero, phase list with the upright phase line, panels, harvest, adoption, form aside
+   bk-*  Buitenkweek only: tagline, food-forest figure, six method steps, the future-species row, the interest note
+   .ink  the hand-drawn line illustrations of partials/ink_drawing.html, in the hyphae's stroke weights (home.css). */
+
+/* ---------- ink drawings ---------- */
+.ink{display:block;width:100%;height:auto;overflow:visible;--ink-bg:var(--straw)}
+.ink path,.ink circle,.ink ellipse{fill:none;stroke:var(--ink);stroke-linecap:round;stroke-linejoin:round}
+.ink .m,.ink .m > *{stroke-width:2.2}
+.ink .s,.ink .s > *{stroke-width:1.3}
+.ink .f,.ink .f > *{stroke-width:.8;stroke-opacity:.72}
+.ink .dots{stroke-width:3;stroke-opacity:.85}
+.ink .bg,.ink .bg > *{fill:var(--ink-bg)}
+.ink .fill,.ink .fill > *{fill:var(--ink);stroke:none}
+.ink .ink-dash{stroke-dasharray:3 5}
+
+/* ---------- hero ---------- */
+.pf-hero{padding-block:clamp(2.5rem,6vw,4.5rem) clamp(1.5rem,4vw,3rem)}
+.pf-hero-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(2.5rem,5vw,5rem);align-items:center}
+.pf-hero h1{font-size:clamp(2.4rem,5.4vw,4.6rem);line-height:1.04;letter-spacing:-0.02em;max-width:16ch;margin-bottom:1.2rem}
+.pf-hero .lede{margin-bottom:1.2rem}
+.pf-hero-note{font-weight:500;border-left:3px solid var(--ink);padding-left:.9rem;max-width:56ch}
+.pf-actions{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.8rem;margin-top:1.8rem}
+.pf-hero-snap{justify-self:center}
+
+/* the kweekschema: a taped note of in-page links */
+.pf-index{max-width:24rem;justify-self:center;width:100%;padding:clamp(1.8rem,3vw,2.4rem) clamp(1.2rem,2.5vw,1.8rem) 1.4rem}
+.pf-hero .pf-index-title{font-size:clamp(1.4rem,2.2vw,1.8rem);margin-bottom:.6rem}
+.pf-index-list{list-style:none;margin:0;padding:0;display:grid}
+.pf-index-list li + li{border-top:1px dotted color-mix(in srgb,var(--ink) 40%,transparent)}
+.pf-index-list a{display:flex;align-items:center;gap:.8rem;min-height:48px;padding-block:.3rem;color:var(--ink);font-weight:500;text-decoration:none;overflow-wrap:anywhere}
+.pf-index-list a:hover,.pf-index-list a:focus-visible{text-decoration:underline;text-decoration-thickness:2px}
+.pf-index-num{flex:none;width:2rem;height:2rem;border:1px solid var(--ink);border-radius:50%;background:var(--straw);display:grid;place-content:center;font-family:var(--font-display);font-size:1rem;line-height:1}
+.pf-index-num--end{background:var(--ink)}
+
+/* ---------- phases: text left, the polaroid right, the phase line upright in the left gutter ---------- */
+.pf-phases{padding-top:clamp(2rem,4vw,3rem)}
+.pf-phase-list{list-style:none;margin:0;padding:0 0 0 clamp(3.4rem,6vw,5rem);position:relative}
+.pf-phase-list::before{
+  content:"";position:absolute;top:1.6rem;bottom:2rem;left:calc(clamp(3.4rem,6vw,5rem) / 2 - 12px);width:24px;opacity:.5;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='160' viewBox='0 0 24 160'%3E%3Cpath d='M12 0C20 26 4 54 12 80C20 106 4 134 12 160' fill='none' stroke='%232c2318' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") repeat-y center top/24px 160px;
+}
+.pf-phase{position:relative;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(2rem,5vw,4.5rem);align-items:center;padding-block:clamp(2.5rem,5vw,4rem)}
+.pf-phase + .pf-phase{border-top:var(--cut)}
+.pf-phase-num{
+  position:absolute;top:clamp(2.5rem,5vw,4rem);left:calc(clamp(3.4rem,6vw,5rem) / -2 - 1.5rem);
+  width:3rem;height:3rem;border:1px solid var(--ink);border-radius:50%;background:var(--straw);
+  display:grid;place-content:center;font-family:var(--font-display);font-size:1.5rem;line-height:1;
+}
+.pf-phase-text{min-width:0}
+.pf-phase-text .overline{margin-bottom:.4rem}
+.pf-phase h3{font-size:clamp(1.7rem,3vw,2.4rem);margin-bottom:.9rem}
+.pf-phase-text > p{max-width:60ch}
+.pf-points{list-style:none;margin:1.2rem 0 1.6rem;padding:0;display:grid;gap:.45rem;max-width:60ch}
+.pf-points li{position:relative;padding-left:1.4rem}
+.pf-points li::before{content:"";position:absolute;left:0;top:.8em;width:.8rem;border-top:2px solid var(--ink)}
+.pf-panel{border:1px solid var(--ink);background:var(--paper-card);padding:1.2rem clamp(1rem,3vw,1.5rem) 1.3rem;max-width:40rem}
+.pf-panel h4{font-family:var(--font-display);font-weight:400;font-size:1.3rem;line-height:1.2;margin:0 0 .8rem}
+.pf-flow{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.6rem 1.9rem;counter-reset:flow}
+.pf-flow li{position:relative;counter-increment:flow;display:flex;align-items:center;gap:.5rem;min-width:0}
+.pf-flow li::before{content:counter(flow);flex:none;width:1.6rem;height:1.6rem;border:1px solid var(--ink);border-radius:50%;display:grid;place-content:center;font-size:.85rem;font-weight:600;line-height:1}
+.pf-flow li:not(:last-child)::after{content:"";position:absolute;right:-1.45rem;top:50%;width:1rem;border-top:1.5px solid var(--ink);opacity:.6}
+.pf-flow--layers{flex-direction:column;align-items:flex-start;gap:.55rem}
+.pf-flow--layers li::after{display:none}
+.pf-key{flex:none;width:1.6rem;height:.9rem;border:1px solid var(--ink)}
+.pf-key--stro{background:repeating-linear-gradient(-12deg,transparent 0 3px,rgb(var(--ink-rgb) / .55) 3px 4px)}
+.pf-key--broed{background:radial-gradient(circle,var(--ink) 1.1px,transparent 1.6px) 0 0/5px 5px}
+.pf-panel--drawing{display:grid;grid-template-columns:minmax(6.5rem,9.5rem) minmax(0,1fr);gap:clamp(1rem,3vw,1.6rem);align-items:center}
+.pf-bucket{margin:0}
+.pf-bucket .ink{--ink-bg:var(--paper-card)}
+.pf-facts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem 1.4rem}
+.pf-facts li{color:var(--ink-soft);line-height:1.4;min-width:0;overflow-wrap:break-word;hyphens:auto}
+.pf-facts strong{display:block;font-family:var(--font-display);font-weight:400;font-size:1.2rem;color:var(--ink)}
+
+/* polaroids standing alone (a figure, not an li of .snaps) */
+figure.pf-snap{margin:0;width:100%;max-width:23rem;justify-self:center}
+.pf-snap figcaption{font-size:.95rem}
+.pf-phase:nth-child(even) .pf-snap{transform:rotate(1.6deg)}
+.pf-phase:nth-child(odd) .pf-snap{transform:rotate(-1.4deg)}
+.pf-snap .snap-extra{width:38%}
+
+/* ---------- harvest and delivery ---------- */
+.pf-harvest-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.pf-harvest-snap{transform:rotate(-1.8deg)}
+.pf-harvest h2{font-size:clamp(2.1rem,4vw,3.25rem);margin-bottom:1rem}
+.pf-ticks{list-style:none;margin:1.4rem 0 1.4rem;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,max-content));gap:.6rem 2.2rem}
+.pf-ticks li{display:flex;align-items:center;gap:.55rem;font-weight:600}
+.pf-ticks .icon{width:1.1rem;height:1.1rem;stroke-width:2.4}
+
+/* ---------- adoption ---------- */
+.pf-benefit-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,12.5rem),1fr));gap:clamp(1.2rem,2.4vw,2rem)}
+.pf-benefit-list li{position:relative;min-width:0;border:var(--cut);background:var(--paper-card);padding:1.3rem 1.4rem 1.4rem;overflow-wrap:break-word;hyphens:auto}
+.pf-benefit-list h3{font-size:1.4rem;margin-bottom:.5rem}
+.pf-benefit-list p{color:var(--ink-soft)}
+.pf-for{font-family:var(--font-display);font-size:clamp(1.3rem,2.2vw,1.7rem);line-height:1.3;max-width:34ch;margin:clamp(2rem,4vw,3rem) 0 0}
+.pf-steps .snaps-wrap{margin-top:0}
+.pf-more{margin:2.6rem 0 0}
+
+/* ---------- form section and its aside (AC29: address and phone beside every form) ---------- */
+.pf-form-grid,.bk-interest-grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:clamp(2rem,4vw,3.5rem);align-items:start}
+.pf-form-col{min-width:0}
+.pf-form-col > h2{margin-bottom:.6rem}
+.pf-form-col > .lede{margin-bottom:1.8rem}
+.pf-aside{display:grid;grid-template-columns:minmax(0,1fr);gap:1.6rem;min-width:0}
+.section .pf-aside h2{font-size:1.5rem;margin-bottom:.6rem}
+.pf-aside-card{border:1px solid var(--ink);background:var(--paper-card);padding:1.4rem 1.5rem;overflow-wrap:break-word;hyphens:auto}
+.pf-aside-points{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.pf-aside-points li{border-left:3px solid var(--ink);padding-left:.75rem;color:var(--ink-soft)}
+.pf-contact ul{list-style:none;margin:0;padding:0}
+.pf-contact li a{position:relative;display:inline-flex;align-items:center;min-height:44px;max-width:100%;color:var(--ink);font-weight:600;overflow-wrap:anywhere}
+.pf-aside-next{display:grid;justify-items:start;gap:.5rem;min-width:0}
+.section .pf-aside-next h2{margin-bottom:0}
+.pf-aside-next p{margin:0 0 .3rem;color:var(--ink-soft)}
+.pf-aside-next .link-action{min-height:44px} /* two stacked actions: each its own 44 px row */
+
+/* ---------- Buitenkweek ---------- */
+.bk-tagline{font-family:var(--font-display);font-size:clamp(1.3rem,2.2vw,1.8rem);line-height:1.25;margin:0 0 1.2rem}
+.bk-sketch{margin:0;max-width:30rem;width:100%;justify-self:center;padding:clamp(1.8rem,3vw,2.4rem) clamp(1rem,2.5vw,1.6rem) 1.2rem}
+.bk-sketch .ink{--ink-bg:var(--grid-paper)}
+.bk-sketch figcaption{font-family:var(--font-mono);font-size:.85rem;line-height:1.45;color:var(--ink-soft);margin-top:.8rem}
+
+.bk-bos-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.bk-bos-figure{margin:0;min-width:0}
+.bk-bos-figure figcaption{font-family:var(--font-mono);font-size:.85rem;line-height:1.45;color:var(--ink-soft);margin-top:.8rem;max-width:40ch}
+.bk-bos-text p:not(.lede){max-width:60ch}
+
+.bk-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.6rem,3vw,2.4rem)}
+.bk-step{min-width:0;border:1px solid var(--ink);background:var(--paper-card);padding:1rem 1.3rem 1.4rem;box-shadow:0 14px 26px -20px rgb(var(--ink-rgb) / .45);overflow-wrap:break-word;hyphens:auto}
+.bk-step .ink{--ink-bg:var(--paper-card);margin:0 auto .8rem;max-width:15rem}
+.bk-step h3{display:flex;align-items:baseline;gap:.55rem;font-size:1.35rem;margin-bottom:.45rem}
+.bk-step-num{flex:none;font-family:var(--font-mono);font-weight:700;font-size:.95rem}
+.bk-step p{color:var(--ink-soft)}
+
+.bk-species-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(2rem,3.5vw,2.8rem) clamp(1.2rem,2.5vw,2rem)}
+.bk-soort{min-width:0;text-align:center;overflow-wrap:break-word}
+.bk-soort-photo{display:block;width:min(100%,11.5rem);margin:0 auto .9rem;aspect-ratio:1;border-radius:50%;overflow:hidden;border:1px solid var(--ink);background:var(--straw-deep)}
+.bk-soort-photo img{display:block;width:100%;height:100%;object-fit:cover;transform:scale(1.04)}
+.bk-soort h3{font-size:clamp(1.1rem,3.4vw,1.3rem);margin-bottom:.35rem}
+.bk-soon{display:inline-block;font-family:var(--font-mono);font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:1.5px solid var(--ink);border-radius:3px;padding:.1rem .5rem;margin:0 0 .6rem;transform:rotate(-2deg)}
+.bk-soort p:last-child{color:var(--ink-soft);font-size:.95rem;line-height:1.5;max-width:24ch;margin-inline:auto}
+
+.bk-interest{padding-top:clamp(2.5rem,5vw,4rem)}
+.bk-note{min-width:0;transform:none} /* the form inside stays level */
+.section .bk-note h2{font-size:clamp(2rem,3.6vw,3rem);margin-bottom:.8rem}
+.bk-hand{font-family:var(--font-hand);font-size:clamp(1.3rem,2vw,1.6rem);line-height:1.3;color:var(--ink);transform:rotate(-2deg);transform-origin:left center;margin:0 0 .8rem}
+.bk-note > p{max-width:60ch}
+.bk-note-small{font-size:.95rem;margin-bottom:1.6rem}
+.bk-note .req-form{margin-top:1.6rem}
+
+/* ---------- smaller screens ---------- */
+@media (max-width:1099px){
+  .bk-species-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:899px){
+  .pf-hero-grid,.pf-harvest-grid,.bk-bos-grid,.pf-form-grid,.bk-interest-grid{grid-template-columns:minmax(0,1fr)}
+  .pf-phase{grid-template-columns:minmax(0,1fr)}
+  /* tilted, taped paper: centred with room for the tape on both sides (S4: tape reached 391 px at 390) */
+  .pf-index,.bk-sketch{justify-self:center;max-width:min(30rem,calc(100% - 1.6rem))}
+  figure.pf-snap{justify-self:center;max-width:min(22rem,calc(100% - 1.6rem))}
+  .bk-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bk-bos-figure{max-width:30rem}
+}
+@media (max-width:599px){
+  .bk-steps{grid-template-columns:minmax(0,1fr)}
+  .pf-flow{flex-direction:column;align-items:flex-start;gap:.55rem}
+  .pf-flow li::after{display:none}
+  .pf-panel--drawing{grid-template-columns:minmax(0,1fr)}
+  .pf-bucket{max-width:9rem}
+  .pf-facts{grid-template-columns:minmax(0,1fr)}
+  .pf-ticks{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:359px){
+  .bk-species-list{grid-template-columns:minmax(0,1fr)}
+}
+
+/* ---------- large text on a phone (S21; the shared rules are in site.css, "large text on a phone") ----------
+   the phase line and its numbers leave the left gutter, so the phase text gets the full column */
+@media (max-width:17em){
+  .pf-phase-list{padding-left:0}
+  .pf-phase-list::before{display:none}
+  .pf-phase-num{position:static;margin-bottom:.8rem}
+  .pf-flow li{align-items:flex-start}
+}
+@media (max-width:17em){
+  .pf-index{padding-inline:12px}
+  .pf-hero .pf-index-title{font-size:1.15rem!important}
+}

@@ -1,0 +1,79 @@
+{# Recipe (S18; PRD R26, R27, plan AD14), from one recipes.json entry. Two views of the same recipe:
+   with: recipe (a recipes.json entry), view = "card" | "article" (default "article").
+   - card: one <li> of the recipe grid: photo (decorative: the title names the dish), title, intro, servings and tags.
+     The title link points at the article's anchor; recipes.js turns it into a button that opens the dialog.
+   - article: the full recipe, readable in place without JS (AD14): photo, title, intro, servings, the varieties it
+     names (linked to their product page; none named = any oyster in the range, linked to /zwammen/), ingredients,
+     steps, tip. recipes.js moves each article into its own native <dialog>.
+   Variety links only for varieties in the range (the global `varieties`), so a removed variety drops out by itself. #}
+{% set view = opt("view", "article") %}
+{% set rid = "recept-" + recipe.id %}
+{% set facts = [recipe.servings] + list(recipe.get("tags") or []) %}
+{% if view == "card" %}
+<li class="rc-card">
+{% if recipe.get("image") %}
+  <div class="rc-card-photo">{{ picture(recipe.image, sizes="(min-width: 1200px) 330px, (min-width: 640px) 45vw, calc(100vw - 2.5rem)", decorative=True) }}</div>
+{% endif %}
+  <div class="rc-card-body">
+    <h3 class="rc-card-title"><a class="rc-open" href="#{{ rid }}" data-recipe="{{ rid }}">{{ recipe.title }}</a></h3>
+    <p class="rc-card-intro">{{ recipe.intro }}</p>
+    <p class="rc-card-meta">{{ " · ".join(facts) }}</p>
+    <span class="rc-card-cta" aria-hidden="true">Bekijk recept <svg class="icon" viewBox="0 0 24 16" focusable="false"><use href="#i-arrow"/></svg></span>
+  </div>
+</li>
+{% else %}
+{% set used = [v for v in varieties if v.slug in (recipe.get("varieties") or [])] %}
+<article class="rc-article" id="{{ rid }}" aria-labelledby="{{ rid }}-titel">
+  <header class="rc-head">
+{% if recipe.get("image") %}
+    <figure class="coupon rc-photo"><svg class="icon coupon-scissors" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-scissors"/></svg>{{ picture(recipe.image, sizes="(min-width: 1100px) 440px, (min-width: 700px) 40vw, calc(100vw - 3rem)") }}</figure>
+{% endif %}
+    <div class="rc-head-text">
+      <p class="overline">Recept</p>
+      <h3 id="{{ rid }}-titel">{{ recipe.title }}</h3>
+      <p class="rc-intro">{{ recipe.intro }}</p>
+      <dl class="rc-facts">
+        <div><dt>Voor</dt><dd>{{ recipe.servings }}</dd></div>
+{% if recipe.get("tags") %}
+        <div><dt>Keuken</dt><dd>{{ ", ".join(recipe.tags) }}</dd></div>
+{% endif %}
+        <div><dt>Oesterzwam</dt><dd>{% if used %}{% for v in used %}<a href="{{ url('/zwammen/' + v.slug + '/') }}">{{ v.name }}</a>{% if not loop.last %}{% if loop.index == len(used) - 1 %} of {% else %}, {% endif %}{% endif %}{% endfor %}{% else %}<a href="{{ url('/zwammen/') }}">Elke soort uit ons gamma</a>{% endif %}</dd></div>
+      </dl>
+    </div>
+  </header>
+  <div class="rc-cols">
+    <section class="rc-ingredients" aria-labelledby="{{ rid }}-ingredienten">
+      <h4 id="{{ rid }}-ingredienten">Ingrediënten</h4>
+      <ul>
+{% for item in recipe.ingredients %}
+        <li>{{ item }}</li>
+{% endfor %}
+      </ul>
+    </section>
+    <section class="rc-method" aria-labelledby="{{ rid }}-bereiding">
+      <h4 id="{{ rid }}-bereiding">Bereiding</h4>
+      <ol class="rc-steps">
+{% for step in recipe.steps %}
+        <li>{% if step.get("title") %}<strong>{{ step.title }}.</strong> {% endif %}{{ step.text }}</li>
+{% endfor %}
+      </ol>
+    </section>
+  </div>
+{% if recipe.get("tip") %}
+  <aside class="rc-tip grid-paper" aria-labelledby="{{ rid }}-tip">
+    <span class="tape tape--l" aria-hidden="true"></span>
+    <h4 id="{{ rid }}-tip">{{ recipe.tip.title }}</h4>
+{% if len(recipe.tip.points) == 1 %}
+    <p>{{ recipe.tip.points[0] }}</p>
+{% else %}
+    <ul>
+{% for point in recipe.tip.points %}
+      <li>{{ point }}</li>
+{% endfor %}
+    </ul>
+{% endif %}
+  </aside>
+{% endif %}
+  <p class="rc-back"><a href="#recepten">Terug naar alle recepten</a></p>
+</article>
+{% endif %}

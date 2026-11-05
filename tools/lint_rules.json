@@ -120,6 +120,23 @@
       "terms": ["adopt\\w*", "adoptie\\w*", "eigenaar\\w*", "eigendom\\w*", "sponsor\\w*", "peter", "meter", "huur\\w*", "beschikbaar", "verkrijgbaar", "te koop", "bestel\\w*", "reserveer\\w*", "reserveren", "boek(?:en|t)?", "bezoek\\w*", "rondleiding\\w*", "(?:jouw|je|uw|eigen) oogst", "deel van de oogst"],
       "near": ["voedselbos\\w*", "boomstam\\w*", "houtstam\\w*", "stammen", "stam", "logs?", "buitenkweek\\w*", "buitenteelt\\w*"],
       "note": "Outdoor growing never offered: a sentence that pairs an outdoor term (voedselbos, boomstam, stammen, buitenkweek) with adoption, ownership, renting, ordering, booking, visiting or 'jouw oogst' is a hit. Bucket adoption ('Adopteer een emmer') has no outdoor term and passes; keep a link to Buitenkweek out of the same sentence as 'adopteer'."
+    },
+    {
+      "id": "Q9-bookable-thuis",
+      "req": "R18",
+      "ac": "AC22",
+      "paths": ["/voor-wie/thuis/"],
+      "region": "main",
+      "terms": ["reserveer\\w*", "reserveren", "reservatie\\w*", "reservering\\w*", "boek(?:en|t)?", "boeking\\w*", "inschrijv\\w*", "schrijf je in", "tickets?", "workshops?", "kooksessie\\w*", "rondleiding\\w*", "proeverij\\w*", "bezoek\\w*", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag", "zondag", "\\d{1,2}[/-]\\d{1,2}(?:[/-]\\d{2,4})?"],
+      "note": "S14 gate (plan S14; PRD Q9 'nothing is bookable yet'): the Thuis & MushLove page offers no reservation, booking, sign-up, ticket, workshop, cooking session, tour, tasting or visit, and names no weekday or date (the pick-up moment is agreed personally, R42). Checked inside <main>; R23 rules cover the food forest site-wide."
+    },
+    {
+      "id": "R30-town",
+      "req": "R30",
+      "ac": "AC27",
+      "paths": ["/leveringsregio/", "/leveringsregio/knokke-heist/", "/leveringsregio/damme/", "/leveringsregio/sluis/", "/leveringsregio/brugge/", "/leveringsregio/blankenberge/"],
+      "pattern": "(?<![\\w])(?:gevestigd|gelegen|vestiging|kweken|kweek|kweekt|gekweekt|kwekerij|kweekruimte|uitvalsbasis|thuisbasis)(?![\\w])(?:\\s+[\\w'’-]+){0,3}?\\s+in\\s+(?:de\\s+(?:regio|streek)\\s+)?(?:knokke-heist|knokke|heist|damme|sluis|brugge|blankenberge)(?![\\w])|(?<![\\w])vanuit\\s+(?:de\\s+(?:regio|streek)\\s+)?(?:knokke-heist|knokke|heist|damme|sluis|brugge|blankenberge)(?![\\w])",
+      "note": "Towns are delivery regions, never GroMush locations: on the hub and the five town pages, 'gevestigd / kweken / kwekerij / uitvalsbasis (up to three words) in <town>' and 'vanuit <town>' (also with 'de regio' before the town) are hits. Westkapelle is the only place named as where GroMush grows, so 'kwekerij in Westkapelle' passes. Stricter reading: Knokke-Heist counts as a town too (the briefs' 'kwekerij in de regio Knokke-Heist' becomes 'kwekerij in Westkapelle'), and so do its parts Knokke and Heist."
     }
   ]
 }

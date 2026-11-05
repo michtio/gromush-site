@@ -10,7 +10,9 @@
 # reported apart from broken ones, then --same-chrome), check_depth.py docs (R7), check_seo.py docs (R40). Then it serves docs/ with
 # tools/serve.sh on a free port (never 8765, which the prototype server uses) and runs per page:
 # overflow.py, check.py + sweep.js + netreq.js at 390 and 1440, nojs.py at 390, and a
-# FONT_SIZE=32 fullshot at 320. Screenshots go to $QA_OUT (default: a new temp folder, printed).
+# FONT_SIZE=32 fullshot at 320 (200 % text: the browser's default font size in the profile, see tools/cdp.py)
+# that fails on any tools/textfit.js problem: a word off screen, clipped, broken mid-word without a hyphen, or a
+# horizontal scroll. Screenshots go to $QA_OUT (default: a new temp folder, printed).
 # Lighthouse runs only through the chrome-devtools MCP; the script prints a reminder.
 #
 # Prints PASS/FAIL per step and a summary; exit 0 only when every step passes. Env: QA_BASE,
@@ -104,7 +106,7 @@ for page in $PAGES; do
       python3 -I tools/check.py "$url" "$w" "$SWEEP" "$NETREQ"
   done
   run "$page nojs 390" "^nojs ok$" python3 -I tools/nojs.py "$url" 390 "$OUT/$slug-nojs.png"
-  run "$page 200% text 320" "unloaded_imgs=0 .*scrollWidth=320$" \
+  run "$page 200% text 320" "unloaded_imgs=0 .*scrollWidth=320 textfit=0$" \
     env FONT_SIZE=32 python3 -I tools/fullshot.py "$url" "$OUT/$slug-font32" 320
 done
 
@@ -113,7 +115,7 @@ echo "== summary$RESULTS"
 echo
 echo "Lighthouse (chrome-devtools MCP only, not run here): serve with 'tools/serve.sh 8766' and run"
 echo "lighthouse_audit (mobile) on each page above; bar: all four scores >= 90, LCP < 2.5 s, CLS < 0.1."
-echo "Manual: look at $OUT/*-font32-320*.png for clipped text (200 % text at 320 px)."
+echo "Manual: glance at $OUT/*-font32-320*.png (200 % text at 320 px); textfit.js does not see overlaps or dialogs."
 echo
 if [ "$FAILS" -eq 0 ]; then echo "qa: all steps passed"; else echo "qa: $FAILS step(s) failed"; fi
 [ "$FAILS" -eq 0 ]

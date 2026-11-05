@@ -1,0 +1,140 @@
+{% extends "layouts/process.html" %}
+{# /ons-verhaal/buitenkweek/ (S17, template F as a plan page; PRD R2, R23, R33, R34, R43, R44, R45). Nothing outdoors
+   exists yet (Q17): the page explains the plan and collects interest, it promises nothing. Order (R43, AC39):
+   hero, voedselbos, methode, soorten, interesse. Copy: Anthony's Buitenkweek brief (content-inventory 2.15) as reworded
+   in the PRD table "Buitenkweek: what stays and what goes": no "biologisch" (R2), no "ons voedselbos", no month, season
+   or harvest date (only "gepland voor 2027"), no log ownership section, no six-benefit bar, no "Meer over ons voedselbos".
+   The six steps are written as method, not as a report.
+   Images (R44): no photo stands for GroMush outdoors. hero-buitenkweek.jpeg, voedselbos.jpeg and the five numbered
+   third-party technique screenshots are not used; the hero sketch, the food-forest diagram and the six steps are ink
+   drawings (partials/ink_drawing.html). The species row uses the 8 images of the Extra Blok zip.
+   The species row (R45) shows only while flags.show_future_species is true; switched off, the section, its heading and
+   its id disappear and nothing else changes (AC41): nothing on the page links to #soorten. Its items are plain list
+   items, no links or focus stops (AC42). #}
+{% block title %}Buitenkweek op boomstammen, gepland voor 2027 · {{ site.name }}{% endblock %}
+{% block description %}{{ site.name }} plant een buitenkweek van paddenstoelen op hardhouten boomstammen, gepland voor 2027. Lees hoe kweken op boomstammen werkt en blijf op de hoogte.{% endblock %}
+{% block overline %}Buitenkweek{% endblock %}
+{% block heading %}Buitenkweek op boomstammen, gepland voor 2027.{% endblock %}
+{% block hero_text %}
+      <p class="bk-tagline">Puur natuur, langzaam en regeneratief.</p>
+      <p class="lede">Sommige smaken kan alleen de natuur maken. Naast onze binnenkweek willen we ook buiten kweken: langzaam, op hardhouten stammen, op het ritme van de natuur.</p>
+      <p class="pf-hero-note">Vandaag is dit een plan, nog geen kwekerij. Op deze pagina lees je hoe het werkt.</p>
+      <div class="pf-actions">
+{% include "partials/button.html" with {"label": "Hou me op de hoogte", "path": "/ons-verhaal/buitenkweek/#interesse"} %}
+{% include "partials/button.html" with {"label": "Zo werkt het", "path": "/ons-verhaal/buitenkweek/#methode", "kind": "link"} %}
+      </div>
+{% endblock %}
+{% block hero_aside %}
+    <figure class="paper-note grid-paper bk-sketch">
+      <span class="tape tape--l" aria-hidden="true"></span>
+      <span class="tape tape--r" aria-hidden="true"></span>
+{% include "partials/ink_drawing.html" with {"name": "plan"} %}
+      <figcaption>Schets van het plan: gestapelde stammen met paddenstoelen, mycelium in de bodem. Een tekening, geen foto.</figcaption>
+    </figure>
+{% endblock %}
+{% block sections %}
+<section class="section bk-bos" id="voedselbos" data-section="voedselbos" aria-labelledby="voedselbos-title">
+  <div class="wrap bk-bos-grid">
+    <figure class="bk-bos-figure">
+{% include "partials/ink_drawing.html" with {"name": "voedselbos"} %}
+      <figcaption>De lagen van een voedselbos: hoge en lage bomen, struiken, kruiden, bodembedekkers en schimmels in de bodem.</figcaption>
+    </figure>
+    <div class="bk-bos-text">
+      <h2 id="voedselbos-title">Wat is een voedselbos?</h2>
+      <p class="lede">Een voedselbos is een ecosysteem dat werkt zoals een natuurlijk bos. Bomen, struiken, kruiden, bloemen, insecten en schimmels leven er samen, in lagen boven elkaar. Het verschil: veel van die planten zijn eetbaar.</p>
+      <p>Er komen geen pesticiden aan te pas. Hoe meer soorten er samenleven, hoe beter het bos zichzelf in evenwicht houdt.</p>
+      <p>Schimmels hebben er een vaste rol. Ze breken dood hout af en geven voedingsstoffen terug aan de bodem. Paddenstoelen op boomstammen passen dus goed in die kringloop: je werkt samen met de natuur, niet ertegen.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section bk-method grid-paper" id="methode" data-section="methode" aria-labelledby="methode-title">
+  <div class="wrap">
+{% include "partials/section_head.html" with {"id": "methode-title", "title": "Zo werkt kweken op boomstammen.", "lede": "Zes stappen, van stam tot paddenstoel. Zo gaat het in het algemeen; bij ons is het nog een plan."} %}
+    <ol class="bk-steps">
+      <li class="bk-step">
+{% include "partials/ink_drawing.html" with {"name": "log-select"} %}
+        <h3><span class="bk-step-num" aria-hidden="true">1</span> Stevige stammen kiezen</h3>
+        <p>Verse, gave hardhouten stammen worden zorgvuldig geselecteerd.</p>
+      </li>
+      <li class="bk-step">
+{% include "partials/ink_drawing.html" with {"name": "log-drill"} %}
+        <h3><span class="bk-step-num" aria-hidden="true">2</span> Inoculeren</h3>
+        <p>Er worden gaten in de stammen geboord, waarin zorgvuldig broed wordt aangebracht.</p>
+      </li>
+      <li class="bk-step">
+{% include "partials/ink_drawing.html" with {"name": "log-wax"} %}
+        <h3><span class="bk-step-num" aria-hidden="true">3</span> Afsluiten met natuurlijke was</h3>
+        <p>De gaten worden afgesloten met natuurlijke was, zodat het broed niet uitdroogt en er geen ongewenste schimmels binnendringen.</p>
+      </li>
+      <li class="bk-step">
+{% include "partials/ink_drawing.html" with {"name": "log-stack"} %}
+        <h3><span class="bk-step-num" aria-hidden="true">4</span> Incubatie</h3>
+        <p>De stammen worden gestapeld en krijgen de tijd om het mycelium te laten doorgroeien.</p>
+      </li>
+      <li class="bk-step">
+{% include "partials/ink_drawing.html" with {"name": "log-fruit"} %}
+        <h3><span class="bk-step-num" aria-hidden="true">5</span> Vruchtvorming</h3>
+        <p>Wanneer de omstandigheden gunstig zijn, verschijnen de eerste paddenstoelen.</p>
+      </li>
+      <li class="bk-step">
+{% include "partials/ink_drawing.html" with {"name": "log-harvest"} %}
+        <h3><span class="bk-step-num" aria-hidden="true">6</span> Oogsten</h3>
+        <p>De paddenstoelen worden met de hand geoogst op het juiste moment, voor de beste smaak en kwaliteit.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+{% if flags.show_future_species %}
+{% set fs = data.future_species %}
+<section class="section bk-species" id="soorten" data-section="soorten" aria-labelledby="soorten-title">
+  <div class="wrap">
+{% include "partials/section_head.html" with {"id": "soorten-title", "title": "Soorten voor later.", "lede": "Deze acht soorten willen we op termijn buiten kweken. Vandaag zijn ze er nog niet."} %}
+    <ul class="bk-species-list">
+{% for s in fs.species %}
+      <li class="bk-soort">
+        <span class="bk-soort-photo">{{ picture(s.image, sizes="(min-width: 1100px) 220px, (min-width: 600px) 22vw, 40vw") }}</span>
+        <h3>{{ s.name }}</h3>
+        <p class="bk-soon">{{ fs.status_label }}</p>
+        <p>{{ s.line }}</p>
+      </li>
+{% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+<section class="section bk-interest" id="interesse" data-section="interesse" aria-labelledby="interesse-title">
+  <div class="wrap bk-interest-grid">
+    <div class="paper-note grid-paper bk-note">
+      <span class="tape tape--l" aria-hidden="true"></span>
+      <span class="tape tape--r" aria-hidden="true"></span>
+      <p class="bk-hand">De natuur groeit op haar eigen tempo.</p>
+      <h2 id="interesse-title">Hou me op de hoogte.</h2>
+      <p>Wil je weten hoe de buitenkweek vordert? Laat je naam en e-mailadres achter, dan krijg je een bericht als er nieuws is.</p>
+      <p class="bk-note-small">Je schrijft je alleen in voor nieuws: er wordt niets verkocht of gereserveerd.</p>
+{% include "partials/form.html" with {"key": "interesse-buitenkweek"} %}
+    </div>
+    <aside class="pf-aside" aria-label="Contact">
+      <div class="pf-contact">
+        <h2>Liever mailen of bellen?</h2>
+        <ul>
+          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+{% if flags.phone_published %}
+          <li><a href="tel:{{ site.phone.tel }}">{{ site.phone.display }}</a></li>
+          <li><a href="{{ site.whatsapp }}" rel="noopener">WhatsApp</a></li>
+{% endif %}
+        </ul>
+      </div>
+      <div class="pf-aside-next">
+        <h2>Vandaag al proeven?</h2>
+        <p>Onze oesterzwammen kweken we nu al binnen, in {{ site.municipality }}.</p>
+{% include "partials/button.html" with {"label": "Ontdek onze zwammen", "path": "/zwammen/", "kind": "link"} %}
+{% include "partials/button.html" with {"label": "Ons kweekproces", "path": "/ons-verhaal/kweekproces/", "kind": "link"} %}
+      </div>
+    </aside>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url('/js/forms.js') }}" defer></script>
+{% endblock %}

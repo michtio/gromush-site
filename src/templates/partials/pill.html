@@ -1,3 +1,9 @@
 {# "Vraag aan" pill in a variety's pill colour (S3, R15). with: variety (from varieties.json), label (optional, default t('pill_request')).
-   A label, not a link: it sits inside the variety's own link (opening, overview). witte gets an ink ring instead of a darker fill. #}
+   A label, not a link: it sits inside the variety's own link (opening, overview). witte gets an ink ring instead of a darker fill.
+   S9 addition (optional): href (an internal path): the pill is then its own link, the "Vraag aan" action beside a
+   variety link (homepage medallions, R10a), named "Vraag aan: <variety>" for screen readers, with a 44 px hit area. #}
+{% if opt("href") %}
+<a class="pill pill-link{{ ' pill--ring' if variety.key == 'witte' else '' }}" href="{{ url(href) }}" style="--accent:var({{ variety.pill }})">{{ opt("label") or t('pill_request') }}<span class="sr-only">: {{ variety.name.lower() }}</span></a>
+{% else %}
 <span class="pill{{ ' pill--ring' if variety.key == 'witte' else '' }}" style="--accent:var({{ variety.pill }})">{{ opt("label") or t('pill_request') }}</span>
+{% endif %}

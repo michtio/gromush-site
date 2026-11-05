@@ -1,5 +1,5 @@
 {
-  "_note": "Form definitions (plan AD7). Every form hands off to site.form_recipient by mailto (partials/form.html, js/forms.js). Options marked options_from are built from that data file (in-range varieties, towns), never copied here; extra_options are added after them. label: the visible label; mail_label: the label in the mail body when it differs; error: the inline message when the field is empty or invalid. ui: the strings the form engine shows around every form. contact (S6): reasons select (R32) first, a mode per reason (\"afhalen\" for bestelling-thuis, R42) whose strings live under modes; fields with mode_only/mode_not/optional_in follow it in js/forms.js. Forms with an empty fields list are defined in their own slice: grootkeuken S13, speciaalzaak S14, adoptie S16, interesse-buitenkweek S17.",
+  "_note": "Form definitions (plan AD7). Every form hands off to site.form_recipient by mailto (partials/form.html, js/forms.js). Options marked options_from are built from that data file (in-range varieties, towns), never copied here; extra_options are added after them. label: the visible label; mail_label: the label in the mail body when it differs; error: the inline message when the field is empty or invalid. ui: the strings the form engine shows around every form. contact (S6): reasons select (R32) first, a mode per reason (\"afhalen\" for bestelling-thuis, R42) whose strings live under modes; fields with mode_only/mode_not/optional_in follow it in js/forms.js. grootkeuken (S13): the needs helper is the first fieldset (group_start/group_end, radios), its four answers are ordinary fields of the form, so they are in the mail body; no kilogram figure, price or formula (R20). Forms with an empty fields list are defined in their own slice: speciaalzaak S14, adoptie S16, interesse-buitenkweek S17.",
   "reasons": [
     {
       "key": "chef-restaurant",
@@ -240,39 +240,404 @@
     },
     "grootkeuken": {
       "subject": "Behoefte grootkeuken",
-      "helper": [
+      "fields": [
+        {
+          "type": "group_start",
+          "name": "helper",
+          "section": "helper",
+          "legend": "Hoeveel heeft jouw keuken nodig?",
+          "intro": "Vier korte vragen over hoe jouw keuken werkt. Je antwoorden gaan mee in je aanvraag; op basis daarvan bespreken we samen wat past.",
+          "progress": "{n} van {total} vragen beantwoord"
+        },
         {
           "name": "maaltijden",
-          "label": "Maaltijden per dag"
+          "label": "Hoeveel maaltijden maakt jouw keuken per dag?",
+          "type": "radios",
+          "options": [
+            "Minder dan 500",
+            "500 tot 1.000",
+            "1.000 tot 5.000",
+            "5.000 tot 10.000",
+            "Meer dan 10.000"
+          ],
+          "mail_label": "Maaltijden per dag"
         },
         {
           "name": "frequentie",
-          "label": "Hoe vaak paddenstoelen op het menu"
+          "label": "Hoe vaak staan paddenstoelen op het menu?",
+          "type": "radios",
+          "options": [
+            "1 keer per week",
+            "2 tot 3 keer per week",
+            "4 tot 5 keer per week",
+            "Dagelijks"
+          ],
+          "mail_label": "Paddenstoelen op het menu"
         },
         {
           "name": "soorten",
-          "label": "Soorten",
-          "options_from": "varieties"
+          "label": "Welke soorten interesseren je?",
+          "type": "checkboxes",
+          "options_from": "varieties",
+          "extra_options": [
+            "Nog geen idee"
+          ],
+          "mail_label": "Soorten"
+        },
+        {
+          "name": "gemeente",
+          "label": "Waar moeten we leveren?",
+          "type": "radios",
+          "options_from": "towns",
+          "extra_options": [
+            "Andere"
+          ],
+          "mail_label": "Leveringsgemeente"
+        },
+        {
+          "type": "group_end"
+        },
+        {
+          "type": "group_start",
+          "name": "gegevens",
+          "section": "gegevens",
+          "legend": "Jouw gegevens"
+        },
+        {
+          "name": "naam",
+          "label": "Naam",
+          "type": "text",
+          "required": true,
+          "autocomplete": "name",
+          "error": "Vul je naam in."
+        },
+        {
+          "name": "organisatie",
+          "label": "Organisatie",
+          "type": "text",
+          "required": true,
+          "autocomplete": "organization",
+          "error": "Vul de naam van je organisatie in."
+        },
+        {
+          "name": "type",
+          "label": "Type keuken",
+          "type": "select",
+          "required": false,
+          "placeholder": "Kies een type",
+          "options": [
+            "Ziekenhuis",
+            "Woonzorgcentrum",
+            "School",
+            "Bedrijfsrestaurant",
+            "Catering",
+            "Hotel",
+            "Andere"
+          ],
+          "mail_label": "Type keuken"
+        },
+        {
+          "name": "functie",
+          "label": "Functie",
+          "type": "text",
+          "required": false,
+          "autocomplete": "organization-title"
+        },
+        {
+          "name": "email",
+          "label": "E-mail",
+          "type": "email",
+          "required": true,
+          "autocomplete": "email",
+          "error": "Vul een geldig e-mailadres in, bijvoorbeeld naam@organisatie.be."
+        },
+        {
+          "name": "tel",
+          "label": "Telefoon",
+          "type": "tel",
+          "required": false,
+          "autocomplete": "tel",
+          "error": "Vul een geldig telefoonnummer in, of laat dit veld leeg."
+        },
+        {
+          "name": "leverfrequentie",
+          "label": "Hoe vaak wil je geleverd worden?",
+          "type": "select",
+          "required": false,
+          "placeholder": "Kies een frequentie",
+          "options": [
+            "Wekelijks",
+            "Meerdere keren per week",
+            "Nog te bespreken"
+          ],
+          "mail_label": "Leverfrequentie"
+        },
+        {
+          "name": "bericht",
+          "label": "Bericht",
+          "type": "textarea",
+          "required": false
+        },
+        {
+          "type": "group_end"
+        }
+      ],
+      "submit": "Vraag een voorstel aan"
+    },
+    "speciaalzaak": {
+      "subject": "Intake speciaalzaak",
+      "fields": [
+        {
+          "name": "naam",
+          "label": "Naam",
+          "type": "text",
+          "required": true,
+          "autocomplete": "name",
+          "error": "Vul je naam in."
+        },
+        {
+          "name": "zaak",
+          "label": "Naam van de zaak",
+          "type": "text",
+          "required": true,
+          "autocomplete": "organization",
+          "error": "Vul de naam van je zaak in.",
+          "mail_label": "Zaak"
+        },
+        {
+          "name": "email",
+          "label": "E-mail",
+          "type": "email",
+          "required": true,
+          "autocomplete": "email",
+          "error": "Vul een geldig e-mailadres in, bijvoorbeeld naam@zaak.be."
+        },
+        {
+          "name": "tel",
+          "label": "Telefoon",
+          "type": "tel",
+          "required": false,
+          "autocomplete": "tel",
+          "error": "Vul een geldig telefoonnummer in, of laat dit veld leeg."
+        },
+        {
+          "name": "type",
+          "label": "Type speciaalzaak",
+          "type": "select",
+          "required": true,
+          "placeholder": "Kies een type",
+          "options": [
+            "Bakkerij",
+            "Groente- en fruitwinkel",
+            "Beenhouwerij",
+            "Traiteur",
+            "Kaas- of delicatessenwinkel",
+            "Natuurvoedingswinkel",
+            "Horeca",
+            "Andere speciaalzaak"
+          ],
+          "error": "Kies het type van je zaak."
         },
         {
           "name": "gemeente",
           "label": "Gemeente",
-          "options_from": "towns"
+          "type": "select",
+          "required": true,
+          "placeholder": "Kies je gemeente",
+          "options_from": "towns",
+          "extra_options": [
+            "Andere"
+          ],
+          "error": "Kies de gemeente van je zaak."
+        },
+        {
+          "name": "soorten",
+          "label": "Interesse in soorten",
+          "type": "checkboxes",
+          "required": false,
+          "options_from": "varieties",
+          "extra_options": [
+            "Weet ik nog niet"
+          ],
+          "mail_label": "Interesse in soorten"
+        },
+        {
+          "name": "volume",
+          "label": "Geschat gewenst volume",
+          "type": "text",
+          "required": false,
+          "hint": "Een ruwe schatting volstaat; we stemmen het samen af.",
+          "mail_label": "Geschat volume"
+        },
+        {
+          "name": "frequentie",
+          "label": "Gewenste leverfrequentie",
+          "type": "select",
+          "required": false,
+          "placeholder": "Kies een frequentie",
+          "options": [
+            "Wekelijks",
+            "Om de twee weken",
+            "Af en toe",
+            "Weet ik nog niet"
+          ],
+          "mail_label": "Leverfrequentie"
+        },
+        {
+          "name": "bericht",
+          "label": "Wat zoek je?",
+          "type": "textarea",
+          "required": false,
+          "mail_label": "Bericht"
         }
       ],
-      "fields": []
-    },
-    "speciaalzaak": {
-      "subject": "Intake speciaalzaak",
-      "fields": []
+      "submit": "Verstuur mijn aanvraag"
     },
     "adoptie": {
       "subject": "Adoptie emmer",
-      "fields": []
+      "_note": "S16 (R24, AC23): a request for a bucket adoption. No price, no log set; Anthony confirms the conditions personally.",
+      "fields": [
+        {
+          "name": "naam",
+          "label": "Naam",
+          "type": "text",
+          "required": true,
+          "autocomplete": "name",
+          "error": "Vul je naam in."
+        },
+        {
+          "name": "email",
+          "label": "E-mail",
+          "type": "email",
+          "required": true,
+          "autocomplete": "email",
+          "error": "Vul een geldig e-mailadres in, bijvoorbeeld naam@voorbeeld.be."
+        },
+        {
+          "name": "tel",
+          "label": "Telefoon",
+          "type": "tel",
+          "required": false,
+          "autocomplete": "tel",
+          "error": "Vul een geldig telefoonnummer in, of laat dit veld leeg."
+        },
+        {
+          "name": "gemeente",
+          "label": "Gemeente",
+          "type": "select",
+          "required": false,
+          "placeholder": "Kies je gemeente",
+          "options_from": "towns",
+          "extra_options": [
+            "Andere"
+          ]
+        },
+        {
+          "name": "soort",
+          "label": "Welke oesterzwam wil je in je emmer?",
+          "type": "select",
+          "required": true,
+          "placeholder": "Kies een soort",
+          "options_from": "varieties",
+          "extra_options": [
+            "Nog geen voorkeur"
+          ],
+          "mail_label": "Soort",
+          "error": "Kies een soort, of kies 'Nog geen voorkeur'."
+        },
+        {
+          "name": "aantal",
+          "label": "Aantal emmers",
+          "type": "select",
+          "required": false,
+          "placeholder": "Kies een aantal",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "Meer dan 3"
+          ]
+        },
+        {
+          "name": "voor",
+          "label": "Voor wie is de emmer?",
+          "type": "select",
+          "required": false,
+          "placeholder": "Kies een antwoord",
+          "options": [
+            "Voor mezelf",
+            "Voor ons gezin",
+            "Als cadeau",
+            "Voor een school of vereniging",
+            "Voor een bedrijf"
+          ],
+          "mail_label": "Voor"
+        },
+        {
+          "name": "bericht",
+          "label": "Bericht",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "submit": "Vraag mijn emmer aan"
     },
     "interesse-buitenkweek": {
       "subject": "Interesse buitenkweek",
-      "fields": []
+      "_note": "S17 (R43, R23): interest registration only. Nothing is offered, reserved or sold; the mail asks to be kept informed.",
+      "fields": [
+        {
+          "name": "naam",
+          "label": "Naam",
+          "type": "text",
+          "required": true,
+          "autocomplete": "name",
+          "error": "Vul je naam in."
+        },
+        {
+          "name": "email",
+          "label": "E-mail",
+          "type": "email",
+          "required": true,
+          "autocomplete": "email",
+          "error": "Vul een geldig e-mailadres in, bijvoorbeeld naam@voorbeeld.be."
+        },
+        {
+          "name": "profiel",
+          "label": "Ik ben",
+          "type": "select",
+          "required": false,
+          "placeholder": "Kies wat past",
+          "options": [
+            "Particulier",
+            "Chef of restaurant",
+            "Speciaalzaak",
+            "Grootkeuken",
+            "School of vereniging",
+            "Andere"
+          ],
+          "mail_label": "Profiel"
+        },
+        {
+          "name": "gemeente",
+          "label": "Gemeente",
+          "type": "select",
+          "required": false,
+          "placeholder": "Kies je gemeente",
+          "options_from": "towns",
+          "extra_options": [
+            "Andere"
+          ]
+        },
+        {
+          "name": "bericht",
+          "label": "Vraag of opmerking",
+          "type": "textarea",
+          "required": false,
+          "mail_label": "Bericht"
+        }
+      ],
+      "submit": "Hou me op de hoogte"
     }
   },
   "ui": {

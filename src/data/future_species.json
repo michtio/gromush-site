@@ -1,14 +1,14 @@
 {
-  "_note": "R45: shown on Buitenkweek only while flags.show_future_species is true. Names from the Extra Blok zip (content-inventory 2.15); the one neutral line per species is drafted in S17 for Anthony's check (no health or availability claim).",
+  "_note": "R45: shown on Buitenkweek only while flags.show_future_species is true (one change hides the row, its heading and its anchor; AC41). Names from the Extra Blok zip (content-inventory 2.15); images: images.json soort-<key>. The one neutral line per species was drafted in S17 for Anthony's check: appearance and kitchen character only, no health, availability or timing claim (R2a, R23, R45). Every item reads status_label (AC42).",
   "status_label": "binnenkort",
   "species": [
-    {"key": "morieltje", "name": "Morieltje", "line": null, "image": null},
-    {"key": "shiitake", "name": "Shiitake", "line": null, "image": null},
-    {"key": "paarse-ridderzwam", "name": "Paarse ridderzwam", "line": null, "image": null},
-    {"key": "judasoor", "name": "Judasoor", "line": null, "image": null},
-    {"key": "wijnrode-stropharia", "name": "Wijnrode stropharia", "line": null, "image": null},
-    {"key": "reishi", "name": "Reishi", "line": null, "image": null},
-    {"key": "nameko", "name": "Nameko", "line": null, "image": null},
-    {"key": "pioppino", "name": "Pioppino", "line": null, "image": null}
+    {"key": "morieltje", "name": "Morieltje", "line": "Een hoed als een honingraat, met een diepe, aardse smaak.", "image": "soort-morieltje"},
+    {"key": "shiitake", "name": "Shiitake", "line": "Een stevige bruine hoed met een rijke, hartige smaak; van oudsher op hardhout gekweekt.", "image": "soort-shiitake"},
+    {"key": "paarse-ridderzwam", "name": "Paarse ridderzwam", "line": "Een lila tot paarse zwam met een zachte, licht zoete geur.", "image": "soort-paarse-ridderzwam"},
+    {"key": "judasoor", "name": "Judasoor", "line": "Een dunne, oorvormige zwam met een knapperige beet, bekend uit de Aziatische keuken.", "image": "soort-judasoor"},
+    {"key": "wijnrode-stropharia", "name": "Wijnrode stropharia", "line": "Ook tuinreus genoemd: een grote, wijnrode hoed met een milde smaak.", "image": "soort-wijnrode-stropharia"},
+    {"key": "reishi", "name": "Reishi", "line": "Een glanzende, roodbruine houtzwam met een harde, kurkachtige structuur.", "image": "soort-reishi"},
+    {"key": "nameko", "name": "Nameko", "line": "Kleine oranjebruine hoedjes met een glanzend laagje, bekend uit de Japanse keuken.", "image": "soort-nameko"},
+    {"key": "pioppino", "name": "Pioppino", "line": "Slanke steeltjes en bruine hoedjes met een licht nootachtige smaak, bekend uit de Italiaanse keuken.", "image": "soort-pioppino"}
   ]
 }

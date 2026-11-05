@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 from urllib.parse import quote
 
-from . import seo
+from . import hyphae, levering, seo
 from .picture import render as render_picture
 from .template import AttrDict, Environment, Markup, TemplateError, escape, wrap
 
@@ -257,6 +257,29 @@ def product_pages(env, varieties, targets):
     return out
 
 
+TOWN_TEMPLATE = "towns/gemeente.html"  # S19: one template (template H), rendered per delivery town; not under pages/
+TOWN_COPY = ("title", "description", "image", "subtitle", "tagline", "intro", "region", "audiences", "route", "delivery",
+             "proefbox")  # towns.json "page": the fields every town page needs
+
+
+def town_pages(env, towns, targets):
+    """S19, R28: /leveringsregio/<slug>/ from towns/gemeente.html for every delivery town in towns.json.
+    A page template at the same path is an error."""
+    out = []
+    for t in sorted(towns, key=lambda t: t.nav_order):
+        path = f"/leveringsregio/{t.slug}/"
+        target = path.lstrip("/") + "index.html"
+        if target in targets:
+            raise BuildError(f"{path}: rendered by {TOWN_TEMPLATE} and by a page template")
+        missing = [k for k in TOWN_COPY if k not in t.get("page", {})]
+        if missing:
+            raise BuildError(f"towns.json: {t.slug} page misses {', '.join(missing)} (S19)")
+        html = env.get(TOWN_TEMPLATE).render(
+            {"page": AttrDict(path=path, template=TOWN_TEMPLATE, dev=False), "town": t})
+        out.append((f"{TOWN_TEMPLATE} ({t.slug})", target, path, html))
+    return out
+
+
 def forward_pages(env, all_varieties, targets):
     """AD17, R17: /zwammen/<slug>/ for every variety out of the range: noindex, refresh and canonical to /zwammen/."""
     out = []
@@ -316,6 +339,36 @@ def write_pages(rendered, out, site, abs_url, og_default):
     return written
 
 
+def home_helpers(varieties, towns_data):
+    """S9 template globals for the homepage (plan AD13, S9): the radial opening's baked hyphae network and medallion
+    places (src/gen/hyphae.py), and the delivery map with the van (src/gen/levering.py). Computed only when a template
+    calls them; a town off the drawn route fails the build."""
+    names = {v.key: v.name for v in varieties}
+    by_key = {v.key: v for v in varieties}
+
+    def hyphae_ring():
+        return Markup(hyphae.ring_svg(frozenset(names)))
+
+    def hyphae_medallions():
+        return [AttrDict(m, variety=by_key[m["key"]]) for m in hyphae.medallions(names)]
+
+    def levering_points():
+        origin = towns_data.map.origin
+        return [(origin.name, origin.x, origin.y, True)] + [(t.name, t.map.x, t.map.y, False) for t in towns_data.towns]
+
+    def levering_map():
+        points = levering_points()
+        off = levering.route_check([(n, x, y) for n, x, y, _ in points])
+        if off:
+            raise BuildError(f"towns.json: {', '.join(off)} not on the drawn delivery route (src/gen/levering.py ROUTE)")
+        return Markup(levering.map_svg(tuple((x, y, home) for _, x, y, home in points)))
+
+    return {"hyphae_ring": hyphae_ring, "hyphae_medallions": hyphae_medallions, "levering_map": levering_map,
+            "levering_van": lambda: Markup(levering.van_svg("lv1")), "levering_pos": levering.pct,
+            "levering_van_style": levering.van_style, "levering_start": levering.V1_START,
+            "levering_route_order": lambda towns: sorted(towns, key=lambda t: levering.route_pos(t.map.x, t.map.y))}
+
+
 def build(base=None, out=ROOT / "docs", data_dir=DATA, templates=TEMPLATES, static=STATIC):
     out = Path(out)
     data = load_data(data_dir)
@@ -327,6 +380,7 @@ def build(base=None, out=ROOT / "docs", data_dir=DATA, templates=TEMPLATES, stat
         **helpers, "site": data.site, "flags": data.flags, "data": data,
         "varieties": varieties, "base": base, "nav": resolve_nav(data.nav, varieties, data.towns.towns),
         **seo_helpers(data, helpers["abs_url"], static),
+        **home_helpers(varieties, data.towns),
     })
     rendered = []
     for name, target, page_path in routes(templates):
@@ -334,6 +388,8 @@ def build(base=None, out=ROOT / "docs", data_dir=DATA, templates=TEMPLATES, stat
         rendered.append((name, target, page_path, html))
     if (Path(templates) / PRODUCT_TEMPLATE).is_file():
         rendered += product_pages(env, varieties, {target for _, target, _, _ in rendered})
+    if (Path(templates) / TOWN_TEMPLATE).is_file():
+        rendered += town_pages(env, data.towns.towns, {target for _, target, _, _ in rendered})
     rendered += forward_pages(env, data.varieties, {target for _, target, _, _ in rendered})
     rendered += wip_pages(env, data.wip, {target for _, target, _, _ in rendered})
     written = write_pages(rendered, out, data.site, helpers["abs_url"], env.globals["og_image"](data.site.seo.og_image))

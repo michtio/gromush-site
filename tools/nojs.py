@@ -11,6 +11,11 @@ and a verdict line, and saves a screenshot of the first 900 px:
   forms        per form: visible, method, action, enctype, visible field count
   imgsBroken   images that failed to load
   sw           document scrollWidth (must equal the width)
+  ring         homepage radial opening (S9, AC13): {paths, drawn} of the visible hyphae network, where drawn counts
+               paths fully drawn (visible, opacity > 0, no dash offset); null on pages without it. Fails unless
+               drawn == paths. Only measurable from 1100 px (below, the opening shows its list instead).
+  recipes      /inspiratie/ (S18, AD14): {articles, readable}: recipe articles in the page and how many are visible
+               with a title, ingredients and steps; null on pages without them. Fails unless readable == articles.
 Verdict "nojs ok", or "nojs FAIL: ..." with exit 1.
 """
 import base64
@@ -35,7 +40,12 @@ sections:main?[...main.querySelectorAll(':scope > section, :scope > * > section'
 forms:[...document.forms].map(f=>({id:f.id||null,visible:vis(f),method:f.getAttribute('method'),action:f.getAttribute('action'),enctype:f.getAttribute('enctype'),
  fields:[...f.querySelectorAll('input:not([type=hidden]),select,textarea')].filter(vis).length})),
 imgsBroken:[...document.images].filter(i=>i.complete&&!i.naturalWidth).map(i=>i.currentSrc||i.src),
-sw:document.documentElement.scrollWidth})})()"""
+sw:document.documentElement.scrollWidth,
+recipes:(()=>{const a=[...document.querySelectorAll('article.rc-article')];if(!a.length)return null;
+ return {articles:a.length,readable:a.filter(x=>vis(x)&&vis(x.querySelector('h3'))&&x.querySelectorAll('.rc-ingredients li').length&&x.querySelectorAll('.rc-steps li').length).length}})(),
+ring:(()=>{const g=[...document.querySelectorAll('.ring-svg .ring-hy')].find(x=>getComputedStyle(x).display!=='none');if(!g)return null;
+ const ps=[...g.querySelectorAll('path')];const drawn=ps.filter(p=>{const cs=getComputedStyle(p);return cs.visibility!=='hidden'&&parseFloat(cs.opacity)>0&&(parseFloat(cs.strokeDashoffset)||0)===0}).length;
+ return {paths:ps.length,drawn}})()})})()"""
 
 
 def main(argv):
@@ -70,6 +80,10 @@ def main(argv):
     fails += [f"form {f['id'] or '?'} not visible" for f in r["forms"] if not f["visible"]]
     if r["imgsBroken"]:
         fails.append(f"{len(r['imgsBroken'])} broken image(s)")
+    if r.get("recipes") and r["recipes"]["readable"] != r["recipes"]["articles"]:
+        fails.append(f"recipes not readable ({r['recipes']['readable']} of {r['recipes']['articles']})")
+    if r.get("ring") and r["ring"]["drawn"] != r["ring"]["paths"]:
+        fails.append(f"hyphae network not fully drawn ({r['ring']['drawn']} of {r['ring']['paths']} paths)")
     if r["sw"] > width:
         fails.append(f"scrollWidth {r['sw']} > {width}")
     print("nojs ok" if not fails else "nojs FAIL: " + "; ".join(fails))

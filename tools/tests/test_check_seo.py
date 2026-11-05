@@ -70,6 +70,11 @@ class CheckSeo(unittest.TestCase):
         self.assertIn("/: same description as /_dev/componenten/ (R40)", out)
         self.assertIn(f"sitemap.xml: misses {ORIGIN}/gromush-site/", out)
 
+    def test_duplicate_h1_on_town_pages(self):
+        self.edit("leveringsregio/sluis/index.html", lambda h: re.sub(r"<h1([^>]*)>.*?</h1>", r"<h1\1>Brugge.</h1>", h, count=1, flags=re.S))
+        self.edit("leveringsregio/damme/index.html", lambda h: re.sub(r"<h1([^>]*)>.*?</h1>", r"<h1\1>Brugge.</h1>", h, count=1, flags=re.S))
+        self.assertIn("/leveringsregio/sluis/: same h1 as /leveringsregio/damme/: 'Brugge.' (AC26)", self.check())
+
     def test_forward_page_rules(self):
         (self.out / "zwammen" / "weg").mkdir(parents=True)
         page = (self.out / "404.html").read_text(encoding="utf-8")

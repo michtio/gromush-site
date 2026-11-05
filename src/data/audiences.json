@@ -100,7 +100,7 @@
     "primary_actions": [
       {
         "label": "Bespreek jouw behoefte",
-        "path": "/contact/?reden=grootkeuken#formulier"
+        "path": "/voor-wie/grootkeukens/#behoefte"
       }
     ],
     "card": {
@@ -108,6 +108,73 @@
       "text": "Lokaal gekweekt, gemaakt voor grotere volumes. Verse oesterzwammen voor zorginstellingen, scholen, bedrijfsrestaurants en catering.",
       "startup_note": "We zitten in een opstartfase: grote volumes zijn nog niet gegarandeerd.",
       "explore": "Ontdek voor grootkeukens"
+    },
+    "page": {
+      "hero": {
+        "title": "Lokaal gekweekt.",
+        "tagline": "Betrouwbaar geleverd.",
+        "lede": "Verse oesterzwammen voor grootkeukens, zorginstellingen, scholen, bedrijfsrestaurants en catering. Van onze kwekerij naar jouw professionele keuken, met aandacht voor kwaliteit, continuïteit en voedselveiligheid.",
+        "image": "grootkeuken-kratten",
+        "secondary": {
+          "label": "Bekijk onze soorten",
+          "path": "#soorten"
+        }
+      },
+      "startup": {
+        "title": "Eerlijk vooraf.",
+        "text": "We zitten momenteel in een opstartfase. Grote volumes kunnen we daarom nog niet garanderen.",
+        "more": "Vertel ons wat jouw keuken nodig heeft. Dan bekijken we samen wat vandaag al kan."
+      },
+      "problem": {
+        "title": "Wat een grootkeuken wil weten.",
+        "points": [
+          {
+            "text": "Welke soorten passen in mijn keuken?",
+            "anchor": "soorten"
+          },
+          {
+            "text": "Hoe komen ze tot bij ons?",
+            "anchor": "kweekproces"
+          },
+          {
+            "text": "Hoe lang blijven ze vers?",
+            "anchor": "vragen"
+          },
+          {
+            "text": "Kunnen we vaste leverdagen afspreken?",
+            "anchor": "vragen"
+          },
+          {
+            "text": "Hoeveel heeft mijn keuken nodig?",
+            "anchor": "behoefte"
+          }
+        ]
+      },
+      "offer": {
+        "title": "Wat GroMush je biedt",
+        "points": [
+          {
+            "title": "Vaste levering",
+            "text": "Geplande wekelijkse leveringen, afgestemd op jouw verbruik."
+          },
+          {
+            "title": "Groeit mee",
+            "text": "Onze productie wordt modulair opgebouwd, zodat onze capaciteit kan meegroeien met de vraag."
+          },
+          {
+            "title": "Lokaal",
+            "text": "Rechtstreeks van onze kwekerij naar jouw keuken."
+          },
+          {
+            "title": "Vers",
+            "text": "Geoogst met aandacht voor optimale kwaliteit en houdbaarheid."
+          }
+        ]
+      },
+      "closing": {
+        "title": "Jullie zorgen voor duizenden maaltijden.",
+        "text": "Wij zorgen voor de paddenstoelen. Samen bouwen we aan een lokale, betrouwbare en smaakvolle voedselketen."
+      }
     },
     "nav_order": 2
   },
@@ -119,7 +186,7 @@
     "reason": "speciaalzaak",
     "primary_actions": [
       {
-        "label": "Naar het intakeformulier",
+        "label": "Vertel ons over je zaak",
         "path": "/voor-wie/speciaalzaken/#formulier"
       }
     ],
@@ -127,6 +194,65 @@
       "title": "Voor speciaalzaken.",
       "text": "Kwaliteit in het rek. Vers uit de polder. Voor groentewinkels, bakkers, traiteurs en delicatessenzaken die hun klanten iets bijzonders willen bieden.",
       "explore": "Ontdek voor winkels"
+    },
+    "page": {
+      "hero": {
+        "title": "De smaak van echte natuur, rechtstreeks naar jouw zaak.",
+        "tagline": "Lokaal is lekkerder.",
+        "lede": "GroMush levert verse, ambachtelijk gekweekte oesterzwammen aan speciaalzaken in onze leveringsregio, van Knokke-Heist tot Brugge. Bijzondere smaken, een lokaal verhaal en kwaliteit die je klanten kunnen proeven.",
+        "image": "krat-overdracht",
+        "secondary": {
+          "label": "Hoe werkt samenwerken?",
+          "path": "#samenwerken"
+        }
+      },
+      "problem": {
+        "title": "Wat een speciaalzaak wil weten.",
+        "lede": "Je wilt je klanten iets bijzonders aanbieden. Maar past het bij je zaak, en hoe begin je eraan?",
+        "points": [
+          {
+            "text": "Past dit in mijn assortiment?",
+            "anchor": "zaken"
+          },
+          {
+            "text": "Welke soorten kan ik aanbieden?",
+            "anchor": "soorten"
+          },
+          {
+            "text": "Wat doen mijn klanten ermee?",
+            "anchor": "in-de-winkel"
+          },
+          {
+            "text": "Hoe starten we samen?",
+            "anchor": "samenwerken"
+          }
+        ]
+      },
+      "offer": {
+        "title": "Waarom kiezen voor GroMush?",
+        "points": [
+          {
+            "title": "Lokaal en dichtbij",
+            "text": "Een kweker uit de regio, met korte lijnen en persoonlijk contact. Zo bouw je mee aan een sterk lokaal voedingsverhaal."
+          },
+          {
+            "title": "Vers en ambachtelijk",
+            "text": "Met aandacht gekweekt en met zorg geselecteerd. Een bijzonder product dat visueel én culinair opvalt."
+          },
+          {
+            "title": "Veelzijdig in gebruik",
+            "text": "Van wokgerechten en pasta tot hartige broodjes, traiteurproducten en creatieve bereidingen."
+          },
+          {
+            "title": "Persoonlijke samenwerking",
+            "text": "Rechtstreeks contact met de kweker om assortiment, volumes en levermomenten op jouw zaak af te stemmen."
+          }
+        ]
+      },
+      "closing": {
+        "title": "Laten we samen meer smaak op tafel brengen.",
+        "text": "Ben je bakker, groente- en fruitwinkelier, beenhouwer, traiteur of uitbater van een speciaalzaak? Vertel ons wat je zoekt. We bekijken graag hoe verse GroMush-oesterzwammen jouw assortiment kunnen versterken."
+      }
     },
     "nav_order": 3
   },
@@ -158,6 +284,62 @@
       "text": "Van onze kwekerij naar jouw keuken. Verse oesterzwammen om zelf mee te koken, en de MushLove-community om mee te groeien.",
       "explore": "Ontdek voor thuis",
       "image": "dish-curry"
+    },
+    "page": {
+      "hero": {
+        "title": "Van onze kwekerij naar jouw keuken.",
+        "tagline": "Volg onze reis en word deel van MushLove.",
+        "lede": "Verse oesterzwammen, rechtstreeks uit de lokale kwekerij. Ontdek nieuwe smaken en kook zelf met bijzondere zwammen. En met MushLove volg je van dichtbij hoe ze groeien.",
+        "image": "thuis-gezin"
+      },
+      "problem": {
+        "title": "Wat je thuis wil weten.",
+        "lede": "Bijzondere oesterzwammen, vers van hier, liggen niet zomaar in de winkel. En hoe maak je ze dan klaar?",
+        "points": [
+          {
+            "text": "Hoe kom ik aan verse oesterzwammen?",
+            "anchor": "bestellen"
+          },
+          {
+            "text": "Hoe maak ik ze lekker klaar?",
+            "anchor": "inspiratie"
+          },
+          {
+            "text": "Hoe groeien ze eigenlijk?",
+            "anchor": "mushlove"
+          },
+          {
+            "text": "Kan ik zelf een emmer volgen?",
+            "anchor": "adopteer"
+          }
+        ]
+      },
+      "offer": {
+        "title": "Zo doe je mee.",
+        "lede": "MushLove is er voor iedereen die meer wil weten, meer wil proeven en meer wil beleven. Of je nu een nieuwsgierige hobbykok bent of een gezin met kinderen: er is altijd een manier om mee te groeien.",
+        "points": [
+          {
+            "title": "Bestel & haal af",
+            "text": "Geniet van verse oesterzwammen uit onze kwekerij. Bestel en haal ze lokaal af."
+          },
+          {
+            "title": "Volg ons proces",
+            "text": "Van mycelium tot oogst. Bekijk onze foto's en video's op MushLove en ontdek hoe onze oesterzwammen groeien."
+          },
+          {
+            "title": "Adopteer een emmer",
+            "text": "Wij begeleiden de kweek, jij volgt hoe jouw oesterzwammen groeien, tot je zelf kunt oogsten."
+          },
+          {
+            "title": "Kook zelf",
+            "text": "Van eenvoudig gebakken tot een verrassend gerecht: ontdek hoe je het beste uit elke soort haalt."
+          }
+        ]
+      },
+      "closing": {
+        "title": "Word deel van MushLove.",
+        "text": "Volg hoe onze oesterzwammen groeien, leer ermee koken en ontmoet mensen die net als jij houden van lokaal en eerlijk voedsel. Je hoeft geen kweker of chef te zijn. Nieuwsgierigheid is genoeg."
+      }
     },
     "nav_order": 4
   }
