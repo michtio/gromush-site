@@ -1,0 +1,110 @@
+{% extends "layouts/base.html" %}
+{# Town page, template H (S19; PRD R2a, R28, R30, R37, R38, R40). src/gen/build.py town_pages() renders this template
+   at /leveringsregio/<slug>/ for every town in towns.json; all copy is that town's "page" entry (Anthony's local
+   landing briefs, content-inventory 2.16-2.20, lightly edited).
+   R30: the town is a delivery region, never a GroMush location. Only Westkapelle is named as the place GroMush grows
+   (tools/lint_rules.json R30-town checks every town page). R2a: factual copy only, no health language. R5: the free
+   offer is the ProefBox; the briefs' "Chef Box" is not used here.
+   Sections (data-section): hero, regio, voor-wie, levering, proefbox. The hand-over photo (krat-overdracht, AI-styled,
+   approved) illustrates personal delivery in general; its caption never names a customer or a delivery that happened
+   (R44). #}
+{% block title %}{{ town.page.title }}{% endblock %}
+{% block description %}{{ town.page.description }}{% endblock %}
+{% block head %}
+{{{ og_image(town.page.image) }}}
+<link rel="stylesheet" href="{{ url('/css/leveringsregio.css') }}">
+{% endblock %}
+{% block main %}
+{% set p = town.page %}
+{% set areas = p.delivery.get("areas") or town.sub_areas %}
+<section class="section aud-hero town-hero" data-template="town" data-section="hero" aria-labelledby="town-title">
+  <div class="wrap aud-hero-grid">
+    <div class="aud-hero-text">
+      <nav class="crumbs" aria-label="Kruimelpad">
+        <ol>
+          <li><a href="{{ url('/leveringsregio/') }}">Leveringsregio</a></li>
+          <li><span aria-current="page">{{ town.name }}</span></li>
+        </ol>
+      </nav>
+      <h1 id="town-title"><span class="town-name">{{ town.name }}.</span> <span class="town-sub">{{ p.subtitle }}</span></h1>
+      <p class="hand aud-tagline">{{ p.tagline }}</p>
+      <p class="lede">{{ p.intro }}</p>
+      <div class="aud-actions">
+        <a class="btn-primary" href="{{ url('/proefbox/?gemeente=' + town.name + '#formulier') }}">Vraag een gratis ProefBox aan</a>
+        <a class="btn-second" href="{{ url('/zwammen/') }}">Ontdek onze zwammen</a>
+      </div>
+    </div>
+    <figure class="aud-hero-photo town-photo">
+      <span class="tape tape--l" aria-hidden="true"></span>
+      <span class="tape tape--r" aria-hidden="true"></span>
+      {{ picture(p.image, sizes="(min-width: 1440px) 600px, (min-width: 900px) 42vw, calc(100vw - 3rem)", loading="eager") }}
+      <figcaption class="town-photo-cap">{{ town.name }}{% if town.get("country") %} <span class="lv1-nl">{{ town.country }}</span>{% endif %}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section town-regio" data-section="regio" aria-labelledby="regio-title">
+  <div class="wrap town-regio-grid">
+    <div class="town-regio-text">
+      <p class="overline">{{ p.region.eyebrow }}</p>
+      <h2 id="regio-title">{{ p.region.title }}</h2>
+{% for para in p.region.text %}
+      <p>{{ para }}</p>
+{% endfor %}
+    </div>
+    <div class="paper-note grid-paper town-note">
+      <span class="tape tape--l" aria-hidden="true"></span>
+      <span class="tape tape--r" aria-hidden="true"></span>
+      <p class="town-note-title">{{ p.region.note }}</p>
+      <ul class="town-values">
+{% for value in p.region["values"] %}
+        <li>{{ value }}</li>
+{% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section tafels grid-paper town-voorwie" data-section="voor-wie" aria-labelledby="voorwie-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="overline">{{ p.audiences.eyebrow }}</p>
+      <h2 id="voorwie-title">{{ p.audiences.title }}</h2>
+      <p class="lede">{{ p.audiences.lede }}</p>
+    </div>
+{% include "partials/audience_grid.html" with {"level": 3, "link_to": "page"} %}
+  </div>
+</section>
+
+<section class="section town-levering" data-section="levering" aria-labelledby="levering-title">
+  <div class="wrap town-levering-grid">
+    <figure class="aud-hero-photo town-overdracht">
+      <span class="tape tape--l" aria-hidden="true"></span>
+      {{ picture("krat-overdracht", sizes="(min-width: 1440px) 520px, (min-width: 900px) 38vw, calc(100vw - 3rem)") }}
+      <figcaption class="hand">Persoonlijk geleverd, van de kweker naar jouw keuken.</figcaption>
+    </figure>
+    <div class="town-levering-text">
+      <p class="overline">{{ p.delivery.eyebrow }}</p>
+      <h2 id="levering-title">{{ p.route.title }}</h2>
+{% for para in p.route.text %}
+      <p>{{ para }}</p>
+{% endfor %}
+      <h3 class="town-line">{{ p.delivery.line }}</h3>
+{% if areas %}
+      <ul class="town-areas" aria-label="Waar we leveren in en rond {{ town.name }}">
+{% for area in areas %}
+        <li>{{ area }}</li>
+{% endfor %}
+        <li class="town-areas-more">en omgeving</li>
+      </ul>
+{% endif %}
+{% for para in p.delivery.text %}
+      <p>{{ para }}</p>
+{% endfor %}
+      <p class="aud-more">{% include "partials/button.html" with {"label": "Bespreek een samenwerking", "path": "/contact/", "kind": "link"} %}{% include "partials/button.html" with {"label": "Ontdek ons verhaal", "path": "/ons-verhaal/", "kind": "link"} %}{% include "partials/button.html" with {"label": "Bekijk de hele leveringsregio", "path": "/leveringsregio/", "kind": "link"} %}</p>
+    </div>
+  </div>
+</section>
+
+{% include "partials/closing_banner.html" with {"id": "proefbox-title", "section": "proefbox", "title": "Ontdek GroMush. Proef het zelf.", "text": p.proefbox, "action": {"label": "Vraag een gratis ProefBox aan", "path": "/proefbox/?gemeente=" + town.name + "#formulier"}} %}
+{% endblock %}

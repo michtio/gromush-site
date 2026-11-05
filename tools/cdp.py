@@ -75,8 +75,17 @@ def free_port():
 def launch(reduced_motion=False, extra_args=()):
     """Start headless Chrome; returns (process, websocket) on the first page tab."""
     port = free_port()
+    profile = tempfile.mkdtemp(prefix='gromush-qa-')
+    if os.environ.get("FONT_SIZE"):
+        # The real browser setting (chrome://settings/fonts) in the throwaway profile. Page.setFontSizes
+        # below alone is not enough: Page.captureScreenshot with captureBeyondViewport (experimental)
+        # re-applies the profile's preferences and renders at 16 px again (seen on Chrome, 2026-11).
+        n = int(os.environ["FONT_SIZE"])
+        os.makedirs(os.path.join(profile, "Default"), exist_ok=True)
+        with open(os.path.join(profile, "Default", "Preferences"), "w") as f:
+            json.dump({"webkit": {"webprefs": {"default_font_size": n, "default_fixed_font_size": n}}}, f)
     args = [CHROME, *extra_args, "--headless=new", "--disable-gpu", "--hide-scrollbars",
-            f"--remote-debugging-port={port}", f"--user-data-dir={tempfile.mkdtemp(prefix='gromush-qa-')}", "about:blank"]
+            f"--remote-debugging-port={port}", f"--user-data-dir={profile}", "about:blank"]
     if reduced_motion:
         args.insert(3, "--force-prefers-reduced-motion")
     proc = subprocess.Popen(args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

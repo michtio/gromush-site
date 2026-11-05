@@ -1,0 +1,84 @@
+/* /voor-wie/grootkeukens/ (S13): the start-up statement (R19), the questions block and the needs form with its helper
+   (R20). Loaded only on this page, after site.css; reuses template D (aud-*), the order form (req-form, chips) and
+   the contact card (ct-*). */
+
+/* hero photo: the crate scene is wide (2.4:1), keep the cook and the crates in the 4:3 polaroid */
+.aud-hero-photo img{object-position:18% 50%}
+
+/* ---------- start-up statement (R19) ---------- */
+.gk-startup{padding-block:0 clamp(2.5rem,5vw,3.5rem)}
+.gk-startup-note{
+  max-width:46rem;border:1px solid var(--ink);border-left-width:6px;background:var(--paper-card);
+  padding:clamp(1.1rem,3vw,1.6rem) clamp(1rem,3vw,1.8rem);overflow-wrap:break-word;
+}
+.gk-startup-note h2{font-size:clamp(1.45rem,2.4vw,1.9rem);line-height:1.12;margin:0 0 .5rem}
+.gk-startup-note p{margin:0;max-width:60ch}
+.gk-startup-note .gk-startup-text{font-weight:600;margin-bottom:.45rem}
+
+/* ---------- questions (FAQ) ---------- */
+.gk-faq-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:clamp(1.5rem,5vw,4.5rem);align-items:start}
+.gk-faq-grid .section-head{margin-bottom:0}
+.gk-faq-list{border-bottom:1px solid var(--ink);min-width:0}
+.gk-faq-list details{border-top:1px solid var(--ink)}
+.gk-faq-list summary{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:44px;padding:.85rem 0;
+  cursor:pointer;list-style:none;font-family:var(--font-display);font-size:clamp(1.1rem,1.6vw,1.3rem);line-height:1.25;
+}
+.gk-faq-list summary::-webkit-details-marker{display:none}
+.gk-faq-list summary::after{
+  content:"";flex:none;width:.8rem;height:.8rem;margin-right:.35rem;
+  border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:translateY(-.2rem) rotate(45deg);
+  transition:transform .2s var(--ease);
+}
+.gk-faq-list details[open] summary::after{transform:translateY(.15rem) rotate(-135deg)}
+.gk-faq-list summary:hover span{text-decoration:underline;text-underline-offset:.2em}
+.gk-faq-list summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.gk-faq-list details p{margin:0 0 1.1rem;max-width:60ch;color:var(--ink-soft)}
+@media (max-width:900px){.gk-faq-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- needs form: helper and details groups (R20) ---------- */
+.gk-form .form-group{border:0;padding:0;margin:0 0 .4rem;min-width:0}
+.gk-form .form-group-legend{
+  font-family:var(--font-display);font-size:clamp(1.45rem,2.4vw,1.9rem);line-height:1.15;padding:0;margin-bottom:.35rem;
+}
+.gk-form .form-group-intro{margin:0 0 .9rem;max-width:60ch;color:var(--ink-soft)}
+.gk-form .form-group > .fields{margin-bottom:0}
+.gk-form .form-group--gegevens{margin-top:1.2rem;padding-top:1.6rem;border-top:var(--cut)}
+.form-progress{display:inline-block;margin:0 0 1rem;font-weight:600;font-size:.9rem;border-bottom:2px solid var(--ink-soft);padding-bottom:.1rem}
+.form-progress.is-complete{border-bottom-color:var(--ink)}
+
+/* the four helper questions as numbered steps */
+.gk-form .form-group--helper > .fields{counter-reset:gk-step;gap:1rem}
+.gk-form .form-group--helper .soorten{margin:0;background:var(--paper-card)}
+.gk-form .form-group--helper .soorten > legend{counter-increment:gk-step;display:flex;align-items:baseline;gap:.5rem;font-size:1rem}
+.gk-form .form-group--helper .soorten > legend::before{
+  content:counter(gk-step);flex:none;display:inline-grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;
+  background:var(--ink);color:var(--paper-card);font-size:.85rem;font-weight:600;
+}
+.gk-form .choice .chip-face{background:var(--grid-paper)}
+.gk-form .choice .chip input:checked + .chip-face{background:var(--paper-card)}
+
+/* what happens next */
+.gk-next ol{margin:0;padding-left:1.2rem;display:grid;gap:.5rem}
+.gk-next li::marker{font-weight:600}
+
+/* inline links in running text: a 44 px hit area around the words (as .form-privacy a, .ct-lines a) */
+.gk-faq-list details a,.gk-form .ct-card p a{position:relative;color:var(--ink);font-weight:600}
+.gk-faq-list details a::before,.gk-form .ct-card p a::before{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:44px;transform:translate(-50%,-50%)}
+
+/* ---------- process: the five steps as a ruled column beside the kitchen scene, a wide taped polaroid ---------- */
+.gk-kitchen{
+  position:relative;margin:clamp(2.5rem,5vw,3.5rem) .4rem 0 auto;max-width:55rem;background:var(--polaroid);
+  padding:10px 10px 14px;border-radius:3px;box-shadow:0 14px 30px rgb(var(--ink-rgb) / .18);transform:rotate(-1deg);
+}
+.gk-kitchen img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:2px}
+.gk-kitchen figcaption{display:flex;align-items:baseline;gap:.6rem;margin-top:.7rem;padding-inline:2px;font-family:var(--font-hand);font-size:clamp(1.25rem,2vw,1.55rem);line-height:1.25;color:var(--ink)}
+.gk-kitchen-num{font-size:1.1em}
+@media (min-width:1100px){
+  .gk-chain{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(3rem,5vw,5rem);align-items:center}
+  .gk-chain .aud-steps{grid-template-columns:minmax(0,1fr);gap:0;border-bottom:1.5px solid var(--ink)}
+  .gk-chain .aud-steps li{display:grid;grid-template-columns:2.8rem minmax(0,1fr);column-gap:.9rem;padding:1rem 0}
+  .gk-chain .aud-step-num{grid-row:span 2;margin:0}
+  .gk-chain .gk-kitchen{margin:0 .4rem 0 0}
+}
+@media (max-width:699px){.gk-kitchen{margin-inline:.4rem;transform:rotate(-.6deg)}}

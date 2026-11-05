@@ -1,0 +1,131 @@
+{% extends "layouts/base.html" %}
+{# /inspiratie/ (S18, template G; PRD R2a, R5, R26, R27, R37, R38, R40; plan AD14, AD18).
+   Copy: Anthony's Inspiratie brief (content-inventory 2.25), lightly edited: no fixed recipe count ("zes" dropped,
+   R27); the brief's "Gratis ChefBox" promo is the ProefBox here (R5: ChefBox only names the paid order); the
+   bereidingsformule shows once, as the process line, and the dark tip block carries the four tips.
+   Consumer page (R2a): cooking language only, no health or nutrition claim.
+   Recipes: recipes.json, however many there are (R27), each a card plus a full <article> (partials/recipe.html).
+   Without JS the cards link to the articles, which read in place; recipes.js opens each article in a native
+   <dialog> (AD14). One Recipe JSON-LD per recipe, built from the same data (AD18). #}
+{% block title %}Oesterzwammen bakken en recepten · {{ site.name }}{% endblock %}
+{% block description %}Zo bak je oesterzwammen écht lekker: twee bakmethodes, de {{ site.name }}-bereidingsformule en recepten met verse oesterzwammen, van burger tot stoofpot.{% endblock %}
+{% block head %}{{{ og_image('pan-tijm') }}}
+<link rel="stylesheet" href="{{ url('/css/inspiratie.css') }}">
+{% for r in data.recipes.recipes %}{{{ jsonld_recipe(r) }}}{% endfor %}
+{% endblock %}
+{% block main %}
+{% set recipes = data.recipes.recipes %}
+<section class="in-hero" aria-labelledby="in-title">
+  <div class="wrap in-hero-grid">
+    <div class="in-hero-text">
+      <p class="overline">{{ site.name }} inspiratie</p>
+      <h1 id="in-title">Zo bak je oester&shy;zwammen écht lekker.</h1>
+      <p class="lede">Van sappig en zacht tot goudbruin en krokant. Ontdek twee manieren om oesterzwammen te bereiden en laat je inspireren door onze recepten.</p>
+      <div class="in-hero-actions">
+{% include "partials/button.html" with {"label": "Ontdek de twee bakmethodes", "path": "/inspiratie/#bakmethodes", "kind": "link"} %}
+{% include "partials/button.html" with {"label": "Naar de recepten", "path": "/inspiratie/#recepten", "kind": "link"} %}
+      </div>
+    </div>
+    <figure class="coupon in-hero-photo"><svg class="icon coupon-scissors" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-scissors"/></svg>{{ picture('pan-tijm', sizes="(min-width: 1440px) 680px, (min-width: 900px) 48vw, calc(100vw - 2.5rem)", loading="eager") }}</figure>
+  </div>
+  <div class="wrap">
+    <ul class="in-usps" aria-label="Waarom {{ site.name }}">
+      <li><strong>Lokaal gekweekt</strong> in {{ site.municipality }}</li>
+      <li><strong>Vers geoogst</strong> rechtstreeks uit onze kwekerij</li>
+      <li><strong>Ambachtelijk</strong> met zorg gekweekt</li>
+      <li><strong>Korte keten</strong> van kweker naar keuken</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section in-secret" aria-labelledby="in-secret-title">
+  <div class="wrap">
+{% include "partials/section_head.html" with {"id": "in-secret-title", "title": "Eerst vocht. Dan kleur. Dan smaak.", "lede": "Oesterzwammen bevatten van nature veel vocht. Door ze voldoende tijd te geven om dat vocht los te laten en te laten verdampen, kunnen ze mooi kleuren. Daarna voeg je olie toe voor de bruining en eventueel boter en kruiden voor extra smaak."} %}
+    <ol class="in-flow" aria-label="De volgorde">
+      <li><span class="in-flow-num" aria-hidden="true">01</span> Vocht</li>
+      <li><span class="in-flow-num" aria-hidden="true">02</span> Verdampen</li>
+      <li><span class="in-flow-num" aria-hidden="true">03</span> Olie</li>
+      <li><span class="in-flow-num" aria-hidden="true">04</span> Kleur</li>
+      <li><span class="in-flow-num" aria-hidden="true">05</span> Kruiden</li>
+    </ol>
+  </div>
+</section>
+
+<section class="section grid-paper in-methods" id="bakmethodes" aria-labelledby="bakmethodes-title">
+  <div class="wrap">
+{% include "partials/section_head.html" with {"id": "bakmethodes-title", "title": "Twee manieren om oesterzwammen te bakken.", "lede": "Twee bereidingen, elk met een eigen verloop en resultaat. Kies wat bij jouw gerecht past.", "knip": True} %}
+    <div class="in-method-grid">
+      <article class="in-method" aria-labelledby="methode-1">
+        <figure class="coupon in-method-photo"><svg class="icon coupon-scissors" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-scissors"/></svg>{{ picture('pan-roze-droog', sizes="(min-width: 1440px) 620px, (min-width: 900px) 44vw, calc(100vw - 4rem)") }}</figure>
+        <p class="in-badge">Methode 01</p>
+        <h3 id="methode-1">Droog bakken<span aria-hidden="true"> → </span><span class="sr-only">, </span>grillen<span aria-hidden="true"> → </span><span class="sr-only">, </span>boter<span aria-hidden="true"> → </span><span class="sr-only">, </span>kruiden</h3>
+        <p class="in-method-sub">Voor een intense smaak en een mooie, goudbruine korst.</p>
+        <ol class="in-steps">
+          <li><strong>Verhit de pan.</strong> Zet een ruime pan op middelhoog tot hoog vuur en laat ze goed opwarmen.</li>
+          <li><strong>Voeg de droge oesterzwammen toe.</strong> Doe de gescheurde of versnipperde oesterzwammen in de pan, zonder olie of boter.</li>
+          <li><strong>Laat het vocht ontsnappen.</strong> Laat de paddenstoelen bakken terwijl het vocht vrijkomt en verdampt. Roer af en toe voorzichtig om.</li>
+          <li><strong>Voeg olijfolie toe.</strong> Wanneer het grootste deel van het vocht verdwenen is, voeg je een scheut olijfolie toe.</li>
+          <li><strong>Grill en kleur.</strong> Bak verder tot de oesterzwammen mooie goudbruine randen krijgen. Geef ze voldoende ruimte en laat ze tussendoor even liggen.</li>
+          <li><strong>Werk af met boter.</strong> Voeg op het einde een klein klontje boter toe en schep de paddenstoelen kort om.</li>
+          <li><strong>Kruid.</strong> Werk af met peper en zout. Verse kruiden kunnen op het einde worden toegevoegd.</li>
+        </ol>
+        <p class="in-accent">Eerst droog. Daarna bakken. Zo geef je de oesterzwam de kans om mooi te kleuren.</p>
+      </article>
+      <article class="in-method" aria-labelledby="methode-2">
+        <figure class="coupon in-method-photo"><svg class="icon coupon-scissors" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-scissors"/></svg>{{ picture('pan-geel-water', sizes="(min-width: 1440px) 620px, (min-width: 900px) 44vw, calc(100vw - 4rem)") }}</figure>
+        <p class="in-badge">Methode 02</p>
+        <h3 id="methode-2">Koken in water<span aria-hidden="true"> → </span><span class="sr-only">, </span>uitkoken<span aria-hidden="true"> → </span><span class="sr-only">, </span>olie<span aria-hidden="true"> → </span><span class="sr-only">, </span>grillen<span aria-hidden="true"> → </span><span class="sr-only">, </span>kruiden</h3>
+        <p class="in-method-sub">Een alternatieve bereidingswijze waarbij je het vocht eerst laat vrijkomen.</p>
+        <ol class="in-steps">
+          <li><strong>Verwarm de pan.</strong> Doe de oesterzwammen in een steelpan en voeg een beperkte hoeveelheid water toe.</li>
+          <li><strong>Breng aan de kook.</strong> Verwarm tot het water zachtjes kookt en de oesterzwammen vocht beginnen af te geven.</li>
+          <li><strong>Laat het vocht uitkoken.</strong> Laat het water volledig verdampen. Blijf erbij en controleer dat de paddenstoelen niet aanbranden wanneer de pan droog wordt.</li>
+          <li><strong>Voeg olijfolie toe.</strong> Zodra het water verdwenen is, voeg je olijfolie toe.</li>
+          <li><strong>Bak en grill.</strong> Laat de oesterzwammen verder bakken tot de randen mooi kleuren. Schep ze af en toe om.</li>
+          <li><strong>Kruid.</strong> Werk af met peper en zout. Voeg eventueel verse kruiden toe.</li>
+        </ol>
+        <p class="in-accent">Eerst laten garen in vocht. Daarna de ruimte geven om te kleuren.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="in-tip" aria-labelledby="in-tip-title">
+  <div class="wrap in-tip-grid">
+    <div>
+      <p class="overline">De {{ site.name }}-bereidingsformule</p>
+      <h2 id="in-tip-title">Geef ze tijd om smaak te ontwikkelen.</h2>
+      <p>Een goede bereiding begint met geduld. Laat het vocht eerst verdwijnen, geef de paddenstoelen voldoende ruimte en voeg olie pas toe wanneer ze klaar zijn om te kleuren.</p>
+    </div>
+    <ul class="in-tip-list">
+      <li>Gebruik een ruime pan.</li>
+      <li>Bak niet te veel paddenstoelen tegelijk.</li>
+      <li>Roer niet voortdurend.</li>
+      <li>Kruid op het einde.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section in-recipes" id="recepten" aria-labelledby="recepten-title">
+  <div class="wrap">
+    <p class="overline">{{ len(recipes) }} recepten</p>
+{% include "partials/section_head.html" with {"id": "recepten-title", "title": "Laat je inspireren.", "lede": "Van een snelle maaltijd tot een verfijnd gerecht. Kies een recept en ontdek hoe je jouw " + site.name + "-oesterzwammen op een andere manier kunt bereiden."} %}
+    <ul class="rc-grid" data-count="{{ len(recipes) }}">
+{% for r in recipes %}
+{% include "partials/recipe.html" with {"recipe": r, "view": "card"} %}
+{% endfor %}
+    </ul>
+  </div>
+  <div class="wrap rc-book" data-recipe-book data-close-label="{{ t('close') }}">
+    <h2 class="rc-book-title">De recepten, stap voor stap</h2>
+{% for r in recipes %}
+{% include "partials/recipe.html" with {"recipe": r} %}
+{% endfor %}
+  </div>
+</section>
+
+{% include "partials/closing_banner.html" with {"id": "in-proefbox", "title": "Ontvang een gratis " + site.name + "-ProefBox.", "text": "Wil je ontdekken wat je allemaal met onze oesterzwammen kunt doen? Vraag een gratis ProefBox aan en ontdek zelf hun smaak, textuur en culinaire mogelijkheden. Voor professionele klanten in onze leveringsregio.", "action": {"label": "Vraag jouw gratis ProefBox aan", "path": "/proefbox/#formulier"}, "link": {"label": "Kook je thuis? Vraag een bestelling aan", "path": "/contact/?reden=bestelling-thuis#formulier"}} %}
+{% endblock %}
+{% block scripts %}
+<script src="{{ url('/js/recipes.js') }}" defer></script>
+{% endblock %}

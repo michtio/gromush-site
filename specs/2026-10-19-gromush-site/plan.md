@@ -141,7 +141,7 @@ The **per-page bar** in every page slice's manual checks: the Impeccable loop `a
 - **Requirements:** R10, R10a, R10b, R12
 - **Layers:** `final.html` (prototype only), extended collision probes.
 - **Verification gate:** probes print `net 0 label 0 rev net 0 label 0` at 1100, 1280, 1440, 1600, 1920 (AC10a); `check.py` at 390 and 320: six links visible, `scrollWidth` equals the width (AC10c); each medallion's accessible name is the plain variety name (AC10b); the reduced-motion screenshot shows the full network.
-- **Manual checks:** required: Michael approves the variant (blocks S9); optional: none.
+- **Manual checks:** required: Michael approves the variant (blocks S9), **approved 2026-11-04 (round 4)**; optional: none.
 - **Size:** one session; M
 - **Builder:** Opus builder agent. **Started 2026-11-03, before plan approval, as design exploration at Michael's request (same exception as the earlier prototypes).**
 
@@ -220,7 +220,7 @@ The **per-page bar** in every page slice's manual checks: the Impeccable loop `a
 - **Deliverable:** `/ons-verhaal/kweekproces/` (four indoor phases plus harvest and delivery, real photography, polaroid and phase-line components) and `/ons-verhaal/adopteer/` (bucket adoption by form, no price, no log sets, link to the Buitenkweek interest registration).
 - **Requirements:** R22, R23, R24, R33, R34, R37, R38
 - **Layers:** `layouts/process.html`, `pages/ons-verhaal/kweekproces.html`, `pages/ons-verhaal/adopteer.html`, `forms.json` (adoption form).
-- **Verification gate:** standard gate on both; `grep -E -c 'boomstam|€|249|49'` on the adoption page is 0 and the form is present (AC23); AC22 rule 0 hits; the adoption form's mail body contains every field.
+- **Verification gate:** standard gate on both; `grep -E -c 'boomstam|€|\b249\b|\b49\b'` on the adoption page's `<main>`, with the phone number stripped, is 0 (the phone 0499… is required by AC29) and the form is present (AC23); AC22 rule 0 hits; the adoption form's mail body contains every field.
 - **Manual checks:** required: per-page bar; process figures only where the inventory marks them as Anthony's text; optional: none.
 - **Size:** one session; M
 - **Builder:** Opus builder agent (wave 2)

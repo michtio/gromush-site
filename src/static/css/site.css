@@ -548,15 +548,10 @@ a.lv1-card:focus-visible{outline-offset:-3px}
   .promo-cut{max-width:16rem}
 }
 
-/* ---------- S1 smoke page (replaced by the homepage in S9) ---------- */
+/* ---------- plain message pages (404, removed-variety forward pages): the S1 smoke shell ---------- */
 .smoke{padding-block:3rem 4rem}
 .smoke h1{font-size:clamp(2.2rem,6vw,4rem);margin-bottom:1rem}
 .smoke h2{font-size:clamp(1.5rem,3vw,2rem);margin:2.5rem 0 1rem}
-.smoke-list{list-style:none;margin:0;padding:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,18rem),1fr))}
-.smoke-list li{background:var(--card);border-left:6px solid var(--accent,var(--ink));border-radius:8px;padding:1rem 1.2rem}
-.smoke-list h3{font-size:1.3rem;margin-bottom:.2rem}
-.smoke-list .latin{font-style:italic;color:var(--ink-soft);margin-bottom:.4rem}
-.smoke-list .taste{font-weight:600;margin-bottom:.4rem}
 
 /* ---------- S7 plain text pages (layouts/text.html: privacy, cookies, voorwaarden) ---------- */
 .text-page{padding-block:clamp(2.5rem,6vw,4.5rem) clamp(3.5rem,7vw,5.5rem)}
@@ -663,14 +658,19 @@ a.lv1-card:focus-visible{outline-offset:-3px}
 .ov-roles{font-family:var(--font-display);font-size:clamp(1.3rem,2.2vw,1.8rem);line-height:1.25;margin:0 0 1.4rem}
 .ov-intro{font-size:1.12rem;max-width:58ch;margin-bottom:1.5rem}
 .ov-intro strong{font-weight:600}
-.ov-quote{margin:0;transform:rotate(1.2deg);max-width:30rem;justify-self:end}
+/* the grower as a taped snap, his quote note pinned over its lower-left corner (grid overlap, no absolute positioning) */
+.ov-hero-visual{display:grid;justify-items:end;padding-inline:.8rem}
+.ov-hero-snap{width:100%;max-width:24rem;padding-bottom:2.2rem;transform:rotate(2deg);margin-right:clamp(0rem,2vw,1.5rem)}
+.ov-quote{position:relative;z-index:2;justify-self:start;margin:-7.5rem 0 0;max-width:21rem;transform:rotate(-2.2deg);padding:clamp(1.6rem,3vw,2.2rem) clamp(1.3rem,2.6vw,1.9rem) clamp(1.3rem,2.6vw,1.7rem);box-shadow:0 22px 36px -18px rgb(var(--ink-rgb) / .55)}
 .ov-quote blockquote{margin:0}
-.ov-quote blockquote p{font-family:var(--font-display);font-size:clamp(1.45rem,2.4vw,2rem);line-height:1.3;color:var(--ink);max-width:none;text-wrap:balance}
+.ov-quote blockquote p{font-family:var(--font-display);font-size:clamp(1.25rem,1.9vw,1.6rem);line-height:1.3;color:var(--ink);max-width:none;text-wrap:balance}
 .ov-sign{font-family:var(--font-hand);font-size:1.6rem;line-height:1.3;color:var(--ink);margin-top:1rem;transform:rotate(-3deg);transform-origin:left center}
 .ov-sign-role{display:block;font:600 .92rem/1.4 var(--font-text);color:var(--ink-soft);margin-top:.15rem;transform:rotate(3deg);transform-origin:left center}
 @media (max-width:899px){
   .ov-hero-grid{grid-template-columns:minmax(0,1fr)}
-  .ov-quote{justify-self:start;max-width:min(30rem,calc(100% - 1.6rem));margin-inline:.8rem}
+  .ov-hero-visual{justify-self:center;width:min(100%,28rem);padding-inline:.8rem}
+  .ov-hero-snap{max-width:min(20rem,calc(100% - 2.5rem));margin-right:0}
+  .ov-quote{max-width:min(18rem,calc(100% - 1rem));margin-top:-5rem}
 }
 
 /* story: two chapters with Anthony's real photos as polaroids, then three text chapters */
@@ -1020,4 +1020,59 @@ html.js form[data-mode-field]:not([data-mode-ready]) [data-mode-only]{display:no
 .wip h1{font-family:var(--font-display);font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.1;margin:0 0 1rem}
 .wip-links{list-style:none;padding:0;margin:1rem 0 0;display:flex;flex-wrap:wrap;gap:.5rem 1.5rem}
 .wip-links a{font-weight:600}
-.home-wip{margin-top:1.5rem;padding:.8rem 1rem;border:1px dashed var(--ink);border-radius:8px;max-width:40rem}
+
+/* ---------- large text on a phone (S21, R38; WCAG 1.4.4 and 1.4.10) ----------
+   The query matches when the viewport is narrower than 17 times the browser's default text size: 320-390 px at 200 %
+   text (an em in a media query is the default size, not the root's, so it never matches at 100 %). Long Dutch words
+   hyphenate instead of breaking inside the word, display sizes step down, gutters and card padding narrow and
+   multi-column lists stack. The heading caps use !important because every template sets its own display size with a
+   more specific selector; the caps apply only in this query. Page CSS adds its own rules under the same query. */
+@media (max-width:17em){
+  body{hyphens:auto;hyphenate-limit-chars:7 3 3}
+  /* never a hyphen inside an address someone might copy or type */
+  a[href^="mailto:"],a[href^="tel:"]{hyphens:manual}
+  a[href^="tel:"]{white-space:nowrap}
+  .wrap{padding-inline:16px}
+  /* the taped slip (partials/slip.html) and its buttons: less padding, so the words keep the width */
+  .slip{padding-inline:12px}
+  .btn-primary,.btn-second{padding-inline:.7rem;border-radius:1.4rem}
+  h1:not(.ring-core *){font-size:1.75rem!important;line-height:1.1!important}
+  h2:not(.foot-title){font-size:1.4rem!important}
+  h3:not(.tc-band h3,.bk-soort h3){font-size:1.2rem!important}
+  .statement,.versions-close{font-size:1.3rem}
+  .lede{font-size:1.0625rem}
+  .hand{font-size:1.1rem}
+  /* audience cards (partials/audience_card.html): the letter disc sits above the name */
+  .version{padding:1rem .75rem}
+  .version-head{flex-wrap:wrap;gap:.4rem}
+  .version h3,.section .version-head h2{font-size:1.15rem!important}
+  /* town register (partials/town_card.html, .lv1): the round photos give their width to the names */
+  .lv1-card{grid-template-columns:minmax(0,1fr) auto;gap:.6rem;padding-inline:0}
+  .lv1-ph{display:none}
+  .lv1-name{font-size:1.15rem}
+  .lv1-subs{font-size:.85rem}
+  /* flip cards (partials/flip_card.html): as wide as the column, never wider than the card */
+  .tc,.tc-flip--under{width:min(15rem,calc(100vw - 64px))}
+  .cat-grid{grid-auto-columns:min(15.625rem,calc(100vw - 64px))}
+  .tc-band{padding-inline:4px}
+  .tc-band h3{font-size:.72rem;letter-spacing:0}
+  /* variety chips (request forms): the fieldset and the chips give their padding to the names */
+  .soorten{padding-inline:.4rem}
+  .chip-face{padding-right:.4rem;gap:.35rem}
+  /* variety list on the audience pages: the photo above the name */
+  .aud-variety a{display:block}
+  .aud-variety-photo{width:4.5rem;margin-bottom:.4rem}
+  /* taped notes and paper cards: narrower padding */
+  .paper-note,.aud-problem-note{padding-inline:12px}
+  /* usp rows on the product pages: one column */
+  .zw-usps{grid-template-columns:minmax(0,1fr)}
+  /* the ProefBox promo dialog: the paper uses the width; the close button keeps its corner above the heading */
+  .promo{padding-inline:4px;max-width:calc(100% - 8px)}
+  .promo-paper{padding-inline:12px}
+  .promo h2{padding-right:0}
+  .promo-label{padding-right:48px}
+  /* footer: one column */
+  .foot-grid{grid-template-columns:minmax(0,1fr)}
+  .footer .wordmark{font-size:1.5rem}
+  .foot-title{font-size:1.1rem}
+}

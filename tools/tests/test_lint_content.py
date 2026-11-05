@@ -168,5 +168,19 @@ class TestR23(LintTestCase):
         self.assertEqual(self.hits(page("<p>Adopteer een emmer en volg de groei.</p>")), [])
 
 
+class TestR30Town(LintTestCase):
+    def test_town_as_location_hits_on_town_pages(self):
+        for bad in ("Onze kwekerij in Brugge.", "GroMush is gevestigd in Damme.", "Wij kweken in Sluis.",
+                    "Vanuit onze kwekerij in de regio Knokke-Heist leveren we.", "Van daaruit, vanuit Knokke-Heist, rijden we."):
+            self.assertEqual(self.hits(page(f"<p>{bad}</p>"), "/leveringsregio/brugge/"), ["R30-town"], bad)
+
+    def test_westkapelle_and_delivery_pass(self):
+        self.assertEqual(self.hits(page("<p>Vanuit onze kwekerij in Westkapelle leveren we in Brugge en omgeving.</p>"),
+                                   "/leveringsregio/brugge/"), [])
+
+    def test_only_on_town_pages(self):
+        self.assertEqual(self.hits(page("<p>Onze kwekerij in Knokke-Heist.</p>"), "/ons-verhaal/"), [])
+
+
 if __name__ == "__main__":
     unittest.main()

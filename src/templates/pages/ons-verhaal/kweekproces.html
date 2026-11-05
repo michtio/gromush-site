@@ -1,0 +1,184 @@
+{% extends "layouts/process.html" %}
+{# /ons-verhaal/kweekproces/ (S16, template F; PRD R22, R23, R37, R38). The indoor process in four phases, then harvest
+   and delivery. Copy: Anthony's Binnenkweek brief (content-inventory 2.14), lightly edited. Figures only where they are
+   his text: 24 uur weken and 24 uur uitlekken (phase 1), 20–24 °C as a guide and "ongeveer 2 à 3 weken" (phase 3; his
+   title says "ongeveer 2 weken", his panel "2-3 weken": inventory question 16). Left out on purpose: the mockup's
+   "12–24 uur", "30–60 min", "minimum 2 weken" and "85–95%" (not his text), the "Word eigenaar van GroMush emmers" block
+   (adoption has its own page), the fake phone strip and "Geen pesticiden" (unverified claim).
+   Photos: fase 1-3 are Anthony's own; fase4-kweekruimte is AI-styled, art-directed by Anthony and approved (images.json).
+   The phase line on the left is the homepage's growing line turned upright. No outdoor growing on this page (R23). #}
+{% block title %}Ons kweekproces: binnenkweek in 4 fases · {{ site.name }}{% endblock %}
+{% block description %}Van stro tot verse oesterzwammen: zo kweekt {{ site.name }} binnen, in 20-literemmers, in vier fases. Pasteuriseren, opbouwen in lagen, incuberen en laten groeien.{% endblock %}
+{% block page_head %}{{{ og_image('fase2-emmer') }}}{% endblock %}
+{% block overline %}Van stro tot verse zwammen{% endblock %}
+{% block heading %}Ons kweekproces: binnenkweek in 4 fases.{% endblock %}
+{% block hero_text %}
+      <p class="lede">Ambachtelijk, duurzaam en met respect voor het natuurlijke ritme van de paddenstoel. Ontdek hoe we stro en broed omvormen tot verse oesterzwammen, met aandacht voor iedere stap.</p>
+      <p class="pf-hero-note">Zo kweken we vandaag: binnen, in emmers met stro, in {{ site.municipality }}.</p>
+{% endblock %}
+{% block hero_aside %}
+    <nav class="pf-index paper-note grid-paper" aria-labelledby="pf-index-title">
+      <span class="tape tape--l" aria-hidden="true"></span>
+      <span class="tape tape--r" aria-hidden="true"></span>
+      <h2 class="pf-index-title" id="pf-index-title">Het kweekschema</h2>
+      <ol class="pf-index-list">
+        <li><a href="#fase-1"><span class="pf-index-num" aria-hidden="true">1</span>Pasteurisatie met koud water</a></li>
+        <li><a href="#fase-2"><span class="pf-index-num" aria-hidden="true">2</span>Opbouw in lagen in 20L-emmers</a></li>
+        <li><a href="#fase-3"><span class="pf-index-num" aria-hidden="true">3</span>Incubatie</a></li>
+        <li><a href="#fase-4"><span class="pf-index-num" aria-hidden="true">4</span>Fruiting: de zwammen groeien</a></li>
+        <li><a href="#oogst"><span class="pf-index-num pf-index-num--end" aria-hidden="true"></span>Oogst &amp; levering</a></li>
+      </ol>
+    </nav>
+{% endblock %}
+{% block sections %}
+<section class="section pf-phases" data-section="fases" aria-labelledby="fases-title">
+  <div class="wrap">
+    <h2 class="sr-only" id="fases-title">De vier fases</h2>
+    <ol class="pf-phase-list">
+      <li class="pf-phase" id="fase-1">
+        <span class="pf-phase-num" aria-hidden="true">1</span>
+        <div class="pf-phase-text">
+          <p class="overline">Fase 1</p>
+          <h3>Pasteurisatie met koud water</h3>
+          <p>We laten het stro in zakken 24 uur weken in koud water, zodat het substraat klaar is voor de volgende stap. Daarna laten we het overtollige water 24 uur uitlekken.</p>
+          <ul class="pf-points">
+            <li>Een eenvoudige voorbereiding van het stro.</li>
+            <li>Ongewenste omstandigheden voor de kweek zoveel mogelijk beperken.</li>
+            <li>De structuur van het stro behouden.</li>
+          </ul>
+          <div class="pf-panel">
+            <h4>Zo werkt het</h4>
+            <ol class="pf-flow">
+              <li>Stro in uienzakken</li>
+              <li>Weken onder water</li>
+              <li>Laten uitlekken</li>
+              <li>Klaar voor gebruik</li>
+            </ol>
+          </div>
+        </div>
+        <figure class="snap pf-snap">
+          <span class="tape tape--l" aria-hidden="true"></span>
+          <span class="tape tape--r" aria-hidden="true"></span>
+          <span class="snap-photo">{{ picture('fase1-stro', sizes="(min-width: 1100px) 400px, (min-width: 700px) 40vw, min(86vw, 26rem)") }}</span>
+          <figcaption><strong>Tip.</strong> <span>Gebruik schoon, koud water en laat het stro goed uitlekken.</span></figcaption>
+        </figure>
+      </li>
+      <li class="pf-phase" id="fase-2">
+        <span class="pf-phase-num" aria-hidden="true">2</span>
+        <div class="pf-phase-text">
+          <p class="overline">Fase 2</p>
+          <h3>Opbouw in lagen in 20L-emmers</h3>
+          <p>We verdelen het voorbereide stro en het paddenstoelenbroed in afwisselende lagen over onze 20-literemmers. Zo krijgt het mycelium de kans om zich door het substraat te verspreiden.</p>
+          <ul class="pf-points">
+            <li>Een gelijkmatige verdeling van stro en broed.</li>
+            <li>Een gestructureerde opbouw, laag per laag.</li>
+            <li>Een praktische en schaalbare kweekmethode.</li>
+          </ul>
+          <div class="pf-panel pf-panel--drawing">
+            <figure class="pf-bucket">
+{% include "partials/ink_drawing.html" with {"name": "bucket"} %}
+              <figcaption class="sr-only">Doorsnede van een emmer: lagen stro en broed om de beurt.</figcaption>
+            </figure>
+            <div>
+              <h4>Opbouw in lagen</h4>
+              <ol class="pf-flow pf-flow--layers">
+                <li><span class="pf-key pf-key--stro" aria-hidden="true"></span>Laag stro</li>
+                <li><span class="pf-key pf-key--broed" aria-hidden="true"></span>Laag broed</li>
+                <li>Herhalen tot de emmer gevuld is</li>
+                <li>Licht aandrukken, niet verdichten</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <figure class="snap pf-snap">
+          <span class="tape tape--l" aria-hidden="true"></span>
+          <span class="tape tape--r" aria-hidden="true"></span>
+          <span class="snap-photo">{{ picture('fase2-emmer', sizes="(min-width: 1100px) 400px, (min-width: 700px) 40vw, min(86vw, 26rem)") }}</span>
+          <figcaption><strong>Tip.</strong> <span>Vul de emmer zonder het substraat te sterk samen te drukken.</span></figcaption>
+        </figure>
+      </li>
+      <li class="pf-phase" id="fase-3">
+        <span class="pf-phase-num" aria-hidden="true">3</span>
+        <div class="pf-phase-text">
+          <p class="overline">Fase 3</p>
+          <h3>Incubatie: het mycelium neemt over</h3>
+          <p>In de incubatieruimte krijgt het mycelium de tijd om het stro te koloniseren. We houden de omstandigheden zo stabiel mogelijk en volgen de ontwikkeling van de emmers op.</p>
+          <ul class="pf-points">
+            <li>Een donkere ruimte.</li>
+            <li>Een gecontroleerde temperatuur.</li>
+            <li>Een goede luchtkwaliteit.</li>
+          </ul>
+          <div class="pf-panel">
+            <h4>De omstandigheden</h4>
+            <ul class="pf-facts">
+              <li><strong>20–24 °C</strong> als richtwaarde</li>
+              <li><strong>Weinig</strong> tot geen licht</li>
+              <li><strong>Ongeveer 2 à 3 weken</strong></li>
+              <li><strong>Voldoende</strong> ventilatie</li>
+            </ul>
+          </div>
+        </div>
+        <figure class="snap pf-snap">
+          <span class="tape tape--l" aria-hidden="true"></span>
+          <span class="tape tape--r" aria-hidden="true"></span>
+          <span class="snap-photo">{{ picture('fase3-incubatie-a', sizes="(min-width: 1100px) 400px, (min-width: 700px) 40vw, min(86vw, 26rem)") }}{{ picture('fase3-incubatie-b', cls="snap-extra", sizes="(min-width: 1100px) 160px, 34vw") }}</span>
+          <figcaption><strong>Tip.</strong> <span>Controleer of het mycelium het substraat voldoende heeft gekoloniseerd voordat je naar de volgende fase gaat.</span></figcaption>
+        </figure>
+      </li>
+      <li class="pf-phase" id="fase-4">
+        <span class="pf-phase-num" aria-hidden="true">4</span>
+        <div class="pf-phase-text">
+          <p class="overline">Fase 4</p>
+          <h3>Fruiting: de oesterzwammen groeien</h3>
+          <p>Wanneer het mycelium voldoende ontwikkeld is, verhuizen de emmers naar de fruitingruimte. Met passende temperatuur, hoge luchtvochtigheid, licht en voldoende luchtverversing stimuleren we de vorming van verse oesterzwammen.</p>
+          <p>Hoe lang de groei duurt, verschilt per soort.</p>
+          <div class="pf-panel">
+            <h4>Wat de zwammen nodig hebben</h4>
+            <ul class="pf-facts">
+              <li><strong>Temperatuur</strong> afgestemd op de soort</li>
+              <li><strong>Hoge</strong> luchtvochtigheid</li>
+              <li><strong>Gerichte</strong> vochtsturing</li>
+              <li><strong>Groei</strong> en opvolging</li>
+            </ul>
+          </div>
+        </div>
+        <figure class="snap pf-snap">
+          <span class="tape tape--l" aria-hidden="true"></span>
+          <span class="tape tape--r" aria-hidden="true"></span>
+          <span class="snap-photo">{{ picture('fase4-kweekruimte', sizes="(min-width: 1100px) 400px, (min-width: 700px) 40vw, min(86vw, 26rem)") }}</span>
+          <figcaption><strong>Tip.</strong> <span>Houd het klimaat stabiel en stem de luchtverversing af op de groei.</span></figcaption>
+        </figure>
+      </li>
+    </ol>
+  </div>
+</section>
+
+{% set towns = sorted(data.towns.towns, key=lambda t: t.nav_order) %}
+{% set town_names = [t.name for t in towns] %}
+<section class="section pf-harvest grid-paper" id="oogst" data-section="oogst" aria-labelledby="oogst-title">
+  <div class="wrap pf-harvest-grid">
+    <figure class="snap pf-snap pf-harvest-snap">
+      <span class="tape tape--l" aria-hidden="true"></span>
+      <span class="tape tape--r" aria-hidden="true"></span>
+      <span class="snap-photo">{{ picture('anthony-krat', sizes="(min-width: 1100px) 380px, (min-width: 700px) 38vw, min(86vw, 26rem)") }}</span>
+      <figcaption><strong>Oogst.</strong> <span>Met de hand, op het juiste moment.</span></figcaption>
+    </figure>
+    <div class="pf-harvest-text">
+      <p class="overline">Na de vier fases</p>
+      <h2 id="oogst-title">Oogst &amp; levering</h2>
+      <p class="lede">Na de groei oogsten we onze oesterzwammen op het juiste moment. We verpakken ze met zorg en brengen ze vers naar chefs, winkels en andere lokale klanten.</p>
+      <ul class="pf-ticks">
+        <li><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-tick"/></svg>Vers geoogst</li>
+        <li><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-tick"/></svg>Met zorg verpakt</li>
+        <li><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-tick"/></svg>Lokaal geleverd</li>
+        <li><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-tick"/></svg>Dagverse kwaliteit</li>
+      </ul>
+      <p>We leveren in {{ ", ".join(town_names[:-1]) }} en {{ town_names[-1] }}.</p>
+{% include "partials/button.html" with {"label": "Bekijk onze leveringsregio", "path": "/leveringsregio/", "kind": "link"} %}
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block closing %}
+{% include "partials/closing_banner.html" with {"id": "pf-slot-title", "section": "slot", "title": "Natuurlijk proces. Ambachtelijk gekweekt. Voor de beste smaak.", "action": {"label": "Ontdek onze zwammen", "path": "/zwammen/"}, "link": {"label": "Of adopteer zelf een emmer", "path": "/ons-verhaal/adopteer/"}} %}
+{% endblock %}

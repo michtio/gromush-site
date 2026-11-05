@@ -178,6 +178,10 @@ def make_jsonld(site, flags, towns, abs_url, image_url):
     def jsonld_recipe(r):
         """Recipe from recipes.json; only the fields the recipe actually has."""
         obj = {"@context": SCHEMA, "@type": "Recipe", "name": r.title, "author": {"@id": org_id}}
+        if r.get("id"):
+            obj["url"] = abs_url("/inspiratie/") + "#recept-" + r.id
+        if r.get("intro"):
+            obj["description"] = r.intro
         if r.get("image"):
             obj["image"] = image_url(r.image)
         if r.get("servings"):
@@ -185,7 +189,10 @@ def make_jsonld(site, flags, towns, abs_url, image_url):
         if r.get("ingredients"):
             obj["recipeIngredient"] = list(r.ingredients)
         if r.get("steps"):
-            obj["recipeInstructions"] = [{"@type": "HowToStep", "text": s} for s in r.steps]
+            # a step is a string or {title?, text} (S18)
+            obj["recipeInstructions"] = [
+                {"@type": "HowToStep", **({"name": s.title} if s.get("title") else {}), "text": s.text}
+                if isinstance(s, dict) else {"@type": "HowToStep", "text": s} for s in r.steps]
         return _script(obj)
 
     return {"jsonld_site": jsonld_site, "jsonld_product": jsonld_product, "jsonld_recipe": jsonld_recipe}

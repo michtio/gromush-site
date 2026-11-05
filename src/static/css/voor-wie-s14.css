@@ -1,0 +1,111 @@
+/* S14: /voor-wie/speciaalzaken/ and /voor-wie/thuis/ (template D, layouts/audience.html). Page sections only; hero, problem,
+   offer and closing use the shared .aud-* styles of site.css. Loaded by both pages through their head block. */
+
+/* shared: a taped photo on polaroid stock (as the audience hero photo) */
+.sz-photo{position:relative;margin:0;background:var(--polaroid);padding:10px 10px 16px;border-radius:3px;box-shadow:0 14px 30px rgb(var(--ink-rgb) / .18);transform:rotate(-1.2deg)}
+.sz-photo img{display:block;width:100%;height:auto;border-radius:2px}
+.sz-photo figcaption{font-size:.92rem;color:var(--ink-soft);padding:.6rem .2rem 0}
+.sz-kweker h2,.sz-zaken h2,.th-bestel h2,.th-mushlove h2,.th-adopteer h2,.th-inspiratie h2{font-size:clamp(2.1rem,4vw,3.25rem);margin-bottom:1rem;max-width:20ch}
+
+/* Speciaalzaken: the four kinds of shop, beside the intro and the greengrocer */
+.sz-zaken{padding-top:clamp(1rem,3vw,2rem)}
+.sz-zaken-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(2.5rem,5vw,5rem);align-items:start}
+.sz-zaken .lede{margin-bottom:2rem}
+.sz-zaken .sz-photo{max-width:36rem}
+.sz-cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.25rem,2.5vw,2rem)}
+.sz-cards li{min-width:0;background:var(--card);border:1px solid var(--ink);border-radius:14px;padding:clamp(1.3rem,2.5vw,1.8rem);box-shadow:var(--shadow-card)}
+.sz-cards li:nth-child(2){transform:rotate(.7deg)}
+.sz-cards li:nth-child(3){transform:rotate(-.5deg)}
+.sz-cards h3{font-size:clamp(1.35rem,2vw,1.65rem);margin-bottom:.45rem}
+.sz-cards p{margin:0;color:var(--ink-soft)}
+@media (max-width:1099px){.sz-zaken-grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){.sz-cards{grid-template-columns:minmax(0,1fr)}.sz-cards li:nth-child(n){transform:none}}
+
+/* Speciaalzaken: the range (varieties.json, R4) on the deeper straw band */
+.sz-soorten{background:var(--straw-deep)}
+.sz-note{margin:2rem 0 0;color:var(--ink-soft);max-width:60ch}
+.sz-soorten .aud-more{margin-top:1.2rem}
+
+/* Speciaalzaken: three ideas for the shop, on one ruled line */
+.sz-ideas{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem clamp(1.5rem,3vw,2.5rem);counter-reset:idea}
+.sz-ideas li{min-width:0;border-top:1.5px solid var(--ink);padding-top:1rem}
+.sz-ideas h3{font-size:clamp(1.3rem,2vw,1.6rem);margin-bottom:.4rem}
+.sz-ideas p{margin:0;color:var(--ink-soft)}
+@media (max-width:899px){.sz-ideas{grid-template-columns:minmax(0,1fr)}}
+
+/* Speciaalzaken: three steps (the .aud-steps line of the Chefs page, three wide) */
+.aud-steps.sz-steps{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:699px){.aud-steps.sz-steps{grid-template-columns:minmax(0,1fr)}}
+
+/* Speciaalzaken: the grower */
+.sz-kweker-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(2.5rem,5vw,5rem);align-items:center}
+.sz-photo--kweker{max-width:32rem;transform:rotate(1.2deg)}
+.sz-photo--kweker img{aspect-ratio:4/5;object-fit:cover}
+.sz-kweker-text p{color:var(--ink-soft);max-width:60ch;margin:0 0 1rem}
+.sz-sign{display:flex;flex-direction:column;gap:.1rem;margin-top:1.4rem!important}
+.sz-sign .hand{font-size:clamp(1.5rem,2.4vw,1.9rem);color:var(--ink)}
+.sz-kweker .aud-more{margin-top:1.4rem}
+@media (max-width:899px){.sz-kweker-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* Thuis: order for pick-up (R42), the points on a taped grid-paper note */
+.th-bestel{padding-top:clamp(1rem,3vw,2rem)}
+.th-bestel-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(2.5rem,5vw,5rem);align-items:center}
+.th-bestel .aud-more{margin-top:1.6rem}
+.th-note{transform:rotate(.6deg)}
+.th-how{margin:0 0 1.2rem;padding-left:1.4rem;display:grid;gap:.6rem}
+.th-how li{padding-left:.3rem}
+.th-how li::marker{font-family:var(--font-hand);font-size:1.15em}
+.th-direct{margin:0}
+.th-direct a{color:var(--ink);font-weight:600;display:inline-block;padding-block:.6rem;margin-block:-.6rem}
+@media (max-width:1099px){.th-bestel-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* Thuis: MushLove (R9: the MushLove Facebook page lives here only) */
+.th-mushlove{background:var(--straw-deep)}
+.th-mushlove-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:clamp(2.5rem,5vw,5rem);align-items:center}
+.th-mushlove-photo{max-width:28rem}
+.th-mushlove-photo img{aspect-ratio:1;object-fit:cover}
+.th-mushlove-text > p:not([class]){color:var(--ink-soft);max-width:60ch;margin:0 0 1rem}
+.th-social{list-style:none;margin:1.6rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.8rem 1rem}
+.th-hand{margin-top:1.4rem;color:var(--ink);transform:rotate(-1.5deg);transform-origin:left center}
+.th-small{margin:1.2rem 0 0;font-size:.98rem;color:var(--ink-soft);max-width:60ch}
+.th-small a{color:var(--ink);font-weight:600;display:inline-block;padding-block:.6rem;margin-block:-.6rem}
+@media (max-width:899px){.th-mushlove-grid{grid-template-columns:minmax(0,1fr)}.th-mushlove-photo{max-width:22rem}}
+
+/* Thuis: adopt a bucket (R24: no price, no log sets; the page itself is /ons-verhaal/adopteer/) */
+.th-adopteer-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:clamp(2.5rem,5vw,5rem);align-items:center}
+.th-adopteer .lede{margin-bottom:1.6rem}
+.th-benefits{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2rem 2rem;border-top:1px solid var(--ink);padding-top:1.2rem}
+.th-benefits h3{font-size:clamp(1.2rem,1.7vw,1.4rem);margin-bottom:.25rem}
+.th-benefits p{margin:0;color:var(--ink-soft)}
+.th-adopteer-photo{max-width:26rem;transform:rotate(1.4deg)}
+.th-adopteer-photo img{aspect-ratio:4/5;object-fit:cover}
+.th-phases{list-style:none;margin:clamp(2.5rem,5vw,3.5rem) 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1rem clamp(.8rem,1.5vw,1.25rem);counter-reset:phase}
+.th-phases li{min-width:0;border-top:1.5px solid var(--ink);padding-top:.8rem;counter-increment:phase;display:flex;flex-direction:column;gap:.2rem}
+.th-phases li::before{content:counter(phase,decimal-leading-zero);font-family:var(--font-hand);font-size:1.4rem;line-height:1;margin-bottom:.3rem}
+.th-phases strong{font-family:var(--font-display);font-weight:400;font-size:1.15rem;line-height:1.2}
+.th-phases span{color:var(--ink-soft);font-size:.95rem}
+@media (max-width:1099px){.th-adopteer-grid{grid-template-columns:minmax(0,1fr)}.th-phases{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){
+  .th-benefits{grid-template-columns:minmax(0,1fr)}
+  .th-phases{grid-template-columns:minmax(0,1fr);gap:0}
+  .th-phases li{display:grid;grid-template-columns:2.6rem minmax(0,1fr);column-gap:.6rem;padding:.7rem 0}
+  .th-phases li::before{grid-row:span 2;margin:0}
+}
+
+/* Thuis: cooking at home, the varieties as a short register */
+.th-inspiratie-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(2.5rem,5vw,5rem);align-items:center}
+.th-inspiratie-photo{max-width:34rem}
+.th-inspiratie-photo img{aspect-ratio:4/3;object-fit:cover}
+.th-inspiratie-text > p:not([class]){color:var(--ink-soft);max-width:60ch;margin:0 0 1.4rem}
+.th-soorten{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.th-soorten li{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0 1rem;border-bottom:1px solid color-mix(in srgb,var(--ink) 35%,transparent);padding:.15rem 0}
+.th-soorten a{display:inline-flex;align-items:center;gap:.55rem;min-height:44px;color:var(--ink);font-family:var(--font-display);font-size:1.2rem;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+.th-soorten a:hover{text-decoration-thickness:2px}
+.th-soort-words{color:var(--ink-soft);font-size:.95rem}
+@media (max-width:899px){.th-inspiratie-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* closing band: the social line is a flex item; .closing p's auto inline margins would push the actions apart */
+.closing .aud-actions .aud-social{margin-inline:0}
+.closing .aud-actions .aud-social{justify-content:center}
+/* narrow screens: keep the rotated polaroids and their tape inside the gutter (overflow 320-1440) */
+@media (max-width:899px){.sz-photo{margin-inline:.4rem}}

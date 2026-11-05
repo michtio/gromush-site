@@ -1,0 +1,32 @@
+{% extends "layouts/base.html" %}
+{# Template F, the Ons verhaal process pages (S16, S17; wireframes.html template F): /ons-verhaal/kweekproces/,
+   /ons-verhaal/adopteer/ and /ons-verhaal/buitenkweek/. A hero (overline, title, text, an aside on the right), then the
+   page's own sections, then an optional closing. Styles in css/process.css, loaded here; a page adds its own head lines
+   in page_head and its scripts in scripts (forms.js on the pages with a form).
+   Blocks a page fills, in page order:
+     overline     one short line above the title
+     heading      the h1 text
+     hero_text    paragraphs and actions under the title
+     hero_aside   a figure, sketch or note beside the hero text (optional)
+     sections     the page's own sections; give each a data-section name
+     closing      a closing band or note (optional)
+   Section markers for tools/check_sections.py: the hero carries data-template="process" and data-section="hero";
+   the rest come from the page (e.g. Buitenkweek: hero,voedselbos,methode,soorten,interesse, AC39). #}
+{% block head %}
+<link rel="stylesheet" href="{{ url('/css/process.css') }}">
+{% block page_head %}{% endblock %}
+{% endblock %}
+{% block main %}
+<section class="section pf-hero" data-template="process" data-section="hero" aria-labelledby="pf-title">
+  <div class="wrap pf-hero-grid">
+    <div class="pf-hero-text">
+      <p class="overline">{% block overline %}{% endblock %}</p>
+      <h1 id="pf-title">{% block heading %}{% endblock %}</h1>
+{% block hero_text %}{% endblock %}
+    </div>
+{% block hero_aside %}{% endblock %}
+  </div>
+</section>
+{% block sections %}{% endblock %}
+{% block closing %}{% endblock %}
+{% endblock %}

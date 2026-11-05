@@ -183,7 +183,7 @@ class FullBuild(unittest.TestCase):
         read = lambda rel: (self.out / rel).read_text(encoding="utf-8")
         self.assertIn('<dialog class="promo" id="promo"', read("index.html"))
         self.assertIn('<dialog class="promo" id="promo"', read("inspiratie/index.html"))
-        self.assertIn('data-never-on="/gromush-site/proefbox/ /gromush-site/contact/ /gromush-site/privacy/ /gromush-site/cookies/ /gromush-site/voorwaarden/"', read("index.html"))
+        self.assertIn('data-never-on="/gromush-site/proefbox/ /gromush-site/voor-wie/thuis/ /gromush-site/contact/ /gromush-site/voor-wie/grootkeukens/ /gromush-site/voor-wie/speciaalzaken/ /gromush-site/privacy/ /gromush-site/cookies/ /gromush-site/voorwaarden/"', read("index.html"))
         for rel in ("proefbox/index.html", "contact/index.html"):
             self.assertNotIn('id="promo"', read(rel), rel)
             self.assertIn("/js/site.js", read(rel))

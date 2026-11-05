@@ -1,0 +1,120 @@
+{% extends "layouts/audience.html" %}
+{# /voor-wie/speciaalzaken/ (S14, template D; PRD R2a, R9, R18, R21, R33, R34). Hero, problem, offer and closing come from
+   audiences.json ("speciaalzaken": page, primary_actions); the sections below are this page's own. Copy: Anthony's
+   Speciaalwinkels brief (content-inventory 2.5), factual only (R2a: no health or superfood language). R21: inside <main>
+   nothing promises a free trial delivery (no "gratis", "proeflevering", ProefBox; lint rule R21-speciaalzaken), and the
+   ProefBox promo is off on this page (site.json promo.never_on). No prices or volumes shown (R3, Q4). The intake form is
+   forms.json "speciaalzaak" through partials/form.html (R33, R34); contact details from site.json next to it (AC29). #}
+{% block title %}Voor speciaalzaken: verse oesterzwammen uit de regio · {{ site.name }}{% endblock %}
+{% block description %}GroMush levert ambachtelijk gekweekte oesterzwammen aan bakkers, groentewinkels, traiteurs en delicatessenzaken in Knokke-Heist, Damme, Sluis, Brugge en omgeving. Vertel ons over jouw zaak.{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url('/css/voor-wie-s14.css') }}">
+{% endblock %}
+{% block sections %}
+<section class="section sz-zaken" id="zaken" data-section="zaken" aria-labelledby="zaken-title">
+  <div class="wrap sz-zaken-grid">
+    <div class="sz-zaken-text">
+      <p class="overline">Voor speciaalzaken</p>
+      <h2 id="zaken-title">Jouw lokale partner voor verse oesterzwammen.</h2>
+      <p class="lede">Wil je jouw klanten iets bijzonders aanbieden? Met {{ site.name }} voeg je een verrassend, veelzijdig en smaakvol product toe aan je assortiment. Onze oesterzwammen passen bij de ambachtelijke aanpak van winkels die bewust kiezen voor kwaliteit, karakter en persoonlijk contact.</p>
+      <figure class="sz-photo">
+        <span class="tape tape--r" aria-hidden="true"></span>
+        {{ picture("speciaalzaak-groenteboer", sizes="(min-width: 1100px) 34vw, (min-width: 600px) 80vw, calc(100vw - 2.5rem)") }}
+      </figure>
+    </div>
+    <ul class="sz-cards">
+      <li><h3>Bakkers</h3><p>Een verrassend ingrediënt voor hartige broodjes, focaccia en creatieve broodspecialiteiten.</p></li>
+      <li><h3>Groente &amp; fruit</h3><p>Verrijk je assortiment met kleurrijke, verse paddenstoelen van een lokale kweker.</p></li>
+      <li><h3>Beenhouwers &amp; traiteurs</h3><p>Een veelzijdig ingrediënt voor bereidingen, maaltijdschotels en verrassende vegetarische alternatieven.</p></li>
+      <li><h3>Horeca &amp; delicatessen</h3><p>Voor winkels en keukens die hun klanten willen laten kennismaken met bijzondere smaken.</p></li>
+    </ul>
+  </div>
+</section>
+<section class="section aud-soorten sz-soorten" id="soorten" data-section="soorten" aria-labelledby="soorten-title">
+  <div class="wrap">
+    <p class="overline">Ons assortiment</p>
+{% include "partials/section_head.html" with {"id": "soorten-title", "title": "Diverse soorten, eindeloze mogelijkheden.", "lede": "Van zacht en verfijnd tot uitgesproken en karaktervol. Ontdek verschillende soorten oesterzwammen die elk een eigen kleur, textuur en culinaire toepassing hebben."} %}
+    <ul class="aud-varieties">
+{% for v in varieties %}
+      <li class="aud-variety" style="--accent:var({{ v.accent }})">
+        <a href="{{ url('/zwammen/' + v.slug + '/') }}">
+          <span class="aud-variety-photo">{{ picture(v.photo, sizes="(min-width: 1100px) 300px, (min-width: 600px) 30vw, 4.5rem", decorative=True) }}</span>
+          <span class="aud-variety-name"><span class="aud-swatch" aria-hidden="true"></span>{{ v.name }}</span>
+        </a>
+        <p class="aud-variety-words">{{ ", ".join(v.taste_words) }}</p>
+      </li>
+{% endfor %}
+    </ul>
+    <p class="sz-note">Wat we kunnen leveren, hangt af van de oogst. We stemmen het aanbod samen met je af.</p>
+    <p class="aud-more">{% include "partials/button.html" with {"label": "Bekijk het volledige assortiment", "path": "/zwammen/", "kind": "link"} %}</p>
+  </div>
+</section>
+<section class="section sz-winkel" id="in-de-winkel" data-section="in-de-winkel" aria-labelledby="winkel-title">
+  <div class="wrap">
+{% include "partials/section_head.html" with {"id": "winkel-title", "title": "Meer dan een paddenstoel.", "lede": "Oesterzwammen zijn veelzijdig, herkenbaar en verrassend toegankelijk. Ze bieden mogelijkheden voor klanten die graag koken, nieuwe smaken ontdekken of vaker vegetarisch willen eten."} %}
+    <ol class="sz-ideas">
+      <li><h3>Vers in de winkel</h3><p>Presenteer ze als een opvallend versproduct, met een korte uitleg over smaak en bereiding.</p></li>
+      <li><h3>Klaar om te ontdekken</h3><p>Inspireer klanten met eenvoudige recepten, bereidingssuggesties of een proevertje in de winkel.</p></li>
+      <li><h3>Een eigen specialiteit</h3><p>Gebruik oesterzwammen als basis voor een eigen broodspecialiteit, maaltijdschotel of creatieve bereiding.</p></li>
+    </ol>
+  </div>
+</section>
+<section class="section grid-paper sz-samen" id="samenwerken" data-section="samenwerken" aria-labelledby="samenwerken-title">
+  <div class="wrap">
+    <p class="overline">Samenwerken met {{ site.name }}</p>
+{% include "partials/section_head.html" with {"id": "samenwerken-title", "title": "Van eerste kennismaking tot verse levering."} %}
+    <ol class="aud-steps sz-steps">
+      <li><span class="aud-step-num" aria-hidden="true">01</span><h3>Vertel ons over je zaak</h3><p>Laat weten welk type winkel je hebt, welke soorten je interesseren en hoe je oesterzwammen wilt aanbieden.</p></li>
+      <li><span class="aud-step-num" aria-hidden="true">02</span><h3>Stem het aanbod af</h3><p>We bespreken de beschikbare soorten, volumes, prijzen en mogelijke levermomenten op basis van jouw behoeften en onze productie.</p></li>
+      <li><span class="aud-step-num" aria-hidden="true">03</span><h3>Start met een eerste levering</h3><p>Ontdek hoe de oesterzwammen passen bij jouw winkel en klanten. Daarna bekijken we hoe een terugkerende samenwerking eruit kan zien.</p></li>
+    </ol>
+    <p class="aud-more"><a class="btn-second" href="#formulier">Bespreek jouw eerste levering</a></p>
+  </div>
+</section>
+<section class="section sz-kweker" id="kweker" data-section="kweker" aria-labelledby="kweker-title">
+  <div class="wrap sz-kweker-grid">
+    <figure class="sz-photo sz-photo--kweker">
+      <span class="tape tape--l" aria-hidden="true"></span>
+      {{ picture("anthony-krat", sizes="(min-width: 1100px) 32vw, (min-width: 600px) 60vw, calc(100vw - 2.5rem)") }}
+    </figure>
+    <div class="sz-kweker-text">
+      <h2 id="kweker-title">Rechtstreeks van de kweker.</h2>
+      <p>{{ site.name }} vertrekt vanuit een eenvoudige overtuiging: goed eten begint bij aandacht voor wat de natuur ons biedt. Met passie voor paddenstoelen en ambachtelijke kweek bouwen we aan een lokaal aanbod dat smaak, kwaliteit en een persoonlijk verhaal samenbrengt.</p>
+      <p>We werken graag samen met zelfstandige winkels die bewust kiezen voor bijzondere producten en een nauwe band met hun klanten.</p>
+      <p class="sz-sign"><span class="hand">Anthony Watteeuw</span> <span>Zaakvoerder en kweker bij {{ site.name }}</span></p>
+      <p class="aud-more">{% include "partials/button.html" with {"label": "Leer " + site.name + " kennen", "path": "/ons-verhaal/", "kind": "link"} %}</p>
+    </div>
+  </div>
+</section>
+<section class="section grid-paper pb-form sz-form" id="formulier" data-section="formulier" aria-labelledby="formulier-title">
+  <div class="wrap">
+    <div class="knip" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" focusable="false"><use href="#i-scissors"/></svg></div>
+    <div class="proefbox-grid">
+      <div class="pb-form-col">
+        <p class="overline">Intake</p>
+        <h2 id="formulier-title">Vertel ons over jouw zaak.</h2>
+        <p class="ct-intro">Een paar gegevens volstaan. Anthony neemt daarna persoonlijk contact met je op om het aanbod, de volumes en de levermomenten af te stemmen.</p>
+{% include "partials/form.html" with {"key": "speciaalzaak"} %}
+      </div>
+      <aside class="pb-aside" aria-labelledby="sz-contact-title">
+        <div class="pb-who ct-card">
+          <h2 id="sz-contact-title">Liever mailen of bellen?</h2>
+          <ul class="ct-lines">
+            <li><span class="ct-key">E-mail</span> <a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+{% if flags.phone_published %}
+            <li><span class="ct-key">Telefoon</span> <a href="tel:{{ site.phone.tel }}">{{ site.phone.display }}</a></li>
+            <li><span class="ct-key">WhatsApp</span> <a href="{{ site.whatsapp }}" rel="noopener">{{ site.phone.display }}</a></li>
+{% endif %}
+            <li><span class="ct-key">Kwekerij</span> <span class="ct-val">{{ site.locality }} ({{ site.municipality }})</span></li>
+          </ul>
+          <p>{{ site.name }} · Anthony Watteeuw, zaakvoerder en kweker.</p>
+          <p class="hand pb-sign">Vers uit de polder.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url('/js/forms.js') }}" defer></script>
+{% endblock %}

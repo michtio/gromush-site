@@ -1,45 +1,141 @@
 {
-  "_note": "The 4 supplied recipes (content-inventory 2.25). Ingredients, steps and tips are copied from the Inspiratie PDF in slice S18 (ghee/boter made consistent there); varieties lists only what the brief names. Add a recipe by adding an object: the page shows however many there are (R27).",
+  "_note": "Recipes for /inspiratie/ (S18; PRD R26, R27). The page shows however many there are, in this order: add a recipe by adding an object. Copied from Anthony's Inspiratie PDF (content-inventory 2.25), lightly edited: ghee used throughout recipe 2 (the PDF listed 'boter' but cooks with 'ghee'), 'liefst biologisch' dropped (R2), notes meant for the web designer left out. Fields: id (anchor and dialog id), title, intro (card and dialog line), servings, tags (short labels), varieties (slugs of the varieties the recipe names; empty = any oyster), image (images.json id), ingredients (strings), steps ({title?, text}), tip ({title, points[]}, optional). No prep time: none is given yet; add 'prep_time' when Anthony supplies it.",
   "recipes": [
     {
       "id": "pulled-mushroom-burger",
       "title": "Forest Pulled Mushroom Burger",
+      "intro": "Pulled oesterzwammen met een rokerige saus en een frisse boscoleslaw, op een geroosterd briochebroodje.",
       "servings": "2 burgers",
+      "tags": ["Ambachtelijke keuken"],
       "varieties": [],
-      "image": null,
-      "ingredients": [],
-      "steps": [],
+      "image": "dish-burger",
+      "ingredients": [
+        "300 g verse GroMush-oesterzwammen",
+        "2 briochebroodjes met sesamzaad",
+        "100 g fijngesneden rodekool",
+        "1 kleine wortel, in fijne reepjes",
+        "Een handvol verse rucola",
+        "1 kleine rode ui",
+        "2 el mayonaise",
+        "1 tl mosterd",
+        "1 el appelazijn",
+        "1 el olijfolie",
+        "1 tl gerookt paprikapoeder",
+        "1 tl ahornsiroop of honing",
+        "2 el barbecuesaus",
+        "Peper en zout naar smaak"
+      ],
+      "steps": [
+        {"title": "De pulled oesterzwammen", "text": "Scheur de oesterzwammen met de hand in lange, natuurlijke vezels. Bak ze eerst op hoog vuur zodat ze mooi bruinen en hun vocht verliezen. Voeg daarna olijfolie, gerookt paprikapoeder, peper, zout, ahornsiroop en barbecuesaus toe. Laat alles karamelliseren tot je sappige, licht krokante pulled mushrooms krijgt."},
+        {"title": "De frisse boscoleslaw", "text": "Meng de rodekool met de wortel, appelazijn en een klein beetje mayonaise. Zo krijg je een frisse, knapperige tegenhanger voor de rijke, hartige paddenstoelen."},
+        {"title": "De GroMush-saus", "text": "Meng de overige mayonaise met de mosterd en een klein beetje barbecuesaus. Dat geeft romigheid, pit en een subtiele rokerige toets."},
+        {"title": "De opbouw", "text": "Rooster de briochebroodjes licht. Bestrijk de onderste helft met de GroMush-saus, voeg rucola toe en leg daarop een royale portie warme pulled oesterzwammen. Werk af met de boscoleslaw en dunne plakjes rode ui. Sluit af met het bovenste broodje."}
+      ],
       "tip": null
     },
     {
       "id": "geroosterde-oesterzwam",
       "title": "Geroosterde oesterzwam met kruiden-ghee, miso en citroen",
+      "intro": "Hele trossen oesterzwam uit de oven, met kruiden-ghee, miso en citroen. De paddenstoel speelt de hoofdrol.",
       "servings": "4 personen",
+      "tags": ["Vegetarisch"],
       "varieties": ["gele-oesterzwam", "blauwe-oesterzwam", "grijze-oesterzwam"],
       "image": "dish-geroosterd",
-      "ingredients": [],
-      "steps": [],
-      "tip": null
+      "ingredients": [
+        "800 g tot 1 kg verse GroMush-oesterzwammen, bij voorkeur grote trossen gele, blauwe of grijze oesterzwammen",
+        "100 g ghee (geklaarde boter)",
+        "2 el witte miso",
+        "3 tenen knoflook, licht gekneusd",
+        "1 kleine prei, in fijne repen",
+        "1 takje tijm",
+        "1 takje rozemarijn",
+        "½ citroen",
+        "1 el olijfolie",
+        "Zwarte peper en zeezout",
+        "Een handvol verse bieslook of peterselie"
+      ],
+      "steps": [
+        {"title": "De oesterzwammen voorbereiden", "text": "Borstel de oesterzwammen schoon en behoud de natuurlijke vorm van de trossen. Snijd alleen het harde uiteinde weg. Dep ze droog zodat ze tijdens het roosteren mooi kunnen bruinen."},
+        {"title": "De kruiden-ghee maken", "text": "Smelt de ghee en meng met de miso, de gekneusde knoflook, tijm, zwarte peper en een beetje citroenschil. Roer tot een gladde, aromatische kruiden-ghee."},
+        {"title": "Roosteren", "text": "Verwarm de oven voor op 190 °C. Leg de oesterzwammen in een stevige ovenschaal en verdeel de kruiden-ghee erover. Voeg de prei en een beetje citroensap toe. Dek af en rooster ongeveer 25 à 35 minuten, afhankelijk van de grootte en dikte van de trossen. Verwijder de afdekking, verhoog de temperatuur naar 220 °C en rooster nog 8 à 12 minuten tot de randen goudbruin en krokant zijn. Bedruip tussendoor met het braadvocht."},
+        {"title": "Afwerken", "text": "Laat de oesterzwammen enkele minuten rusten. Werk af met fijngehakte bieslook, wat citroenrasp en eventueel enkele druppels olijfolie."}
+      ],
+      "tip": {"title": "Mijn GroMush-signatuur", "points": ["Ik zou dit serveren op een donkere keramische schaal, met de oesterzwam als blikvanger. Daarbij passen geroosterde aardappelen, seizoensgroenten of een zachte aardappelpuree. Zo blijft de paddenstoel de hoofdrol spelen."]}
     },
     {
       "id": "vlaamse-stoofpot",
       "title": "Vlaamse stoofpot van oesterzwammen met rode wijn",
+      "intro": "Hartig en diep van smaak: oesterzwammen langzaam gestoofd in rode wijn, met een smeuïge aardappelpuree.",
       "servings": "4 personen",
+      "tags": ["Vegetarisch"],
       "varieties": [],
       "image": "dish-stoof",
-      "ingredients": [],
-      "steps": [],
-      "tip": null
+      "ingredients": [
+        "800 g verse GroMush-oesterzwammen",
+        "1 kg bloemige aardappelen",
+        "400 ml droge rode wijn",
+        "250 ml groentebouillon",
+        "3 sjalotten",
+        "2 wortelen",
+        "2 tenen knoflook",
+        "1 el tomatenpuree",
+        "1 tl mosterd",
+        "2 laurierblaadjes",
+        "3 takjes verse tijm",
+        "60 g boter",
+        "150 ml melk",
+        "2 el olijfolie",
+        "1 el bloem",
+        "Peper en zout naar smaak"
+      ],
+      "steps": [
+        {"title": "De oesterzwammen krachtig aanbakken", "text": "Scheur de oesterzwammen met de hand in grove stukken. Bak ze in porties in olijfolie op hoog vuur tot ze mooi goudbruin zijn. Werk in kleine porties, zodat ze bakken in plaats van koken. Haal ze uit de pan en zet opzij."},
+        {"title": "De basis van de stoofpot", "text": "Fruit de fijngesneden sjalotten en wortelen in dezelfde pan. Voeg de knoflook en tomatenpuree toe en bak kort mee. Roer de bloem erdoor en laat even garen."},
+        {"title": "Langzaam stoven in rode wijn", "text": "Blus met de rode wijn en schraap de aanbaksels los. Voeg de groentebouillon, mosterd, laurier en tijm toe. Laat 10 minuten zacht inkoken. Voeg de oesterzwammen toe en laat nog 20 à 25 minuten zacht sudderen, tot de saus gebonden is en de smaken mooi samensmelten. Verwijder de laurier en de tijmstengels."},
+        {"title": "De aardappelpuree", "text": "Kook de geschilde aardappelen gaar in gezouten water. Giet af en laat ze kort uitdampen. Stamp fijn en meng met de boter en warme melk. Kruid met peper en zout tot je een zachte, smeuïge puree krijgt."},
+        {"title": "Serveren op zijn GroMush", "text": "Schep een royale lepel puree op een warm bord. Lepel de rodewijnstoofpot ernaast en laat een beetje saus over de puree lopen. Werk af met verse tijm en eventueel enkele goudbruin gebakken stukjes oesterzwam voor extra textuur."}
+      ],
+      "tip": {"title": "De GroMush-toets", "points": [
+        "Diepe smaak: laat de rode wijn voldoende inkoken en gebruik een stevige groentebouillon.",
+        "Vlezige structuur: bak de oesterzwammen eerst apart. Zo behouden ze meer beet.",
+        "Gastronomische afwerking: voeg vlak voor het serveren eventueel een klein klontje koude boter aan de saus toe, voor glans en een rondere smaak.",
+        "Mijn advies: gebruik bij voorkeur een droge rode wijn zoals een Côtes du Rhône of een soepele Merlot. Kies een wijn die je ook graag bij het gerecht zou drinken."
+      ]}
     },
     {
       "id": "kokos-curry",
       "title": "Oesterzwammen in romige kokos-curry met rijst",
+      "intro": "Een kruidige, romige maaltijd waarin jouw oesterzwammen de hoofdrol spelen. De rode currypasta zorgt voor warmte en diepgang, de kokosmelk voor een zachte saus en de limoen voor een frisse toets.",
       "servings": "4 personen",
+      "tags": [],
       "varieties": [],
       "image": "dish-curry",
-      "ingredients": [],
-      "steps": [],
-      "tip": null
+      "ingredients": [
+        "800 g verse GroMush-oesterzwammen",
+        "300 g basmatirijst",
+        "400 ml kokosmelk",
+        "2 el rode currypasta",
+        "1 rode paprika",
+        "150 g sperziebonen",
+        "2 tenen knoflook",
+        "1 limoen",
+        "2 el sojasaus",
+        "1 el olie",
+        "Verse koriander of Thaise basilicum",
+        "Peper en zout naar smaak"
+      ],
+      "steps": [
+        {"title": "Kook de rijst", "text": "Kook de rijst volgens de aanwijzingen op de verpakking."},
+        {"title": "Bak de oesterzwammen", "text": "Scheur ze in grove repen en bak ze in een ruime pan met olie op hoog vuur goudbruin. Doe dit eventueel in twee porties, zodat ze mooi bakken in plaats van koken."},
+        {"title": "Voeg de curry toe", "text": "Zet het vuur iets lager, voeg de fijngehakte knoflook en rode currypasta toe en bak ongeveer één minuut mee."},
+        {"title": "Maak de kokossaus", "text": "Voeg de kokosmelk, de paprika in reepjes en de sperziebonen toe. Laat 10 à 15 minuten zachtjes sudderen tot de groenten gaar zijn en de saus mooi romig is."},
+        {"title": "Breng op smaak", "text": "Voeg de sojasaus en het sap van een halve limoen toe. Proef en pas de kruidigheid aan. Is de saus te pittig, voeg dan wat extra kokosmelk toe."},
+        {"title": "Serveer", "text": "Schep de rijst in een diep bord, verdeel de kokos-curry met oesterzwammen erover en werk af met verse kruiden en een partje limoen."}
+      ],
+      "tip": {"title": "Mijn GroMush-tip", "points": [
+        "Bak de oesterzwammen echt goed bruin vóór je de kokosmelk toevoegt. Dat geeft een veel diepere, hartigere smaak en zorgt ervoor dat ze hun stevige structuur behouden.",
+        "Voor een extra gastronomische versie kun je op het einde wat geroosterde cashewnoten en fijngeraspte limoenschil toevoegen."
+      ]}
     }
   ]
 }

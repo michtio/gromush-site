@@ -1,0 +1,82 @@
+/* Leveringsregio: the hub /leveringsregio/ (S20, template H-lite) and the town pages /leveringsregio/<slug>/ (S19,
+   template H). The hub's map is the homepage's delivery map in its static state (css/home.css, .lv1 without .is-live);
+   this file only adds what the hub needs on top of it. The town pages reuse the audience hero (site.css .aud-hero),
+   the taped grid-paper note, the audience grid and the closing band. */
+
+/* ---------- hub: title, and the map's town labels as links ---------- */
+.regio-hub h1{font-size:clamp(2.4rem,5vw,3.75rem);line-height:1.08;max-width:18ch;margin-bottom:.5rem}
+.regio-lede{margin-top:1.1rem}
+/* the labels are links for pointer users (keyboard and screen readers use the register beside the map, which carries
+   the same five links); a 44 px hit area around each label */
+.regio-pins{pointer-events:none}
+a.regio-pin{pointer-events:auto;color:var(--ink);text-decoration:none;z-index:2}
+a.regio-pin::before{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%)}
+a.regio-pin:hover{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:.15em;background:var(--kraft-tint)}
+.lv1-pin[data-t=blankenberge].regio-pin:hover{background:var(--kraft-tint)}
+.regio-hub .lv1-stops a.lv1-card:hover{background:var(--kraft-tint)}
+/* the map keeps its proportions at large text: below 17.5em of width (a phone at 200 % text) it stays 17.5em wide and
+   scrolls sideways inside its own frame, so every label keeps the room it has at 100 % (WCAG 1.4.10 exempts maps) */
+.regio-scroll{min-width:0;overflow-x:auto;overscroll-behavior-x:contain;border-radius:4px}
+.regio-scroll:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.regio-hub .lv1-canvas{min-width:17.5em}
+/* the register at large text on a phone: the shared rules in site.css (S21, "large text on a phone") hide the round
+   photos; the "and more" row (home.css) then loses its photo indent too */
+@media (max-width:17em){
+  .regio-hub .lv1 .lv1-more,.regio-hub .lv1-more{padding-left:0}
+}
+
+/* ---------- town page: hero ---------- */
+.town-hero{padding-top:clamp(1rem,3vw,2.5rem)}
+.town-hero h1{max-width:18ch}
+.town-name{display:block}
+.town-sub{display:block;font-size:clamp(1.45rem,2.6vw,2.15rem);line-height:1.2;margin-top:.5rem;max-width:22ch;color:var(--ink)}
+.town-photo img{aspect-ratio:3/2}
+.town-photo-cap{position:absolute;left:1.4rem;bottom:1.6rem;background:var(--straw);border:1.5px solid var(--ink);border-radius:4px;padding:.15rem .6rem;font-family:var(--font-display);font-size:1.15rem;line-height:1.3}
+
+/* ---------- town page: the region (editorial text and a taped note with what we stand for here) ---------- */
+.town-regio-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(2.5rem,5vw,5rem);align-items:center}
+.town-regio-text h2{max-width:20ch}
+.town-regio-text p:not(.overline){color:var(--ink-soft);max-width:62ch;margin:0 0 1rem}
+.town-note{max-width:30rem;justify-self:center;transform:rotate(1deg)}
+.town-note-title{font-family:var(--font-hand);font-size:clamp(1.45rem,2.4vw,1.9rem);line-height:1.25;color:var(--ink);margin:0 0 1.1rem;max-width:none}
+.town-values{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.town-values li{position:relative;padding:.65rem 0 .65rem 1.8rem;border-bottom:1px solid color-mix(in srgb,var(--ink) 35%,transparent);font-family:var(--font-display);font-size:clamp(1.15rem,1.8vw,1.35rem)}
+.town-values li::before{content:"";position:absolute;left:.2rem;top:1.05rem;width:.8rem;height:.42rem;border-left:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(-45deg)}
+@media (max-width:899px){.town-regio-grid{grid-template-columns:minmax(0,1fr)}.town-note{justify-self:start;margin-inline:.4rem}}
+
+/* ---------- town page: the four audiences ---------- */
+.town-voorwie .section-head{margin-bottom:clamp(2rem,4vw,3rem)}
+.town-voorwie .section-head h2{max-width:20ch;margin-bottom:.8rem}
+
+/* ---------- town page: from Westkapelle, and where we deliver ---------- */
+.town-levering-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2.5rem,5vw,5rem);align-items:start}
+.town-levering-text h2{max-width:18ch}
+.town-levering-text > p:not(.overline):not(.aud-more){color:var(--ink-soft);max-width:62ch;margin:0 0 1rem}
+.town-overdracht{transform:rotate(-1.5deg);margin-top:.6rem}
+.town-overdracht img{aspect-ratio:3/2}
+.town-overdracht figcaption{padding:.7rem .4rem 0;color:var(--ink)}
+.town-line{font-size:clamp(1.4rem,2.2vw,1.8rem);margin:2rem 0 1rem}
+/* the areas read as a line of place names (not pills: pills are actions on this site) */
+.town-areas{list-style:none;margin:0 0 1.3rem;padding:.7rem 0;display:flex;flex-wrap:wrap;gap:.2rem 0;border-block:1px solid var(--ink);font-family:var(--font-display);font-size:clamp(1.1rem,1.6vw,1.3rem)}
+.town-areas li:not(:last-child)::after{content:"·";margin-inline:.55em;color:var(--ink-soft)}
+.town-areas .town-areas-more{font-family:var(--font-hand);color:var(--ink-soft)}
+@media (max-width:899px){
+  .town-levering-grid{grid-template-columns:minmax(0,1fr)}
+  .town-overdracht{max-width:34rem;margin-inline:.4rem;order:2}
+}
+@media (prefers-reduced-motion:reduce){a.regio-pin{transition:none}}
+
+/* ---------- town page at large text on a phone (under 17 times the default text size wide: 320-390 px at 200 %) ----------
+   on top of the shared rules in site.css (S21: hyphenation, heading caps, audience cards), the town's own display
+   sizes step down */
+@media (max-width:17em){
+  .town-name{font-size:1.75rem}
+  .town-sub{font-size:1.15rem}
+  .town-note{min-width:0;padding:1.4rem .8rem 1.1rem;margin-inline:.3rem}
+  .town-note-title{font-size:1.1rem}
+  .town-values li{font-size:1rem;padding-left:1.5rem}
+  .town-line{font-size:1.2rem}
+  .town-areas{font-size:1rem}
+  .town-areas li{max-width:100%;overflow-wrap:anywhere}
+  .town-photo-cap{font-size:.9rem;left:1rem;bottom:1.2rem}
+}

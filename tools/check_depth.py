@@ -84,32 +84,43 @@ def crawl(root, base, max_depth):
     return depth, file_for
 
 
-def main(argv):
-    ap = argparse.ArgumentParser(description="Click depth of every sitemap page from the homepage (R7, AC9).")
+def report(root, base, sitemap=SITEMAP, max_depth=2):
+    """Counts for the sitemap pages: (missing paths, reachable, total, built, pending)."""
+    wanted = sitemap_paths(sitemap)
+    depth, file_for = crawl(root, base, max_depth)
+    missing, built, pending = [], 0, 0
+    for path in wanted:
+        if depth.get(path) is None:
+            missing.append(path)
+        elif os.path.isfile(file_for(path)):
+            built += 1
+        else:
+            pending += 1
+    return missing, len(wanted) - len(missing), len(wanted), built, pending
+
+
+def parse(argv, description):
+    """Shared command line of check_depth.py and crawl.py; returns (args, normalised base) or exits."""
+    ap = argparse.ArgumentParser(description=description)
     ap.add_argument("dir")
     ap.add_argument("--base", required=True)
     ap.add_argument("--sitemap", default=SITEMAP)
     ap.add_argument("--max", type=int, default=2)
     args = ap.parse_args(argv)
     base = "/" + args.base.strip("/") + "/" if args.base.strip("/") else "/"
+    return args, base
+
+
+def main(argv):
+    args, base = parse(argv, "Click depth of every sitemap page from the homepage (R7, AC9).")
     if not os.path.isfile(os.path.join(args.dir, "index.html")):
         print(f"no homepage: {os.path.join(args.dir, 'index.html')}", file=sys.stderr)
         return 2
-    wanted = sitemap_paths(args.sitemap)
-    depth, file_for = crawl(args.dir, base, args.max)
-    ok = built = pending = 0
-    for path in wanted:
-        d = depth.get(path)
-        if d is None:
-            print(f"{path}: not reachable within {args.max} clicks")
-            continue
-        ok += 1
-        if os.path.isfile(file_for(path)):
-            built += 1
-        else:
-            pending += 1
-    print(f"{ok} of {len(wanted)} sitemap pages within {args.max} clicks ({built} built, {pending} pending)")
-    return 0 if ok == len(wanted) else 1
+    missing, ok, total, built, pending = report(args.dir, base, args.sitemap, args.max)
+    for path in missing:
+        print(f"{path}: not reachable within {args.max} clicks")
+    print(f"{ok} of {total} sitemap pages within {args.max} clicks ({built} built, {pending} pending)")
+    return 0 if ok == total else 1
 
 
 if __name__ == "__main__":
